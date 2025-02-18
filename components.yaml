@@ -27,49 +27,49 @@ GMAOpyobs:
 # Jedi repos follow - need releases to replace branches!
 
 jedi-cmake:
-  local: ./jedi-cmake
+  local: ./@jedi-cmake
   remote: https://github.com/JCSDA/oops
   branch: develop
   
 oops:
-  local: ./src/oops
+  local: ./src/@oops
   remote: https://github.com/JCSDA/oops
   branch: develop
   
 vader:
-  local: ./src/vader
+  local: ./src/@vader
   remote: https://github.com/JCSDA/vader
   branch: develop
 
 ioda:
-  local: ./src/ioda
+  local: ./src/@ioda
   remote: https://github.com/JCSDA/ioda
   branch: develop
 
-ioda-data:
-  local: ./data/ioda-data
-  remote: https://github.com/JCSDA-internal/ioda-data
-  branch: develop
-  
 ioda-converters:
-  local: ./src/ioda-converters
+  local: ./src/@ioda-converters
   remote: https://github.com/JCSDA/ioda-converters
   branch: develop
 
 crtm:
-  local: ./src/crtm
+  local: ./src/@crtm
   remote: https://github.com/JCSDA/crtm
   tag: v2.4.1-jedi.1
 
 ufo:
-  local: ./src/ufo
+  local: ./src/@ufo
   remote: https://github.com/JCSDA/ufo
   branch: develop
 
-ufo-data:
-  local: ./data/ufo-data
-  remote: https://github.com/JCSDA-internal/ufo-data
-  branch: develop
+#ioda-data:
+#  local: ./data/ioda-data
+#  remote: https://github.com/JCSDA-internal/ioda-data
+#  branch: develop
+  
+#ufo-data:
+#  local: ./data/ufo-data
+#  remote: https://github.com/JCSDA-internal/ufo-data
+#  branch: develop
   
 
   
