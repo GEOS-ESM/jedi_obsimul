@@ -3,10 +3,12 @@
 # Run cmake with reasonable defaults. Why make the user do all these steps?
 #
 
-###source @env/g5_modules # to be sure
+source @env/g5_modules # to be sure
+rm -r    build
 mkdir -p build
 cd build
 ##cmake .. -DBASEDIR=$BASEDIR/`uname -s` \
-cmake .. -DCMAKE_Fortran_COMPILER=ifort \
+cmake .. -DBASEDIR=$BASEDIR/`uname -s` \
+         -DCMAKE_Fortran_COMPILER=ifort \
          -DCMAKE_INSTALL_PREFIX=../install # -DCMAKE_BUILD_TYPE=Debug
       

@@ -9,6 +9,8 @@ src/@oops/
 src/@ufo/
 src/@vader/
 /.mepo/
+/build/
+/install/
 __pycache__
 .ipynb_checkpoints
 parallel_build.o*

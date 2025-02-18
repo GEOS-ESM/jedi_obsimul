@@ -4,8 +4,8 @@ cmake_policy (SET CMP0054 NEW)
 cmake_policy (SET CMP0132 NEW)
 
 project (
-  QFED
-  VERSION 3.0.0
+  jedi_obsimul
+  VERSION 0.1.0
   LANGUAGES Fortran CXX C)  # Note - CXX is required for ESMF
 
 if ("${PROJECT_SOURCE_DIR}" STREQUAL "${PROJECT_BINARY_DIR}")
@@ -26,8 +26,11 @@ endif ()
 #set (ACG_FLAGS -v)
 
 # mepo can now clone subrepos in three styles
-set (ESMA_CMAKE_DIRS @cmake)
-
+set (ESMA_CMAKE_DIRS
+  cmake
+  @cmake
+  cmake@
+  )
 foreach (dir IN LISTS ESMA_CMAKE_DIRS)
   if (EXISTS ${CMAKE_CURRENT_LIST_DIR}/${dir})
     list (APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/${dir}")
@@ -63,4 +66,4 @@ install(
    )
 
 # Adds ability to tar source
-include(esma_cpack) 
+include(esma_cpack)

@@ -1,10 +1,10 @@
 esma_add_subdirectory (Shared)
 esma_add_subdirectory (@crtm)
-esma_add_subdirectory (@ioda)
-esma_add_subdirectory (@ioda-converters)
-esma_add_subdirectory (@oops)
-esma_add_subdirectory (@ufo)
-esma_add_subdirectory (@vader)
+#esma_add_subdirectory (@ioda)
+#esma_add_subdirectory (@ioda-converters)
+#esma_add_subdirectory (@oops)
+#esma_add_subdirectory (@ufo)
+#esma_add_subdirectory (@vader)
 
 file (GLOB obsimul_files obsimul/*.py)
 install (
