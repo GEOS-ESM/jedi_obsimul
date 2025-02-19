@@ -1,0 +1,1523 @@
+VERSION: 1
+EXPID:  AIST_c180_L137
+EXPDSC: AIST-nr
+EXPSRC: GEOSgcm-v12
+#ServerSizeSplit: 81
+#CollectionWriteSplit: 7
+
+
+#the bare minimum for AIST-nr
+COLLECTIONS: 'geosgcm_prog'
+              'geosgcm_surf'
+              'inst_01hr_2d_brs_Nx'
+              'geosgcm_moist'
+              'geosgcm_turb'
+              'geosgcm_gwd'
+##            'geosgcm_tend'
+              'geosgcm_budi'
+              'geosgcm_buda'
+##            'geosgcm_landice'
+##            'geosgcm_meltwtr'
+##            'geosgcm_snowlayer'
+#>>>          'geosgcm_tracer'
+              'tavg2d_aer_x'
+              'tavg3d_aer_p'
+#             'const_2d_asm_Nx'
+########################
+# Additions for sampling
+########################
+       'jedi'
+       'ACtraj'
+       'Aeronet'
+       'Aqua'
+       'Terra'
+       'SNDR_ATMS'
+##     'ABI_M6C14_Geostationary'  # slow
+##     'ABI_M6C01_Mask'           # slow
+::
+
+
+##################################################
+# The GRID_LABELS section must be after the main #
+#  list of COLLECTIONS for scripting purposes.   #
+##################################################
+
+GRID_LABELS: PC720x361-DC
+     PC1440x721-DC
+     PC2880x1441-DC
+     PC5760x2881-DC
+     PC11520x5761-DC
+# additions for sampling
+             SwathGrid_MYD
+             SwathGrid_MOD
+             SwathGrid_ATMS
+             abi_grid_GOES16_M6C14
+::
+
+PC720x361-DC.GRID_TYPE: LatLon
+PC720x361-DC.IM_WORLD: 720
+PC720x361-DC.JM_WORLD: 361
+PC720x361-DC.POLE: PC
+PC720x361-DC.DATELINE: DC
+PC720x361-DC.LM: 181
+
+PC1440x721-DC.GRID_TYPE: LatLon
+PC1440x721-DC.IM_WORLD: 1440
+PC1440x721-DC.JM_WORLD: 721
+PC1440x721-DC.POLE: PC
+PC1440x721-DC.DATELINE: DC
+PC1440x721-DC.LM: 181
+
+PC2880x1441-DC.GRID_TYPE: LatLon
+PC2880x1441-DC.IM_WORLD: 2880
+PC2880x1441-DC.JM_WORLD: 1441
+PC2880x1441-DC.POLE: PC
+PC2880x1441-DC.DATELINE: DC
+PC2880x1441-DC.LM: 181
+
+PC5760x2881-DC.GRID_TYPE: LatLon
+PC5760x2881-DC.IM_WORLD: 5760
+PC5760x2881-DC.JM_WORLD: 2881
+PC5760x2881-DC.POLE: PC
+PC5760x2881-DC.DATELINE: DC
+PC5760x2881-DC.LM: 181
+
+PC11520x5761-DC.GRID_TYPE: LatLon
+PC11520x5761-DC.IM_WORLD: 11520
+PC11520x5761-DC.JM_WORLD: 5761
+PC11520x5761-DC.POLE: PC
+PC11520x5761-DC.DATELINE: DC
+PC11520x5761-DC.LM: 137
+
+######################
+#AIST-sampling grids
+######################
+SwathGrid_ATMS.GRID_TYPE: Swath
+SwathGrid_ATMS.GRID_FILE: /discover/nobackup/projects/gmao/aist-nr/data/SNDR.J1.ATMS.L1B.v02/Y%y4/%D3/SNDR.J1.ATMS.%y4%m2%d2T%h2%n2*.nc
+#  SwathGrid_ATMS.NX:  15
+#  SwathGrid_ATMS.NY:  720
+SwathGrid_ATMS.LM:  137
+SwathGrid_ATMS.index_name_lon:  xtrack
+SwathGrid_ATMS.index_name_lat:  atrack
+SwathGrid_ATMS.var_name_lon:    lon
+SwathGrid_ATMS.var_name_lat:    lat
+SwathGrid_ATMS.var_name_time:   obs_time_tai93
+SwathGrid_ATMS.tunit:          'seconds since 1993-01-01 00:00:00'
+SwathGrid_ATMS.obs_file_begin: '2019-07-31T00:00:00'
+SwathGrid_ATMS.obs_file_end:   '2019-11-01T23:00:00'
+SwathGrid_ATMS.obs_file_interval:   '000000 000600'     # yymmdd  hhmmss
+SwathGrid_ATMS.Epoch:           060000                  # hhmmss
+
+
+SwathGrid_MYD.GRID_TYPE: Swath
+SwathGrid_MYD.GRID_FILE: /discover/nobackup/projects/gmao/aist-nr/data/Aqua/%y4/%D3/MYD04_L2.A%y4%D3.%h2%n2*.hdf
+#  SwathGrid_MYD.NX:  15
+#  SwathGrid_MYD.NY:  720
+SwathGrid_MYD.LM:  137
+SwathGrid_MYD.index_name_lon: 'Cell_Across_Swath:mod04'
+SwathGrid_MYD.index_name_lat: 'Cell_Along_Swath:mod04'
+SwathGrid_MYD.var_name_lon:   'Longitude'
+SwathGrid_MYD.var_name_lat:   'Latitude'
+SwathGrid_MYD.var_name_time:  'Scan_Start_Time'
+SwathGrid_MYD.tunit:          'seconds since 1993-01-01 00:00:00'
+SwathGrid_MYD.obs_file_begin: '2019-07-31T00:00:00'
+SwathGrid_MYD.obs_file_end:   '2019-11-01T00:00:00'
+SwathGrid_MYD.obs_file_interval:   '000000 000500'     # yymmdd  hhmmss
+SwathGrid_MYD.Epoch:           060000                  #
+
+
+SwathGrid_MOD.GRID_TYPE: Swath
+SwathGrid_MOD.GRID_FILE: /discover/nobackup/projects/gmao/aist-nr/data/Terra/%y4/%D3/MOD04_L2.A%y4%D3.%h2%n2*.hdf
+#  SwathGrid_MOD.NX:  15
+#  SwathGrid_MOD.NY:  720
+SwathGrid_MOD.LM:   137
+SwathGrid_MOD.index_name_lon: 'Cell_Across_Swath:mod04'
+SwathGrid_MOD.index_name_lat: 'Cell_Along_Swath:mod04'
+SwathGrid_MOD.var_name_lon:   'Longitude'
+SwathGrid_MOD.var_name_lat:   'Latitude'
+SwathGrid_MOD.var_name_time:  'Scan_Start_Time'
+SwathGrid_MOD.tunit:          'seconds since 1993-01-01 00:00:00'
+SwathGrid_MOD.obs_file_begin: '2019-07-31T00:00:00'
+SwathGrid_MOD.obs_file_end:   '2019-11-01T00:00:00'
+SwathGrid_MOD.obs_file_interval:   '000000 000500'     # yymmdd  hhmmss
+SwathGrid_MOD.Epoch:           060000                  # 
+
+
+abi_grid_GOES16_M6C14.GRID_TYPE:     XY
+abi_grid_GOES16_M6C14.GRIDNAME:      ABI_Fixed_Grid
+abi_grid_GOES16_M6C14.index_name_x:  x
+abi_grid_GOES16_M6C14.index_name_y:  y
+abi_grid_GOES16_M6C14.var_name_x:    x
+abi_grid_GOES16_M6C14.var_name_y:    y
+abi_grid_GOES16_M6C14.var_name_proj: goes_imager_projection
+abi_grid_GOES16_M6C14.att_name_proj: longitude_of_projection_origin
+abi_grid_GOES16_M6C14.thin_factor:   10
+abi_grid_GOES16_M6C14.LM:            137
+abi_grid_GOES16_M6C14.GRID_FILENAME:   /discover/nobackup/projects/gmao/aist-nr/data/GOES-X/OR_ABI-L1b-RadF-M6C14_G16_s20192340800216_e20192340809524_c20192340810006.nc
+######################
+
+
+# the collections
+geosgcm_prog.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
+geosgcm_prog.archive:          '%c/Y%y4' ,
+geosgcm_prog.format:           'CFIO' ,
+geosgcm_prog.deflate:           1 ,
+geosgcm_prog.grid_label:        PC720x361-DC ,
+geosgcm_prog.regrid_method:    'BILINEAR',
+geosgcm_prog.frequency:         010000 ,
+geosgcm_prog.vscale:            100.0 ,
+geosgcm_prog.vunit:            'hPa' ,
+geosgcm_prog.vvars:            'log(PLE)' , 'DYN' ,
+geosgcm_prog.levels:            1000 975 950 925 900 875 850 825 800 775 750 725 700 650 600 550 500 450 400 350 300 250 200 150 100 70 50 40 30 20 10 7 5 4 3 2 1 0.7 0.5 0.4 0.3 0.2 0.1 0.07 0.05 0.04 0.03 0.02 ,
+geosgcm_prog.fields:           'PHIS'   , 'AGCM'       ,
+          'SLP'    , 'DYN'        ,
+          'U;V'    , 'DYN'        ,
+          'T'      , 'DYN'        ,
+          'PS'     , 'DYN'        ,
+          'ZLE'    , 'DYN'        , 'H'   ,
+          'OMEGA'  , 'DYN'        ,
+          'Q'      , 'MOIST'      , 'QV'  ,
+          'QITOT'  , 'AGCM'       , 'QI'  ,
+          'QLTOT'  , 'AGCM'       , 'QL'  ,
+          'RH2'    , 'MOIST'      , 'RH'  ,
+          'O3'     , 'CHEMISTRY'  ,
+           ::
+
+geosgcm_surf.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
+geosgcm_surf.archive:          '%c/Y%y4' ,
+geosgcm_surf.format:           'CFIO' ,
+geosgcm_surf.deflate:           1 ,
+geosgcm_surf.grid_label:        PC720x361-DC ,
+geosgcm_surf.regrid_method:    'BILINEAR',
+geosgcm_surf.mode:             'instantaneous' ,
+# geosgcm_surf.monthly:           1 ,
+geosgcm_surf.frequency:         010000 ,
+geosgcm_surf.ref_time:          210000 ,
+geosgcm_surf.fields:           'PHIS'           , 'AGCM'        ,
+          'SGH'            , 'AGCM'        ,
+          'VARFLT'         , 'AGCM'        ,
+          'TROPP_EPV'      , 'AGCM'        , 'TROPPV'     ,
+          'TROPP_THERMAL'  , 'AGCM'        , 'TROPPT'     ,
+          'TROPP_BLENDED'  , 'AGCM'        , 'TROPPB'     ,
+          'TROPT'          , 'AGCM'        ,
+          'TROPQ'          , 'AGCM'        ,
+          'QVFILL'         , 'AGCM'        ,
+          'OXFILL'         , 'AGCM'        ,
+          'TA'             , 'DYN'         ,
+          'QA'             , 'DYN'         ,
+          'US;VS'          , 'DYN'         ,
+          'PS'             , 'DYN'         ,
+          'SPEED'          , 'DYN'         ,
+          'ZPBL'           , 'TURBULENCE'  , 'PBLH'       ,
+          'TS'             , 'SURFACE'     ,
+          'QS'             , 'SURFACE'     ,
+          'THAT'           , 'SURFACE'     ,
+          'QHAT'           , 'SURFACE'     ,
+          'CN_PRCP'        , 'MOIST'       , 'CNPRCP'     ,
+          'LS_PRCP'        , 'MOIST'       , 'LSPRCP'     ,
+          'AN_PRCP'        , 'MOIST'       , 'ANPRCP'     ,
+          'SNO'            , 'MOIST'       ,
+          'PLS'            , 'MOIST'       ,
+          'PCU'            , 'MOIST'       ,
+          'ICE'            , 'MOIST'       ,
+          'FRZR'           , 'MOIST'       ,
+          'RAIN'           , 'MOIST'       ,
+          'PTYPE'          , 'MOIST'       ,
+          'LWP'            , 'MOIST'       ,
+          'CCWP'           , 'MOIST'       ,
+          'TAUTT'          , 'SOLAR'       ,
+          'TAULO'          , 'SOLAR'       ,
+          'TAUMD'          , 'SOLAR'       ,
+          'TAUHI'          , 'SOLAR'       ,
+          'CLDTT'          , 'SOLAR'       ,
+          'CLDLO'          , 'SOLAR'       ,
+          'CLDMD'          , 'SOLAR'       ,
+          'CLDHI'          , 'SOLAR'       ,
+          'SPLAND'         , 'SURFACE'     ,
+          'SPWATR'         , 'SURFACE'     ,
+          'RUNSURF'        , 'SURFACE'     , 'RUNOFF'     ,
+          'BASEFLOW'       , 'SURFACE'     ,
+          'EMIS'           , 'SURFACE'     ,
+          'CT'             , 'SURFACE'     ,
+          'CQ'             , 'SURFACE'     ,
+          'CN'             , 'SURFACE'     ,
+          'CM'             , 'SURFACE'     ,
+          'RI'             , 'SURFACE'     , 'RISFC'      ,
+          'LAI'            , 'SURFACE'     ,
+          'GRN'            , 'SURFACE'     ,
+          'SNOMAS'         , 'SURFACE'     ,
+          'ITY'            , 'SURFACE'     , 'VEGTYPE'    ,
+          'WET1'           , 'SURFACE'     ,
+          'WET2'           , 'SURFACE'     ,
+          'WET3'           , 'SURFACE'     ,
+          'TSOIL1'         , 'SURFACE'     ,
+          'TSOIL2'         , 'SURFACE'     ,
+          'FRLAND'         , 'SURFACE'     ,
+          'FRLANDICE'      , 'SURFACE'     ,
+          'FRLAKE'         , 'SURFACE'     ,
+          'FRACI'          , 'SURFACE'     , 'FRSEAICE'   ,
+          'FROCEAN'        , 'SURFACE'     ,
+          'USTAR'          , 'SURFACE'     ,
+          'Z0'             , 'SURFACE'     ,
+          'Z0H'            , 'SURFACE'     ,
+          'LHFX'           , 'SURFACE'     ,
+          'SH'             , 'SURFACE'     , 'SHFX'       ,
+          'EVAP'           , 'SURFACE'     ,
+          'TAUX;TAUY'      , 'SURFACE'     ,
+          'RHOS'           , 'SURFACE'     ,
+          'U2M;V2M'        , 'SURFACE'     ,
+          'T2M'            , 'SURFACE'     ,
+          'Q2M'            , 'SURFACE'     ,
+          'U10N;V10N'      , 'SURFACE'     ,
+          'U10M;V10M'      , 'SURFACE'     ,
+          'T10M'           , 'SURFACE'     ,
+          'Q10M'           , 'SURFACE'     ,
+          'U50M;V50M'      , 'SURFACE'     ,
+          'GUST'           , 'SURFACE'     ,
+          'VENT'           , 'SURFACE'     ,
+          'ASNOW'          , 'SURFACE'     ,
+          'RADSRF'         , 'RADIATION'   ,
+          'TBISCCP'        , 'SATSIM'      ,
+        'DBZ_MAX'  , 'MOIST'    ,  'DBZMAX' , 'MAX' ,
+        'DBZ_TOP'  , 'MOIST'    ,  'DBZTOP' , 'MAX' ,
+        'DBZ_1KM'  , 'MOIST'    ,  'DBZ1KM' , 'MAX' ,
+        'DBZ_M10C' , 'MOIST'    , 'DBZM10C' , 'MAX' ,
+        'UH25'     , 'DYN'      ,  'UH25MX' , 'MAX' ,
+        'UH03'     , 'DYN'      ,  'UH03MX' , 'MAX' ,
+        'SRH25'    , 'DYN'      , 'SRH25MX' , 'MAX' ,
+        'SRH03'    , 'DYN'      , 'SRH03MX' , 'MAX' ,
+        'SRH01'    , 'DYN'      , 'SRH01MX' , 'MAX' ,
+          'FLNS'           , 'IRRAD'       ,
+          'FLNSC'          , 'IRRAD'       ,
+          'FLNSA'          , 'IRRAD'       , 'FLNSCNA'    ,
+          'OLR'            , 'IRRAD'       ,
+          'OLC'            , 'IRRAD'       , 'OLRC'       ,
+          'OLCC5'          , 'IRRAD'       , 'OLRCC5'     ,
+          'OLA'            , 'IRRAD'       , 'OLRCNA'     ,
+          'LWS'            , 'IRRAD'       ,
+          'LCS'            , 'IRRAD'       , 'LWSC'       ,
+          'LCSC5'          , 'IRRAD'       , 'LWSCC5'     ,
+          'LAS'            , 'IRRAD'       , 'LWSCNA'     ,
+          'SFCEM'          , 'IRRAD'       ,
+          'CLDTMP'         , 'SOLAR'       , 'SWCLDTMP'   ,
+          'CLDPRS'         , 'SOLAR'       , 'SWCLDPRS'   ,
+          'OSR'            , 'SOLAR'       ,
+          'OSRCLR'         , 'SOLAR'       ,
+          'RSR'            , 'SOLAR'       , 'SWTNET'     ,
+          'RSC'            , 'SOLAR'       , 'SWTNETC'    ,
+          'RSCNA'          , 'SOLAR'       , 'SWTNETCNA'  ,
+          'RSRNA'          , 'SOLAR'       , 'SWTNETNA'   ,
+          'SLRTP'          , 'SOLAR'       , 'RADSWT'     ,
+          'SLRSF'          , 'SOLAR'       , 'SWGDWN'     ,
+          'SLRSFC'         , 'SOLAR'       , 'SWGDWNC'    ,
+          'RSRS'           , 'SOLAR'       , 'SWGNET'     ,
+          'RSCS'           , 'SOLAR'       , 'SWGNETC'    ,
+          'RSRSNA'         , 'SOLAR'       , 'SWGNETNA'   ,
+          'RSCSNA'         , 'SOLAR'       , 'SWGNETCNA'  ,
+          'ALBEDO'         , 'SOLAR'       ,
+          'ALBVR'          , 'SOLAR'       ,
+          'ALBVF'          , 'SOLAR'       ,
+          'ALBNR'          , 'SOLAR'       ,
+          'ALBNF'          , 'SOLAR'       ,
+          'EVLAND'         , 'SURFACE'     ,
+          'LHLAND'         , 'SURFACE'     ,
+          'SHLAND'         , 'SURFACE'     ,
+          'SWLAND'         , 'SURFACE'     ,
+          'LWLAND'         , 'SURFACE'     ,
+          'GHLAND'         , 'SURFACE'     ,
+          'SMLAND'         , 'SURFACE'     ,
+          'TWLAND'         , 'SURFACE'     ,
+          'TELAND'         , 'SURFACE'     ,
+# additonal exports for skin SST
+          'EVAPOUT'        , 'SURFACE'     ,
+          'COSZ'           , 'SOLAR'       ,
+          'DCOOL'          , 'SURFACE'     ,
+          'DWARM'          , 'SURFACE'     ,
+          'TDROP'          , 'SURFACE'     , 'DELT_COOL'  ,
+          'TS_FOUND'       , 'SURFACE'     ,
+          'TDEL'           , 'SURFACE'     ,
+          'BCOOL'          , 'SURFACE'     ,
+          'LCOOL'          , 'SURFACE'     ,
+          'TBAR'           , 'SURFACE'     ,
+          'USTARW'         , 'SURFACE'     ,
+          'SWCOOL'         , 'SURFACE'     ,
+          'QCOOL'          , 'SURFACE'     ,
+          'DELTS'          , 'SURFACE'     ,
+          'QWARM'          , 'SURFACE'     ,
+          'SWWARM'         , 'SURFACE'     ,
+          'LANGM'          , 'SURFACE'     ,
+          'PHIW'           , 'SURFACE'     ,
+          'TAUTW'          , 'SURFACE'     ,
+          'ZETA_W'         , 'SURFACE'     ,
+           ::
+
+  inst_01hr_2d_brs_Nx.format:      'CFIO' ,
+  inst_01hr_2d_brs_Nx.descr:       '2d,1-Hourly,Instantaneous,Hi-Res Lat-Lon on Single-Level,Assimilation,Meteorological, Carbon and Aerosol Single-Level Diagnostics' ,
+  inst_01hr_2d_brs_Nx.grid_label:  PC11520x5761-DC ,
+  inst_01hr_2d_brs_Nx.nbits:       12,
+  inst_01hr_2d_brs_Nx.chunksize:   360 181 1 1,
+  inst_01hr_2d_brs_Nx.deflate:     1,
+  inst_01hr_2d_brs_Nx.template:    '%y4%m2%d2_%h2%n2z.nc4' ,
+  inst_01hr_2d_brs_Nx.mode:        'instantaneous' ,
+  inst_01hr_2d_brs_Nx.frequency:   010000 ,
+  inst_01hr_2d_brs_Nx.duration:    010000 ,
+  inst_01hr_2d_brs_Nx.fields:   'SLP'       , 'DYN'      ,
+                                'PS'        , 'DYN'      ,
+                                'H1000'     , 'DYN'      ,
+                                'H500'      , 'DYN'      ,
+                                'SPEED'     , 'DYN'      ,
+                                'T2MDEW'    , 'SURFACE'  ,
+                                'PTYPE'     , 'MOIST'    ,
+                                'TSLAND'    , 'SURFACE'  , 'SNOMAS' ,
+                                'U10M;V10M' , 'SURFACE'  ,
+                                'TS'        , 'SURFACE'  , 'TSKIN'  ,
+                                'T2M'       , 'SURFACE'  ,
+                                'Q2M'       , 'SURFACE'  ,  'QV2M'  ,
+                                'TQV'       , 'AGCM'     ,
+                                'TQI'       , 'AGCM'     ,
+                                'TQL'       , 'AGCM'     ,
+                                'TQR'       , 'AGCM'     ,
+                                'TQS'       , 'AGCM'     ,
+                                'TQG'       , 'AGCM'     ,
+#@                                'TQC'       , 'AGCM'     ,
+                                'CWP'       , 'MOIST'    ,
+                                'LWP'       , 'MOIST'    ,
+                                'IWP'       , 'MOIST'    ,
+                                'SNO'       , 'MOIST'    , 'PRECSNO'   ,
+                                'TPREC'     , 'MOIST'    , 'PRECTOT'   ,
+                                'AN_PRCP'   , 'MOIST'    , 'PRECANV' ,
+                                'CN_PRCP'   , 'MOIST'    , 'PRECCON' ,
+                                'LS_PRCP'   , 'MOIST'    , 'PRECLSC' ,
+                                'CNV_FRC'   , 'MOIST'    ,
+                                'BSTAR'     , 'SURFACE'  ,
+                                'USTAR'     , 'SURFACE'  ,
+                                'LHFX'      , 'SURFACE'  ,  'EFLUX'   ,
+                                'EVAP'      , 'SURFACE'  ,
+                                'SH'        , 'SURFACE'  ,  'HFLUX'   ,
+                                'TAUX'      , 'SURFACE'  ,
+                                'TAUY'      , 'SURFACE'  ,
+                                'LWI'       , 'SURFACE'  ,
+                                'U200;V200' , 'DYN'      ,
+                                'U500;V500' , 'DYN'      ,
+                                'U700;V700' , 'DYN'      ,
+                                'U850;V850' , 'DYN'      ,
+                                'VORT200'   , 'DYN'      ,
+                                'VORT500'   , 'DYN'      ,
+                                'VORT700'   , 'DYN'      ,
+                                'VORT850'   , 'DYN'      ,
+                                'DIVG200'   , 'DYN'      ,
+                                'DIVG500'   , 'DYN'      ,
+                                'DIVG700'   , 'DYN'      ,
+                                'DIVG850'   , 'DYN'      ,
+                                'ZPBL'      , 'TURBULENCE' ,  'PBLH'   ,
+                                'MDSCLDSZWTR', 'SATSIM'  ,
+                                'MDSCLDSZICE', 'SATSIM'  ,
+# New diagnostics
+                           'SLRTP'     , 'SOLAR'      , 'SWTDN'  ,
+                           'ISRB08RG'  , 'SOLAR'      ,
+                           'ISRB09RG'  , 'SOLAR'      ,
+                           'ISRB10RG'  , 'SOLAR'      ,
+                           'OSRB08RG'  , 'SOLAR'      ,
+                           'OSRB09RG'  , 'SOLAR'      ,
+                           'OSRB10RG'  , 'SOLAR'      ,
+                           'TBRB05RG'  , 'IRRAD'      ,
+                           'TBRB06RG'  , 'IRRAD'      ,
+                           'TBRB07RG'  , 'IRRAD'      ,
+                           'TBRB09RG'  , 'IRRAD'      ,
+                           'TBRB10RG'  , 'IRRAD'      ,
+                           'TBRB11RG'  , 'IRRAD'      ,
+                           'TBRB15RG'  , 'IRRAD'      ,
+                           'TBISCCP'   , 'SATSIM'     ,
+                           'DBZ_MAX'   , 'MOIST'      ,
+                           'DBZ_TOP'   , 'MOIST'      ,
+                           'DBZ_1KM'   , 'MOIST'      ,
+                           'DBZ_M10C'  , 'MOIST'      ,
+                           'UH25'      , 'DYN'        ,
+                           'UH03'      , 'DYN'        ,
+                           'SRH25'     , 'DYN'        ,
+                           'SRH03'     , 'DYN'        ,
+                           'SRH01'     , 'DYN'        ,
+                           'CAPE'      , 'MOIST'      ,
+                           'INHB'      , 'MOIST'      , 'CIN'               ,
+                           'SBCAPE'    , 'MOIST'      , 'CAPE_SFC'          ,
+                           'SBCIN'     , 'MOIST'      , 'CIN_SFC'           ,
+                           'MLCAPE'    , 'MOIST'      , 'CAPE_90MB'         ,
+                           'MLCIN'     , 'MOIST'      , 'CIN_90MB'          ,
+                           'MUCAPE'    , 'MOIST'      , 'CAPE_255MB'        ,
+                           'MUCIN'     , 'MOIST'      , 'CIN_255MB'         ,
+# Aerosols
+                                'DUEXTTAU'       , 'DU'   ,
+                                'SSEXTTAU'       , 'SS'   ,
+                                'CA.ocEXTTAU'  , 'CA.oc'  , 'OCEXTTAU'
+                                'CA.bcEXTTAU'  , 'CA.bc'  , 'BCEXTTAU'
+                                'CA.brEXTTAU'  , 'CA.br'  , 'BREXTTAU'
+                                'SUEXTTAU'       , 'SU'   ,
+                                'NIEXTTAU'       , 'NI'   ,
+# Total Aerosol properties
+                                'TOTEXTTAU'  , 'GOCART2G'  ,
+                                'TOTSCATAU'  , 'GOCART2G'  ,
+                                'TOTANGSTR'  , 'GOCART2G'  ,
+# Surface Concentrations
+                                'COEM'       , 'GOCART'     , 'COEM'       ,
+                                'COLS'       , 'GOCART'     , 'COLS'       ,
+                                'COPD'       , 'GOCART'     , 'COPD'       ,
+                                'COCL'       , 'GOCART'     , 'COCL'       ,
+                                'COSC'       , 'GOCART'     , 'COSC'       ,
+#>>                                'CO2EM001'   , 'GOCART'     , 'CO2EM'      ,
+#>>                                'CO2SC001'   , 'GOCART'     , 'CO2SC'      ,
+#>>                                'CO2CL001'   , 'GOCART'     , 'CO2CL'      ,
+                                'DUSMASS'    , 'DU'  ,
+                                'DUSMASS25'  , 'DU'  ,
+                                'SSSMASS'    , 'SS'  ,
+                                'SSSMASS25'  , 'SS'  ,
+                                'CA.ocSMASS', 'CA.oc', 'OCSMASS'
+                                'CA.bcSMASS', 'CA.bc', 'BCSMASS'
+                                'CA.brSMASS', 'CA.br', 'BRSMASS'
+#ALT: no25                                'CA.ocSMASS25', 'CA.oc', 'OCSMASS25'
+#ALT: no25                                'CA.bcSMASS25', 'CA.bc', 'BCSMASS25'
+#ALT: no25                                'CA.brSMASS25', 'CA.br', 'BRSMASS25'
+                                'SO4SMASS'   , 'SU'  ,
+#ALT: no25                                'SO4SMASS25'   , 'SU'  ,
+                                'SO2SMASS'   , 'SU'  ,
+                                'SO2CMASS'   , 'SU'  ,
+                                'NISMASS'    , 'NI'  ,
+                                'NISMASS25'  , 'NI'  ,
+                                ::
+
+geosgcm_moist.template:        '%y4%m2%d2_%h2%n2z.nc4' ,
+geosgcm_moist.archive:         '%c/Y%y4' ,
+geosgcm_moist.format:          'CFIO' ,
+geosgcm_moist.deflate:          1 ,
+geosgcm_moist.grid_label:       PC720x361-DC ,
+geosgcm_moist.regrid_method:   'BILINEAR',
+geosgcm_moist.mode:            'instantaneous' ,
+#  geosgcm_moist.monthly:          1 ,
+geosgcm_moist.frequency:        010000 ,
+# geosgcm_moist.ref_time:         210000 ,
+geosgcm_moist.vscale:           100.0 ,
+geosgcm_moist.vunit:           'hPa' ,
+geosgcm_moist.vvars:           'log(PLE)', 'DYN' ,
+geosgcm_moist.levels:           1000 975 950 925 900 875 850 825 800 775 750 725 700 650 600 550 500 450 400 350 300 250 200 150 100 70 50 40 30 20 10 7 5 4 3 2 1 0.7 0.5 0.4 0.3 0.2 0.1 0.07 0.05 0.04 0.03 0.02 ,
+geosgcm_moist.fields:          'PHIS'     , 'AGCM'     ,
+          'QL'       , 'MOIST'    ,
+          'QI'       , 'MOIST'    ,
+          'QR'       , 'MOIST'    ,
+          'RI'       , 'MOIST'    , 'RICE'    ,
+          'RL'       , 'MOIST'    , 'RLIQ'    ,
+          'RH1'      , 'MOIST'    ,
+          'CNV_FRC'  , 'MOIST'    ,
+          'CNV_MF0'  , 'MOIST'    , 'CNVMF0'  ,
+          'CNV_MFD'  , 'MOIST'    , 'CNVMFD'  ,
+          'CNV_MFC'  , 'MOIST'    , 'CNVMFC'  ,
+          'REV_CN'   , 'MOIST'    , 'REVCN'   ,
+          'REV_AN'   , 'MOIST'    , 'REVAN'   ,
+          'REV_LS'   , 'MOIST'    , 'REVLS'   ,
+          'RSU_CN'   , 'MOIST'    , 'RSUCN'   ,
+          'RSU_AN'   , 'MOIST'    , 'RSUAN'   ,
+          'RSU_LS'   , 'MOIST'    , 'RSULS'   ,
+          'EVAPC'    , 'MOIST'    ,
+          'SUBLC'    , 'MOIST'    ,
+          'FCLD'     , 'MOIST'    ,
+          'CLCN'     , 'MOIST'    ,
+          'CLLS'     , 'MOIST'    ,
+          'QICN'     , 'MOIST'    ,
+          'QILS'     , 'MOIST'    ,
+          'QLCN'     , 'MOIST'    ,
+          'QLLS'     , 'MOIST'    ,
+           ::
+
+geosgcm_turb.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
+geosgcm_turb.archive:          '%c/Y%y4' ,
+geosgcm_turb.format:           'CFIO' ,
+geosgcm_turb.deflate:           1 ,
+geosgcm_turb.grid_label:        PC720x361-DC ,
+geosgcm_turb.regrid_method:    'BILINEAR',
+geosgcm_turb.mode:             'instantaneous' ,
+#  geosgcm_turb.monthly:           1 ,
+geosgcm_turb.frequency:         010000 ,
+# geosgcm_turb.ref_time:          210000 ,
+geosgcm_turb.vscale:            100.0 ,
+geosgcm_turb.vunit:            'hPa' ,
+geosgcm_turb.vvars:            'log(PLE)' , 'DYN' ,
+geosgcm_turb.levels:            1000 975 950 925 900 875 850 825 800 775 750 725 700 650 600 550 500 450 400 350 300 250 200 150 100 70 50 40 30 20 10 7 5 4 3 2 1 0.7 0.5 0.4 0.3 0.2 0.1 0.07 0.05 0.04 0.03 0.02 ,
+geosgcm_turb.fields:           'INTDIS'  , 'TURBULENCE'  ,
+          'TOPDIS'  , 'TURBULENCE'  ,
+          'SRFDIS'  , 'TURBULENCE'  ,
+          'DBUOY'   , 'TURBULENCE'  ,
+          'WERAD'   , 'TURBULENCE'  ,
+          'KH'      , 'TURBULENCE'  ,
+          'KM'      , 'TURBULENCE'  ,
+          'KHLS'    , 'TURBULENCE'  ,
+          'KMLS'    , 'TURBULENCE'  ,
+          'EKH'     , 'TURBULENCE'  ,
+          'EKM'     , 'TURBULENCE'  ,
+          'KHSFC'   , 'TURBULENCE'  ,
+          'KHRAD'   , 'TURBULENCE'  ,
+          'RI'      , 'TURBULENCE'  ,
+          'DU'      , 'TURBULENCE'  ,
+           ::
+
+geosgcm_gwd.template:          '%y4%m2%d2_%h2%n2z.nc4' ,
+geosgcm_gwd.archive:           '%c/Y%y4' ,
+geosgcm_gwd.format:            'CFIO' ,
+geosgcm_gwd.deflate:            1 ,
+geosgcm_gwd.grid_label:         PC720x361-DC ,
+geosgcm_gwd.regrid_method:     'BILINEAR',
+geosgcm_gwd.mode:              'instantaneous' ,
+#  geosgcm_gwd.monthly:            1 ,
+geosgcm_gwd.frequency:          010000 ,
+# geosgcm_gwd.ref_time:           210000 ,
+geosgcm_gwd.vscale:             100.0 ,
+geosgcm_gwd.vunit:             'hPa' ,
+geosgcm_gwd.vvars:             'log(PLE)' , 'DYN' ,
+geosgcm_gwd.levels:             1000 975 950 925 900 875 850 825 800 775 750 725 700 650 600 550 500 450 400 350 300 250 200 150 100 70 50 40 30 20 10 7 5 4 3 2 1 0.7 0.5 0.4 0.3 0.2 0.1 0.07 0.05 0.04 0.03 0.02 ,
+geosgcm_gwd.fields:            'DUDT_ORO;DVDT_ORO'  , 'GWD'  , 'DUDTORO;DVDTORO' ,
+          'DUDT_BKG;DVDT_BKG'  , 'GWD'  , 'DUDTBKG;DVDTBKG' ,
+          'DUDT_RAY;DVDT_RAY'  , 'GWD'  , 'DUDTRAY;DVDTRAY' ,
+          'TAUOROX;TAUOROY'    , 'GWD'  ,
+          'TAUBKGX;TAUBKGY'    , 'GWD'  ,
+          'DTDT_ORO'           , 'GWD'  , 'DTDTORO'  ,
+          'DTDT_BKG'           , 'GWD'  , 'DTDTBKG'  ,
+          'DTDT_RAY'           , 'GWD'  , 'DTDTRAY'  ,
+           ::
+
+geosgcm_budi.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
+geosgcm_budi.archive:          '%c/Y%y4' ,
+geosgcm_budi.format:           'CFIO' ,
+geosgcm_budi.deflate:           1 ,
+geosgcm_budi.grid_label:        PC720x361-DC ,
+geosgcm_budi.regrid_method:    'CONSERVE',
+geosgcm_budi.frequency:         010000 ,
+geosgcm_budi.fields:           'TQV'   , 'AGCM'  ,
+          'TQI'   , 'AGCM'  ,
+          'TQL'   , 'AGCM'  ,
+          'TOX'   , 'AGCM'  ,
+          'MASS'  , 'AGCM'  ,
+           ::
+
+geosgcm_buda.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
+geosgcm_buda.archive:          '%c/Y%y4' ,
+geosgcm_buda.format:           'CFIO' ,
+geosgcm_buda.deflate:           1 ,
+geosgcm_buda.grid_label:        PC720x361-DC ,
+geosgcm_buda.regrid_method:    'CONSERVE',
+geosgcm_buda.mode:             'instantaneous' ,
+#  geosgcm_buda.monthly:           1 ,
+geosgcm_buda.frequency:         010000 ,
+geosgcm_buda.fields:           'DMDTDYN'      , 'DYN'      , 'DMDTDYN'   ,
+          'DMDTANA'      , 'DYN'      , 'DMDTANA'   ,
+          'DMDT'         , 'PHYSICS'  , 'DMDTPHY'   ,
+          'DQVDTDYNINT'  , 'DYN'      , 'DQVDTDYN'  ,
+          'DQVDTPHYINT'  , 'PHYSICS'  , 'DQVDTPHY'  ,
+          'DQVDTANAINT'  , 'DYN'      , 'DQVDTANA'  ,
+          'DQVDTMSTINT'  , 'PHYSICS'  , 'DQVDTMST'  ,
+          'DQVDTTRBINT'  , 'PHYSICS'  , 'DQVDTTRB'  ,
+          'DQVDTCHMINT'  , 'PHYSICS'  , 'DQVDTCHM'  ,
+          'DQLDTDYNINT'  , 'DYN'      , 'DQLDTDYN'  ,
+          'DQLDTPHYINT'  , 'PHYSICS'  , 'DQLDTPHY'  ,
+          'DQLDTANAINT'  , 'DYN'      , 'DQLDTANA'  ,
+          'DQLDTMSTINT'  , 'PHYSICS'  , 'DQLDTMST'  ,
+          'DQIDTDYNINT'  , 'DYN'      , 'DQIDTDYN'  ,
+          'DQIDTPHYINT'  , 'PHYSICS'  , 'DQIDTPHY'  ,
+          'DQIDTANAINT'  , 'DYN'      , 'DQIDTANA'  ,
+          'DQIDTMSTINT'  , 'PHYSICS'  , 'DQIDTMST'  ,
+          'DOXDTDYNINT'  , 'DYN'      , 'DOXDTDYN'  ,
+          'DOXDTPHYINT'  , 'PHYSICS'  , 'DOXDTPHY'  ,
+          'DOXDTANAINT'  , 'DYN'      , 'DOXDTANA'  ,
+          'DOXDTCHMINT'  , 'PHYSICS'  , 'DOXDTCHM'  ,
+           ::
+
+#                     ---------------------
+#                     Aerosols/Constituents
+#                     ---------------------
+#
+#
+#### GOCART
+
+  tavg2d_aer_x.template:       '%y4%m2%d2_%h2%n2z.nc4',
+  tavg2d_aer_x.archive:        '%c/Y%y4',
+  tavg2d_aer_x.format:         'CFIO',
+  tavg2d_aer_x.deflate:         1,
+  tavg2d_aer_x.grid_label:      PC720x361-DC,
+  tavg2d_aer_x.mode:           'instantaneous',
+#  tavg2d_aer_x.monthly:         1,
+  tavg2d_aer_x.frequency:       010000,
+# tavg2d_aer_x.ref_time:        210000,
+  tavg2d_aer_x.regrid_method:   'CONSERVE',
+  tavg2d_aer_x.splitField:      1,
+  tavg2d_aer_x.fields:         'LWI'            , 'SURFACE'   ,
+                               'TOTEXTTAU'      , 'GOCART2G'  ,
+                               'TOTSCATAU'      , 'GOCART2G'  ,
+                               'TOTANGSTR'      , 'GOCART2G'  ,
+                               'TOTSTEXTTAU'    , 'GOCART2G'  ,
+                               'TOTSTSCATAU'    , 'GOCART2G'  ,
+                               'PM25'           , 'GOCART2G'  ,
+                               'PM'             , 'GOCART2G'  ,
+                               'DUEM'           , 'DU'        , 'DUEM001;DUEM002;DUEM003;DUEM004;DUEM005' ,
+                               'DUSD'           , 'DU'        , 'DUSD001;DUSD002;DUSD003;DUSD004;DUSD005' ,
+                               'DUDP'           , 'DU'        , 'DUDP001;DUDP002;DUDP003;DUDP004;DUDP005' ,
+                               'DUWT'           , 'DU'        , 'DUWT001;DUWT002;DUWT003;DUWT004;DUWT005' ,
+                               'DUSMASS'        , 'DU'        ,
+                               'DUCMASS'        , 'DU'        ,
+                               'DUEXTTAU'       , 'DU'        ,
+                               'DUSCATAU'       , 'DU'        ,
+                               'DUSTEXTTAU'     , 'DU'        ,
+                               'DUSTSCATAU'     , 'DU'        ,
+                               'DUANGSTR'       , 'DU'        ,
+                               'DUEXTTFM'       , 'DU'        ,
+                               'DUSCATFM'       , 'DU'        ,
+                               'DUSMASS25'      , 'DU'        ,
+                               'DUCMASS25'      , 'DU'        ,
+                               'DUEXTT25'       , 'DU'        ,
+                               'DUSCAT25'       , 'DU'        ,
+                               'DUAERIDX'       , 'DU'        ,
+                               'DUFLUXU'        , 'DU'        ,
+                               'DUFLUXV'        , 'DU'        ,
+                               'SSEM'           , 'SS'        , 'SSEM001;SSEM002;SSEM003;SSEM004;SSEM005' ,
+                               'SSSD'           , 'SS'        , 'SSSD001;SSSD002;SSSD003;SSSD004;SSSD005' ,
+                               'SSDP'           , 'SS'        , 'SSDP001;SSDP002;SSDP003;SSDP004;SSDP005' ,
+                               'SSWT'           , 'SS'        , 'SSWT001;SSWT002;SSWT003;SSWT004;SSWT005' ,
+                               'SSSMASS'        , 'SS'        ,
+                               'SSCMASS'        , 'SS'        ,
+                               'SSEXTTAU'       , 'SS'        ,
+                               'SSSCATAU'       , 'SS'        ,
+                               'SSSTEXTTAU'     , 'SS'        ,
+                               'SSSTSCATAU'     , 'SS'        ,
+                               'SSANGSTR'       , 'SS'        ,
+                               'SSEXTTFM'       , 'SS'        ,
+                               'SSSCATFM'       , 'SS'        ,
+                               'SSSMASS25'      , 'SS'        ,
+                               'SSCMASS25'      , 'SS'        ,
+                               'SSEXTT25'       , 'SS'        ,
+                               'SSSCAT25'       , 'SS'        ,
+                               'SSAERIDX'       , 'SS'        ,
+                               'SSFLUXU'        , 'SS'        ,
+                               'SSFLUXV'        , 'SS'        ,
+                               'SUEM'           , 'SU'        ,
+                               'SUDP'           , 'SU'        ,
+                               'SUWT'           , 'SU'        ,
+                               'SUSD'           , 'SU'        ,
+                               'SO2SMASS'       , 'SU'        ,
+                               'SO2CMASS'       , 'SU'        ,
+                               'SO4SMASS'       , 'SU'        ,
+                               'SO4CMASS'       , 'SU'        ,
+                               'DMSSMASS'       , 'SU'        ,
+                               'DMSCMASS'       , 'SU'        ,
+                               'SUPSO2'         , 'SU'        ,
+                               'SUPSO4G'        , 'SU'        ,
+                               'SUPSO4AQ'       , 'SU'        ,
+                               'SUPSO4WT'       , 'SU'        ,
+                               'SUPMSA'         , 'SU'        ,
+                               'SUEXTTAU'       , 'SU'        ,
+                               'SUSCATAU'       , 'SU'        ,
+                               'SUSTEXTTAU'     , 'SU'        ,
+                               'SUSTSCATAU'     , 'SU'        ,
+                               'SUANGSTR'       , 'SU'        ,
+                               'SO4EMAN'        , 'SU'        ,
+                               'SO2EMAN'        , 'SU'        ,
+                               'SO2EMBB'        , 'SU'        ,
+                               'SO2EMVN'        , 'SU'        ,
+                               'SO2EMVE'        , 'SU'        ,
+                               'SUFLUXU'        , 'SU'        ,
+                               'SUFLUXV'        , 'SU'        ,
+                               'CA.bcEM'        , 'CA.bc'     , 'BCEM001;BCEM002' ,
+                               'CA.bcDP'        , 'CA.bc'     , 'BCDP001;BCDP002' ,
+                               'CA.bcWT'        , 'CA.bc'     , 'BCWT001;BCWT002' ,
+#                              'CA.bcSD'        , 'CA.bc'     , 'BCSD001;BCSD002' ,
+                               'CA.bcSMASS'     , 'CA.bc'     , 'BCSMASS'     ,
+                               'CA.bcCMASS'     , 'CA.bc'     , 'BCCMASS'     ,
+                               'CA.bcEXTTAU'    , 'CA.bc'     , 'BCEXTTAU'    ,
+                               'CA.bcSCATAU'    , 'CA.bc'     , 'BCSCATAU'    ,
+                               'CA.bcSTEXTTAU'  , 'CA.bc'     , 'BCSTEXTTAU'  ,
+                               'CA.bcSTSCATAU'  , 'CA.bc'     , 'BCSTSCATAU'  ,
+                               'CA.bcANGSTR'    , 'CA.bc'     , 'BCANGSTR'    ,
+                               'CA.bcHYPHIL'    , 'CA.bc'     , 'BCHYPHIL'    ,
+                               'CA.bcEMBB'      , 'CA.bc'     , 'BCEMBB'      ,
+                               'CA.bcEMBF'      , 'CA.bc'     , 'BCEMBF'      ,
+                               'CA.bcEMAN'      , 'CA.bc'     , 'BCEMAN'      ,
+                               'CA.bcFLUXU'     , 'CA.bc'     , 'BCFLUXU'     ,
+                               'CA.bcFLUXV'     , 'CA.bc'     , 'BCFLUXV'     ,
+                               'CA.ocEM'        , 'CA.oc'     , 'OCEM001;OCEM002' ,
+                               'CA.ocDP'        , 'CA.oc'     , 'OCDP001;OCDP002' ,
+                               'CA.ocWT'        , 'CA.oc'     , 'OCWT001;OCWT002' ,
+#                              'CA.ocSD'        , 'CA.oc'     , 'OCSD001;OCSD002' ,
+                               'CA.ocSMASS'     , 'CA.oc'     , 'OCSMASS'     ,
+                               'CA.ocCMASS'     , 'CA.oc'     , 'OCCMASS'     ,
+                               'CA.ocEXTTAU'    , 'CA.oc'     , 'OCEXTTAU'    ,
+                               'CA.ocSCATAU'    , 'CA.oc'     , 'OCSCATAU'    ,
+                               'CA.ocSTEXTTAU'  , 'CA.oc'     , 'OCSTEXTTAU'  ,
+                               'CA.ocSTSCATAU'  , 'CA.oc'     , 'OCSTSCATAU'  ,
+                               'CA.ocANGSTR'    , 'CA.oc'     , 'OCANGSTR'    ,
+                               'CA.ocEMBB'      , 'CA.oc'     , 'OCEMBB'      ,
+                               'CA.ocEMBF'      , 'CA.oc'     , 'OCEMBF'      ,
+                               'CA.ocEMAN'      , 'CA.oc'     , 'OCEMAN'      ,
+                               'CA.ocEMBG'      , 'CA.oc'     , 'OCEMBG'      ,
+                               'CA.ocPSOA'      , 'CA.oc'     , 'OCPSOA'      ,
+                               'CA.ocHYPHIL'    , 'CA.oc'     , 'OCHYPHIL'    ,
+                               'CA.ocFLUXU'     , 'CA.oc'     , 'OCFLUXU'     ,
+                               'CA.ocFLUXV'     , 'CA.oc'     , 'OCFLUXV'     ,
+                               'CA.brEM'        , 'CA.br'     , 'BREM001;BREM002' ,
+                               'CA.brDP'        , 'CA.br'     , 'BRDP001;BRDP002' ,
+                               'CA.brWT'        , 'CA.br'     , 'BRWT001;BRWT002' ,
+#                              'CA.brSD'        , 'CA.br'     , 'BRSD001;BRSD002' ,
+                               'CA.brSMASS'     , 'CA.br'     , 'BRSMASS'     ,
+                               'CA.brCMASS'     , 'CA.br'     , 'BRCMASS'     ,
+                               'CA.brEXTTAU'    , 'CA.br'     , 'BREXTTAU'    ,
+                               'CA.brSCATAU'    , 'CA.br'     , 'BRSCATAU'    ,
+                               'CA.brSTEXTTAU'  , 'CA.br'     , 'BRSTEXTTAU'  ,
+                               'CA.brSTSCATAU'  , 'CA.br'     , 'BRSTSCATAU'  ,
+                               'CA.brANGSTR'    , 'CA.br'     , 'BRANGSTR'    ,
+                               'CA.brPSOA'      , 'CA.br'     , 'BRPSOA'      ,
+                               'CA.brHYPHIL'    , 'CA.br'     , 'BRHYPHIL'    ,
+                               'CA.brEMBB'      , 'CA.br'     , 'BREMBB'      ,
+                               'CA.brEMBF'      , 'CA.br'     , 'BREMBF'      ,
+                               'CA.brEMAN'      , 'CA.br'     , 'BREMAN'      ,
+                               'CA.brFLUXU'     , 'CA.br'     , 'BRFLUXU'     ,
+                               'CA.brFLUXV'     , 'CA.br'     , 'BRFLUXV'     ,
+                               'HNO3SMASS'      , 'NI'        ,
+                               'NH3SMASS'       , 'NI'        ,
+                               'NH4SMASS'       , 'NI'        ,
+                               'NISMASS'        , 'NI'        ,
+                               'NISMASS25'      , 'NI'        ,
+                               'HNO3CMASS'      , 'NI'        ,
+                               'NH3CMASS'       , 'NI'        ,
+                               'NH4CMASS'       , 'NI'        ,
+                               'NICMASS'        , 'NI'        ,
+                               'NICMASS25'      , 'NI'        ,
+                               'NIEXTTFM'       , 'NI'        ,
+                               'NISCATFM'       , 'NI'        ,
+                               'NIEXTTAU'       , 'NI'        ,
+                               'NISCATAU'       , 'NI'        ,
+                               'NIANGSTR'       , 'NI'        ,
+                               'NIPNO3AQ'       , 'NI'        ,
+                               'NIPNH4AQ'       , 'NI'        ,
+                               'NIPNH3AQ'       , 'NI'        ,
+                               'NIHT'           , 'NI'        ,
+                               'NISD'           , 'NI'        ,
+                               'NIDP'           , 'NI'        ,
+                               'NIWT'           , 'NI'        ,
+                               'NH3EM'          , 'NI'        ,
+                               'NH3DP'          , 'NI'        ,
+                               'NH3WT'          , 'NI'        ,
+                               'NH4SD'          , 'NI'        ,
+                               'NH4DP'          , 'NI'        ,
+                               'NH4WT'          , 'NI'        ,
+                               'NIFLUXU'        , 'NI'        ,
+                               'NIFLUXV'        , 'NI'        ,
+                               'NH3SV'          , 'NI'        ,
+                               'NH4SV'          , 'NI'        ,
+                               'MCHEMTRI%DU::DUIM'             , 'PHYSICS' , 'DUSV' ,
+                               'MCHEMTRI%SS::SSIM'             , 'PHYSICS' , 'SSSV' ,
+                               'MCHEMTRI%CA.oc::CA.ocphilicIM' , 'PHYSICS' , 'OCSV' ,
+                               'MCHEMTRI%CA.bc::CA.bcphilicIM' , 'PHYSICS' , 'BCSV' ,
+                               'MCHEMTRI%CA.br::CA.brphilicIM' , 'PHYSICS' , 'BRSV' ,
+                               'MCHEMTRI%SU::SO4IM'            , 'PHYSICS' , 'SUSV' ,
+                               'MCHEMTRI%NI::NO3an1IM'         , 'PHYSICS' , 'NISV' ,
+                                ::
+
+  tavg3d_aer_p.template:       '%y4%m2%d2_%h2%n2z.nc4',
+  tavg3d_aer_p.archive:        '%c/Y%y4',
+  tavg3d_aer_p.format:         'CFIO',
+  tavg3d_aer_p.deflate:         1,
+  tavg3d_aer_p.grid_label:      PC720x361-DC,
+  tavg3d_aer_p.mode:           'instantaneous',
+#  tavg3d_aer_p.monthly:         1,
+  tavg3d_aer_p.frequency:       010000,
+# tavg3d_aer_p.ref_time:        210000,
+  tavg3d_aer_p.regrid_method:   'CONSERVE',
+  tavg3d_aer_p.splitField:      1,
+  tavg3d_aer_p.vscale:          100.0,
+  tavg3d_aer_p.vunit:          'hPa',
+  tavg3d_aer_p.vvars:          'log(PLE)'    , 'DYN'        ,
+  tavg3d_aer_p.levels:          1000 975 950 925 900 850 800 750 700 650 600 550 500 450 400 350 300 250 200 150 100 70 50 30 20 10,
+ tavg3d_aer_p.fields:         'PS'          , 'DYN'        , 'PS'        ,
+                              'LWI'         , 'SURFACE'    , 'LWI'       ,
+                              'AIRDENS'     , 'CHEMENV'    ,
+                              'ZL'          , 'DYN'        , 'H'         ,
+                              'DUMASS'      , 'DU'         , 'DU'        ,
+                              'SSMASS'      , 'SS'         , 'SS'        ,
+                              'CA.bcMASS'        , 'CA.bc'    , 'BC'         ,
+                              'CA.ocMASS'        , 'CA.oc'    , 'OC'         ,
+                              'CA.brMASS'        , 'CA.br'    , 'BR'         ,
+                              'SO2'         , 'SU'         ,
+                              'SO4'         , 'SU'         ,
+                              'NH3MASS'     , 'NI'         , 'NH3'       ,
+                              'NH4MASS'     , 'NI'         , 'NH4'       ,
+                              'NIMASS'      , 'NI'         , 'NI'        ,
+                              'HNO3CONC'    , 'NI'         ,
+                              'NICONC'      , 'NI'         ,
+                              'DUEXTCOEF'   , 'DU'         ,
+                              'SSEXTCOEF'   , 'SS'         ,
+                              'SUEXTCOEF'   , 'SU'         ,
+                              'NIEXTCOEF'   , 'NI'         ,
+                              'CA.bcEXTCOEF'     , 'CA.bc'    , 'BCEXTCOEF'  ,
+                              'CA.brEXTCOEF'     , 'CA.br'    , 'BREXTCOEF'  ,
+                              'CA.ocEXTCOEF'     , 'CA.oc'    , 'OCEXTCOEF'  ,
+                              'ACHEM::VOC'      , 'ACHEM'      , 'VOC'       ,
+                              'ACHEM::VOCbiob'  , 'ACHEM'      , 'VOCbiob'   ,
+                              'pSOA_ANTHRO_VOC' , 'ACHEM', 'pSOA'        ,
+                              'pSOA_BIOB_VOC'   , 'ACHEM', 'pSOAbiob'    ,
+                              'GOCART::CO'      , 'GOCART','CO'        ,
+                               ::
+
+#------------------------------
+# Test sampler
+#------------------------------
+
+# YGYU: I think Arlindo said --
+# Aeronet output aer_Nv (here we output aer_Nv + asm_Nv) 
+# NOAA GHCNd output asm_Nv (Global Historical Climatology Network daily (GHCNd))
+#
+  Aeronet.sampler_spec: 'station'
+  Aeronet.station_id_file:    /discover/nobackup/projects/gmao/aist-nr/data/Station/1_national.csv
+  Aeronet.station_skip_line:  1
+  Aeronet.template: %y4%m2%d2_%h2%n2z.nc4
+  Aeronet.format: 'CFIO'
+  Aeronet.frequency: 010000,   # when to write
+  Aeronet.duration:  060000,    # time length to update file
+  Aeronet.splitField:      1,
+  Aeronet.regrid_method: 'BILINEAR' ,
+  Aeronet.fields:                        'PS'           , 'DYN'      ,
+# aer_Nv
+                                         'DELP'         , 'DYN'      ,
+                                         'LWI'          , 'SURFACE'  ,
+                                         'RH2'          , 'MOIST'    , 'RH'        ,
+                                         'AIRDENS'      , 'CHEMENV'  ,
+###<have mixed level/edge>
+###<grid2LS regridder: rank > 3 not implemented>
+# Dust
+                                         'DU'           , 'DU'       , "DU001;DU002;DU003;DU004;DU005"
+### Sea-salt
+                                         'SS'           , 'SS'       , "SS001;SS002;SS003;SS004;SS005"
+### Sulfates
+                                         'DMS'          , 'SU'       ,
+                                         'SO2'          , 'SU'       ,
+                                         'SO4'          , 'SU'       ,
+                                         'MSA'          , 'SU'       ,
+# Carbonaceous (main)
+                                         'CA.bcphobic'  , 'CA.bc'    , 'BCPHOBIC'  ,
+                                         'CA.bcphilic'  , 'CA.bc'    , 'BCPHILIC'  ,
+                                         'CA.brphobic'  , 'CA.br'    , 'BRPHOBIC'  ,
+                                         'CA.brphilic'  , 'CA.br'    , 'BRPHILIC'  ,
+                                         'CA.ocphobic'  , 'CA.oc'    , 'OCPHOBIC'  ,
+                                         'CA.ocphilic'  , 'CA.oc'    , 'OCPHILIC'  ,
+# Nitrate
+                                         'NH3'          , 'NI'       ,
+                                         'NH4a'         , 'NI'       , 'NH4A'      ,
+                                         'NO3an1'       , 'NI'       , 'NO3AN1'    ,
+                                         'NO3an2'       , 'NI'       , 'NO3AN2'    ,
+                                         'NO3an3'       , 'NI'       , 'NO3AN3'    ,
+###asm_Nv
+
+                                         'SLP'    , 'DYN'        ,
+                                         'PHIS'   , 'AGCM'       ,
+##                                         'PL'     , 'DYN'        ,
+                                         'T'      , 'DYN'        ,
+                                         'U'      , 'DYN'        ,
+                                         'V'      , 'DYN'        ,
+                                         'OMEGA'  , 'DYN'        ,
+                                         'Q'      , 'MOIST'      , 'QV'     ,
+                                         'QLTOT'  , 'AGCM'       , 'QL'     ,
+                                         'QITOT'  , 'AGCM'       , 'QI'     ,
+#not-exist                                       'QRTOT'  , 'MOIST'      , 'QR'     ,
+#not-exist                                       'QSTOT'  , 'MOIST'      , 'QS'     ,
+                                         'ZL'     , 'DYN'        , 'H'      ,
+                                         'O3'     , 'CHEMISTRY'  ,
+                                         'EPV'    , 'DYN'        ,
+                                         'FCLD'   , 'MOIST'      , 'CLOUD'  ,
+::
+
+
+  SNDR_ATMS.observation_spec:  'Swath'
+  SNDR_ATMS.template:    '%y4%m2%d2_%h2%n2z.nc4',
+  SNDR_ATMS.format:      'CFIO',
+  SNDR_ATMS.frequency:   060000,
+  SNDR_ATMS.grid_label:   SwathGrid_ATMS,
+  SNDR_ATMS.regrid_method: 'BILINEAR' ,
+  SNDR_ATMS.fields:    
+include(instrument_fields.vl)
+::
+
+  Aqua.observation_spec:  'Swath'  
+  Aqua.template:    '%y4%m2%d2_%h2%n2z.nc4',
+  Aqua.format:      'CFIO',
+  Aqua.frequency:   060000,
+  Aqua.grid_label:  SwathGrid_MYD,   
+  Aqua.regrid_method: 'BILINEAR' ,   
+  Aqua.fields:         
+include(instrument_fields.vl)
+::
+
+  Terra.observation_spec:  'Swath'
+  Terra.template:    '%y4%m2%d2_%h2%n2z.nc4',
+  Terra.format:      'CFIO',
+  Terra.frequency:   060000,
+  Terra.grid_label:  SwathGrid_MOD,
+  Terra.regrid_method: 'BILINEAR' ,
+  Terra.fields:        
+include(instrument_fields.vl)
+::
+
+  ACtraj.sampler_spec:       trajectory
+  ACtraj.ObsPlatforms:       CAMP2EX  FIREXAQ
+  ACtraj.template:           '%y4%m2%d2_%h2%n2z.nc4',
+  ACtraj.format:             'CFIO',
+  ACtraj.obs_file_begin:     2019-07-31T00:00:00
+  ACtraj.obs_file_interval:  '000001 000000'        #  fixed string format:  yymmdd hhmmss
+  ACtraj.obs_file_end:       2019-11-01T00:00:00
+  ACtraj.Epoch:              240000                 #  fixed integer format:  hhmmss
+  ACtraj.regrid_method:      'BILINEAR' ,
+  ACtraj.splitField: 1
+::           
+
+
+  jedi.sampler_spec:         trajectory
+  jedi.ObsPlatforms:         aircraft airs_aqua amsr2_gcom-w1 amsua_aqua amsua_metop-b amsua_n15 amsua_n18 amsua_n19 atms_n20 atms_npp avhrr3_metop-b avhrr3_n18 avhrr3_n19 cris-fsr_n20 cris-fsr_npp gmi_gpm gps iasi_metop-b mhs_metop-b mhs_n19 mls55_aura omi_aura ompsnm_npp satwind scatwind sfc sfcship sondes ssmis_f17
+  jedi.template:             '%y4%m2%d2_%h2%n2z.nc4',
+  jedi.format:               'CFIO',
+  jedi.obs_file_begin:       2019-07-31T21:00:00
+  jedi.obs_file_interval:    '000000 060000'    #  fixed string format:  yymmdd hhmmss
+  jedi.obs_file_end:         2019-11-01T00:00:00
+  jedi.Epoch:                060000             #  fixed integer format:  hhmmss
+  jedi.use_NWP_1_file:       .true.
+  jedi.restore_2_obs_vector: .true.
+  jedi.regrid_method:        'BILINEAR' ,
+  jedi.splitField:           1,
+::
+
+#
+#______  format after here does not obey normal history.rc format ____
+#        donot modify the format below
+#
+
+DEFINE_OBS_PLATFORM::
+
+PLATFORM.CAMP2EX::
+  IODA_SCHEMA::
+    index_name_x:     time
+    var_name_lon:     trjLon
+    var_name_lat:     trjLat
+    var_name_time:    time
+    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/CAMP2EX/sampled/P3B/GEOS-FP/%y4-%m2-%d2/CAMP2Ex-GEOS-FP-adg-Nx-P3B_Model_%y4%m2%d2_R1.nc
+  ::
+  GEOVALS_SCHEMA::
+    geovals_fields::
+                                         'PS'           , 'DYN'      ,
+# aer_Nv
+                                         'DELP'         , 'DYN'      ,
+                                         'LWI'          , 'SURFACE'  ,
+                                         'RH2'          , 'MOIST'    , 'RH'        ,
+                                         'AIRDENS'      , 'CHEMENV'  ,
+###<have mixed level/edge>
+###<grid2LS regridder: rank > 3 not implemented>
+# Dust
+                                         'DU'           , 'DU'       , "DU001;DU002;DU003;DU004;DU005"
+### Sea-salt
+                                         'SS'           , 'SS'       , "SS001;SS002;SS003;SS004;SS005"
+### Sulfates
+                                         'DMS'          , 'SU'       ,
+                                         'SO2'          , 'SU'       ,
+                                         'SO4'          , 'SU'       ,
+                                         'MSA'          , 'SU'       ,
+# Carbonaceous (main)
+                                         'CA.bcphobic'  , 'CA.bc'    , 'BCPHOBIC'  ,
+                                         'CA.bcphilic'  , 'CA.bc'    , 'BCPHILIC'  ,
+                                         'CA.brphobic'  , 'CA.br'    , 'BRPHOBIC'  ,
+                                         'CA.brphilic'  , 'CA.br'    , 'BRPHILIC'  ,
+                                         'CA.ocphobic'  , 'CA.oc'    , 'OCPHOBIC'  ,
+                                         'CA.ocphilic'  , 'CA.oc'    , 'OCPHILIC'  ,
+# Nitrate
+                                         'NH3'          , 'NI'       ,
+                                         'NH4a'         , 'NI'       , 'NH4A'      ,
+                                         'NO3an1'       , 'NI'       , 'NO3AN1'    ,
+                                         'NO3an2'       , 'NI'       , 'NO3AN2'    ,
+                                         'NO3an3'       , 'NI'       , 'NO3AN3'    ,
+###asm_Nv
+                                         'SLP'    , 'DYN'        ,
+                                         'PHIS'   , 'AGCM'       ,
+##                                         'PL'     , 'DYN'        ,
+                                         'T'      , 'DYN'        ,
+                                         'U'      , 'DYN'        ,
+                                         'V'      , 'DYN'        ,
+                                         'OMEGA'  , 'DYN'        ,
+                                         'Q'      , 'MOIST'      , 'QV'     ,
+                                         'QLTOT'  , 'AGCM'       , 'QL'     ,
+                                         'QITOT'  , 'AGCM'       , 'QI'     ,
+#not-exist                                       'QRTOT'  , 'MOIST'      , 'QR'     ,
+#not-exist                                       'QSTOT'  , 'MOIST'      , 'QS'     ,
+                                         'ZL'     , 'DYN'        , 'H'      ,
+                                         'O3'     , 'CHEMISTRY'  ,
+                                         'EPV'    , 'DYN'        ,
+                                         'FCLD'   , 'MOIST'      , 'CLOUD'  ,
+    ::
+  ::
+::
+
+PLATFORM.FIREXAQ::
+  IODA_SCHEMA::
+    index_name_x:     time
+    var_name_lon:     trjLon
+    var_name_lat:     trjLat
+    var_name_time:    time
+    file_name_template: /discover/nobackup/projects/gmao/aist-nr/data/FIREX-AQ/sampled/DC8/GEOS-FP/%y4-%m2-%d2/FIREXAQ-GEOS-FP-adg-Nx-DC8_Model_%y4%m2%d2_R1.nc
+  ::
+  GEOVALS_SCHEMA::
+    geovals_fields::
+                                         'PS'           , 'DYN'      ,
+# aer_Nv
+                                         'DELP'         , 'DYN'      ,
+                                         'LWI'          , 'SURFACE'  ,
+                                         'RH2'          , 'MOIST'    , 'RH'        ,
+                                         'AIRDENS'      , 'CHEMENV'  ,
+###<have mixed level/edge>
+###<grid2LS regridder: rank > 3 not implemented>
+# Dust
+                                         'DU'           , 'DU'       , "DU001;DU002;DU003;DU004;DU005"
+### Sea-salt
+                                         'SS'           , 'SS'       , "SS001;SS002;SS003;SS004;SS005"
+### Sulfates
+                                         'DMS'          , 'SU'       ,
+                                         'SO2'          , 'SU'       ,
+                                         'SO4'          , 'SU'       ,
+                                         'MSA'          , 'SU'       ,
+# Carbonaceous (main)
+                                         'CA.bcphobic'  , 'CA.bc'    , 'BCPHOBIC'  ,
+                                         'CA.bcphilic'  , 'CA.bc'    , 'BCPHILIC'  ,
+                                         'CA.brphobic'  , 'CA.br'    , 'BRPHOBIC'  ,
+                                         'CA.brphilic'  , 'CA.br'    , 'BRPHILIC'  ,
+                                         'CA.ocphobic'  , 'CA.oc'    , 'OCPHOBIC'  ,
+                                         'CA.ocphilic'  , 'CA.oc'    , 'OCPHILIC'  ,
+# Nitrate
+                                         'NH3'          , 'NI'       ,
+                                         'NH4a'         , 'NI'       , 'NH4A'      ,
+                                         'NO3an1'       , 'NI'       , 'NO3AN1'    ,
+                                         'NO3an2'       , 'NI'       , 'NO3AN2'    ,
+                                         'NO3an3'       , 'NI'       , 'NO3AN3'    ,
+###asm_Nv
+                                         'SLP'    , 'DYN'        ,
+                                         'PHIS'   , 'AGCM'       ,
+##                                         'PL'     , 'DYN'        ,
+                                         'T'      , 'DYN'        ,
+                                         'U'      , 'DYN'        ,
+                                         'V'      , 'DYN'        ,
+                                         'OMEGA'  , 'DYN'        ,
+                                         'Q'      , 'MOIST'      , 'QV'     ,
+                                         'QLTOT'  , 'AGCM'       , 'QL'     ,
+                                         'QITOT'  , 'AGCM'       , 'QI'     ,
+#not-exist                                       'QRTOT'  , 'MOIST'      , 'QR'     ,
+#not-exist                                       'QSTOT'  , 'MOIST'      , 'QS'     ,
+                                         'ZL'     , 'DYN'        , 'H'      ,
+                                         'O3'     , 'CHEMISTRY'  ,
+                                         'EPV'    , 'DYN'        ,
+                                         'FCLD'   , 'MOIST'      , 'CLOUD'  ,
+    ::
+  ::
+::
+
+PLATFORM.airs_aqua::
+  IODA_SCHEMA::
+    index_name_x:     Location
+    var_name_lon:     MetaData/longitude
+    var_name_lat:     MetaData/latitude
+    var_name_time:    MetaData/dateTime
+    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/airs_aqua.%y4%m2%d2T%h2%n2%S2Z.nc4
+  ::
+  GEOVALS_SCHEMA::
+    geovals_fields::
+include(crtm_ir.vl)
+  ::
+::
+
+PLATFORM.cris-fsr_n20::
+  IODA_SCHEMA::
+    index_name_x:     Location
+    var_name_lon:     MetaData/longitude
+    var_name_lat:     MetaData/latitude
+    var_name_time:    MetaData/dateTime
+    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/cris-fsr_n20.%y4%m2%d2T%h2%n2%S2Z.nc4
+  ::
+  GEOVALS_SCHEMA::
+    geovals_fields::
+include(crtm_ir.vl)
+  ::
+::
+
+PLATFORM.cris-fsr_npp::
+  IODA_SCHEMA::
+    index_name_x:     Location
+    var_name_lon:     MetaData/longitude
+    var_name_lat:     MetaData/latitude
+    var_name_time:    MetaData/dateTime
+    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/cris-fsr_npp.%y4%m2%d2T%h2%n2%S2Z.nc4
+  ::
+  GEOVALS_SCHEMA::
+    geovals_fields::
+include(crtm_ir.vl)
+  ::
+::
+
+PLATFORM.iasi_metop-b::
+  IODA_SCHEMA::
+    index_name_x:     Location
+    var_name_lon:     MetaData/longitude
+    var_name_lat:     MetaData/latitude
+    var_name_time:    MetaData/dateTime
+    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/iasi_metop-b.%y4%m2%d2T%h2%n2%S2Z.nc4
+  ::
+  GEOVALS_SCHEMA::
+    geovals_fields::
+include(crtm_ir.vl)
+  ::
+::
+
+PLATFORM.amsua_aqua::
+  IODA_SCHEMA::
+    index_name_x:     Location
+    var_name_lon:     MetaData/longitude
+    var_name_lat:     MetaData/latitude
+    var_name_time:    MetaData/dateTime
+    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/amsua_aqua.%y4%m2%d2T%h2%n2%S2Z.nc4
+  ::
+  GEOVALS_SCHEMA::
+    geovals_fields::
+include(crtm_mw.vl)
+  ::
+::
+
+PLATFORM.amsua_metop-b::
+  IODA_SCHEMA::
+    index_name_x:     Location
+    var_name_lon:     MetaData/longitude
+    var_name_lat:     MetaData/latitude
+    var_name_time:    MetaData/dateTime
+    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/amsua_metop-b.%y4%m2%d2T%h2%n2%S2Z.nc4
+  ::
+  GEOVALS_SCHEMA::
+    geovals_fields::
+include(crtm_mw.vl)
+  ::
+::
+
+PLATFORM.amsua_n15::
+  IODA_SCHEMA::
+    index_name_x:     Location
+    var_name_lon:     MetaData/longitude
+    var_name_lat:     MetaData/latitude
+    var_name_time:    MetaData/dateTime
+    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/amsua_n15.%y4%m2%d2T%h2%n2%S2Z.nc4
+  ::
+  GEOVALS_SCHEMA::
+    geovals_fields::
+include(crtm_mw.vl)
+  ::
+::
+
+PLATFORM.amsua_n18::
+  IODA_SCHEMA::
+    index_name_x:     Location
+    var_name_lon:     MetaData/longitude
+    var_name_lat:     MetaData/latitude
+    var_name_time:    MetaData/dateTime
+    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/amsua_n18.%y4%m2%d2T%h2%n2%S2Z.nc4
+  ::
+  GEOVALS_SCHEMA::
+    geovals_fields::
+include(crtm_mw.vl)
+  ::
+::
+
+PLATFORM.amsua_n19::
+  IODA_SCHEMA::
+    index_name_x:     Location
+    var_name_lon:     MetaData/longitude
+    var_name_lat:     MetaData/latitude
+    var_name_time:    MetaData/dateTime
+    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/amsua_n19.%y4%m2%d2T%h2%n2%S2Z.nc4
+  ::
+  GEOVALS_SCHEMA::
+    geovals_fields::
+include(crtm_mw.vl)
+  ::
+::
+
+PLATFORM.amsr2_gcom-w1::
+  IODA_SCHEMA::
+    index_name_x:     Location
+    var_name_lon:     MetaData/longitude
+    var_name_lat:     MetaData/latitude
+    var_name_time:    MetaData/dateTime
+    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/amsr2_gcom-w1.%y4%m2%d2T%h2%n2%S2Z.nc4
+  ::
+  GEOVALS_SCHEMA::
+    geovals_fields::
+include(crtm_mw.vl)
+  ::
+::
+
+PLATFORM.atms_n20::
+  IODA_SCHEMA::
+    index_name_x:     Location
+    var_name_lon:     MetaData/longitude
+    var_name_lat:     MetaData/latitude
+    var_name_time:    MetaData/dateTime
+    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/atms_n20.%y4%m2%d2T%h2%n2%S2Z.nc4
+  ::
+  GEOVALS_SCHEMA::
+    geovals_fields::
+include(crtm_mw.vl)
+  ::
+::
+
+PLATFORM.atms_npp::
+  IODA_SCHEMA::
+    index_name_x:     Location
+    var_name_lon:     MetaData/longitude
+    var_name_lat:     MetaData/latitude
+    var_name_time:    MetaData/dateTime
+    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/atms_npp.%y4%m2%d2T%h2%n2%S2Z.nc4
+  ::
+  GEOVALS_SCHEMA::
+    geovals_fields::
+include(crtm_mw.vl)
+  ::
+::
+
+PLATFORM.avhrr3_metop-b::
+  IODA_SCHEMA::
+    index_name_x:     Location
+    var_name_lon:     MetaData/longitude
+    var_name_lat:     MetaData/latitude
+    var_name_time:    MetaData/dateTime
+    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/avhrr3_metop-b.%y4%m2%d2T%h2%n2%S2Z.nc4
+  ::
+  GEOVALS_SCHEMA::
+    geovals_fields::
+include(crtm_mw.vl)
+  ::
+::
+
+PLATFORM.avhrr3_n18::
+  IODA_SCHEMA::
+    index_name_x:     Location
+    var_name_lon:     MetaData/longitude
+    var_name_lat:     MetaData/latitude
+    var_name_time:    MetaData/dateTime
+    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/avhrr3_n18.%y4%m2%d2T%h2%n2%S2Z.nc4
+  ::
+  GEOVALS_SCHEMA::
+    geovals_fields::
+include(crtm_mw.vl)
+  ::
+::
+
+PLATFORM.avhrr3_n19::
+  IODA_SCHEMA::
+    index_name_x:     Location
+    var_name_lon:     MetaData/longitude
+    var_name_lat:     MetaData/latitude
+    var_name_time:    MetaData/dateTime
+    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/avhrr3_n19.%y4%m2%d2T%h2%n2%S2Z.nc4
+  ::
+  GEOVALS_SCHEMA::
+    geovals_fields::
+include(crtm_mw.vl)
+  ::
+::
+
+PLATFORM.gmi_gpm::
+  IODA_SCHEMA::
+    index_name_x:     Location
+    var_name_lon:     MetaData/longitude
+    var_name_lat:     MetaData/latitude
+    var_name_time:    MetaData/dateTime
+    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/gmi_gpm.%y4%m2%d2T%h2%n2%S2Z.nc4
+  ::
+  GEOVALS_SCHEMA::
+    geovals_fields::
+include(crtm_mw.vl)
+  ::
+::
+
+PLATFORM.mhs_metop-b::
+  IODA_SCHEMA::
+    index_name_x:     Location
+    var_name_lon:     MetaData/longitude
+    var_name_lat:     MetaData/latitude
+    var_name_time:    MetaData/dateTime
+    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/mhs_metop-b.%y4%m2%d2T%h2%n2%S2Z.nc4
+  ::
+  GEOVALS_SCHEMA::
+    geovals_fields::
+include(crtm_mw.vl)
+  ::
+::
+
+PLATFORM.mhs_n19::
+  IODA_SCHEMA::
+    index_name_x:     Location
+    var_name_lon:     MetaData/longitude
+    var_name_lat:     MetaData/latitude
+    var_name_time:    MetaData/dateTime
+    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/mhs_n19.%y4%m2%d2T%h2%n2%S2Z.nc4
+  ::
+  GEOVALS_SCHEMA::
+    geovals_fields::
+include(crtm_mw.vl)
+  ::
+::
+
+PLATFORM.ssmis_f17::
+  IODA_SCHEMA::
+    index_name_x:     Location
+    var_name_lon:     MetaData/longitude
+    var_name_lat:     MetaData/latitude
+    var_name_time:    MetaData/dateTime
+    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/ssmis_f17.%y4%m2%d2T%h2%n2%S2Z.nc4
+  ::
+  GEOVALS_SCHEMA::
+    geovals_fields::
+include(crtm_mw.vl)
+  ::
+::
+
+PLATFORM.mls55_aura::
+  IODA_SCHEMA::
+    index_name_x:     Location
+    var_name_lon:     MetaData/longitude
+    var_name_lat:     MetaData/latitude
+    var_name_time:    MetaData/dateTime
+    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/mls55_aura.%y4%m2%d2T%h2%n2%S2Z.nc4
+  ::
+  GEOVALS_SCHEMA::
+    geovals_fields::
+include(crtm_mw.vl)
+  ::
+::
+
+PLATFORM.aircraft::
+  IODA_SCHEMA::
+    index_name_x:     Location
+    var_name_lon:     MetaData/longitude
+    var_name_lat:     MetaData/latitude
+    var_name_time:    MetaData/dateTime
+    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/aircraft.%y4%m2%d2T%h2%n2%S2Z.nc4
+  :: 
+  GEOVALS_SCHEMA::
+    geovals_fields::
+include(crtm_conv.vl)
+  ::
+::
+
+PLATFORM.gps::
+  IODA_SCHEMA::
+    index_name_x:     Location 
+    var_name_lon:     MetaData/longitude
+    var_name_lat:     MetaData/latitude
+    var_name_time:    MetaData/dateTime
+    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/gps.%y4%m2%d2T%h2%n2%S2Z.nc4
+  ::
+  GEOVALS_SCHEMA::
+    geovals_fields::
+include(crtm_conv.vl)
+  ::
+::
+
+PLATFORM.omi_aura::
+  IODA_SCHEMA::        
+    index_name_x:     Location     
+    var_name_lon:     MetaData/longitude
+    var_name_lat:     MetaData/latitude
+    var_name_time:    MetaData/dateTime
+    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/omi_aura.%y4%m2%d2T%h2%n2%S2Z.nc4
+  ::
+  GEOVALS_SCHEMA::
+    geovals_fields::
+include(crtm_ozone.vl)
+  ::
+::
+
+PLATFORM.ompsnm_npp::
+  IODA_SCHEMA::
+    index_name_x:     Location
+    var_name_lon:     MetaData/longitude
+    var_name_lat:     MetaData/latitude
+    var_name_time:    MetaData/dateTime
+    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/ompsnm_npp.%y4%m2%d2T%h2%n2%S2Z.nc4
+  ::
+  GEOVALS_SCHEMA::
+    geovals_fields::
+include(crtm_ozone.vl)
+  ::
+::
+
+PLATFORM.satwind::
+  IODA_SCHEMA::
+    index_name_x:     Location
+    var_name_lon:     MetaData/longitude
+    var_name_lat:     MetaData/latitude
+    var_name_time:    MetaData/dateTime
+    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/satwind.%y4%m2%d2T%h2%n2%S2Z.nc4
+  ::
+  GEOVALS_SCHEMA::
+    geovals_fields::
+include(crtm_winds.vl)
+  ::
+::
+
+PLATFORM.scatwind::
+  IODA_SCHEMA::
+    index_name_x:     Location
+    var_name_lon:     MetaData/longitude
+    var_name_lat:     MetaData/latitude
+    var_name_time:    MetaData/dateTime
+    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/scatwind.%y4%m2%d2T%h2%n2%S2Z.nc4
+  ::
+  GEOVALS_SCHEMA::
+    geovals_fields::
+include(crtm_winds.vl)
+  ::
+::
+
+PLATFORM.sfc::
+  IODA_SCHEMA::
+    index_name_x:     Location
+    var_name_lon:     MetaData/longitude
+    var_name_lat:     MetaData/latitude
+    var_name_time:    MetaData/dateTime
+    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/sfc.%y4%m2%d2T%h2%n2%S2Z.nc4
+  ::
+  GEOVALS_SCHEMA::
+    geovals_fields::
+include(crtm_conv.vl)
+  ::
+::
+
+PLATFORM.sfcship::
+  IODA_SCHEMA::
+    index_name_x:     Location
+    var_name_lon:     MetaData/longitude
+    var_name_lat:     MetaData/latitude
+    var_name_time:    MetaData/dateTime
+    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/sfcship.%y4%m2%d2T%h2%n2%S2Z.nc4
+  ::
+  GEOVALS_SCHEMA::
+    geovals_fields::
+include(crtm_conv.vl)
+  ::
+::
+
+PLATFORM.sondes::
+  IODA_SCHEMA::
+    index_name_x:     Location
+    var_name_lon:     MetaData/longitude
+    var_name_lat:     MetaData/latitude
+    var_name_time:    MetaData/dateTime
+    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/sondes.%y4%m2%d2T%h2%n2%S2Z.nc4
+  ::
+  GEOVALS_SCHEMA::
+    geovals_fields::
+include(crtm_conv.vl)
+  ::
+::
+
+
