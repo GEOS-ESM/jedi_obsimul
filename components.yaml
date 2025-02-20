@@ -5,19 +5,19 @@ jedi_obsimul:
 env:
   local: ./@env
   remote: ../ESMA_env.git
-  tag: v4.29.1
+  branch: feature/mathomp4/genesis-try-build
   develop: main
 
 cmake:
   local: ./@cmake
   remote: ../ESMA_cmake.git
-  tag: v4.8.1
+  branch: feature/mathomp4/genesis-try-build
   develop: develop
 
 ecbuild:
   local: ./@cmake/@ecbuild
   remote: ../ecbuild.git
-  tag: geos/v1.2.0
+  tag: geos/v1.4.0
 
 GMAOpyobs:
   local: ./src/Shared/@GMAOpyobs
@@ -26,19 +26,22 @@ GMAOpyobs:
 
 # Jedi repos follow - need releases to replace branches!
 
+# Per Doruk for iodaconv
+# required_repos:
+#  - jedicmake
+#  - oops
+#  - ioda
+#  - iodaconv
+#  - ioda-data
+
 jedi-cmake:
   local: ./@jedi-cmake
   remote: https://github.com/JCSDA/oops
   branch: develop
-  
+
 oops:
   local: ./src/@oops
   remote: https://github.com/JCSDA/oops
-  branch: develop
-  
-vader:
-  local: ./src/@vader
-  remote: https://github.com/JCSDA/vader
   branch: develop
 
 ioda:
@@ -51,6 +54,31 @@ ioda-converters:
   remote: https://github.com/JCSDA/ioda-converters
   branch: develop
 
+#ioda-data:
+#  local: ./data/ioda-data
+#  remote: https://github.com/JCSDA-internal/ioda-data
+#  branch: develop
+
+# Per Doruk for ufo
+# optional_repos:
+#  - ropp-ufo
+#  - geos-aero
+#  - gsw
+#  - crtm
+
+# required_repos:
+#  - jedicmake
+#  - oops
+#  - ioda
+#  - ufo
+#  - ioda-data
+#  - ufo-data
+
+vader:
+  local: ./src/@vader
+  remote: https://github.com/JCSDA/vader
+  branch: develop
+
 crtm:
   local: ./src/@crtm
   remote: https://github.com/JCSDA/crtm
@@ -61,27 +89,22 @@ ufo:
   remote: https://github.com/JCSDA/ufo
   branch: develop
 
-#ioda-data:
-#  local: ./data/ioda-data
-#  remote: https://github.com/JCSDA-internal/ioda-data
-#  branch: develop
-  
 #ufo-data:
 #  local: ./data/ufo-data
 #  remote: https://github.com/JCSDA-internal/ufo-data
 #  branch: develop
-  
 
-  
-#INFO JediBundle: Branch develop       of jedicmake will be cloned from https://github.com/JCSDA/jedi-cmake              
-#INFO JediBundle: Branch develop       of oops      will be cloned from https://github.com/JCSDA/oops                    
-# *INFO JediBundle: Branch develop       of *gsw       will be cloned from https://github.com/JCSDA-internal/GSW-Fortran    
-#INFO JediBundle: Branch develop       of vader     will be cloned from https://github.com/JCSDA/vader                   
-# *INFO JediBundle: Tag    1.2.1         of *gsibec    will be cloned from https://github.com/GEOS-ESM/GSIbec               
-#JediBundle: Branch develop       of ioda-data will be cloned from https://github.com/JCSDA-internal/ioda-data      
-#INFO JediBundle: Branch develop       of ioda      will be cloned from https://github.com/JCSDA/ioda                    
+
+
+#INFO JediBundle: Branch develop       of jedicmake will be cloned from https://github.com/JCSDA/jedi-cmake
+#INFO JediBundle: Branch develop       of oops      will be cloned from https://github.com/JCSDA/oops
+# *INFO JediBundle: Branch develop       of *gsw       will be cloned from https://github.com/JCSDA-internal/GSW-Fortran
+#INFO JediBundle: Branch develop       of vader     will be cloned from https://github.com/JCSDA/vader
+# *INFO JediBundle: Tag    1.2.1         of *gsibec    will be cloned from https://github.com/GEOS-ESM/GSIbec
+#JediBundle: Branch develop       of ioda-data will be cloned from https://github.com/JCSDA-internal/ioda-data
+#INFO JediBundle: Branch develop       of ioda      will be cloned from https://github.com/JCSDA/ioda
 #INFO JediBundle: Branch develop       of iodaconv  will be cloned from https://github.com/JCSDA-internal/ioda-converters
-#INFO JediBundle: Tag    v2.4.1-jedi.1 of crtm      will be cloned from https://github.com/JCSDA/crtm                    
-#JediBundle: Branch develop       of ufo-data  will be cloned from https://github.com/JCSDA-internal/ufo-data       
-#INFO JediBundle: Branch develop       of ufo       will be cloned from https://github.com/JCSDA/ufo 
+#INFO JediBundle: Tag    v2.4.1-jedi.1 of crtm      will be cloned from https://github.com/JCSDA/crtm
+#JediBundle: Branch develop       of ufo-data  will be cloned from https://github.com/JCSDA-internal/ufo-data
+#INFO JediBundle: Branch develop       of ufo       will be cloned from https://github.com/JCSDA/ufo
 

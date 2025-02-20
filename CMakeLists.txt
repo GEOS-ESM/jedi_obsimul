@@ -19,11 +19,8 @@ if (NOT CMAKE_BUILD_TYPE)
   set (CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build." FORCE)
   # Set the possible values of build type for cmake-gui
   set_property (CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS
-    "Debug" "Release" "Aggressive") 
+    "Debug" "Release" "Aggressive")
 endif ()
-
-# Should find a better place for this - used in Chem component
-#set (ACG_FLAGS -v)
 
 # mepo can now clone subrepos in three styles
 set (ESMA_CMAKE_DIRS
@@ -39,13 +36,9 @@ endforeach ()
 
 include (esma)
 
-ecbuild_declare_project()
+list (APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/@jedi-cmake")
 
-# Generic DFLAGS
-# These should be relocated and/or eliminated.
-add_definitions(-Dsys${CMAKE_SYSTEM_NAME} -DESMA64)
-add_definitions(${MPI_Fortran_COMPILE_FLAGS})
-include_directories(${MPI_Fortran_INCLUDE_PATH})
+ecbuild_declare_project()
 
 esma_mepo_style(env env_dir)
 esma_add_subdirectory (${env_dir})
@@ -66,4 +59,4 @@ install(
    )
 
 # Adds ability to tar source
-include(esma_cpack)
+#include(esma_cpack)
