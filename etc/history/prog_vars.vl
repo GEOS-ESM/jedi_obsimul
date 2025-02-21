@@ -1,0 +1,16 @@
+
+#
+# Prognostic variables
+#
+          'PHIS'   , 'AGCM'       ,
+          'SLP'    , 'DYN'        ,
+          'U;V'    , 'DYN'        ,
+          'T'      , 'DYN'        ,
+          'PS'     , 'DYN'        ,
+          'ZLE'    , 'DYN'        , 'H'   ,
+          'OMEGA'  , 'DYN'        ,
+          'Q'      , 'MOIST'      , 'QV'  ,
+          'QITOT'  , 'AGCM'       , 'QI'  ,
+          'QLTOT'  , 'AGCM'       , 'QL'  ,
+          'RH2'    , 'MOIST'      , 'RH'  ,
+          'O3'     , 'CHEMISTRY'  ,
