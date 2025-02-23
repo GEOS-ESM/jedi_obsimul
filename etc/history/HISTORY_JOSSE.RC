@@ -72,8 +72,8 @@ GRID_LABELS:
     
 #    Sampler Geometries
 #    ------------------
-     SwathGrid_MYD
-     SwathGrid_MOD
+     SwathGrid_MYD04
+     SwathGrid_MOD04
      SwathGrid_ATMS
      abi_grid_GOES16_M6C14
     
@@ -125,12 +125,13 @@ PC11520x5761-DC.LM: 137
     #ams  
 SwathGrid_ATMS.GRID_TYPE: Swath
 SwathGrid_ATMS.GRID_FILE: /discover/nobackup/projects/gmao/aist-nr/data/SNDR.J1.ATMS.L1B.v02/Y%y4/%D3/SNDR.J1.ATMS.%y4%m2%d2T%h2%n2*.nc
-    #ams "X" and "Y" does not make sense for a swath. The standard name of the directions
+    #ams "NX" and "NY" does not make sense for a swath dim name. The standard name of the directions
     #ams     are "along track" and "cross track", where "track" means the ground track of the satellite.
     #ams     Having said that, these are discoverable, they are not necessary in the rc file.
     #ams  SwathGrid_ATMS.xtrack.dim_size:  15
-    #ams  SwathGrid_ATMS.atrack.dim_size:  720 
-    SwathGrid_ATMS.LM:  137
+    #ams  SwathGrid_ATMS.atrack.dim_size:  720
+    #ams  Why do we need LM as part of the swath specification???
+SwathGrid_ATMS.LM:  137
     #ams Note: dim_name is a property of xtrack, have the "xtrack" come first
     #ams       lon/lat makes noi sense here, use atrack/xtrack instead.
     #ams SwathGrid_ATMS.xtrack.dim_name:  xtrack   
@@ -167,38 +168,38 @@ SwathGrid_ATMS.obs_file_end:        '2019-11-01T23:00:00'
 SwathGrid_ATMS.obs_file_interval:   '000000 000600'         # yymmdd  hhmmss
 SwathGrid_ATMS.Epoch:                060000                 # hhmmss
 
-SwathGrid_MYD.GRID_TYPE: Swath
-SwathGrid_MYD.GRID_FILE: /discover/nobackup/projects/gmao/aist-nr/data/Aqua/%y4/%D3/MYD04_L2.A%y4%D3.%h2%n2*.hdf
-#  SwathGrid_MYD.NX:  15
-#  SwathGrid_MYD.NY:  720
-SwathGrid_MYD.LM:  137
-SwathGrid_MYD.index_name_lon:      'Cell_Across_Swath:mod04'
-SwathGrid_MYD.index_name_lat:      'Cell_Along_Swath:mod04'
-SwathGrid_MYD.var_name_lon:        'Longitude'
-SwathGrid_MYD.var_name_lat:        'Latitude'
-SwathGrid_MYD.var_name_time:       'Scan_Start_Time'
-SwathGrid_MYD.tunit:               'seconds since 1993-01-01 00:00:00'
-SwathGrid_MYD.obs_file_begin:      '2019-07-31T00:00:00'
-SwathGrid_MYD.obs_file_end:        '2019-11-01T00:00:00'
-SwathGrid_MYD.obs_file_interval:   '000000 000500'     # yymmdd  hhmmss
-SwathGrid_MYD.Epoch:               060000              #
+SwathGrid_MYD04.GRID_TYPE: Swath
+SwathGrid_MYD04.GRID_FILE: /discover/nobackup/projects/gmao/aist-nr/data/Aqua/%y4/%D3/MYD04_L2.A%y4%D3.%h2%n2*.hdf
+#  SwathGrid_MYD04.NX:  15
+#  SwathGrid_MYD04.NY:  720
+SwathGrid_MYD04.LM:  137
+SwathGrid_MYD04.index_name_lon:      'Cell_Across_Swath:mod04'
+SwathGrid_MYD04.index_name_lat:      'Cell_Along_Swath:mod04'
+SwathGrid_MYD04.var_name_lon:        'Longitude'
+SwathGrid_MYD04.var_name_lat:        'Latitude'
+SwathGrid_MYD04.var_name_time:       'Scan_Start_Time'
+SwathGrid_MYD04.tunit:               'seconds since 1993-01-01 00:00:00'
+SwathGrid_MYD04.obs_file_begin:      '2019-07-31T00:00:00'
+SwathGrid_MYD04.obs_file_end:        '2019-11-01T00:00:00'
+SwathGrid_MYD04.obs_file_interval:   '000000 000500'     # yymmdd  hhmmss
+SwathGrid_MYD04.Epoch:               060000              #
 
 
-SwathGrid_MOD.GRID_TYPE: Swath
-SwathGrid_MOD.GRID_FILE: /discover/nobackup/projects/gmao/aist-nr/data/Terra/%y4/%D3/MOD04_L2.A%y4%D3.%h2%n2*.hdf
-#  SwathGrid_MOD.NX:  15
-#  SwathGrid_MOD.NY:  720
-SwathGrid_MOD.LM:   137
-SwathGrid_MOD.index_name_lon: 'Cell_Across_Swath:mod04'
-SwathGrid_MOD.index_name_lat: 'Cell_Along_Swath:mod04'
-SwathGrid_MOD.var_name_lon:   'Longitude'
-SwathGrid_MOD.var_name_lat:   'Latitude'
-SwathGrid_MOD.var_name_time:  'Scan_Start_Time'
-SwathGrid_MOD.tunit:          'seconds since 1993-01-01 00:00:00'
-SwathGrid_MOD.obs_file_begin: '2019-07-31T00:00:00'
-SwathGrid_MOD.obs_file_end:   '2019-11-01T00:00:00'
-SwathGrid_MOD.obs_file_interval:   '000000 000500'     # yymmdd  hhmmss
-SwathGrid_MOD.Epoch:           060000                  # 
+SwathGrid_MOD04.GRID_TYPE: Swath
+SwathGrid_MOD04.GRID_FILE: /discover/nobackup/projects/gmao/aist-nr/data/Terra/%y4/%D3/MOD04_L2.A%y4%D3.%h2%n2*.hdf
+#  SwathGrid_MOD04.NX:  15
+#  SwathGrid_MOD04.NY:  720
+SwathGrid_MOD04.LM:   137
+SwathGrid_MOD04.index_name_lon: 'Cell_Across_Swath:mod04'
+SwathGrid_MOD04.index_name_lat: 'Cell_Along_Swath:mod04'
+SwathGrid_MOD04.var_name_lon:   'Longitude'
+SwathGrid_MOD04.var_name_lat:   'Latitude'
+SwathGrid_MOD04.var_name_time:  'Scan_Start_Time'
+SwathGrid_MOD04.tunit:          'seconds since 1993-01-01 00:00:00'
+SwathGrid_MOD04.obs_file_begin: '2019-07-31T00:00:00'
+SwathGrid_MOD04.obs_file_end:   '2019-11-01T00:00:00'
+SwathGrid_MOD04.obs_file_interval:   '000000 000500'     # yymmdd  hhmmss
+SwathGrid_MOD04.Epoch:           060000                  # 
 
 
 abi_grid_GOES16_M6C14.GRID_TYPE:     XY
@@ -302,7 +303,7 @@ geosgcm_turb.vscale:            100.0 ,
 geosgcm_turb.vunit:            'hPa' ,
 geosgcm_turb.vvars:            'log(PLE)' , 'DYN' ,
 geosgcm_turb.levels:            include(press_48levels.vl)
-geosgcm_turb.fields:            include(turb_vars)
+geosgcm_turb.fields:            include(turb_vars.vl)
 ::
 
 # Gravity wave drag
@@ -429,27 +430,29 @@ tavg3d_aer_p.fields:          include(aer3Dp_vars.vl)
   SNDR_ATMS.frequency:         060000,
   SNDR_ATMS.grid_label:        SwathGrid_ATMS,
   SNDR_ATMS.regrid_method:     'BILINEAR' ,
-  SNDR_ATMS.fields:            include(instrument_fields.vl)
+  SNDR_ATMS.fields:            include(crtmSampler_vars.vl)
 ::
 
-  Aqua.observation_spec:  'Swath'  
-  Aqua.template:    '%y4%m2%d2_%h2%n2z.nc4',
-  Aqua.format:      'CFIO',
-  Aqua.frequency:   060000,
-  Aqua.grid_label:  SwathGrid_MYD,   
-  Aqua.regrid_method: 'BILINEAR' ,   
-  Aqua.fields:         
-include(instrument_fields.vl)
+  myd04.observation_spec:  'Swath'  
+  myd04.template:          '%y4%m2%d2_%h2%n2z.nc4',
+  myd04.format:            'CFIO',
+  myd04.frequency:         060000,
+  myd04.grid_label:        SwathGrid_MYD04,   
+  myd04.regrid_method:     'BILINEAR' ,   
+  myd04.fields:            include(aerSampler_vars.vl)
+                           include(cldSampler_vars.vl)
+                           include(asmSampler_vars.vl)
 ::
 
-  Terra.observation_spec:  'Swath'
-  Terra.template:    '%y4%m2%d2_%h2%n2z.nc4',
-  Terra.format:      'CFIO',
-  Terra.frequency:   060000,
-  Terra.grid_label:  SwathGrid_MOD,
-  Terra.regrid_method: 'BILINEAR' ,
-  Terra.fields:        
-include(instrument_fields.vl)
+  mod04.observation_spec:  'Swath'
+  mod04.template:          '%y4%m2%d2_%h2%n2z.nc4',
+  mod04.format:            'CFIO',
+  mod04.frequency:         060000,
+  mod04.grid_label:        SwathGrid_MOD04,
+  mod04.regrid_method:     'BILINEAR' ,
+  mod04.fields:            include(aerSampler_vars.vl)
+                           include(cldSampler_vars.vl)
+                           include(asmSampler_vars.vl)
 ::
 
     #ams This design is not very consistent. We need to consistently separate
@@ -583,7 +586,8 @@ PLATFORM.cris-fsr_npp::
   ::
   GEOVALS_SCHEMA::
     geovals_fields::
-include(crtm_ir.vl)
+                         include(crtmSampler_vars.vl)
+
   ::
 ::
 
@@ -597,7 +601,7 @@ PLATFORM.iasi_metop-b::
   ::
   GEOVALS_SCHEMA::
     geovals_fields::
-include(crtm_ir.vl)
+                         include(crtmSampler_vars.vl)
   ::
 ::
 
@@ -611,7 +615,7 @@ PLATFORM.amsua_aqua::
   ::
   GEOVALS_SCHEMA::
     geovals_fields::
-include(crtm_mw.vl)
+                         include(crtmSampler_vars.vl)
   ::
 ::
 
@@ -765,7 +769,7 @@ PLATFORM.gmi_gpm::
   ::
   GEOVALS_SCHEMA::
     geovals_fields::
-include(crtm_mw.vl)
+                         include(crtmSampler_vars.vl)
   ::
 ::
 
