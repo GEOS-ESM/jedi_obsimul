@@ -1,3 +1,9 @@
+#
+#  To generarate a valid GEOS history file, process this file with m4:
+#
+#  % m4 < HISTORY_JOSSE.RC > HISTORY_JOSSE.rc
+#
+
 include(warning.vl)
 
 VERSION: 1
@@ -7,11 +13,15 @@ EXPSRC: GEOSgcm-v12
 #ServerSizeSplit: 81
 #CollectionWriteSplit: 7
 
+#                              -------------------------    
+#                               Selection of Collections
+#                              -------------------------    
 
-#########################
-# Global Gridded Output #
-#########################
-COLLECTIONS:  'geosgcm_prog'
+COLLECTIONS:  
+
+#             Gridded Output
+#             --------------    
+              'geosgcm_prog'
               'geosgcm_surf'
               'inst_01hr_2d_brs_Nx'
               'geosgcm_moist'
@@ -28,38 +38,50 @@ COLLECTIONS:  'geosgcm_prog'
               'tavg3d_aer_p'
 #             'const_2d_asm_Nx'
 
-###########################
-# Output at Obs Locations #
-###########################
-    
-       'jedi'
-       'ACtraj'
-       'Aeronet'
-       'Aqua'
-       'Terra'
-#      'SNDR_ATMS'
-#      'ABI_M6C14_Geostationary'  # slow
-#      'ABI_M6C01_Mask'           # slow
+#             Sampelers at Obs locations
+#             --------------------------    
+              'jedi'
+              'ACtraj'
+              'Aeronet'
+              'Aqua'
+              'Terra'
+#             'SNDR_ATMS'
+#             'ABI_M6C14_Geostationary'  # slow
+#             'ABI_M6C01_Mask'           # slow
     
 ::
 
 
-##################################################
-# The GRID_LABELS section must be after the main #
-#  list of COLLECTIONS for scripting purposes.   #
-##################################################
+#                              ----------------------    
+#                              Grid Definition Macros
+#                              ----------------------    
 
-GRID_LABELS: PC720x361-DC
+# ---
+# N.B.: This set of labels must appear after the main list of COLLECTIONS.
+# ---
+    
+GRID_LABELS: 
+
+#    Global Grids
+#    ------------
+     PC720x361-DC
      PC1440x721-DC
      PC2880x1441-DC
      PC5760x2881-DC
      PC11520x5761-DC
-# additions for sampling
-             SwathGrid_MYD
-             SwathGrid_MOD
-             SwathGrid_ATMS
-             abi_grid_GOES16_M6C14
+    
+#    Sampler Geometries
+#    ------------------
+     SwathGrid_MYD
+     SwathGrid_MOD
+     SwathGrid_ATMS
+     abi_grid_GOES16_M6C14
+    
 ::
+
+#                              ------------------------    
+#                              Grid Geometry Definition
+#                              ------------------------    
 
 PC720x361-DC.GRID_TYPE: LatLon
 PC720x361-DC.IM_WORLD:  720
@@ -96,11 +118,11 @@ PC11520x5761-DC.POLE: PC
 PC11520x5761-DC.DATELINE:  DC
 PC11520x5761-DC.LM: 137
 
-#                              -------------------    
-#                              Sampled Collections
-#                              -------------------    
+#                              ---------------------------
+#                              Sampler Geometry Definition
+#                              ---------------------------
 
-
+    #ams  
 SwathGrid_ATMS.GRID_TYPE: Swath
 SwathGrid_ATMS.GRID_FILE: /discover/nobackup/projects/gmao/aist-nr/data/SNDR.J1.ATMS.L1B.v02/Y%y4/%D3/SNDR.J1.ATMS.%y4%m2%d2T%h2%n2*.nc
     #ams "X" and "Y" does not make sense for a swath. The standard name of the directions
@@ -119,7 +141,7 @@ SwathGrid_ATMS.index_name_lat:      atrack
     #ams SwathGrid_ATMS.lon.var_name:        lon
     #ams SwathGrid_ATMS.lat.var_name:        lat
     #ams SwathGrid_ATMS.time.var_name:       obs_time_tai93
-    #ams Note: you may need to specify the uniuts of these variables when
+    #ams Note: you may need to specify the units of these variables when
     #          they are omitted from the file. Why is this important? For
     #          the cases when tehse are expressed in radians, not degrees.
 SwathGrid_ATMS.var_name_lon:        lon
@@ -191,9 +213,13 @@ abi_grid_GOES16_M6C14.thin_factor:   10
 abi_grid_GOES16_M6C14.LM:            137
 abi_grid_GOES16_M6C14.GRID_FILENAME:   /discover/nobackup/projects/gmao/aist-nr/data/GOES-X/OR_ABI-L1b-RadF-M6C14_G16_s20192340800216_e20192340809524_c20192340810006.nc
 
-#                              -------------------    
-#                              Gridded Collections
-#                              -------------------    
+
+    #ams For consistency, You need to define geometry for stations...
+    
+
+#                              ---------------------------------    
+#                              Definition of Gridded Collections
+#                              ---------------------------------    
     
 # Prognostic variables on pressure levels
 # ---------------------------------------    
@@ -207,8 +233,8 @@ geosgcm_prog.frequency:         010000 ,
 geosgcm_prog.vscale:            100.0 ,
 geosgcm_prog.vunit:            'hPa' ,
 geosgcm_prog.vvars:            'log(PLE)' , 'DYN' ,
-geosgcm_prog.levels: include(press_48levels.vl)
-geosgcm_prog.fields: include(prog_vars.vl)
+geosgcm_prog.levels:           include(press_48levels.vl)
+geosgcm_prog.fields:           include(prog_vars.vl)
 ::
   
 # Surface diagnostics
@@ -277,7 +303,7 @@ geosgcm_turb.vunit:            'hPa' ,
 geosgcm_turb.vvars:            'log(PLE)' , 'DYN' ,
 geosgcm_turb.levels:            include(press_48levels.vl)
 geosgcm_turb.fields:            include(turb_vars)
-           ::
+::
 
 # Gravity wave drag
 # -----------------
@@ -322,12 +348,11 @@ geosgcm_buda.mode:             'instantaneous' ,
 #  geosgcm_buda.monthly:           1 ,
 geosgcm_buda.frequency:        010000 ,
 geosgcm_buda.fields:           include(buda_vars.vl)
-           ::
+::
 
 #                     ---------------------
 #                     Aerosols/Constituents
 #                     ---------------------
-#
 #
 
 # 2D Aerosol Diagnostics
@@ -343,8 +368,10 @@ tavg2d_aer_x.frequency:       010000,
 # tavg2d_aer_x.ref_time:        210000,
 tavg2d_aer_x.regrid_method:   'CONSERVE',
 tavg2d_aer_x.splitField:      1,
-tavg2d_aer_x.fields:           
+tavg2d_aer_x.fields:          included(aer2D_vars.vl)
 
+# 3D Aerosol Mixing Ratio
+# -----------------------
 tavg3d_aer_p.template:       '%y4%m2%d2_%h2%n2z.nc4',
 tavg3d_aer_p.archive:        '%c/Y%y4',
 tavg3d_aer_p.format:         'CFIO',
@@ -359,113 +386,50 @@ tavg3d_aer_p.splitField:      1,
 tavg3d_aer_p.vscale:          100.0,
 tavg3d_aer_p.vunit:          'hPa',
 tavg3d_aer_p.vvars:          'log(PLE)'    , 'DYN'        ,
-tavg3d_aer_p.levels:          1000 975 950 925 900 850 800 750 700 650 600 550 500 450 400 350 300 250 200 150 100 70 50 30 20 10,
-tavg3d_aer_p.fields:         'PS'          , 'DYN'        , 'PS'        ,
-                              'LWI'         , 'SURFACE'    , 'LWI'       ,
-                              'AIRDENS'     , 'CHEMENV'    ,
-                              'ZL'          , 'DYN'        , 'H'         ,
-                              'DUMASS'      , 'DU'         , 'DU'        ,
-                              'SSMASS'      , 'SS'         , 'SS'        ,
-                              'CA.bcMASS'        , 'CA.bc'    , 'BC'         ,
-                              'CA.ocMASS'        , 'CA.oc'    , 'OC'         ,
-                              'CA.brMASS'        , 'CA.br'    , 'BR'         ,
-                              'SO2'         , 'SU'         ,
-                              'SO4'         , 'SU'         ,
-                              'NH3MASS'     , 'NI'         , 'NH3'       ,
-                              'NH4MASS'     , 'NI'         , 'NH4'       ,
-                              'NIMASS'      , 'NI'         , 'NI'        ,
-                              'HNO3CONC'    , 'NI'         ,
-                              'NICONC'      , 'NI'         ,
-                              'DUEXTCOEF'   , 'DU'         ,
-                              'SSEXTCOEF'   , 'SS'         ,
-                              'SUEXTCOEF'   , 'SU'         ,
-                              'NIEXTCOEF'   , 'NI'         ,
-                              'CA.bcEXTCOEF'     , 'CA.bc'    , 'BCEXTCOEF'  ,
-                              'CA.brEXTCOEF'     , 'CA.br'    , 'BREXTCOEF'  ,
-                              'CA.ocEXTCOEF'     , 'CA.oc'    , 'OCEXTCOEF'  ,
-                              'ACHEM::VOC'      , 'ACHEM'      , 'VOC'       ,
-                              'ACHEM::VOCbiob'  , 'ACHEM'      , 'VOCbiob'   ,
-                              'pSOA_ANTHRO_VOC' , 'ACHEM', 'pSOA'        ,
-                              'pSOA_BIOB_VOC'   , 'ACHEM', 'pSOAbiob'    ,
-                              'GOCART::CO'      , 'GOCART','CO'        ,
-                               ::
+tavg3d_aer_p.levels:          include(press_26levels.vl)
+tavg3d_aer_p.fields:          include(aer3Dp_vars.vl)
+::
 
-#------------------------------
-# Test sampler
-#------------------------------
 
-# YGYU: I think Arlindo said --
-# Aeronet output aer_Nv (here we output aer_Nv + asm_Nv) 
-# NOAA GHCNd output asm_Nv (Global Historical Climatology Network daily (GHCNd))
+#                              ---------------------------------    
+#                              Definition of Sampled Collections
+#                              ---------------------------------    
+
+#ams  The station geometry is asymmetric. For consistency you should have 
+#     a geometry specific like the others. The supported sampling geometries
 #
-  Aeronet.sampler_spec: 'station'
+#     ____.geometry:  Station_AERONET    
+#     ____.geometry:  SwathGrid_ATMS 
+#     ____.geometry:  Traj_FIREX-AQ      
+#     ____.geometry:  Traj_CAMP2EX      
+#     ____.geometry:       
+#     ____.geometry:       
+#     ____.geometry:       
+#     ____.geometry:       
+#     ____.geometry:       
+
+  Aeronet.sampler_spec:       'station'
   Aeronet.station_id_file:    /discover/nobackup/projects/gmao/aist-nr/data/Station/1_national.csv
   Aeronet.station_skip_line:  1
-  Aeronet.template: %y4%m2%d2_%h2%n2z.nc4
-  Aeronet.format: 'CFIO'
-  Aeronet.frequency: 010000,   # when to write
-  Aeronet.duration:  060000,    # time length to update file
-  Aeronet.splitField:      1,
-  Aeronet.regrid_method: 'BILINEAR' ,
-  Aeronet.fields:                        'PS'           , 'DYN'      ,
-# aer_Nv
-                                         'DELP'         , 'DYN'      ,
-                                         'LWI'          , 'SURFACE'  ,
-                                         'RH2'          , 'MOIST'    , 'RH'        ,
-                                         'AIRDENS'      , 'CHEMENV'  ,
-###<have mixed level/edge>
-###<grid2LS regridder: rank > 3 not implemented>
-# Dust
-                                         'DU'           , 'DU'       , "DU001;DU002;DU003;DU004;DU005"
-### Sea-salt
-                                         'SS'           , 'SS'       , "SS001;SS002;SS003;SS004;SS005"
-### Sulfates
-                                         'DMS'          , 'SU'       ,
-                                         'SO2'          , 'SU'       ,
-                                         'SO4'          , 'SU'       ,
-                                         'MSA'          , 'SU'       ,
-# Carbonaceous (main)
-                                         'CA.bcphobic'  , 'CA.bc'    , 'BCPHOBIC'  ,
-                                         'CA.bcphilic'  , 'CA.bc'    , 'BCPHILIC'  ,
-                                         'CA.brphobic'  , 'CA.br'    , 'BRPHOBIC'  ,
-                                         'CA.brphilic'  , 'CA.br'    , 'BRPHILIC'  ,
-                                         'CA.ocphobic'  , 'CA.oc'    , 'OCPHOBIC'  ,
-                                         'CA.ocphilic'  , 'CA.oc'    , 'OCPHILIC'  ,
-# Nitrate
-                                         'NH3'          , 'NI'       ,
-                                         'NH4a'         , 'NI'       , 'NH4A'      ,
-                                         'NO3an1'       , 'NI'       , 'NO3AN1'    ,
-                                         'NO3an2'       , 'NI'       , 'NO3AN2'    ,
-                                         'NO3an3'       , 'NI'       , 'NO3AN3'    ,
-###asm_Nv
-
-                                         'SLP'    , 'DYN'        ,
-                                         'PHIS'   , 'AGCM'       ,
-##                                         'PL'     , 'DYN'        ,
-                                         'T'      , 'DYN'        ,
-                                         'U'      , 'DYN'        ,
-                                         'V'      , 'DYN'        ,
-                                         'OMEGA'  , 'DYN'        ,
-                                         'Q'      , 'MOIST'      , 'QV'     ,
-                                         'QLTOT'  , 'AGCM'       , 'QL'     ,
-                                         'QITOT'  , 'AGCM'       , 'QI'     ,
-#not-exist                                       'QRTOT'  , 'MOIST'      , 'QR'     ,
-#not-exist                                       'QSTOT'  , 'MOIST'      , 'QS'     ,
-                                         'ZL'     , 'DYN'        , 'H'      ,
-                                         'O3'     , 'CHEMISTRY'  ,
-                                         'EPV'    , 'DYN'        ,
-                                         'FCLD'   , 'MOIST'      , 'CLOUD'  ,
+  Aeronet.template:           %y4%m2%d2_%h2%n2z.nc4
+  Aeronet.format:             'CFIO'
+  Aeronet.frequency:          010000,   # when to write
+  Aeronet.duration:           060000,   # time length to update file
+  Aeronet.splitField:         1,
+  Aeronet.regrid_method:      'BILINEAR' ,
+  Aeronet.fields:             include(aerSampler_vars.vl)
+                              include(cldSampler_vars.vl)
+                              include(asmSampler_vars.vl)
 ::
 
 
   SNDR_ATMS.observation_spec:  'Swath'
-  SNDR_ATMS.template:    '%y4%m2%d2_%h2%n2z.nc4',
-  SNDR_ATMS.format:      'CFIO',
-  SNDR_ATMS.frequency:   060000,
-  SNDR_ATMS.grid_label:   SwathGrid_ATMS,
-  SNDR_ATMS.regrid_method: 'BILINEAR' ,
-  SNDR_ATMS.fields:    
-include(instrument_fields.vl)
+  SNDR_ATMS.template:          '%y4%m2%d2_%h2%n2z.nc4',
+  SNDR_ATMS.format:            'CFIO',
+  SNDR_ATMS.frequency:         060000,
+  SNDR_ATMS.grid_label:        SwathGrid_ATMS,
+  SNDR_ATMS.regrid_method:     'BILINEAR' ,
+  SNDR_ATMS.fields:            include(instrument_fields.vl)
 ::
 
   Aqua.observation_spec:  'Swath'  
@@ -488,6 +452,11 @@ include(instrument_fields.vl)
 include(instrument_fields.vl)
 ::
 
+    #ams This design is not very consistent. We need to consistently separate
+    #    the geometry specification from te collection specification.
+    #    The airborne campaigns are ought to have their own geometry specification
+    #    as they are independent. 
+    
   ACtraj.sampler_spec:       trajectory
   ACtraj.ObsPlatforms:       CAMP2EX  FIREXAQ
   ACtraj.template:           '%y4%m2%d2_%h2%n2z.nc4',
@@ -515,11 +484,31 @@ include(instrument_fields.vl)
   jedi.splitField:           1,
 ::
 
-#
-#______  format after here does not obey normal history.rc format ____
-#        donot modify the format below
-#
+#                              -------------------------    
+#                              JEDI Platform Definitions
+#                              -------------------------
 
+    #ams This does not make sense. This is in confounding geometry and collection
+    #    specifications.  For a given collection, one could elect to write more
+    #    than 1 collextion. It is all entagled. Needs refactoring.
+    #
+    #    IODA_SCHEMA is completely inadequate for CAMP2EX, FIREX-AQ; these have
+    #    absolutely to do with JEDI's IODA format.
+    
+    #    Now, for bina fide IODA trajecories, the IODA_SCHEMA parameters index_name_x, ..., var_name_time 
+    #    should be the default. Better yet, this is a IODA convention, no need to allow it to be redfined.
+    #
+    #    Really, when defining the geometries for trajectory one could define
+    #       SCHEMA: IODA or Generic
+    #    If SCHEMA is IODA, then this is implied (notice that I changed the label names):
+    #        index_dim_name:      Location
+    #        lon_var_name:        MetaData/longitude
+    #        lat_var_name:        MetaData/latitude
+    #        time_var_name:       MetaData/dateTime
+    #    If SCHEMA is Generic, then these attributes ought to be specified.
+    #
+
+    
 DEFINE_OBS_PLATFORM::
 
 PLATFORM.CAMP2EX::
@@ -532,152 +521,64 @@ PLATFORM.CAMP2EX::
   ::
   GEOVALS_SCHEMA::
     geovals_fields::
-                                         'PS'           , 'DYN'      ,
-# aer_Nv
-                                         'DELP'         , 'DYN'      ,
-                                         'LWI'          , 'SURFACE'  ,
-                                         'RH2'          , 'MOIST'    , 'RH'        ,
-                                         'AIRDENS'      , 'CHEMENV'  ,
-###<have mixed level/edge>
-###<grid2LS regridder: rank > 3 not implemented>
-# Dust
-                                         'DU'           , 'DU'       , "DU001;DU002;DU003;DU004;DU005"
-### Sea-salt
-                                         'SS'           , 'SS'       , "SS001;SS002;SS003;SS004;SS005"
-### Sulfates
-                                         'DMS'          , 'SU'       ,
-                                         'SO2'          , 'SU'       ,
-                                         'SO4'          , 'SU'       ,
-                                         'MSA'          , 'SU'       ,
-# Carbonaceous (main)
-                                         'CA.bcphobic'  , 'CA.bc'    , 'BCPHOBIC'  ,
-                                         'CA.bcphilic'  , 'CA.bc'    , 'BCPHILIC'  ,
-                                         'CA.brphobic'  , 'CA.br'    , 'BRPHOBIC'  ,
-                                         'CA.brphilic'  , 'CA.br'    , 'BRPHILIC'  ,
-                                         'CA.ocphobic'  , 'CA.oc'    , 'OCPHOBIC'  ,
-                                         'CA.ocphilic'  , 'CA.oc'    , 'OCPHILIC'  ,
-# Nitrate
-                                         'NH3'          , 'NI'       ,
-                                         'NH4a'         , 'NI'       , 'NH4A'      ,
-                                         'NO3an1'       , 'NI'       , 'NO3AN1'    ,
-                                         'NO3an2'       , 'NI'       , 'NO3AN2'    ,
-                                         'NO3an3'       , 'NI'       , 'NO3AN3'    ,
-###asm_Nv
-                                         'SLP'    , 'DYN'        ,
-                                         'PHIS'   , 'AGCM'       ,
-##                                         'PL'     , 'DYN'        ,
-                                         'T'      , 'DYN'        ,
-                                         'U'      , 'DYN'        ,
-                                         'V'      , 'DYN'        ,
-                                         'OMEGA'  , 'DYN'        ,
-                                         'Q'      , 'MOIST'      , 'QV'     ,
-                                         'QLTOT'  , 'AGCM'       , 'QL'     ,
-                                         'QITOT'  , 'AGCM'       , 'QI'     ,
-#not-exist                                       'QRTOT'  , 'MOIST'      , 'QR'     ,
-#not-exist                                       'QSTOT'  , 'MOIST'      , 'QS'     ,
-                                         'ZL'     , 'DYN'        , 'H'      ,
-                                         'O3'     , 'CHEMISTRY'  ,
-                                         'EPV'    , 'DYN'        ,
-                                         'FCLD'   , 'MOIST'      , 'CLOUD'  ,
+                      include(aerSampler_vars.vl)
+                      include(cldSampler_vars.vl)
+                      include(asmSampler_vars.vl)
     ::
   ::
 ::
 
 PLATFORM.FIREXAQ::
   IODA_SCHEMA::
-    index_name_x:     time
-    var_name_lon:     trjLon
-    var_name_lat:     trjLat
-    var_name_time:    time
+    index_name_x:       time
+    var_name_lon:       trjLon
+    var_name_lat:       trjLat
+    var_name_time:      time
     file_name_template: /discover/nobackup/projects/gmao/aist-nr/data/FIREX-AQ/sampled/DC8/GEOS-FP/%y4-%m2-%d2/FIREXAQ-GEOS-FP-adg-Nx-DC8_Model_%y4%m2%d2_R1.nc
   ::
   GEOVALS_SCHEMA::
     geovals_fields::
-                                         'PS'           , 'DYN'      ,
-# aer_Nv
-                                         'DELP'         , 'DYN'      ,
-                                         'LWI'          , 'SURFACE'  ,
-                                         'RH2'          , 'MOIST'    , 'RH'        ,
-                                         'AIRDENS'      , 'CHEMENV'  ,
-###<have mixed level/edge>
-###<grid2LS regridder: rank > 3 not implemented>
-# Dust
-                                         'DU'           , 'DU'       , "DU001;DU002;DU003;DU004;DU005"
-### Sea-salt
-                                         'SS'           , 'SS'       , "SS001;SS002;SS003;SS004;SS005"
-### Sulfates
-                                         'DMS'          , 'SU'       ,
-                                         'SO2'          , 'SU'       ,
-                                         'SO4'          , 'SU'       ,
-                                         'MSA'          , 'SU'       ,
-# Carbonaceous (main)
-                                         'CA.bcphobic'  , 'CA.bc'    , 'BCPHOBIC'  ,
-                                         'CA.bcphilic'  , 'CA.bc'    , 'BCPHILIC'  ,
-                                         'CA.brphobic'  , 'CA.br'    , 'BRPHOBIC'  ,
-                                         'CA.brphilic'  , 'CA.br'    , 'BRPHILIC'  ,
-                                         'CA.ocphobic'  , 'CA.oc'    , 'OCPHOBIC'  ,
-                                         'CA.ocphilic'  , 'CA.oc'    , 'OCPHILIC'  ,
-# Nitrate
-                                         'NH3'          , 'NI'       ,
-                                         'NH4a'         , 'NI'       , 'NH4A'      ,
-                                         'NO3an1'       , 'NI'       , 'NO3AN1'    ,
-                                         'NO3an2'       , 'NI'       , 'NO3AN2'    ,
-                                         'NO3an3'       , 'NI'       , 'NO3AN3'    ,
-###asm_Nv
-                                         'SLP'    , 'DYN'        ,
-                                         'PHIS'   , 'AGCM'       ,
-##                                         'PL'     , 'DYN'        ,
-                                         'T'      , 'DYN'        ,
-                                         'U'      , 'DYN'        ,
-                                         'V'      , 'DYN'        ,
-                                         'OMEGA'  , 'DYN'        ,
-                                         'Q'      , 'MOIST'      , 'QV'     ,
-                                         'QLTOT'  , 'AGCM'       , 'QL'     ,
-                                         'QITOT'  , 'AGCM'       , 'QI'     ,
-#not-exist                                       'QRTOT'  , 'MOIST'      , 'QR'     ,
-#not-exist                                       'QSTOT'  , 'MOIST'      , 'QS'     ,
-                                         'ZL'     , 'DYN'        , 'H'      ,
-                                         'O3'     , 'CHEMISTRY'  ,
-                                         'EPV'    , 'DYN'        ,
-                                         'FCLD'   , 'MOIST'      , 'CLOUD'  ,
+                         include(aerSampler_vars.vl)
+                         include(cldSampler_vars.vl)
+                         include(asmSampler_vars.vl)
     ::
   ::
 ::
 
 PLATFORM.airs_aqua::
   IODA_SCHEMA::
-    index_name_x:     Location
-    var_name_lon:     MetaData/longitude
-    var_name_lat:     MetaData/latitude
-    var_name_time:    MetaData/dateTime
+    index_name_x:        Location
+    var_name_lon:        MetaData/longitude
+    var_name_lat:        MetaData/latitude
+    var_name_time:       MetaData/dateTime
     file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/airs_aqua.%y4%m2%d2T%h2%n2%S2Z.nc4
   ::
   GEOVALS_SCHEMA::
-    geovals_fields::
-include(crtm_ir.vl)
-  ::
+    geovals_fields:: 
+                         include(crtmSampler_vars.vl)
+    ::
 ::
 
 PLATFORM.cris-fsr_n20::
   IODA_SCHEMA::
-    index_name_x:     Location
-    var_name_lon:     MetaData/longitude
-    var_name_lat:     MetaData/latitude
-    var_name_time:    MetaData/dateTime
+    index_name_x:        Location
+    var_name_lon:        MetaData/longitude
+    var_name_lat:        MetaData/latitude
+    var_name_time:       MetaData/dateTime
     file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/cris-fsr_n20.%y4%m2%d2T%h2%n2%S2Z.nc4
   ::
   GEOVALS_SCHEMA::
     geovals_fields::
-include(crtm_ir.vl)
+                         include(crtmSampler_vars.vl)
   ::
 ::
 
 PLATFORM.cris-fsr_npp::
   IODA_SCHEMA::
-    index_name_x:     Location
-    var_name_lon:     MetaData/longitude
-    var_name_lat:     MetaData/latitude
-    var_name_time:    MetaData/dateTime
+    index_name_x:        Location
+    var_name_lon:        MetaData/longitude
+    var_name_lat:        MetaData/latitude
+    var_name_time:       MetaData/dateTime
     file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/cris-fsr_npp.%y4%m2%d2T%h2%n2%S2Z.nc4
   ::
   GEOVALS_SCHEMA::
@@ -688,10 +589,10 @@ include(crtm_ir.vl)
 
 PLATFORM.iasi_metop-b::
   IODA_SCHEMA::
-    index_name_x:     Location
-    var_name_lon:     MetaData/longitude
-    var_name_lat:     MetaData/latitude
-    var_name_time:    MetaData/dateTime
+    index_name_x:        Location
+    var_name_lon:        MetaData/longitude
+    var_name_lat:        MetaData/latitude
+    var_name_time:       MetaData/dateTime
     file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/iasi_metop-b.%y4%m2%d2T%h2%n2%S2Z.nc4
   ::
   GEOVALS_SCHEMA::
@@ -702,10 +603,10 @@ include(crtm_ir.vl)
 
 PLATFORM.amsua_aqua::
   IODA_SCHEMA::
-    index_name_x:     Location
-    var_name_lon:     MetaData/longitude
-    var_name_lat:     MetaData/latitude
-    var_name_time:    MetaData/dateTime
+    index_name_x:        Location
+    var_name_lon:        MetaData/longitude
+    var_name_lat:        MetaData/latitude
+    var_name_time:       MetaData/dateTime
     file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/amsua_aqua.%y4%m2%d2T%h2%n2%S2Z.nc4
   ::
   GEOVALS_SCHEMA::
@@ -716,150 +617,150 @@ include(crtm_mw.vl)
 
 PLATFORM.amsua_metop-b::
   IODA_SCHEMA::
-    index_name_x:     Location
-    var_name_lon:     MetaData/longitude
-    var_name_lat:     MetaData/latitude
-    var_name_time:    MetaData/dateTime
+    index_name_x:        Location
+    var_name_lon:        MetaData/longitude
+    var_name_lat:        MetaData/latitude
+    var_name_time:       MetaData/dateTime
     file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/amsua_metop-b.%y4%m2%d2T%h2%n2%S2Z.nc4
   ::
   GEOVALS_SCHEMA::
     geovals_fields::
-include(crtm_mw.vl)
+                         include(crtmSampler_vars.vl)
   ::
 ::
 
 PLATFORM.amsua_n15::
   IODA_SCHEMA::
-    index_name_x:     Location
-    var_name_lon:     MetaData/longitude
-    var_name_lat:     MetaData/latitude
-    var_name_time:    MetaData/dateTime
+    index_name_x:        Location
+    var_name_lon:        MetaData/longitude
+    var_name_lat:        MetaData/latitude
+    var_name_time:       MetaData/dateTime
     file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/amsua_n15.%y4%m2%d2T%h2%n2%S2Z.nc4
   ::
   GEOVALS_SCHEMA::
     geovals_fields::
-include(crtm_mw.vl)
+                         include(crtmSampler_vars.vl)
   ::
 ::
 
 PLATFORM.amsua_n18::
   IODA_SCHEMA::
-    index_name_x:     Location
-    var_name_lon:     MetaData/longitude
-    var_name_lat:     MetaData/latitude
-    var_name_time:    MetaData/dateTime
+    index_name_x:        Location
+    var_name_lon:        MetaData/longitude
+    var_name_lat:        MetaData/latitude
+    var_name_time:       MetaData/dateTime
     file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/amsua_n18.%y4%m2%d2T%h2%n2%S2Z.nc4
   ::
   GEOVALS_SCHEMA::
     geovals_fields::
-include(crtm_mw.vl)
+                         include(crtmSampler_vars.vl)
   ::
 ::
 
 PLATFORM.amsua_n19::
   IODA_SCHEMA::
-    index_name_x:     Location
-    var_name_lon:     MetaData/longitude
-    var_name_lat:     MetaData/latitude
-    var_name_time:    MetaData/dateTime
+    index_name_x:        Location
+    var_name_lon:        MetaData/longitude
+    var_name_lat:        MetaData/latitude
+    var_name_time:       MetaData/dateTime
     file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/amsua_n19.%y4%m2%d2T%h2%n2%S2Z.nc4
   ::
   GEOVALS_SCHEMA::
     geovals_fields::
-include(crtm_mw.vl)
+                         include(crtmSampler_vars.vl)
   ::
 ::
 
 PLATFORM.amsr2_gcom-w1::
   IODA_SCHEMA::
-    index_name_x:     Location
-    var_name_lon:     MetaData/longitude
-    var_name_lat:     MetaData/latitude
-    var_name_time:    MetaData/dateTime
+    index_name_x:        Location
+    var_name_lon:        MetaData/longitude
+    var_name_lat:        MetaData/latitude
+    var_name_time:       MetaData/dateTime
     file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/amsr2_gcom-w1.%y4%m2%d2T%h2%n2%S2Z.nc4
   ::
   GEOVALS_SCHEMA::
     geovals_fields::
-include(crtm_mw.vl)
+                         include(crtmSampler_vars.vl)
   ::
 ::
 
 PLATFORM.atms_n20::
   IODA_SCHEMA::
-    index_name_x:     Location
-    var_name_lon:     MetaData/longitude
-    var_name_lat:     MetaData/latitude
-    var_name_time:    MetaData/dateTime
+    index_name_x:        Location
+    var_name_lon:        MetaData/longitude
+    var_name_lat:        MetaData/latitude
+    var_name_time:       MetaData/dateTime
     file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/atms_n20.%y4%m2%d2T%h2%n2%S2Z.nc4
   ::
   GEOVALS_SCHEMA::
     geovals_fields::
-include(crtm_mw.vl)
+                         include(crtmSampler_vars.vl)
   ::
 ::
 
 PLATFORM.atms_npp::
   IODA_SCHEMA::
-    index_name_x:     Location
-    var_name_lon:     MetaData/longitude
-    var_name_lat:     MetaData/latitude
-    var_name_time:    MetaData/dateTime
+    index_name_x:        Location
+    var_name_lon:        MetaData/longitude
+    var_name_lat:        MetaData/latitude
+    var_name_time:       MetaData/dateTime
     file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/atms_npp.%y4%m2%d2T%h2%n2%S2Z.nc4
   ::
   GEOVALS_SCHEMA::
     geovals_fields::
-include(crtm_mw.vl)
+                         include(crtmSampler_vars.vl)
   ::
 ::
 
 PLATFORM.avhrr3_metop-b::
   IODA_SCHEMA::
-    index_name_x:     Location
-    var_name_lon:     MetaData/longitude
-    var_name_lat:     MetaData/latitude
-    var_name_time:    MetaData/dateTime
+    index_name_x:        Location
+    var_name_lon:        MetaData/longitude
+    var_name_lat:        MetaData/latitude
+    var_name_time:       MetaData/dateTime
     file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/avhrr3_metop-b.%y4%m2%d2T%h2%n2%S2Z.nc4
   ::
   GEOVALS_SCHEMA::
     geovals_fields::
-include(crtm_mw.vl)
+                         include(crtmSampler_vars.vl)
   ::
 ::
 
 PLATFORM.avhrr3_n18::
   IODA_SCHEMA::
-    index_name_x:     Location
-    var_name_lon:     MetaData/longitude
-    var_name_lat:     MetaData/latitude
-    var_name_time:    MetaData/dateTime
+    index_name_x:        Location
+    var_name_lon:        MetaData/longitude
+    var_name_lat:        MetaData/latitude
+    var_name_time:       MetaData/dateTime
     file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/avhrr3_n18.%y4%m2%d2T%h2%n2%S2Z.nc4
   ::
   GEOVALS_SCHEMA::
     geovals_fields::
-include(crtm_mw.vl)
+                         include(crtmSampler_vars.vl)
   ::
 ::
 
 PLATFORM.avhrr3_n19::
   IODA_SCHEMA::
-    index_name_x:     Location
-    var_name_lon:     MetaData/longitude
-    var_name_lat:     MetaData/latitude
-    var_name_time:    MetaData/dateTime
+    index_name_x:        Location
+    var_name_lon:        MetaData/longitude
+    var_name_lat:        MetaData/latitude
+    var_name_time:       MetaData/dateTime
     file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/avhrr3_n19.%y4%m2%d2T%h2%n2%S2Z.nc4
   ::
   GEOVALS_SCHEMA::
     geovals_fields::
-include(crtm_mw.vl)
+                         include(crtmSampler_vars.vl)
   ::
 ::
 
 PLATFORM.gmi_gpm::
   IODA_SCHEMA::
-    index_name_x:     Location
-    var_name_lon:     MetaData/longitude
-    var_name_lat:     MetaData/latitude
-    var_name_time:    MetaData/dateTime
+    index_name_x:        Location
+    var_name_lon:        MetaData/longitude
+    var_name_lat:        MetaData/latitude
+    var_name_time:       MetaData/dateTime
     file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/gmi_gpm.%y4%m2%d2T%h2%n2%S2Z.nc4
   ::
   GEOVALS_SCHEMA::
@@ -870,183 +771,183 @@ include(crtm_mw.vl)
 
 PLATFORM.mhs_metop-b::
   IODA_SCHEMA::
-    index_name_x:     Location
-    var_name_lon:     MetaData/longitude
-    var_name_lat:     MetaData/latitude
-    var_name_time:    MetaData/dateTime
+    index_name_x:        Location
+    var_name_lon:        MetaData/longitude
+    var_name_lat:        MetaData/latitude
+    var_name_time:       MetaData/dateTime
     file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/mhs_metop-b.%y4%m2%d2T%h2%n2%S2Z.nc4
   ::
   GEOVALS_SCHEMA::
     geovals_fields::
-include(crtm_mw.vl)
+                         include(crtmSampler_vars.vl)
   ::
 ::
 
 PLATFORM.mhs_n19::
   IODA_SCHEMA::
-    index_name_x:     Location
-    var_name_lon:     MetaData/longitude
-    var_name_lat:     MetaData/latitude
-    var_name_time:    MetaData/dateTime
+    index_name_x:        Location
+    var_name_lon:        MetaData/longitude
+    var_name_lat:        MetaData/latitude
+    var_name_time:       MetaData/dateTime
     file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/mhs_n19.%y4%m2%d2T%h2%n2%S2Z.nc4
   ::
   GEOVALS_SCHEMA::
     geovals_fields::
-include(crtm_mw.vl)
+                         include(crtmSampler_vars.vl)
   ::
 ::
 
 PLATFORM.ssmis_f17::
   IODA_SCHEMA::
-    index_name_x:     Location
-    var_name_lon:     MetaData/longitude
-    var_name_lat:     MetaData/latitude
-    var_name_time:    MetaData/dateTime
+    index_name_x:        Location
+    var_name_lon:        MetaData/longitude
+    var_name_lat:        MetaData/latitude
+    var_name_time:       MetaData/dateTime
     file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/ssmis_f17.%y4%m2%d2T%h2%n2%S2Z.nc4
   ::
   GEOVALS_SCHEMA::
     geovals_fields::
-include(crtm_mw.vl)
+                         include(crtmSampler_vars.vl)
   ::
 ::
 
 PLATFORM.mls55_aura::
   IODA_SCHEMA::
-    index_name_x:     Location
-    var_name_lon:     MetaData/longitude
-    var_name_lat:     MetaData/latitude
-    var_name_time:    MetaData/dateTime
+    index_name_x:        Location
+    var_name_lon:        MetaData/longitude
+    var_name_lat:        MetaData/latitude
+    var_name_time:       MetaData/dateTime
     file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/mls55_aura.%y4%m2%d2T%h2%n2%S2Z.nc4
   ::
   GEOVALS_SCHEMA::
     geovals_fields::
-include(crtm_mw.vl)
+                         include(crtmSampler_vars.vl)
   ::
 ::
 
 PLATFORM.aircraft::
   IODA_SCHEMA::
-    index_name_x:     Location
-    var_name_lon:     MetaData/longitude
-    var_name_lat:     MetaData/latitude
-    var_name_time:    MetaData/dateTime
+    index_name_x:        Location
+    var_name_lon:        MetaData/longitude
+    var_name_lat:        MetaData/latitude
+    var_name_time:       MetaData/dateTime
     file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/aircraft.%y4%m2%d2T%h2%n2%S2Z.nc4
   :: 
   GEOVALS_SCHEMA::
     geovals_fields::
-include(crtm_conv.vl)
+                         include(crtmSampler_vars.vl)
   ::
 ::
 
 PLATFORM.gps::
   IODA_SCHEMA::
-    index_name_x:     Location 
-    var_name_lon:     MetaData/longitude
-    var_name_lat:     MetaData/latitude
-    var_name_time:    MetaData/dateTime
+    index_name_x:        Location 
+    var_name_lon:        MetaData/longitude
+    var_name_lat:        MetaData/latitude
+    var_name_time:       MetaData/dateTime
     file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/gps.%y4%m2%d2T%h2%n2%S2Z.nc4
   ::
   GEOVALS_SCHEMA::
     geovals_fields::
-include(crtm_conv.vl)
+                         include(crtmSampler_vars.vl)
   ::
 ::
 
 PLATFORM.omi_aura::
   IODA_SCHEMA::        
-    index_name_x:     Location     
-    var_name_lon:     MetaData/longitude
-    var_name_lat:     MetaData/latitude
-    var_name_time:    MetaData/dateTime
+    index_name_x:        Location     
+    var_name_lon:        MetaData/longitude
+    var_name_lat:        MetaData/latitude
+    var_name_time:       MetaData/dateTime
     file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/omi_aura.%y4%m2%d2T%h2%n2%S2Z.nc4
   ::
   GEOVALS_SCHEMA::
     geovals_fields::
-include(crtm_ozone.vl)
+                         include(crtmSampler_vars.vl)
   ::
 ::
 
 PLATFORM.ompsnm_npp::
   IODA_SCHEMA::
-    index_name_x:     Location
-    var_name_lon:     MetaData/longitude
-    var_name_lat:     MetaData/latitude
-    var_name_time:    MetaData/dateTime
+    index_name_x:        Location
+    var_name_lon:        MetaData/longitude
+    var_name_lat:        MetaData/latitude
+    var_name_time:       MetaData/dateTime
     file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/ompsnm_npp.%y4%m2%d2T%h2%n2%S2Z.nc4
   ::
   GEOVALS_SCHEMA::
     geovals_fields::
-include(crtm_ozone.vl)
+                         include(crtmSampler_vars.vl)
   ::
 ::
 
 PLATFORM.satwind::
   IODA_SCHEMA::
-    index_name_x:     Location
-    var_name_lon:     MetaData/longitude
-    var_name_lat:     MetaData/latitude
-    var_name_time:    MetaData/dateTime
+    index_name_x:        Location
+    var_name_lon:        MetaData/longitude
+    var_name_lat:        MetaData/latitude
+    var_name_time:       MetaData/dateTime
     file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/satwind.%y4%m2%d2T%h2%n2%S2Z.nc4
   ::
   GEOVALS_SCHEMA::
     geovals_fields::
-include(crtm_winds.vl)
+                         include(crtmSampler_vars.vl)
   ::
 ::
 
 PLATFORM.scatwind::
   IODA_SCHEMA::
-    index_name_x:     Location
-    var_name_lon:     MetaData/longitude
-    var_name_lat:     MetaData/latitude
-    var_name_time:    MetaData/dateTime
+    index_name_x:        Location
+    var_name_lon:        MetaData/longitude
+    var_name_lat:        MetaData/latitude
+    var_name_time:       MetaData/dateTime
     file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/scatwind.%y4%m2%d2T%h2%n2%S2Z.nc4
   ::
   GEOVALS_SCHEMA::
     geovals_fields::
-include(crtm_winds.vl)
+                         include(crtmSampler_vars.vl)
   ::
 ::
 
 PLATFORM.sfc::
   IODA_SCHEMA::
-    index_name_x:     Location
-    var_name_lon:     MetaData/longitude
-    var_name_lat:     MetaData/latitude
-    var_name_time:    MetaData/dateTime
+    index_name_x:        Location
+    var_name_lon:        MetaData/longitude
+    var_name_lat:        MetaData/latitude
+    var_name_time:       MetaData/dateTime
     file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/sfc.%y4%m2%d2T%h2%n2%S2Z.nc4
   ::
   GEOVALS_SCHEMA::
     geovals_fields::
-include(crtm_conv.vl)
+                         include(crtmSampler_vars.vl)
   ::
 ::
 
 PLATFORM.sfcship::
   IODA_SCHEMA::
-    index_name_x:     Location
-    var_name_lon:     MetaData/longitude
-    var_name_lat:     MetaData/latitude
-    var_name_time:    MetaData/dateTime
+    index_name_x:        Location
+    var_name_lon:        MetaData/longitude
+    var_name_lat:        MetaData/latitude
+    var_name_time:       MetaData/dateTime
     file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/sfcship.%y4%m2%d2T%h2%n2%S2Z.nc4
   ::
   GEOVALS_SCHEMA::
     geovals_fields::
-include(crtm_conv.vl)
+                         include(crtmSampler_vars.vl)
   ::
 ::
 
 PLATFORM.sondes::
   IODA_SCHEMA::
-    index_name_x:     Location
-    var_name_lon:     MetaData/longitude
-    var_name_lat:     MetaData/latitude
-    var_name_time:    MetaData/dateTime
+    index_name_x:        Location
+    var_name_lon:        MetaData/longitude
+    var_name_lat:        MetaData/latitude
+    var_name_time:       MetaData/dateTime
     file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/sondes.%y4%m2%d2T%h2%n2%S2Z.nc4
   ::
   GEOVALS_SCHEMA::
     geovals_fields::
-include(crtm_conv.vl)
+                         include(crtmSampler_vars.vl)
   ::
 ::
 

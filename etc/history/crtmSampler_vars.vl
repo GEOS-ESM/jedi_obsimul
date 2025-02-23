@@ -55,6 +55,8 @@
                        'SNOMAS'         , 'SURFACE'    , 'SNOWDP'    ,
                        'WET1'           , 'SURFACE'    , 'GWETTOP'   ,
                        'TSOIL1'         , 'SURFACE'    ,
+                       'LAI'            , 'SURFACE'    ,
+
                        'COSZ'           , 'SOLAR'      ,
                        
                        'QHAT'           , 'SURFACE'    ,
@@ -72,4 +74,4 @@
                        'TDROP'          , 'SURFACE'    ,
                        'TS_FOUND'       , 'SURFACE'    ,
                        'TDEL'           , 'SURFACE'    ,
-    ::
+ 

@@ -1,0 +1,35 @@
+#
+# aer3Dp_vars.vl - 3D aerosols in pressure coordinates.
+#                  There should be no extension nor carbon species in this file!
+#                  We should move away from LWI.
+#
+
+                              'PS'          , 'DYN'        , 'PS'        ,
+                              'LWI'         , 'SURFACE'    , 'LWI'       ,
+                              'AIRDENS'     , 'CHEMENV'    ,
+                              'ZL'          , 'DYN'        , 'H'         ,
+                              'DUMASS'      , 'DU'         , 'DU'        ,
+                              'SSMASS'      , 'SS'         , 'SS'        ,
+                              'CA.bcMASS'   , 'CA.bc'      , 'BC'         ,
+                              'CA.ocMASS'   , 'CA.oc'      , 'OC'         ,
+                              'CA.brMASS'   , 'CA.br'      , 'BR'         ,
+                              'SO2'         , 'SU'         ,
+                              'SO4'         , 'SU'         ,
+                              'NH3MASS'     , 'NI'         , 'NH3'       ,
+                              'NH4MASS'     , 'NI'         , 'NH4'       ,
+                              'NIMASS'      , 'NI'         , 'NI'        ,
+                              'HNO3CONC'    , 'NI'         ,
+                              'NICONC'      , 'NI'         ,
+#ams                          'DUEXTCOEF'   , 'DU'         ,
+#ams                          'SSEXTCOEF'   , 'SS'         ,
+#ams                          'SUEXTCOEF'   , 'SU'         ,
+#ams                          'NIEXTCOEF'   , 'NI'         ,
+#ams                              'CA.bcEXTCOEF'     , 'CA.bc'    , 'BCEXTCOEF'  ,
+#ams                              'CA.brEXTCOEF'     , 'CA.br'    , 'BREXTCOEF'  ,
+#ams                              'CA.ocEXTCOEF'     , 'CA.oc'    , 'OCEXTCOEF'  ,
+                              'ACHEM::VOC'      , 'ACHEM'      , 'VOC'       ,
+#ams                              'ACHEM::VOCbiob'  , 'ACHEM'      , 'VOCbiob'   ,
+#ams                              'pSOA_ANTHRO_VOC' , 'ACHEM', 'pSOA'        ,
+                              'pSOA_BIOB_VOC'   , 'ACHEM', 'pSOAbiob'    ,
+#ams                              'GOCART::CO'      , 'GOCART','CO'        ,
+                              

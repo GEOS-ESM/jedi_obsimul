@@ -1,0 +1,37 @@
+#
+# aerSampler_vars.vl: 3D Aerosol mixing ratios
+#
+#
+
+#                                        Dust
+#                                        ----
+                                         'DU'           , 'DU'       , "DU001;DU002;DU003;DU004;DU005"
+
+#                                        Sea-salt
+#                                        --------
+                                         'SS'           , 'SS'       , "SS001;SS002;SS003;SS004;SS005"
+
+#                                        Sulfates
+#                                        --------
+                                         'DMS'          , 'SU'       ,
+                                         'SO2'          , 'SU'       ,
+                                         'SO4'          , 'SU'       ,
+                                         'MSA'          , 'SU'       ,
+
+#                                        Carbonaceous
+#                                        ------------
+                                         'CA.bcphobic'  , 'CA.bc'    , 'BCPHOBIC'  ,
+                                         'CA.bcphilic'  , 'CA.bc'    , 'BCPHILIC'  ,
+                                         'CA.brphobic'  , 'CA.br'    , 'BRPHOBIC'  ,
+                                         'CA.brphilic'  , 'CA.br'    , 'BRPHILIC'  ,
+                                         'CA.ocphobic'  , 'CA.oc'    , 'OCPHOBIC'  ,
+                                         'CA.ocphilic'  , 'CA.oc'    , 'OCPHILIC'  ,
+
+#                                        Nitrate
+#                                        -------
+                                         'NH3'          , 'NI'       ,
+                                         'NH4a'         , 'NI'       , 'NH4A'      ,
+                                         'NO3an1'       , 'NI'       , 'NO3AN1'    ,
+                                         'NO3an2'       , 'NI'       , 'NO3AN2'    ,
+                                         'NO3an3'       , 'NI'       , 'NO3AN3'    ,
+
