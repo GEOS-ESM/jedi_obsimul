@@ -64,11 +64,11 @@ GRID_LABELS:
 
 #    Global Grids
 #    ------------
-     PC720x361-DC
-     PC1440x721-DC
-     PC2880x1441-DC
-     PC5760x2881-DC
-     PC11520x5761-DC
+     PC720x361-DC        # 0.5    x 0.625   deg     (<==> c180)
+     PC1440x721-DC       # 0.25   x 0.3125  deg     (<--> c360)
+     PC2880x1441-DC      # 0.125  x 0.0625  deg     (<--> c720)
+     PC5760x2881-DC      # 0.0625 x 0.03125 deg     (<--> c1140)
+     PC11520x5761-DC     # 112.5  x 56.25   arcsec  (<--> c2880)
     
 #    Sampler Geometries
 #    ------------------
@@ -83,19 +83,6 @@ GRID_LABELS:
 #                              Grid Geometry Definition
 #                              ------------------------    
 
-PC180x91-DC.GRID_TYPE: LatLon
-PC180x91-DC.IM_WORLD:  180
-PC180x91-DC.JM_WORLD:   91
-PC180x91-DC.POLE: PC
-PC180x91-DC.DATELINE:  DC
-PC180x91-DC.LM: 181
-
-PC360x181-DC.GRID_TYPE: LatLon
-PC360x181-DC.IM_WORLD:  360
-PC360x181-DC.JM_WORLD:  181
-PC360x181-DC.POLE: PC
-PC360x181-DC.DATELINE:  DC
-PC360x181-DC.LM: 181
 
 PC720x361-DC.GRID_TYPE: LatLon
 PC720x361-DC.IM_WORLD:  720
@@ -136,48 +123,15 @@ PC11520x5761-DC.LM: 137
 #                              Sampler Geometry Definition
 #                              ---------------------------
 
-    #ams  
 SwathGrid_ATMS.GRID_TYPE: Swath
 SwathGrid_ATMS.GRID_FILE: /discover/nobackup/projects/gmao/aist-nr/data/SNDR.J1.ATMS.L1B.v02/Y%y4/%D3/SNDR.J1.ATMS.%y4%m2%d2T%h2%n2*.nc
-    #ams "NX" and "NY" does not make sense for a swath dim name. The standard name of the directions
-    #ams     are "along track" and "cross track", where "track" means the ground track of the satellite.
-    #ams     Having said that, these are discoverable, they are not necessary in the rc file.
-    #ams  SwathGrid_ATMS.xtrack.dim_size:  15
-    #ams  SwathGrid_ATMS.atrack.dim_size:  720
-    #ams  Why do we need LM as part of the swath specification???
 SwathGrid_ATMS.LM:  137
-    #ams Note: dim_name is a property of xtrack, have the "xtrack" come first
-    #ams       lon/lat makes noi sense here, use atrack/xtrack instead.
-    #ams SwathGrid_ATMS.xtrack.dim_name:  xtrack   
 SwathGrid_ATMS.index_name_lon:      xtrack
-    #ams SwathGrid_ATMS.atrack.dim_name:  atrack
 SwathGrid_ATMS.index_name_lat:      atrack
-    #ams Same here, use this convention:  object.property_name    
-    #ams SwathGrid_ATMS.lon.var_name:        lon
-    #ams SwathGrid_ATMS.lat.var_name:        lat
-    #ams SwathGrid_ATMS.time.var_name:       obs_time_tai93
-    #ams Note: you may need to specify the units of these variables when
-    #          they are omitted from the file. Why is this important? For
-    #          the cases when tehse are expressed in radians, not degrees.
 SwathGrid_ATMS.var_name_lon:        lon
 SwathGrid_ATMS.var_name_lat:        lat
 SwathGrid_ATMS.var_name_time:       obs_time_tai93
-    #ams make thus optional, needed only if file is not CF compliant for time.
-    #    Please adopt naming convention.
-    #    SwathGrid_ATMS.time.units: 'seconds since 1993-01-01 00:00:00'
 SwathGrid_ATMS.tunit:               'seconds since 1993-01-01 00:00:00'
-    #ams file_begin and file_end are not very clear, and should not be a hard requirement
-    #ams What is needed is the specification of a reference time (which a data file may
-    #ams    or may not exist as a file on disk) and the delta-t for the files; file_end
-    #ams    is not necessary.  
-    #ams SwathGrid_ATMS.file.time_reference:  '2019-07-31T00:00:00'
-    #ams SwathGrid_ATMS.file.time_interval:   '000000 000600'         # yymmdd  hhmmss
-    #ams SwathGrid_ATMS.batch.time_interval:  060000                  # hhmmss
-    #    (this shoulkd go iubto collection definition below)
-    #ams Notes: 
-    #ams        1) Please change this throughout for consistency.
-    #ams        2) Choose a convention for expressing time; avoid mixing ISO and nymd.nhms
-    #ams        3) I wonder if "batch.time_interval" is better than "epoch.time_interval".
 SwathGrid_ATMS.obs_file_begin:      '2019-07-31T00:00:00'
 SwathGrid_ATMS.obs_file_end:        '2019-11-01T23:00:00'
 SwathGrid_ATMS.obs_file_interval:   '000000 000600'         # yymmdd  hhmmss
@@ -185,8 +139,6 @@ SwathGrid_ATMS.Epoch:                060000                 # hhmmss
 
 SwathGrid_MYD04.GRID_TYPE: Swath
 SwathGrid_MYD04.GRID_FILE: /discover/nobackup/projects/gmao/aist-nr/data/Aqua/%y4/%D3/MYD04_L2.A%y4%D3.%h2%n2*.hdf
-#  SwathGrid_MYD04.NX:  15
-#  SwathGrid_MYD04.NY:  720
 SwathGrid_MYD04.LM:  137
 SwathGrid_MYD04.index_name_lon:      'Cell_Across_Swath:mod04'
 SwathGrid_MYD04.index_name_lat:      'Cell_Along_Swath:mod04'
@@ -202,8 +154,6 @@ SwathGrid_MYD04.Epoch:               060000              #
 
 SwathGrid_MOD04.GRID_TYPE: Swath
 SwathGrid_MOD04.GRID_FILE: /discover/nobackup/projects/gmao/aist-nr/data/Terra/%y4/%D3/MOD04_L2.A%y4%D3.%h2%n2*.hdf
-#  SwathGrid_MOD04.NX:  15
-#  SwathGrid_MOD04.NY:  720
 SwathGrid_MOD04.LM:   137
 SwathGrid_MOD04.index_name_lon:     'Cell_Across_Swath:mod04'
 SwathGrid_MOD04.index_name_lat:     'Cell_Along_Swath:mod04'
@@ -255,6 +205,7 @@ ana_slv.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
 ana_slv.archive:          '%c/Y%y4' ,
     ana_slv.format:           'CFIO' ,
     .nbits:       12,
+    chunks!!!!!
 ana_slv.deflate:           1 ,
 ana_slv.grid_label:        PC360x181-DC ,
 ana_slv.regrid_method:    'BILINEAR',
