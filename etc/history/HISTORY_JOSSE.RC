@@ -83,6 +83,20 @@ GRID_LABELS:
 #                              Grid Geometry Definition
 #                              ------------------------    
 
+PC180x91-DC.GRID_TYPE: LatLon
+PC180x91-DC.IM_WORLD:  180
+PC180x91-DC.JM_WORLD:   91
+PC180x91-DC.POLE: PC
+PC180x91-DC.DATELINE:  DC
+PC180x91-DC.LM: 181
+
+PC360x181-DC.GRID_TYPE: LatLon
+PC360x181-DC.IM_WORLD:  360
+PC360x181-DC.JM_WORLD:  181
+PC360x181-DC.POLE: PC
+PC360x181-DC.DATELINE:  DC
+PC360x181-DC.LM: 181
+
 PC720x361-DC.GRID_TYPE: LatLon
 PC720x361-DC.IM_WORLD:  720
 PC720x361-DC.JM_WORLD:  361
@@ -159,6 +173,7 @@ SwathGrid_ATMS.tunit:               'seconds since 1993-01-01 00:00:00'
     #ams SwathGrid_ATMS.file.time_reference:  '2019-07-31T00:00:00'
     #ams SwathGrid_ATMS.file.time_interval:   '000000 000600'         # yymmdd  hhmmss
     #ams SwathGrid_ATMS.batch.time_interval:  060000                  # hhmmss
+    #    (this shoulkd go iubto collection definition below)
     #ams Notes: 
     #ams        1) Please change this throughout for consistency.
     #ams        2) Choose a convention for expressing time; avoid mixing ISO and nymd.nhms
@@ -190,16 +205,16 @@ SwathGrid_MOD04.GRID_FILE: /discover/nobackup/projects/gmao/aist-nr/data/Terra/%
 #  SwathGrid_MOD04.NX:  15
 #  SwathGrid_MOD04.NY:  720
 SwathGrid_MOD04.LM:   137
-SwathGrid_MOD04.index_name_lon: 'Cell_Across_Swath:mod04'
-SwathGrid_MOD04.index_name_lat: 'Cell_Along_Swath:mod04'
-SwathGrid_MOD04.var_name_lon:   'Longitude'
-SwathGrid_MOD04.var_name_lat:   'Latitude'
-SwathGrid_MOD04.var_name_time:  'Scan_Start_Time'
-SwathGrid_MOD04.tunit:          'seconds since 1993-01-01 00:00:00'
-SwathGrid_MOD04.obs_file_begin: '2019-07-31T00:00:00'
-SwathGrid_MOD04.obs_file_end:   '2019-11-01T00:00:00'
-SwathGrid_MOD04.obs_file_interval:   '000000 000500'     # yymmdd  hhmmss
-SwathGrid_MOD04.Epoch:           060000                  # 
+SwathGrid_MOD04.index_name_lon:     'Cell_Across_Swath:mod04'
+SwathGrid_MOD04.index_name_lat:     'Cell_Along_Swath:mod04'
+SwathGrid_MOD04.var_name_lon:       'Longitude'
+SwathGrid_MOD04.var_name_lat:       'Latitude'
+SwathGrid_MOD04.var_name_time:      'Scan_Start_Time'
+SwathGrid_MOD04.tunit:              'seconds since 1993-01-01 00:00:00'
+SwathGrid_MOD04.obs_file_begin:     '2019-07-31T00:00:00'
+SwathGrid_MOD04.obs_file_end:       '2019-11-01T00:00:00'
+SwathGrid_MOD04.obs_file_interval:  '000000 000500'     # yymmdd  hhmmss
+SwathGrid_MOD04.Epoch:               060000                  # 
 
 
 abi_grid_GOES16_M6C14.GRID_TYPE:     XY
@@ -221,6 +236,63 @@ abi_grid_GOES16_M6C14.GRID_FILENAME:   /discover/nobackup/projects/gmao/aist-nr/
 #                              ---------------------------------    
 #                              Definition of Gridded Collections
 #                              ---------------------------------    
+    
+# Prognostic variables for analysis verification
+# ----------------------------------------------
+ana_prog.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
+ana_prog.archive:          '%c/Y%y4' ,
+    ana_prog.format:           'CFIO' ,
+    .nbits:       12,
+ana_prog.deflate:           1 ,
+ana_prog.grid_label:        PC360x181-DC ,
+ana_prog.regrid_method:    'BILINEAR',
+ana_prog.ref_time:          210000 ,
+ana_prog.frequency:         010000 ,
+ana_prog.fields:            include(ana_vars.vl)
+::
+    
+ana_slv.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
+ana_slv.archive:          '%c/Y%y4' ,
+    ana_slv.format:           'CFIO' ,
+    .nbits:       12,
+ana_slv.deflate:           1 ,
+ana_slv.grid_label:        PC360x181-DC ,
+ana_slv.regrid_method:    'BILINEAR',
+ana_slv.ref_time:          210000 ,
+ana_slv.frequency:         010000 ,
+ana_slv.fields:            include(slv_vars.vl)  ##### add w at several levels
+::
+
+ana_surf.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
+ana_surf.archive:          '%c/Y%y4' ,
+    ana_surf.format:           'CFIO' ,
+    .nbits:       12,
+ana_surf.deflate:           1 ,
+ana_surf.grid_label:        PC360x181-DC ,
+ana_surf.mode:             'time-averaged'
+ana_surf.regrid_method:    'CONSERVE',
+ana_surf.ref_time:          210000 ,
+ana_surf.frequency:         010000 ,
+ana_surf.fields:            include(surf_vars.vl)
+::
+
+# Met/Aerosol/Carbon Single Level Varriables -- Look at DYAMOND v2 (Browsing product)
+# ------------------------------------------
+inst_01hr_2d_brs_Nx.format:      'CFIO' ,
+inst_01hr_2d_brs_Nx.descr:       '2d,1-Hourly,Instantaneous,Hi-Res Lat-Lon on Single-Level,Assimilation,Meteorological, Carbon and Aerosol Single-Level Diagnostics' ,
+inst_01hr_2d_brs_Nx.grid_label:  PC2880x1441-DC ,
+inst_01hr_2d_brs_Nx.nbits:       12,
+inst_01hr_2d_brs_Nx.chunksize:   360 181 1 1,
+inst_01hr_2d_brs_Nx.deflate:     1,
+inst_01hr_2d_brs_Nx.template:    '%y4%m2%d2_%h2%n2z.nc4' ,
+inst_01hr_2d_brs_Nx.mode:        'instantaneous' ,
+inst_01hr_2d_brs_Nx.frequency:   010000 ,
+inst_01hr_2d_brs_Nx.duration:    010000 ,
+inst_01hr_2d_brs_Nx.fields:      include(brs_vars.vl)
+::
+
+
+
     
 # Prognostic variables on pressure levels
 # ---------------------------------------    
@@ -251,21 +323,6 @@ geosgcm_surf.mode:             'instantaneous' ,
 geosgcm_surf.frequency:         010000 ,
 geosgcm_surf.ref_time:          210000 ,
 geosgcm_surf.fields:            include(surf_vars.vl)
-::
-
-# Met/Aerosol/Carbon Single Level Varriables
-# ------------------------------------------
-inst_01hr_2d_brs_Nx.format:      'CFIO' ,
-inst_01hr_2d_brs_Nx.descr:       '2d,1-Hourly,Instantaneous,Hi-Res Lat-Lon on Single-Level,Assimilation,Meteorological, Carbon and Aerosol Single-Level Diagnostics' ,
-inst_01hr_2d_brs_Nx.grid_label:  PC11520x5761-DC ,
-inst_01hr_2d_brs_Nx.nbits:       12,
-inst_01hr_2d_brs_Nx.chunksize:   360 181 1 1,
-inst_01hr_2d_brs_Nx.deflate:     1,
-inst_01hr_2d_brs_Nx.template:    '%y4%m2%d2_%h2%n2z.nc4' ,
-inst_01hr_2d_brs_Nx.mode:        'instantaneous' ,
-inst_01hr_2d_brs_Nx.frequency:   010000 ,
-inst_01hr_2d_brs_Nx.duration:    010000 ,
-inst_01hr_2d_brs_Nx.fields:      include(brs_vars.vl)
 ::
 
 # Moist physics diagnostics
@@ -400,10 +457,10 @@ tavg3d_aer_p.fields:          include(aer3Dp_vars.vl)
 #     a geometry specific like the others. The supported sampling geometries
 #
 #     ____.geometry:  Station_AERONET    
-#     ____.geometry:  SwathGrid_ATMS 
+#     ____.geometry:  Swath_ATMS 
 #     ____.geometry:  Traj_FIREX-AQ      
 #     ____.geometry:  Traj_CAMP2EX      
-#     ____.geometry:       
+#     ____.geometry:  Patch_GOES16  
 #     ____.geometry:       
 #     ____.geometry:       
 #     ____.geometry:       
@@ -436,7 +493,7 @@ tavg3d_aer_p.fields:          include(aer3Dp_vars.vl)
   myd04.observation_spec:  'Swath'  
   myd04.template:          '%y4%m2%d2_%h2%n2z.nc4',
   myd04.format:            'CFIO',
-  myd04.frequency:         060000,
+  myd04.frequency:         060000,               # should not be here
   myd04.grid_label:        SwathGrid_MYD04,   
   myd04.regrid_method:     'BILINEAR' ,   
   myd04.fields:            include(aerSampler_vars.vl)

@@ -6,12 +6,15 @@
                        'TV'             , 'DYN'        , 
                        'DELP'           , 'DYN'        , 
                        'Q'              , 'MOIST'      , 
-
+                       'ZLE'            , 'DYN'        , 'H'   ,
+ 
                        'QITOT'          , 'AGCM'       , 
                        'QLTOT'          , 'AGCM'       , 
                        'QRTOT'          , 'MOIST'      , 
                        'QSTOT'          , 'MOIST'      , 
 
+#                      Trace gases
+#                      -----------
                        'O3PPMV'         , 'CHEMISTRY'  ,
                        'GOCART::CO2'    , 'GOCART'     , 'CO2'  ,
  
@@ -74,4 +77,20 @@
                        'TDROP'          , 'SURFACE'    ,
                        'TS_FOUND'       , 'SURFACE'    ,
                        'TDEL'           , 'SURFACE'    ,
- 
+
+#                      Cloud variables to inform thinning
+#                      ----------------------------------
+                       'FCLD'           , 'MOIST'       , 'CLOUD'  ,
+                       'CLDTT'          , 'SOLAR'       ,
+                       'CLDLO'          , 'SOLAR'       ,
+                       'CLDMD'          , 'SOLAR'       ,
+                       'CLDHI'          , 'SOLAR'       ,
+                       'CLDTMP'         , 'SOLAR'       , 'SWCLDTMP'   ,
+                       'CLDPRS'         , 'SOLAR'       , 'SWCLDPRS'   ,
+
+#                      Precipitation Profile variables to inform thinning
+#                      --------------------------------------------------
+                       'SNO'            , 'MOIST'    , 'PRECSNO' ,
+                       'AN_PRCP'        , 'MOIST'    , 'PRECANV' ,
+                       'CN_PRCP'        , 'MOIST'    , 'PRECCON' ,
+                       'LS_PRCP'        , 'MOIST'    , 'PRECLSC' ,
