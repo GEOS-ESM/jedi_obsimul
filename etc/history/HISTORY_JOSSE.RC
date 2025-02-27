@@ -20,7 +20,11 @@ EXPSRC: GEOSgcm-v12
 COLLECTIONS:  
 
 #             Gridded Output
-#             --------------    
+#             --------------  
+ 
+  
+#             Gridded Output
+#             --------------  
               'geosgcm_prog'
               'geosgcm_surf'
               'inst_01hr_2d_brs_Nx'
@@ -38,6 +42,16 @@ COLLECTIONS:
               'tavg3d_aer_p'
 #             'const_2d_asm_Nx'
 
+#             Browsing products
+#             -----------------
+             'hwt_30mn_slv_LCC'
+             'hwt_30mn_prs_LCC'
+             'hwt_01hr_slv_LCC'
+             'hwt_01hr_acc_LCC'
+             'inst1_2d_asm_Nx'
+             'tavg1_2d_flx_Nx'
+
+    
 #             Sampelers at Obs locations
 #             --------------------------    
               'jedi'
@@ -179,10 +193,6 @@ abi_grid_GOES16_M6C14.thin_factor:   10
 abi_grid_GOES16_M6C14.LM:            137
 abi_grid_GOES16_M6C14.GRID_FILENAME:   /discover/nobackup/projects/gmao/aist-nr/data/GOES-X/OR_ABI-L1b-RadF-M6C14_G16_s20192340800216_e20192340809524_c20192340810006.nc
 
-
-    #ams For consistency, You need to define geometry for stations...
-    
-
 #                              ---------------------------------    
 #                              Definition of Gridded Collections
 #                              ---------------------------------    
@@ -191,10 +201,10 @@ abi_grid_GOES16_M6C14.GRID_FILENAME:   /discover/nobackup/projects/gmao/aist-nr/
 # ----------------------------------------------
 ana_prog.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
 ana_prog.archive:          '%c/Y%y4' ,
-    ana_prog.format:           'CFIO' ,
-    .nbits:       12,
+ana_prog.format:           'CFIO' ,
+ana_prog.nbits:             12,
 ana_prog.deflate:           1 ,
-ana_prog.grid_label:        PC360x181-DC ,
+ana_prog.grid_label:        PC1440x721-DC ,
 ana_prog.regrid_method:    'BILINEAR',
 ana_prog.ref_time:          210000 ,
 ana_prog.frequency:         010000 ,
@@ -203,11 +213,11 @@ ana_prog.fields:            include(ana_vars.vl)
     
 ana_slv.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
 ana_slv.archive:          '%c/Y%y4' ,
-    ana_slv.format:           'CFIO' ,
-    .nbits:       12,
-    chunks!!!!!
+ana_slv.format:           'CFIO' ,
+ana_slv.nbits:             12,
+ana_slv.chunks:            180 91 1 1,
 ana_slv.deflate:           1 ,
-ana_slv.grid_label:        PC360x181-DC ,
+ana_slv.grid_label:        PC1440x721-DC ,
 ana_slv.regrid_method:    'BILINEAR',
 ana_slv.ref_time:          210000 ,
 ana_slv.frequency:         010000 ,
@@ -216,10 +226,10 @@ ana_slv.fields:            include(slv_vars.vl)  ##### add w at several levels
 
 ana_surf.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
 ana_surf.archive:          '%c/Y%y4' ,
-    ana_surf.format:           'CFIO' ,
-    .nbits:       12,
+ana_surf.format:           'CFIO' ,
+ana_surf.nbits:             12,
 ana_surf.deflate:           1 ,
-ana_surf.grid_label:        PC360x181-DC ,
+ana_surf.grid_label:        PC1440x721-DC ,
 ana_surf.mode:             'time-averaged'
 ana_surf.regrid_method:    'CONSERVE',
 ana_surf.ref_time:          210000 ,
