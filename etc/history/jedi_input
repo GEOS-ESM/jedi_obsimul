@@ -1,0 +1,15 @@
+
+  jedi.sampler_spec:         trajectory
+  jedi.ObsPlatforms:         aircraft airs_aqua amsr2_gcom-w1 amsua_aqua amsua_metop-b amsua_n15 amsua_n18 amsua_n19 atms_n20 atms_npp avhrr3_metop-b avhrr3_n18 avhrr3_n19 cris-fsr_n20 cris-fsr_npp gmi_gpm gps iasi_metop-b mhs_metop-b mhs_n19 mls55_aura omi_aura ompsnm_npp satwind scatwind sfc sfcship sondes ssmis_f17
+  jedi.template:             '%y4%m2%d2_%h2%n2z.nc4',
+  jedi.format:               'CFIO',
+  jedi.obs_file_begin:       2019-07-31T21:00:00
+  jedi.obs_file_interval:    '000000 060000'    #  fixed string format:  yymmdd hhmmss
+  jedi.obs_file_end:         2019-11-01T00:00:00
+  jedi.Epoch:                060000             #  fixed integer format:  hhmmss
+  jedi.use_NWP_1_file:       .true.
+  jedi.restore_2_obs_vector: .true.
+  jedi.regrid_method:        'BILINEAR' ,
+  jedi.splitField:           1,
+::
+

@@ -3,6 +3,10 @@
 #
 #  % m4 < HISTORY_JOSSE.RC > HISTORY_JOSSE.rc
 #
+#  ( if separate jedi super collection into 29 collections:
+#  % sh separate_jedi_to_29_collections.j
+#  % output:  HISTORY_J29.rc
+#  )
 
 include(warning.vl)
 
@@ -62,7 +66,15 @@ COLLECTIONS:
 #             'SNDR_ATMS'
 #             'ABI_M6C14_Geostationary'  # slow
 #             'ABI_M6C01_Mask'           # slow
-    
+::
+
+
+jjCOLLECTIONS:
+              'jedi'
+::
+
+qqCOLLECTIONS:
+    include(jedi_collection_names.vl)
 ::
 
 
@@ -504,6 +516,9 @@ tavg3d_aer_p.fields:          include(aer3Dp_vars.vl)
   jedi.regrid_method:        'BILINEAR' ,
   jedi.splitField:           1,
 ::
+
+include(jedi_29_collections.set)
+
 
 #                              -------------------------    
 #                              JEDI Platform Definitions
