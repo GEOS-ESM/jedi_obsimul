@@ -29,5 +29,6 @@ mv  t2      $collect_name_vl
 
 #  glue
 m4 HISTORY_JOSSE.RC > HISTORY_J29.rc
+cp HISTORY_J29.rc   HISTORY.rc
 
 exit
