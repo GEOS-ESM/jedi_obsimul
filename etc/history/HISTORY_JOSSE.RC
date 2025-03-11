@@ -21,55 +21,8 @@ EXPSRC: GEOSgcm-v12
 #                               Selection of Collections
 #                              -------------------------    
 
-COLLECTIONS:  
-
-#             Gridded Output
-#             --------------  
- 
-  
-#             Gridded Output
-#             --------------  
-              'geosgcm_prog'
-              'geosgcm_surf'
-              'inst_01hr_2d_brs_Nx'
-              'geosgcm_moist'
-              'geosgcm_turb'
-              'geosgcm_gwd'
-#             'geosgcm_tend'
-              'geosgcm_budi'
-              'geosgcm_buda'
-#             'geosgcm_landice'
-#             'geosgcm_meltwtr'
-#             'geosgcm_snowlayer'
-#             'geosgcm_tracer'
-              'tavg2d_aer_x'
-              'tavg3d_aer_p'
-#             'const_2d_asm_Nx'
-
-#             Browsing products
-#             -----------------
-             'hwt_30mn_slv_LCC'
-             'hwt_30mn_prs_LCC'
-             'hwt_01hr_slv_LCC'
-             'hwt_01hr_acc_LCC'
-             'inst1_2d_asm_Nx'
-             'tavg1_2d_flx_Nx'
-
-    
-#             Sampelers at Obs locations
-#             --------------------------    
-              'jedi'
-              'ACtraj'
-              'Aeronet'
-              'Aqua'
-              'Terra'
-#             'SNDR_ATMS'
-#             'ABI_M6C14_Geostationary'  # slow
-#             'ABI_M6C01_Mask'           # slow
-::
-
-
-jjCOLLECTIONS:
+COLLECTIONS:
+#              'geosgcm_prog'
               'jedi'
 ::
 
@@ -91,17 +44,17 @@ GRID_LABELS:
 #    Global Grids
 #    ------------
      PC720x361-DC        # 0.5    x 0.625   deg     (<==> c180)
-     PC1440x721-DC       # 0.25   x 0.3125  deg     (<--> c360)
-     PC2880x1441-DC      # 0.125  x 0.0625  deg     (<--> c720)
-     PC5760x2881-DC      # 0.0625 x 0.03125 deg     (<--> c1140)
-     PC11520x5761-DC     # 112.5  x 56.25   arcsec  (<--> c2880)
-    
-#    Sampler Geometries
-#    ------------------
-     SwathGrid_MYD04
-     SwathGrid_MOD04
-     SwathGrid_ATMS
-     abi_grid_GOES16_M6C14
+#     PC1440x721-DC       # 0.25   x 0.3125  deg     (<--> c360)
+#     PC2880x1441-DC      # 0.125  x 0.0625  deg     (<--> c720)
+#     PC5760x2881-DC      # 0.0625 x 0.03125 deg     (<--> c1140)
+#     PC11520x5761-DC     # 112.5  x 56.25   arcsec  (<--> c2880)
+#    
+##    Sampler Geometries
+##    ------------------
+##     SwathGrid_MYD04     ygyu: 3/5/25 data directory missing
+##     SwathGrid_MOD04     ygyu: 3/5/25 data directory missing
+#     SwathGrid_ATMS
+#     abi_grid_GOES16_M6C14
     
 ::
 
@@ -117,154 +70,10 @@ PC720x361-DC.POLE: PC
 PC720x361-DC.DATELINE:  DC
 PC720x361-DC.LM: 181
 
-PC1440x721-DC.GRID_TYPE: LatLon
-PC1440x721-DC.IM_WORLD:  1440
-PC1440x721-DC.JM_WORLD:  721
-PC1440x721-DC.POLE: PC
-PC1440x721-DC.DATELINE:  DC
-PC1440x721-DC.LM: 181
-
-PC2880x1441-DC.GRID_TYPE: LatLon
-PC2880x1441-DC.IM_WORLD:  2880
-PC2880x1441-DC.JM_WORLD:  1441
-PC2880x1441-DC.POLE: PC
-PC2880x1441-DC.DATELINE:  DC
-PC2880x1441-DC.LM: 181
-
-PC5760x2881-DC.GRID_TYPE: LatLon
-PC5760x2881-DC.IM_WORLD:  5760
-PC5760x2881-DC.JM_WORLD:  2881
-PC5760x2881-DC.POLE: PC
-PC5760x2881-DC.DATELINE:  DC
-PC5760x2881-DC.LM: 181
-
-PC11520x5761-DC.GRID_TYPE: LatLon
-PC11520x5761-DC.IM_WORLD:  11520
-PC11520x5761-DC.JM_WORLD:  5761
-PC11520x5761-DC.POLE: PC
-PC11520x5761-DC.DATELINE:  DC
-PC11520x5761-DC.LM: 137
-
-#                              ---------------------------
-#                              Sampler Geometry Definition
-#                              ---------------------------
-
-SwathGrid_ATMS.GRID_TYPE: Swath
-SwathGrid_ATMS.GRID_FILE: /discover/nobackup/projects/gmao/aist-nr/data/SNDR.J1.ATMS.L1B.v02/Y%y4/%D3/SNDR.J1.ATMS.%y4%m2%d2T%h2%n2*.nc
-SwathGrid_ATMS.LM:  137
-SwathGrid_ATMS.index_name_lon:      xtrack
-SwathGrid_ATMS.index_name_lat:      atrack
-SwathGrid_ATMS.var_name_lon:        lon
-SwathGrid_ATMS.var_name_lat:        lat
-SwathGrid_ATMS.var_name_time:       obs_time_tai93
-SwathGrid_ATMS.tunit:               'seconds since 1993-01-01 00:00:00'
-SwathGrid_ATMS.obs_file_begin:      '2019-07-31T00:00:00'
-SwathGrid_ATMS.obs_file_end:        '2019-11-01T23:00:00'
-SwathGrid_ATMS.obs_file_interval:   '000000 000600'         # yymmdd  hhmmss
-SwathGrid_ATMS.Epoch:                060000                 # hhmmss
-
-SwathGrid_MYD04.GRID_TYPE: Swath
-SwathGrid_MYD04.GRID_FILE: /discover/nobackup/projects/gmao/aist-nr/data/Aqua/%y4/%D3/MYD04_L2.A%y4%D3.%h2%n2*.hdf
-SwathGrid_MYD04.LM:  137
-SwathGrid_MYD04.index_name_lon:      'Cell_Across_Swath:mod04'
-SwathGrid_MYD04.index_name_lat:      'Cell_Along_Swath:mod04'
-SwathGrid_MYD04.var_name_lon:        'Longitude'
-SwathGrid_MYD04.var_name_lat:        'Latitude'
-SwathGrid_MYD04.var_name_time:       'Scan_Start_Time'
-SwathGrid_MYD04.tunit:               'seconds since 1993-01-01 00:00:00'
-SwathGrid_MYD04.obs_file_begin:      '2019-07-31T00:00:00'
-SwathGrid_MYD04.obs_file_end:        '2019-11-01T00:00:00'
-SwathGrid_MYD04.obs_file_interval:   '000000 000500'     # yymmdd  hhmmss
-SwathGrid_MYD04.Epoch:               060000              #
-
-
-SwathGrid_MOD04.GRID_TYPE: Swath
-SwathGrid_MOD04.GRID_FILE: /discover/nobackup/projects/gmao/aist-nr/data/Terra/%y4/%D3/MOD04_L2.A%y4%D3.%h2%n2*.hdf
-SwathGrid_MOD04.LM:   137
-SwathGrid_MOD04.index_name_lon:     'Cell_Across_Swath:mod04'
-SwathGrid_MOD04.index_name_lat:     'Cell_Along_Swath:mod04'
-SwathGrid_MOD04.var_name_lon:       'Longitude'
-SwathGrid_MOD04.var_name_lat:       'Latitude'
-SwathGrid_MOD04.var_name_time:      'Scan_Start_Time'
-SwathGrid_MOD04.tunit:              'seconds since 1993-01-01 00:00:00'
-SwathGrid_MOD04.obs_file_begin:     '2019-07-31T00:00:00'
-SwathGrid_MOD04.obs_file_end:       '2019-11-01T00:00:00'
-SwathGrid_MOD04.obs_file_interval:  '000000 000500'     # yymmdd  hhmmss
-SwathGrid_MOD04.Epoch:               060000                  # 
-
-
-abi_grid_GOES16_M6C14.GRID_TYPE:     XY
-abi_grid_GOES16_M6C14.GRIDNAME:      ABI_Fixed_Grid
-abi_grid_GOES16_M6C14.index_name_x:  x
-abi_grid_GOES16_M6C14.index_name_y:  y
-abi_grid_GOES16_M6C14.var_name_x:    x
-abi_grid_GOES16_M6C14.var_name_y:    y
-abi_grid_GOES16_M6C14.var_name_proj: goes_imager_projection
-abi_grid_GOES16_M6C14.att_name_proj: longitude_of_projection_origin
-abi_grid_GOES16_M6C14.thin_factor:   10
-abi_grid_GOES16_M6C14.LM:            137
-abi_grid_GOES16_M6C14.GRID_FILENAME:   /discover/nobackup/projects/gmao/aist-nr/data/GOES-X/OR_ABI-L1b-RadF-M6C14_G16_s20192340800216_e20192340809524_c20192340810006.nc
 
 #                              ---------------------------------    
 #                              Definition of Gridded Collections
 #                              ---------------------------------    
-    
-# Prognostic variables for analysis verification
-# ----------------------------------------------
-ana_prog.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
-ana_prog.archive:          '%c/Y%y4' ,
-ana_prog.format:           'CFIO' ,
-ana_prog.nbits:             12,
-ana_prog.deflate:           1 ,
-ana_prog.grid_label:        PC1440x721-DC ,
-ana_prog.regrid_method:    'BILINEAR',
-ana_prog.ref_time:          210000 ,
-ana_prog.frequency:         010000 ,
-ana_prog.fields:            include(ana_vars.vl)
-::
-    
-ana_slv.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
-ana_slv.archive:          '%c/Y%y4' ,
-ana_slv.format:           'CFIO' ,
-ana_slv.nbits:             12,
-ana_slv.chunks:            180 91 1 1,
-ana_slv.deflate:           1 ,
-ana_slv.grid_label:        PC1440x721-DC ,
-ana_slv.regrid_method:    'BILINEAR',
-ana_slv.ref_time:          210000 ,
-ana_slv.frequency:         010000 ,
-ana_slv.fields:            include(slv_vars.vl)  ##### add w at several levels
-::
-
-ana_surf.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
-ana_surf.archive:          '%c/Y%y4' ,
-ana_surf.format:           'CFIO' ,
-ana_surf.nbits:             12,
-ana_surf.deflate:           1 ,
-ana_surf.grid_label:        PC1440x721-DC ,
-ana_surf.mode:             'time-averaged'
-ana_surf.regrid_method:    'CONSERVE',
-ana_surf.ref_time:          210000 ,
-ana_surf.frequency:         010000 ,
-ana_surf.fields:            include(surf_vars.vl)
-::
-
-# Met/Aerosol/Carbon Single Level Varriables -- Look at DYAMOND v2 (Browsing product)
-# ------------------------------------------
-inst_01hr_2d_brs_Nx.format:      'CFIO' ,
-inst_01hr_2d_brs_Nx.descr:       '2d,1-Hourly,Instantaneous,Hi-Res Lat-Lon on Single-Level,Assimilation,Meteorological, Carbon and Aerosol Single-Level Diagnostics' ,
-inst_01hr_2d_brs_Nx.grid_label:  PC2880x1441-DC ,
-inst_01hr_2d_brs_Nx.nbits:       12,
-inst_01hr_2d_brs_Nx.chunksize:   360 181 1 1,
-inst_01hr_2d_brs_Nx.deflate:     1,
-inst_01hr_2d_brs_Nx.template:    '%y4%m2%d2_%h2%n2z.nc4' ,
-inst_01hr_2d_brs_Nx.mode:        'instantaneous' ,
-inst_01hr_2d_brs_Nx.frequency:   010000 ,
-inst_01hr_2d_brs_Nx.duration:    010000 ,
-inst_01hr_2d_brs_Nx.fields:      include(brs_vars.vl)
-::
-
-
 
     
 # Prognostic variables on pressure levels
@@ -282,225 +91,6 @@ geosgcm_prog.vvars:            'log(PLE)' , 'DYN' ,
 geosgcm_prog.levels:           include(press_48levels.vl)
 geosgcm_prog.fields:           include(prog_vars.vl)
 ::
-  
-# Surface diagnostics
-# -------------------  
-geosgcm_surf.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
-geosgcm_surf.archive:          '%c/Y%y4' ,
-geosgcm_surf.format:           'CFIO' ,
-geosgcm_surf.deflate:           1 ,
-geosgcm_surf.grid_label:        PC720x361-DC ,
-geosgcm_surf.regrid_method:    'BILINEAR',
-geosgcm_surf.mode:             'instantaneous' ,
-# geosgcm_surf.monthly:           1 ,
-geosgcm_surf.frequency:         010000 ,
-geosgcm_surf.ref_time:          210000 ,
-geosgcm_surf.fields:            include(surf_vars.vl)
-::
-
-# Moist physics diagnostics
-# -------------------------    
-geosgcm_moist.template:        '%y4%m2%d2_%h2%n2z.nc4' ,
-geosgcm_moist.archive:         '%c/Y%y4' ,
-geosgcm_moist.format:          'CFIO' ,
-geosgcm_moist.deflate:          1 ,
-geosgcm_moist.grid_label:       PC720x361-DC ,
-geosgcm_moist.regrid_method:   'BILINEAR',
-geosgcm_moist.mode:            'instantaneous' ,
-#  geosgcm_moist.monthly:          1 ,
-geosgcm_moist.frequency:        010000 ,
-# geosgcm_moist.ref_time:         210000 ,
-geosgcm_moist.vscale:           100.0 ,
-geosgcm_moist.vunit:           'hPa' ,
-geosgcm_moist.vvars:           'log(PLE)', 'DYN' ,
-geosgcm_moist.levels:          include(press_48levels.vl)
-geosgcm_moist.fields:          include(moist_vars.vl)
-::
-
-# Turbulence diagnostics
-# ----------------------    
-geosgcm_turb.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
-geosgcm_turb.archive:          '%c/Y%y4' ,
-geosgcm_turb.format:           'CFIO' ,
-geosgcm_turb.deflate:           1 ,
-geosgcm_turb.grid_label:        PC720x361-DC ,
-geosgcm_turb.regrid_method:    'BILINEAR',
-geosgcm_turb.mode:             'instantaneous' ,
-#  geosgcm_turb.monthly:           1 ,
-geosgcm_turb.frequency:         010000 ,
-# geosgcm_turb.ref_time:          210000 ,
-geosgcm_turb.vscale:            100.0 ,
-geosgcm_turb.vunit:            'hPa' ,
-geosgcm_turb.vvars:            'log(PLE)' , 'DYN' ,
-geosgcm_turb.levels:            include(press_48levels.vl)
-geosgcm_turb.fields:            include(turb_vars.vl)
-::
-
-# Gravity wave drag
-# -----------------
-geosgcm_gwd.template:          '%y4%m2%d2_%h2%n2z.nc4' ,
-geosgcm_gwd.archive:           '%c/Y%y4' ,
-geosgcm_gwd.format:            'CFIO' ,
-geosgcm_gwd.deflate:            1 ,
-geosgcm_gwd.grid_label:         PC720x361-DC ,
-geosgcm_gwd.regrid_method:     'BILINEAR',
-geosgcm_gwd.mode:              'instantaneous' ,
-#  geosgcm_gwd.monthly:            1 ,
-geosgcm_gwd.frequency:          010000 ,
-# geosgcm_gwd.ref_time:           210000 ,
-geosgcm_gwd.vscale:             100.0 ,
-geosgcm_gwd.vunit:             'hPa' ,
-geosgcm_gwd.vvars:             'log(PLE)' , 'DYN' ,
-geosgcm_gwd.levels:            include(press_48levels.vl) 
-geosgcm_gwd.fields:            include(gwd_vars.vl)
-::
-
-# Column mass
-# -----------
-geosgcm_budi.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
-geosgcm_budi.archive:          '%c/Y%y4' ,
-geosgcm_budi.format:           'CFIO' ,
-geosgcm_budi.deflate:           1 ,
-geosgcm_budi.grid_label:        PC720x361-DC ,
-geosgcm_budi.regrid_method:    'CONSERVE',
-geosgcm_budi.frequency:         010000 ,
-geosgcm_budi.fields:            include(budi_vars.vl)        
-::
-
-# Analysis tendencies
-# -------------------
-geosgcm_buda.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
-geosgcm_buda.archive:          '%c/Y%y4' ,
-geosgcm_buda.format:           'CFIO' ,
-geosgcm_buda.deflate:           1 ,
-geosgcm_buda.grid_label:        PC720x361-DC ,
-geosgcm_buda.regrid_method:    'CONSERVE',
-geosgcm_buda.mode:             'instantaneous' ,
-#  geosgcm_buda.monthly:           1 ,
-geosgcm_buda.frequency:        010000 ,
-geosgcm_buda.fields:           include(buda_vars.vl)
-::
-
-#                     ---------------------
-#                     Aerosols/Constituents
-#                     ---------------------
-#
-
-# 2D Aerosol Diagnostics
-# ----------------------
-tavg2d_aer_x.template:       '%y4%m2%d2_%h2%n2z.nc4',
-tavg2d_aer_x.archive:        '%c/Y%y4',
-tavg2d_aer_x.format:         'CFIO',
-tavg2d_aer_x.deflate:         1,
-tavg2d_aer_x.grid_label:      PC720x361-DC,
-tavg2d_aer_x.mode:           'instantaneous',
-#  tavg2d_aer_x.monthly:         1,
-tavg2d_aer_x.frequency:       010000,
-# tavg2d_aer_x.ref_time:        210000,
-tavg2d_aer_x.regrid_method:   'CONSERVE',
-tavg2d_aer_x.splitField:      1,
-tavg2d_aer_x.fields:          included(aer2D_vars.vl)
-
-# 3D Aerosol Mixing Ratio
-# -----------------------
-tavg3d_aer_p.template:       '%y4%m2%d2_%h2%n2z.nc4',
-tavg3d_aer_p.archive:        '%c/Y%y4',
-tavg3d_aer_p.format:         'CFIO',
-tavg3d_aer_p.deflate:         1,
-tavg3d_aer_p.grid_label:      PC720x361-DC,
-tavg3d_aer_p.mode:           'instantaneous',
-#  tavg3d_aer_p.monthly:         1,
-tavg3d_aer_p.frequency:       010000,
-# tavg3d_aer_p.ref_time:        210000,
-tavg3d_aer_p.regrid_method:   'CONSERVE',
-tavg3d_aer_p.splitField:      1,
-tavg3d_aer_p.vscale:          100.0,
-tavg3d_aer_p.vunit:          'hPa',
-tavg3d_aer_p.vvars:          'log(PLE)'    , 'DYN'        ,
-tavg3d_aer_p.levels:          include(press_26levels.vl)
-tavg3d_aer_p.fields:          include(aer3Dp_vars.vl)
-::
-
-
-#                              ---------------------------------    
-#                              Definition of Sampled Collections
-#                              ---------------------------------    
-
-#ams  The station geometry is asymmetric. For consistency you should have 
-#     a geometry specific like the others. The supported sampling geometries
-#
-#     ____.geometry:  Station_AERONET    
-#     ____.geometry:  Swath_ATMS 
-#     ____.geometry:  Traj_FIREX-AQ      
-#     ____.geometry:  Traj_CAMP2EX      
-#     ____.geometry:  Patch_GOES16  
-#     ____.geometry:       
-#     ____.geometry:       
-#     ____.geometry:       
-#     ____.geometry:       
-
-  Aeronet.sampler_spec:       'station'
-  Aeronet.station_id_file:    /discover/nobackup/projects/gmao/aist-nr/data/Station/1_national.csv
-  Aeronet.station_skip_line:  1
-  Aeronet.template:           %y4%m2%d2_%h2%n2z.nc4
-  Aeronet.format:             'CFIO'
-  Aeronet.frequency:          010000,   # when to write
-  Aeronet.duration:           060000,   # time length to update file
-  Aeronet.splitField:         1,
-  Aeronet.regrid_method:      'BILINEAR' ,
-  Aeronet.fields:             include(aerSampler_vars.vl)
-                              include(cldSampler_vars.vl)
-                              include(asmSampler_vars.vl)
-::
-
-
-  SNDR_ATMS.observation_spec:  'Swath'
-  SNDR_ATMS.template:          '%y4%m2%d2_%h2%n2z.nc4',
-  SNDR_ATMS.format:            'CFIO',
-  SNDR_ATMS.frequency:         060000,
-  SNDR_ATMS.grid_label:        SwathGrid_ATMS,
-  SNDR_ATMS.regrid_method:     'BILINEAR' ,
-  SNDR_ATMS.fields:            include(crtmSampler_vars.vl)
-::
-
-  myd04.observation_spec:  'Swath'  
-  myd04.template:          '%y4%m2%d2_%h2%n2z.nc4',
-  myd04.format:            'CFIO',
-  myd04.frequency:         060000,               # should not be here
-  myd04.grid_label:        SwathGrid_MYD04,   
-  myd04.regrid_method:     'BILINEAR' ,   
-  myd04.fields:            include(aerSampler_vars.vl)
-                           include(cldSampler_vars.vl)
-                           include(asmSampler_vars.vl)
-::
-
-  mod04.observation_spec:  'Swath'
-  mod04.template:          '%y4%m2%d2_%h2%n2z.nc4',
-  mod04.format:            'CFIO',
-  mod04.frequency:         060000,
-  mod04.grid_label:        SwathGrid_MOD04,
-  mod04.regrid_method:     'BILINEAR' ,
-  mod04.fields:            include(aerSampler_vars.vl)
-                           include(cldSampler_vars.vl)
-                           include(asmSampler_vars.vl)
-::
-
-    #ams This design is not very consistent. We need to consistently separate
-    #    the geometry specification from te collection specification.
-    #    The airborne campaigns are ought to have their own geometry specification
-    #    as they are independent. 
-    
-  ACtraj.sampler_spec:       trajectory
-  ACtraj.ObsPlatforms:       CAMP2EX  FIREXAQ
-  ACtraj.template:           '%y4%m2%d2_%h2%n2z.nc4',
-  ACtraj.format:             'CFIO',
-  ACtraj.obs_file_begin:     2019-07-31T00:00:00
-  ACtraj.obs_file_interval:  '000001 000000'        #  fixed string format:  yymmdd hhmmss
-  ACtraj.obs_file_end:       2019-11-01T00:00:00
-  ACtraj.Epoch:              240000                 #  fixed integer format:  hhmmss
-  ACtraj.regrid_method:      'BILINEAR' ,
-  ACtraj.splitField: 1
-::           
 
 
   jedi.sampler_spec:         trajectory
@@ -516,6 +106,7 @@ tavg3d_aer_p.fields:          include(aer3Dp_vars.vl)
   jedi.regrid_method:        'BILINEAR' ,
   jedi.splitField:           1,
 ::
+
 
 include(jedi_29_collections.set)
 
@@ -547,39 +138,42 @@ include(jedi_29_collections.set)
     
 DEFINE_OBS_PLATFORM::
 
-PLATFORM.CAMP2EX::
-  IODA_SCHEMA::
-    index_name_x:     time
-    var_name_lon:     trjLon
-    var_name_lat:     trjLat
-    var_name_time:    time
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/CAMP2EX/sampled/P3B/GEOS-FP/%y4-%m2-%d2/CAMP2Ex-GEOS-FP-adg-Nx-P3B_Model_%y4%m2%d2_R1.nc
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
-                      include(aerSampler_vars.vl)
-                      include(cldSampler_vars.vl)
-                      include(asmSampler_vars.vl)
-    ::
-  ::
-::
+#PLATFORM.CAMP2EX::
+#  IODA_SCHEMA::
+#    index_name_x:     time
+#    var_name_lon:     trjLon
+#    var_name_lat:     trjLat
+#    var_name_time:    time
+#    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/CAMP2EX/sampled/P3B/GEOS-FP/%y4-%m2-%d2/CAMP2Ex-GEOS-FP-adg-Nx-P3B_Model_%y4%m2%d2_R1.nc
+#  ::
+#  GEOVALS_SCHEMA::
+#    geovals_fields::
+#                      include(aerSampler_vars.vl)
+#                      include(cldSampler_vars.vl)
+#                      include(asmSampler_vars.vl)
+#    ::
+#  ::
+#::
+#
+#PLATFORM.FIREXAQ::
+#  IODA_SCHEMA::
+#    index_name_x:       time
+#    var_name_lon:       trjLon
+#    var_name_lat:       trjLat
+#    var_name_time:      time
+#    file_name_template: /discover/nobackup/projects/gmao/aist-nr/data/FIREX-AQ/sampled/DC8/GEOS-FP/%y4-%m2-%d2/FIREXAQ-GEOS-FP-adg-Nx-DC8_Model_%y4%m2%d2_R1.nc
+#  ::
+#  GEOVALS_SCHEMA::
+#    geovals_fields::
+#                         include(aerSampler_vars.vl)
+#                         include(cldSampler_vars.vl)
+#                         include(asmSampler_vars.vl)
+#    ::
+#  ::
+#::
+#
+#
 
-PLATFORM.FIREXAQ::
-  IODA_SCHEMA::
-    index_name_x:       time
-    var_name_lon:       trjLon
-    var_name_lat:       trjLat
-    var_name_time:      time
-    file_name_template: /discover/nobackup/projects/gmao/aist-nr/data/FIREX-AQ/sampled/DC8/GEOS-FP/%y4-%m2-%d2/FIREXAQ-GEOS-FP-adg-Nx-DC8_Model_%y4%m2%d2_R1.nc
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
-                         include(aerSampler_vars.vl)
-                         include(cldSampler_vars.vl)
-                         include(asmSampler_vars.vl)
-    ::
-  ::
-::
 
 PLATFORM.airs_aqua::
   IODA_SCHEMA::
@@ -593,8 +187,12 @@ PLATFORM.airs_aqua::
     geovals_fields:: 
                          include(crtmSampler_vars.vl)
     ::
+  ::
 ::
 
+
+
+## pt3 
 PLATFORM.cris-fsr_n20::
   IODA_SCHEMA::
     index_name_x:        Location
@@ -606,6 +204,7 @@ PLATFORM.cris-fsr_n20::
   GEOVALS_SCHEMA::
     geovals_fields::
                          include(crtmSampler_vars.vl)
+    ::
   ::
 ::
 
@@ -620,7 +219,7 @@ PLATFORM.cris-fsr_npp::
   GEOVALS_SCHEMA::
     geovals_fields::
                          include(crtmSampler_vars.vl)
-
+    ::
   ::
 ::
 
@@ -635,6 +234,7 @@ PLATFORM.iasi_metop-b::
   GEOVALS_SCHEMA::
     geovals_fields::
                          include(crtmSampler_vars.vl)
+    ::
   ::
 ::
 
@@ -649,6 +249,7 @@ PLATFORM.amsua_aqua::
   GEOVALS_SCHEMA::
     geovals_fields::
                          include(crtmSampler_vars.vl)
+    ::
   ::
 ::
 
@@ -663,6 +264,7 @@ PLATFORM.amsua_metop-b::
   GEOVALS_SCHEMA::
     geovals_fields::
                          include(crtmSampler_vars.vl)
+    ::
   ::
 ::
 
@@ -677,6 +279,7 @@ PLATFORM.amsua_n15::
   GEOVALS_SCHEMA::
     geovals_fields::
                          include(crtmSampler_vars.vl)
+    ::
   ::
 ::
 
@@ -691,6 +294,7 @@ PLATFORM.amsua_n18::
   GEOVALS_SCHEMA::
     geovals_fields::
                          include(crtmSampler_vars.vl)
+    ::
   ::
 ::
 
@@ -705,6 +309,7 @@ PLATFORM.amsua_n19::
   GEOVALS_SCHEMA::
     geovals_fields::
                          include(crtmSampler_vars.vl)
+    ::
   ::
 ::
 
@@ -719,6 +324,7 @@ PLATFORM.amsr2_gcom-w1::
   GEOVALS_SCHEMA::
     geovals_fields::
                          include(crtmSampler_vars.vl)
+    ::
   ::
 ::
 
@@ -733,6 +339,7 @@ PLATFORM.atms_n20::
   GEOVALS_SCHEMA::
     geovals_fields::
                          include(crtmSampler_vars.vl)
+    ::
   ::
 ::
 
@@ -747,6 +354,7 @@ PLATFORM.atms_npp::
   GEOVALS_SCHEMA::
     geovals_fields::
                          include(crtmSampler_vars.vl)
+    ::
   ::
 ::
 
@@ -761,6 +369,7 @@ PLATFORM.avhrr3_metop-b::
   GEOVALS_SCHEMA::
     geovals_fields::
                          include(crtmSampler_vars.vl)
+    ::
   ::
 ::
 
@@ -775,6 +384,7 @@ PLATFORM.avhrr3_n18::
   GEOVALS_SCHEMA::
     geovals_fields::
                          include(crtmSampler_vars.vl)
+    ::
   ::
 ::
 
@@ -789,6 +399,7 @@ PLATFORM.avhrr3_n19::
   GEOVALS_SCHEMA::
     geovals_fields::
                          include(crtmSampler_vars.vl)
+    ::
   ::
 ::
 
@@ -803,6 +414,7 @@ PLATFORM.gmi_gpm::
   GEOVALS_SCHEMA::
     geovals_fields::
                          include(crtmSampler_vars.vl)
+    ::
   ::
 ::
 
@@ -817,6 +429,7 @@ PLATFORM.mhs_metop-b::
   GEOVALS_SCHEMA::
     geovals_fields::
                          include(crtmSampler_vars.vl)
+    ::
   ::
 ::
 
@@ -831,6 +444,7 @@ PLATFORM.mhs_n19::
   GEOVALS_SCHEMA::
     geovals_fields::
                          include(crtmSampler_vars.vl)
+    ::
   ::
 ::
 
@@ -845,6 +459,7 @@ PLATFORM.ssmis_f17::
   GEOVALS_SCHEMA::
     geovals_fields::
                          include(crtmSampler_vars.vl)
+    ::
   ::
 ::
 
@@ -859,6 +474,7 @@ PLATFORM.mls55_aura::
   GEOVALS_SCHEMA::
     geovals_fields::
                          include(crtmSampler_vars.vl)
+    ::
   ::
 ::
 
@@ -873,6 +489,7 @@ PLATFORM.aircraft::
   GEOVALS_SCHEMA::
     geovals_fields::
                          include(crtmSampler_vars.vl)
+    ::
   ::
 ::
 
@@ -887,6 +504,7 @@ PLATFORM.gps::
   GEOVALS_SCHEMA::
     geovals_fields::
                          include(crtmSampler_vars.vl)
+    ::
   ::
 ::
 
@@ -901,6 +519,7 @@ PLATFORM.omi_aura::
   GEOVALS_SCHEMA::
     geovals_fields::
                          include(crtmSampler_vars.vl)
+    ::
   ::
 ::
 
@@ -915,6 +534,7 @@ PLATFORM.ompsnm_npp::
   GEOVALS_SCHEMA::
     geovals_fields::
                          include(crtmSampler_vars.vl)
+    ::
   ::
 ::
 
@@ -929,6 +549,7 @@ PLATFORM.satwind::
   GEOVALS_SCHEMA::
     geovals_fields::
                          include(crtmSampler_vars.vl)
+    ::
   ::
 ::
 
@@ -943,6 +564,7 @@ PLATFORM.scatwind::
   GEOVALS_SCHEMA::
     geovals_fields::
                          include(crtmSampler_vars.vl)
+    ::
   ::
 ::
 
@@ -957,6 +579,7 @@ PLATFORM.sfc::
   GEOVALS_SCHEMA::
     geovals_fields::
                          include(crtmSampler_vars.vl)
+    ::
   ::
 ::
 
@@ -971,6 +594,7 @@ PLATFORM.sfcship::
   GEOVALS_SCHEMA::
     geovals_fields::
                          include(crtmSampler_vars.vl)
+    ::
   ::
 ::
 
@@ -985,6 +609,7 @@ PLATFORM.sondes::
   GEOVALS_SCHEMA::
     geovals_fields::
                          include(crtmSampler_vars.vl)
+    ::
   ::
 ::
 
