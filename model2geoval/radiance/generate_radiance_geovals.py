@@ -305,36 +305,38 @@ def generate_radiance_geovals(sensor, year, month, day, analtime):
     latitudes = nr_ds['latitude'].values
     longitudes = nr_ds['longitude'].values
 
-    # Use vectorized operations for constraints and mappings
-    vegetation_type_index = np.clip(vegetation_type_index, 1.0, 20.0)
-    soil_type = np.clip(soil_type, 1.0, 16.0)
-
-    # Create the mapping for vegetation types and soil types efficiently
-    mapped_vegetation = np.array([igbp_to_gfs[int(vg) - 1] for vg in vegetation_type_index])
-    mapped_soil = np.array([map_soil_to_crtm[int(s) - 1] for s in soil_type])
+#    # Use vectorized operations for constraints and mappings
+#    vegetation_type_index = np.clip(vegetation_type_index, 1.0, 20.0)
+#    soil_type = np.clip(soil_type, 1.0, 16.0)
+#    print(np.min(vegetation_type_index),np.max(vegetation_type_index))
+#    print(np.min(soil_type),np.max(soil_type))
+#
+#    # Create the mapping for vegetation types and soil types efficiently
+#    mapped_vegetation = np.array([igbp_to_gfs[int(vg) - 1] for vg in vegetation_type_index])
+#    mapped_soil = np.array([map_soil_to_crtm[int(s) - 1] for s in soil_type])
 
     # Loop over each location
     for i in range(nlocs):
        target_point = (latitudes[i], longitudes[i])
+       nearest_point_idx = find_nearest_point(target_point, point_list)
 
-       # Look up the index directly using the dictionary
-       nearest_point_idx = point_list_dict.get(target_point, None)
+       land_type_index_NPOESS[i] = stype_point_array[point_list.index(nearest_point_idx)][2]
+       soil_type[i] = stype_point_array[point_list.index(nearest_point_idx)][2]
+       vegetation_type_index[i] = vtype_point_array[point_list.index(nearest_point_idx)][2]
+       vegetation_area_fraction[i] = vfrac_point_array[point_list.index(nearest_point_idx)][2]
 
-       if nearest_point_idx is not None:
-          # Efficiently get the corresponding values from the point lists
-          land_type_index_NPOESS[i] = stype_point_list[nearest_point_idx][2]
-          soil_type[i] = stype_point_list[nearest_point_idx][2]
-          vegetation_type_index[i] = vtype_point_list[nearest_point_idx][2]
-          vegetation_area_fraction[i] = vfrac_point_list[nearest_point_idx][2]
+       vegetation_type_index[i] = max(1.0, min(vegetation_type_index[i], 20.0))
+       soil_type[i] = max(1.0, min(soil_type[i], 16.0))
 
-          # Apply the mapping to vegetation and soil type indices
-          vegetation_type_index[i] = mapped_vegetation[i]
-          land_type_index_NPOESS[i] = mapped_vegetation[i]
-          soil_type[i] = mapped_soil[i]
+       # Apply the mapping to vegetation and soil type indices
+       vegetation_type_index[i] = igbp_to_gfs[int(vegetation_type_index[i])-1]
+       land_type_index_NPOESS[i] = igbp_to_gfs[int(vegetation_type_index[i])-1] 
+       soil_type[i] = map_soil_to_crtm[int(soil_type[i])-1] 
 
-        # Compute leaf area index (LAI) using day_of_year_value and vegetation type
-          lai = get_lai(day_of_year_value, latitudes[i], int(vegetation_type_index[i]))
-          leaf_area_index[i] = lai
+       # Compute leaf area index (LAI) using day_of_year_value and vegetation type
+       lai = get_lai(day_of_year_value, latitudes[i], int(vegetation_type_index[i]))
+       leaf_area_index[i] = lai
+       print(i,leaf_area_index[i])
 
     # Fill geoval_ds with the computed values
     geoval_ds['land_type_index_NPOESS'][:] = land_type_index_NPOESS[:]
