@@ -305,16 +305,6 @@ def generate_radiance_geovals(sensor, year, month, day, analtime):
     latitudes = nr_ds['latitude'].values
     longitudes = nr_ds['longitude'].values
 
-#    # Use vectorized operations for constraints and mappings
-#    vegetation_type_index = np.clip(vegetation_type_index, 1.0, 20.0)
-#    soil_type = np.clip(soil_type, 1.0, 16.0)
-#    print(np.min(vegetation_type_index),np.max(vegetation_type_index))
-#    print(np.min(soil_type),np.max(soil_type))
-#
-#    # Create the mapping for vegetation types and soil types efficiently
-#    mapped_vegetation = np.array([igbp_to_gfs[int(vg) - 1] for vg in vegetation_type_index])
-#    mapped_soil = np.array([map_soil_to_crtm[int(s) - 1] for s in soil_type])
-
     # Loop over each location
     for i in range(nlocs):
        target_point = (latitudes[i], longitudes[i])
@@ -336,7 +326,6 @@ def generate_radiance_geovals(sensor, year, month, day, analtime):
        # Compute leaf area index (LAI) using day_of_year_value and vegetation type
        lai = get_lai(day_of_year_value, latitudes[i], int(vegetation_type_index[i]))
        leaf_area_index[i] = lai
-       print(i,leaf_area_index[i])
 
     # Fill geoval_ds with the computed values
     geoval_ds['land_type_index_NPOESS'][:] = land_type_index_NPOESS[:]
@@ -376,19 +365,18 @@ def generate_radiance_geovals(sensor, year, month, day, analtime):
     geoval_ds['mole_fraction_of_carbon_dioxide_in_air'][:] = 410.0  # Temporary value
 
 
-    # Initialize the first pressure level (top of atmosphere) at 0.5 Pa (temporary assignment)
-    geoval_ds['air_pressure_levels'][:, 0] = 0.5  # Unit: Pa (temp assignment)
+    # Initialize the first pressure level (top of atmosphere) at 0.5 Pa
+    geoval_ds['air_pressure_levels'][:, 0] = 0.5  # Unit: Pa 
    
     cumulative_delp = np.cumsum(np.vstack([np.zeros((1, nlocs)), nr_ds['delp']]), axis=0)
-    geoval_ds['air_pressure_levels'][:,:] = cumulative_delp[:].T + geoval_ds['air_pressure_levels'][:, 0:1].values
+    geoval_ds['air_pressure_levels'][:,:] = cumulative_delp[:,:].T + geoval_ds['air_pressure_levels'][:, 0:1].values
     geoval_ds['air_pressure_levels'][:,nlevsp1-1] = nr_ds['ps'][:]  # Unit: Pa
 
-#    for k in range(nlevs):
-#      # Calculate the average air pressure between levels k and k+1
-#      geoval_ds['air_pressure'][:, k] = 0.5 * (geoval_ds['air_pressure_levels'][:, k] + geoval_ds['air_pressure_levels'][:, k+1])
-    geoval_ds['air_pressure'][:, :-1] = 0.5 * (geoval_ds['air_pressure_levels'][:, :-1] + geoval_ds['air_pressure_levels'][:, 1:])
+#    geoval_ds['air_pressure'][:,:nlevs]  =  \
+#             (geoval_ds['air_pressure_levels'][:, :nlevs] + geoval_ds['air_pressure_levels'][:, 1:nlevs+1]) * 0.5
 
-  
+    for k in range(nlevs):
+        geoval_ds['air_pressure'][:, k] = (geoval_ds['air_pressure_levels'][:, k] + geoval_ds['air_pressure_levels'][:, k + 1]) * 0.5  
 #Finally,
     # Save the new dataset to a new jedi geoval file
     print(f"Saving the new JEDI geoval file to {outfilename}") 
