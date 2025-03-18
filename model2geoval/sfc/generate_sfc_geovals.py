@@ -27,14 +27,17 @@ def generate_sfc_geovals(sensor, year, month, day, analtime, analtimep3):
     nrdirectory = '/discover/nobackup/projects/gmao/aist-nr/yyu11/run_geos_su17/c180_L137_test_sampler/scratch.jedi.works/'
     infilename = f"{nrdirectory}{sensor}.AIST_c180_L137.jedi.{year}{month_str}{day_str}_{analtime}00z.nc4"
     outfilename = f"{sensor}_geovals.{year}{month_str}{day_str}T{analtime}0000Z.nc4"
+    iodadirectory = f"/discover/nobackup/projects/gmao/aist-nr/data/ioda/{year}{month_str}{day_str}T{analtimep3}0000Z/geos_atmosphere/"
+    iodafilename = f"{iodadirectory}{sensor}.{year}{month_str}{day_str}T{analtime}0000Z.nc4"
 
     # Print input and output filenames
     print(f"Input file: {infilename}")
     print(f"Output file: {outfilename}")
-
+    print(f"IODA file: {iodafilename}")
 
 #========================================================================
-# 1. Use xarray to read the NR netCDF file
+# 1a. Use xarray to read the NR netCDF file
+    # ---------------------------
     try:
        nr_ds = xr.open_dataset(infilename)
     except FileNotFoundError:
@@ -66,6 +69,17 @@ def generate_sfc_geovals(sensor, year, month, day, analtime, analtimep3):
 
     # Close the dataset after processing
     nr_ds.close()
+
+# 1b. Read the sample ioda file 
+    # ---------------------------
+    try:
+       ioda_ds = xr.open_dataset(iodafilename, group='MetaData')
+    except FileNotFoundError:
+       print(f"Error: The file {iodafilename} does not exist.")
+       return
+    ioda_lat = ioda_ds['latitude'].values
+    ioda_lon = ioda_ds['longitude'].values
+    ioda_satidentifier = ioda_ds['satelliteIdentifier'].values
 
 # 2. 
     # Create NR jedi-geovals of which each variables will be filled with values later.
@@ -135,6 +149,11 @@ def generate_sfc_geovals(sensor, year, month, day, analtime, analtimep3):
     day_of_year_value = day_of_year(yy, mm, dd)
     print("Day of the year:", day_of_year_value)
 
+    # station index info
+    #---------------------------
+    for i in range(nlocs):
+       geoval_ds['dup_kx_vector'][i,:] = ioda_satidentifier[i]
+
 #4  Surface variables
     eps = 0.621837  # eps = rd/rv = 287.04/461.6
     omeps = 0.3781629 # omeps = 1 - eps
@@ -157,6 +176,9 @@ def generate_sfc_geovals(sensor, year, month, day, analtime, analtimep3):
     geoval_ds['surface_pressure'][:] = nr_ds['ps']
     geoval_ds['surface_roughness'][:] = nr_ds['Z0M']
     geoval_ds['surface_temperature'][:] = nr_ds['T2M']
+    geoval_ds['wind_reduction_factor_at_10m'].values[:] = 1.0
+
+
 
     # For surface level saturation vapor pressure and specific humidity
     surface_saturation_vapor_pressure = 0.01 * 611.2 * np.exp( 17.67 * (geoval_ds['surface_temperature'] - 273.15) / 
@@ -179,7 +201,7 @@ def generate_sfc_geovals(sensor, year, month, day, analtime, analtimep3):
     geoval_ds['air_pressure_levels'][:,:] = cumulative_delp[:,:].T + geoval_ds['air_pressure_levels'][:, 0:1].values
     geoval_ds['air_pressure_levels'][:,ninterfaces-1] = nr_ds['ps'][:]  # Unit: Pa
     for k in range(nlevs):
-        geoval_ds['air_pressure'][:, k] = (geoval_ds['air_pressure_levels'][:, k] + geoval_ds['air_pressure_levels'][:, k + 1]) * 0.5   
+        geoval_ds['air_pressure'][:, k] = (geoval_ds['air_pressure_levels'][:, k] + geoval_ds['air_pressure_levels'][:, k + 1]) * 0.5
 
     # Compute the saturation vapor pressure for all levels and locations
     saturation_vapor_pressure = 0.01 * 611.2 * np.exp( 17.67 * (geoval_ds['air_temperature'] - 273.15) / 
@@ -187,11 +209,7 @@ def generate_sfc_geovals(sensor, year, month, day, analtime, analtimep3):
     # Compute the saturation specific humidity for all levels and locations
     geoval_ds['saturation_specific_humidity'][:] = eps * saturation_vapor_pressure / (geoval_ds['air_pressure'] \
                                                  - omeps * saturation_vapor_pressure)
-
-    print(geoval_ds['air_pressure'][0,0])
     # Reverse all the relevant variables 
-
-      
     geoval_ds['virtual_temperature'].values[:,:] = geoval_ds['virtual_temperature'].values[:,::-1]
     geoval_ds['air_temperature'].values[:,:] = geoval_ds['air_temperature'].values[:,::-1]
     geoval_ds['air_pressure'].values[:,:] = geoval_ds['air_pressure'].values[:,::-1]
@@ -206,7 +224,9 @@ def generate_sfc_geovals(sensor, year, month, day, analtime, analtimep3):
     virtual_temp = geoval_ds['virtual_temperature'].values
     air_pressure_levels = geoval_ds['air_pressure_levels'].values
     air_pressure = geoval_ds['air_pressure'].values
-    geoval_ds['geopotential_height'][:,0] = 29.3 * virtual_temp[:,0] * np.log(air_pressure_levels[:,0] / air_pressure[:,0])
+    geoval_ds['geopotential_height'][:,0] = 29.3 * virtual_temp[:,0] * np.log(air_pressure_levels[:,0] / air_pressure[:,0]) \
+                                              + nr_ds['phis'] / constants.g
+
 
     for k in range(1,nlevs):
        geoval_ds['geopotential_height'][:, k] = geoval_ds['geopotential_height'][:, k-1] \
