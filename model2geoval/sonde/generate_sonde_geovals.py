@@ -157,6 +157,9 @@ def generate_sonde_geovals(sensor, year, month, day, analtime, analtimep3):
     geoval_ds['surface_pressure'][:] = nr_ds['ps']
     geoval_ds['surface_roughness'][:] = nr_ds['Z0M']
     geoval_ds['surface_temperature'][:] = nr_ds['T2M']
+    geoval_ds['wind_reduction_factor_at_10m'].values[:] = 1.0
+
+
 
     # For surface level saturation vapor pressure and specific humidity
     surface_saturation_vapor_pressure = 0.01 * 611.2 * np.exp( 17.67 * (geoval_ds['surface_temperature'] - 273.15) / 
@@ -179,7 +182,7 @@ def generate_sonde_geovals(sensor, year, month, day, analtime, analtimep3):
     geoval_ds['air_pressure_levels'][:,:] = cumulative_delp[:,:].T + geoval_ds['air_pressure_levels'][:, 0:1].values
     geoval_ds['air_pressure_levels'][:,ninterfaces-1] = nr_ds['ps'][:]  # Unit: Pa
     for k in range(nlevs):
-        geoval_ds['air_pressure'][:, k] = (geoval_ds['air_pressure_levels'][:, k] + geoval_ds['air_pressure_levels'][:, k + 1]) * 0.5   
+        geoval_ds['air_pressure'][:, k] = (geoval_ds['air_pressure_levels'][:, k] + geoval_ds['air_pressure_levels'][:, k + 1]) * 0.5
 
     # Compute the saturation vapor pressure for all levels and locations
     saturation_vapor_pressure = 0.01 * 611.2 * np.exp( 17.67 * (geoval_ds['air_temperature'] - 273.15) / 
@@ -206,7 +209,9 @@ def generate_sonde_geovals(sensor, year, month, day, analtime, analtimep3):
     virtual_temp = geoval_ds['virtual_temperature'].values
     air_pressure_levels = geoval_ds['air_pressure_levels'].values
     air_pressure = geoval_ds['air_pressure'].values
-    geoval_ds['geopotential_height'][:,0] = 29.3 * virtual_temp[:,0] * np.log(air_pressure_levels[:,0] / air_pressure[:,0])
+    geoval_ds['geopotential_height'][:,0] = 29.3 * virtual_temp[:,0] * np.log(air_pressure_levels[:,0] / air_pressure[:,0]) \
+                                              + nr_ds['phis'] / constants.g
+
 
     for k in range(1,nlevs):
        geoval_ds['geopotential_height'][:, k] = geoval_ds['geopotential_height'][:, k-1] \
