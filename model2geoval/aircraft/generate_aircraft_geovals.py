@@ -27,14 +27,16 @@ def generate_aircraft_geovals(sensor, year, month, day, analtime, analtimep3):
     nrdirectory = '/discover/nobackup/projects/gmao/aist-nr/yyu11/run_geos_su17/c180_L137_test_sampler/scratch.jedi.works/'
     infilename = f"{nrdirectory}{sensor}.AIST_c180_L137.jedi.{year}{month_str}{day_str}_{analtime}00z.nc4"
     outfilename = f"{sensor}_geovals.{year}{month_str}{day_str}T{analtime}0000Z.nc4"
+    iodadirectory = f"/discover/nobackup/projects/gmao/aist-nr/data/ioda/{year}{month_str}{day_str}T{analtimep3}0000Z/geos_atmosphere/"
+    iodafilename = f"{iodadirectory}{sensor}.{year}{month_str}{day_str}T{analtime}0000Z.nc4"
 
     # Print input and output filenames
     print(f"Input file: {infilename}")
     print(f"Output file: {outfilename}")
-
+    print(f"IODA file: {iodafilename}")
 
 #========================================================================
-# 1. Use xarray to read the NR netCDF file
+# 1a. Use xarray to read the NR netCDF file
     try:
        nr_ds = xr.open_dataset(infilename)
     except FileNotFoundError:
@@ -66,6 +68,17 @@ def generate_aircraft_geovals(sensor, year, month, day, analtime, analtimep3):
 
     # Close the dataset after processing
     nr_ds.close()
+
+# 1b. Read the sample ioda file 
+    # ---------------------------
+    try:
+       ioda_ds = xr.open_dataset(iodafilename, group='MetaData')
+    except FileNotFoundError:
+       print(f"Error: The file {iodafilename} does not exist.")
+       return
+    ioda_lat = ioda_ds['latitude'].values
+    ioda_lon = ioda_ds['longitude'].values
+    ioda_satidentifier = ioda_ds['satelliteIdentifier'].values
 
 # 2. 
     # Create NR jedi-geovals of which each variables will be filled with values later.
@@ -134,9 +147,12 @@ def generate_aircraft_geovals(sensor, year, month, day, analtime, analtimep3):
     day_of_year_value = day_of_year(yy, mm, dd)
     print("Day of the year:", day_of_year_value)
 
+    # station index info
+    #---------------------------
+    for i in range(nlocs):
+       geoval_ds['dup_kx_vector'][i,:] = ioda_satidentifier[i]
+
 #4  Surface variables
-    eps = 0.621837  # eps = rd/rv = 287.04/461.6
-    omeps = 0.3781629 # omeps = 1 - eps
 
     # Surface index  
     geoval_ds['land_area_fraction'][:] = nr_ds['frland'].values
