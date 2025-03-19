@@ -43,6 +43,43 @@ ecbuild_declare_project()
 esma_mepo_style(env env_dir)
 esma_add_subdirectory (${env_dir})
 
+# A code in the src tree tries to download a file
+# at CMake time. This is antithetical to the idea of
+# being able to build on a compute node. If we are on
+# a node with no internet, we need to be able to build.
+
+set(CRTM_COEFFICIENTS_DIR /discover/nobackup/projects/gmao/advda/SwellStaticFiles/jedi/crtm_coefficients/2.4.1_skylab_4.0)
+
+if(EXISTS ${CRTM_COEFFICIENTS_DIR})
+  message(STATUS "Found CRTM coefficients at ${CRTM_COEFFICIENTS_DIR}. We will symlink in the data files.")
+  # first create a directory called 'test-data-release' in the *source* tree
+  file(MAKE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/test-data-release/crtm)
+  # then symlink the data files into that directory
+  file(CREATE_LINK
+    ${CRTM_COEFFICIENTS_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/test-data-release/crtm/2.4.1_skylab_4.0
+    SYMBOLIC
+    )
+
+  # first create a directory called 'test-data-release' in the *source* tree
+  file(MAKE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/src/@ufo/test-data-release/crtm)
+  # then symlink the data files into that directory
+  file(CREATE_LINK
+    ${CRTM_COEFFICIENTS_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/@ufo/test-data-release/crtm/2.4.1_skylab_4.0
+    SYMBOLIC
+    )
+else()
+  message(STATUS "No CRTM coefficients found at ${CRTM_COEFFICIENTS_DIR}. Make sure you are on a node with internet access.")
+  execute_process(
+    COMMAND ping www.nasa.gov -c 4
+    RESULT_VARIABLE NO_CONNECTION
+    )
+  if(NO_CONNECTION GREATER 0)
+    message(FATAL_ERROR "No internet connection detected. Please run on a node with internet access or set CRTM_COEFFICIENTS_DIR to a directory with the CRTM coefficients.")
+  endif()
+endif()
+
 # Recursively build source tree
 esma_add_subdirectory (src)
 

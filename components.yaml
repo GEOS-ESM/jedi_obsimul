@@ -36,12 +36,18 @@ GMAOpyobs:
 
 jedi-cmake:
   local: ./@jedi-cmake
-  remote: https://github.com/JCSDA/oops
+  remote: https://github.com/JCSDA/jedi-cmake
   branch: develop
+  recurse_submodules: true
 
 oops:
   local: ./src/@oops
   remote: https://github.com/JCSDA/oops
+  branch: develop
+
+ioda-data:
+  local: ./data/ioda-data
+  remote: https://github.com/JCSDA-internal/ioda-data
   branch: develop
 
 ioda:
@@ -51,13 +57,8 @@ ioda:
 
 ioda-converters:
   local: ./src/@ioda-converters
-  remote: https://github.com/JCSDA/ioda-converters
-  branch: develop
-
-#ioda-data:
-#  local: ./data/ioda-data
-#  remote: https://github.com/JCSDA-internal/ioda-data
-#  branch: develop
+  remote: https://github.com/mathomp4/ioda-converters
+  branch: feature/mepo-support
 
 # Per Doruk for ufo
 # optional_repos:
@@ -86,13 +87,13 @@ crtm:
 
 ufo:
   local: ./src/@ufo
-  remote: https://github.com/JCSDA/ufo
-  branch: develop
+  remote: https://github.com/mathomp4/ufo
+  branch: feature/mepo-support
 
-#ufo-data:
-#  local: ./data/ufo-data
-#  remote: https://github.com/JCSDA-internal/ufo-data
-#  branch: develop
+ufo-data:
+  local: ./data/ufo-data
+  remote: https://github.com/JCSDA-internal/ufo-data
+  branch: develop
 
 
 
