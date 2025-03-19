@@ -18,5 +18,6 @@ log.*
 CMakeUserPresets.json
 [._]*.s[a-v][a-z]
 [._]*.sw[a-p]
+.DS_Store
 
 test-data-release

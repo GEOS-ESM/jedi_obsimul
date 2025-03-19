@@ -1,0 +1,11 @@
+#
+# gwd_vars.vl - Gravity Wave Drag variables.
+#
+          'DUDT_ORO;DVDT_ORO'  , 'GWD'  , 'DUDTORO;DVDTORO' ,
+          'DUDT_BKG;DVDT_BKG'  , 'GWD'  , 'DUDTBKG;DVDTBKG' ,
+          'DUDT_RAY;DVDT_RAY'  , 'GWD'  , 'DUDTRAY;DVDTRAY' ,
+          'TAUOROX;TAUOROY'    , 'GWD'  ,
+          'TAUBKGX;TAUBKGY'    , 'GWD'  ,
+          'DTDT_ORO'           , 'GWD'  , 'DTDTORO'  ,
+          'DTDT_BKG'           , 'GWD'  , 'DTDTBKG'  ,
+          'DTDT_RAY'           , 'GWD'  , 'DTDTRAY'  ,
