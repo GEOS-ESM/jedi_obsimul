@@ -101,7 +101,7 @@ def generate_sonde_geovals(sensor, year, month, day, analtime, analtimep3):
     geoval_ds['land_area_fraction'] = xr.DataArray(np.zeros(nlocs), dims=['nlocs'])
     geoval_ds['surface_geometric_height'] = xr.DataArray(np.zeros(nlocs), dims=['nlocs'])
     geoval_ds['surface_geopotential_height'] = xr.DataArray(np.zeros(nlocs), dims=['nlocs'])
-    geoval_ds['surface_pressure'] = xr.DataArray(np.zeros(nlocs), dims=['nlocs'])
+    geoval_ds['air_pressure_at_surface'] = xr.DataArray(np.zeros(nlocs), dims=['nlocs'])
     geoval_ds['surface_roughness'] = xr.DataArray(np.zeros(nlocs), dims=['nlocs'])
     geoval_ds['surface_temperature'] = xr.DataArray(np.zeros(nlocs), dims=['nlocs'])
     geoval_ds['surface_saturation_specific_humidity'] = xr.DataArray(np.zeros(nlocs), dims=['nlocs'])
@@ -116,6 +116,7 @@ def generate_sonde_geovals(sensor, year, month, day, analtime, analtimep3):
     geoval_ds['geopotential_height'] = xr.DataArray(np.zeros((nlocs, nlevs)), dims=['nlocs', 'nlevs'])
     geoval_ds['northward_wind'] = xr.DataArray(np.zeros((nlocs, nlevs)), dims=['nlocs', 'nlevs'])
     geoval_ds['specific_humidity'] = xr.DataArray(np.zeros((nlocs, nlevs)), dims=['nlocs', 'nlevs'])
+    geoval_ds['water_vapor_mixing_ratio_wrt_moist_air'] = xr.DataArray(np.zeros((nlocs, nlevs)), dims=['nlocs', 'nlevs'])
     geoval_ds['virtual_temperature'] = xr.DataArray(np.zeros((nlocs, nlevs)), dims=['nlocs', 'nlevs'])
     geoval_ds['saturation_specific_humidity'] = xr.DataArray(np.zeros((nlocs, nlevs)), dims=['nlocs', 'nlevs'])
     geoval_ds['geometric_height'] = xr.DataArray(np.zeros((nlocs, nlevs)), dims=['nlocs', 'nlevs'])
@@ -173,7 +174,7 @@ def generate_sonde_geovals(sensor, year, month, day, analtime, analtimep3):
                                             / (6371000.0 - geoval_ds['surface_geopotential_height'])
      
     # Assign values directly for surface pressure, roughness, and temperature
-    geoval_ds['surface_pressure'][:] = nr_ds['ps']
+    geoval_ds['air_pressure_at_surface'][:] = nr_ds['ps']
     geoval_ds['surface_roughness'][:] = nr_ds['Z0M']
     geoval_ds['surface_temperature'][:] = nr_ds['T2M']
     geoval_ds['wind_reduction_factor_at_10m'].values[:] = 1.0
@@ -184,7 +185,9 @@ def generate_sonde_geovals(sensor, year, month, day, analtime, analtimep3):
     surface_saturation_vapor_pressure = 0.01 * 611.2 * np.exp( 17.67 * (geoval_ds['surface_temperature'] - 273.15) / 
                                                                (geoval_ds['surface_temperature'] - 273.15 + 243.5))
     geoval_ds['surface_saturation_specific_humidity'][:] = eps * surface_saturation_vapor_pressure \
-                       / (geoval_ds['surface_pressure'] - omeps * surface_saturation_vapor_pressure)
+                       / (geoval_ds['air_pressure_at_surface'] - omeps * surface_saturation_vapor_pressure)
+    geoval_ds['water_vapor_mixing_ratio_wrt_moist_air'][:] = 1000.0 * nr_ds['sphu'][:].T / (1.0 - nr_ds['sphu'][:].T)
+
 
 #5 2D variables
 
