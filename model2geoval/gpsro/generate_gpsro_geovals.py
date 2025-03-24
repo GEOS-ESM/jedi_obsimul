@@ -86,12 +86,13 @@ def generate_gpsro_geovals(sensor, year, month, day, analtime, analtimep3):
     
     geoval_ds['surface_geometric_height'] = xr.DataArray(np.zeros(nlocs), dims=['nlocs'])
     geoval_ds['surface_geopotential_height'] = xr.DataArray(np.zeros(nlocs), dims=['nlocs'])
-    geoval_ds['surface_altitude'] = xr.DataArray(np.zeros(nlocs), dims=['nlocs'])
+    geoval_ds['height_above_mean_sea_level_at_surface'] = xr.DataArray(np.zeros(nlocs), dims=['nlocs'])
 
     # For 2D variables (e.g., air_temperature, air_pressure), we need to specify both nlocs and nlevs/ninterfaces
     geoval_ds['air_temperature'] = xr.DataArray(np.zeros((nlocs, nlevs)), dims=['nlocs', 'nlevs'])
     geoval_ds['virtual_temperature'] = xr.DataArray(np.zeros((nlocs, nlevs)), dims=['nlocs', 'nlevs'])
     geoval_ds['specific_humidity'] = xr.DataArray(np.zeros((nlocs, nlevs)), dims=['nlocs', 'nlevs'])
+    geoval_ds['water_vapor_mixing_ratio_wrt_moist_air'] = xr.DataArray(np.zeros((nlocs, nlevs)), dims=['nlocs', 'nlevs'])
     geoval_ds['geopotential_height'] = xr.DataArray(np.zeros((nlocs, nlevs)), dims=['nlocs', 'nlevs'])
     geoval_ds['geopotential_height_levels'] = xr.DataArray(np.zeros((nlocs, ninterfaces)), dims=['nlocs', 'ninterfaces'])
     geoval_ds['air_pressure'] = xr.DataArray(np.zeros((nlocs, nlevs)), dims=['nlocs', 'nlevs'])
@@ -130,7 +131,7 @@ def generate_gpsro_geovals(sensor, year, month, day, analtime, analtimep3):
 #4  Height info 
     # Compute surface_geopotential_height and surface_geometric_height
     geoval_ds['surface_geopotential_height'][:] = nr_ds['phis'] / constants.g
-    geoval_ds['surface_altitude'][:] = nr_ds['phis'] / constants.g
+    geoval_ds['height_above_mean_sea_level_at_surface'][:] = nr_ds['phis'] / constants.g
     geoval_ds['surface_geometric_height'][:] = geoval_ds['surface_geopotential_height'] * 6371000.0 \
                                             / (6371000.0 - geoval_ds['surface_geopotential_height'])
 
@@ -143,7 +144,9 @@ def generate_gpsro_geovals(sensor, year, month, day, analtime, analtimep3):
     geoval_ds['air_temperature'][:] = (nr_ds['tv'][:] / (1.0 + 0.60773 * nr_ds['sphu'][:])).T
     geoval_ds['virtual_temperature'][:] = nr_ds['tv'][:].T
     geoval_ds['specific_humidity'][:] = nr_ds['sphu'][:].T
-    
+    geoval_ds['water_vapor_mixing_ratio_wrt_moist_air'][:] = 1000.0 * nr_ds['sphu'][:].T / (1.0 - nr_ds['sphu'][:].T) 
+   
+ 
     # Initialize the first pressure level (top of atmosphere) at 0.5 Pa
     geoval_ds['air_pressure_levels'][:, 0] = 0.5  # Unit: Pa 
     cumulative_delp = np.cumsum(np.vstack([np.zeros((1, nlocs)), nr_ds['delp']]), axis=0)
@@ -165,8 +168,8 @@ def generate_gpsro_geovals(sensor, year, month, day, analtime, analtimep3):
     virtual_temp = geoval_ds['virtual_temperature'].values
     air_pressure_levels = geoval_ds['air_pressure_levels'].values
     air_pressure = geoval_ds['air_pressure'].values
-    geoval_ds['geopotential_height'][:,0] = 29.3 * virtual_temp[:,0] * np.log(air_pressure_levels[:,0] / air_pressure[:,0]) + geoval_ds['surface_altitude'][:] 
-    geoval_ds['geopotential_height_levels'][:,0] = geoval_ds['surface_altitude'][:]
+    geoval_ds['geopotential_height'][:,0] = 29.3 * virtual_temp[:,0] * np.log(air_pressure_levels[:,0] / air_pressure[:,0]) + geoval_ds['height_above_mean_sea_level_at_surface'][:] 
+    geoval_ds['geopotential_height_levels'][:,0] = geoval_ds['height_above_mean_sea_level_at_surface'][:]
 
     for k in range(nlevs):
        geoval_ds['geopotential_height_levels'][:, k+1] = geoval_ds['geopotential_height_levels'][:, k] \
