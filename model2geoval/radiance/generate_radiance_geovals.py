@@ -151,6 +151,12 @@ def generate_radiance_geovals(sensor, year, month, day, analtime):
     geoval_ds['surface_temperature_where_land'] = xr.DataArray(np.zeros(nlocs), dims=['nlocs'])
     geoval_ds['surface_temperature_where_ice'] = xr.DataArray(np.zeros(nlocs), dims=['nlocs'])
     geoval_ds['surface_temperature_where_snow'] = xr.DataArray(np.zeros(nlocs), dims=['nlocs'])
+    geoval_ds['skin_temperature_at_surface_where_sea'] = xr.DataArray(np.zeros(nlocs), dims=['nlocs'])
+    geoval_ds['skin_temperature_at_surface_where_land'] = xr.DataArray(np.zeros(nlocs), dims=['nlocs'])
+    geoval_ds['skin_temperature_at_surface_where_ice'] = xr.DataArray(np.zeros(nlocs), dims=['nlocs'])
+    geoval_ds['skin_temperature_at_surface_where_snow'] = xr.DataArray(np.zeros(nlocs), dims=['nlocs'])
+    geoval_ds['skin_temperature_at_surface'] = xr.DataArray(np.zeros(nlocs), dims=['nlocs'])
+
     geoval_ds['soil_temperature'] = xr.DataArray(np.zeros(nlocs), dims=['nlocs'])
     geoval_ds['volume_fraction_of_condensed_water_in_soil'] = xr.DataArray(np.zeros(nlocs), dims=['nlocs'])
     geoval_ds['land_type_index_NPOESS'] = xr.DataArray(np.zeros(nlocs, dtype=int), dims=['nlocs'])
@@ -158,6 +164,8 @@ def generate_radiance_geovals(sensor, year, month, day, analtime):
     geoval_ds['vegetation_area_fraction'] = xr.DataArray(np.zeros(nlocs), dims=['nlocs'])
     geoval_ds['surface_snow_thickness'] = xr.DataArray(np.zeros(nlocs), dims=['nlocs'])
     geoval_ds['surface_wind_speed'] = xr.DataArray(np.zeros(nlocs), dims=['nlocs'])
+    geoval_ds['wind_speed_at_surface'] = xr.DataArray(np.zeros(nlocs), dims=['nlocs'])
+    geoval_ds['wind_from_direction_at_surface'] = xr.DataArray(np.zeros(nlocs), dims=['nlocs'])
     geoval_ds['tropopause_pressure'] = xr.DataArray(np.zeros(nlocs), dims=['nlocs'])
     geoval_ds['vegetation_type_index'] = xr.DataArray(np.zeros(nlocs), dims=['nlocs'])
     geoval_ds['leaf_area_index'] = xr.DataArray(np.zeros(nlocs), dims=['nlocs'])
@@ -165,12 +173,17 @@ def generate_radiance_geovals(sensor, year, month, day, analtime):
     geoval_ds['surface_wind_from_direction'] = xr.DataArray(np.zeros(nlocs), dims=['nlocs'])
     geoval_ds['surface_geopotential_height'] = xr.DataArray(np.zeros(nlocs), dims=['nlocs'])
     geoval_ds['surface_geometric_height'] = xr.DataArray(np.zeros(nlocs), dims=['nlocs'])
+    geoval_ds['height_above_mean_sea_level_at_surface'] = xr.DataArray(np.zeros(nlocs), dims=['nlocs'])
+    geoval_ds['cloud_volume_fraction_in_atmosphere_layer'] = xr.DataArray(np.zeros(nlocs), dims=['nlocs'])
+    geoval_ds['air_temperature_at_two_meters_above_surface'] = xr.DataArray(np.zeros((nlocs)), dims=['nlocs'])
+    geoval_ds['water_vapor_mixing_ratio_wrt_moist_air_at_2m'] = xr.DataArray(np.zeros((nlocs)), dims=['nlocs'])
     
     # For 2D variables (e.g., air_temperature, air_pressure, humidity_mixing_ratio), we need to specify both nlocs and nlevs/nlevsp1
     geoval_ds['air_temperature'] = xr.DataArray(np.zeros((nlocs, nlevs)), dims=['nlocs', 'nlevs'])
     geoval_ds['air_pressure'] = xr.DataArray(np.zeros((nlocs, nlevs)), dims=['nlocs', 'nlevs'])
     geoval_ds['air_pressure_levels'] = xr.DataArray(np.zeros((nlocs, nlevsp1)), dims=['nlocs', 'nlevsp1'])
     geoval_ds['humidity_mixing_ratio'] = xr.DataArray(np.zeros((nlocs, nlevs)), dims=['nlocs', 'nlevs'])
+    geoval_ds['water_vapor_mixing_ratio_wrt_dry_air'] = xr.DataArray(np.zeros((nlocs, nlevs)), dims=['nlocs', 'nlevs'])
     geoval_ds['mole_fraction_of_ozone_in_air'] = xr.DataArray(np.zeros((nlocs, nlevs)), dims=['nlocs', 'nlevs'])
     geoval_ds['mole_fraction_of_carbon_dioxide_in_air'] = xr.DataArray(np.zeros((nlocs, nlevs)), dims=['nlocs', 'nlevs'])
     
@@ -219,6 +232,8 @@ def generate_radiance_geovals(sensor, year, month, day, analtime):
     geoval_ds['water_area_fraction'][:] = nr_ds['frocean'].values + nr_ds['frlake'].values
     geoval_ds['land_area_fraction'][:] = nr_ds['frland'].values
     geoval_ds['ice_area_fraction'][:] = nr_ds['frseaice'].values + nr_ds['frlandice'].values
+    geoval_ds['cloud_volume_fraction_in_atmosphere_layer'] = 0.0
+ 
 
     # Adjust water_area_fraction where sea ice exists
     for i in range(nlocs):
@@ -254,9 +269,16 @@ def generate_radiance_geovals(sensor, year, month, day, analtime):
     ### Surface tempeature 
     # ---------------------------
     geoval_ds['surface_temperature_where_sea'][:]  = nr_ds['ts'][:]
+    geoval_ds['skin_temperature_at_surface_where_sea'][:]  = nr_ds['ts'][:]
     geoval_ds['surface_temperature_where_land'][:] = nr_ds['ts'][:]
+    geoval_ds['skin_temperature_at_surface_where_land'][:]  = nr_ds['ts'][:]
     geoval_ds['surface_temperature_where_ice'][:]  = nr_ds['ts'][:]
+    geoval_ds['skin_temperature_at_surface_where_ice'][:]  = nr_ds['ts'][:]
     geoval_ds['surface_temperature_where_snow'][:] = nr_ds['ts'][:]
+    geoval_ds['skin_temperature_at_surface_where_snow'][:]  = nr_ds['ts'][:]
+    geoval_ds['skin_temperature_at_surface'][:]  = nr_ds['ts'][:]
+    geoval_ds['air_temperature_at_two_meters_above_surface'] = nr_ds['T2M'] 
+    geoval_ds['water_vapor_mixing_ratio_wrt_moist_air_at_2m'] = nr_ds['Q2M'] 
 
     ### Surface wind speed and direction 
     # ---------------------------
@@ -282,6 +304,8 @@ def generate_radiance_geovals(sensor, year, month, day, analtime):
     geoval_ds['surface_wind_speed'][:] = surface_wind_speed
     geoval_ds['surface_wind_from_direction'][:] = surface_wind_from_direction
 
+    geoval_ds['wind_speed_at_surface'][:] = surface_wind_speed
+    geoval_ds['wind_from_direction_at_surface'][:] =  surface_wind_from_direction
 
 
     ### Soil and veg types
@@ -351,6 +375,7 @@ def generate_radiance_geovals(sensor, year, month, day, analtime):
     # Geopotential height conversion
     geoval_ds['surface_geopotential_height'][:] = nr_ds['phis'][:] / constants.g  # phis[m2 sec-2] --> geo.pot.height[m]
     geoval_ds['surface_geometric_height'][:] = geoval_ds['surface_geopotential_height'][:] * 6371000.0 / (6371000.0 - geoval_ds['surface_geopotential_height'][:])
+    geoval_ds['height_above_mean_sea_level_at_surface'][:] = geoval_ds['surface_geopotential_height'][:] * 6371000.0 / (6371000.0 - geoval_ds['surface_geopotential_height'][:])
   
     # Atmospheric profile info
     #---------------------------------------------------
@@ -359,6 +384,7 @@ def generate_radiance_geovals(sensor, year, month, day, analtime):
     
     # Humidity mixing ratio calculation (vectorized for all locations)
     geoval_ds['humidity_mixing_ratio'][:] = 1000.0 * nr_ds['sphu'][:].T / (1.0 - nr_ds['sphu'][:].T)
+    geoval_ds['water_vapor_mixing_ratio_wrt_dry_air'][:] = 1000.0 * nr_ds['sphu'][:].T / (1.0 - nr_ds['sphu'][:].T)
      
     # Temporary values for ozone and CO2 mole fractions (adjust as needed)
     geoval_ds['mole_fraction_of_ozone_in_air'][:] = 0.02  # Temporary value
@@ -367,16 +393,19 @@ def generate_radiance_geovals(sensor, year, month, day, analtime):
 
     # Initialize the first pressure level (top of atmosphere) at 0.5 Pa
     geoval_ds['air_pressure_levels'][:, 0] = 0.5  # Unit: Pa 
-   
     cumulative_delp = np.cumsum(np.vstack([np.zeros((1, nlocs)), nr_ds['delp']]), axis=0)
     geoval_ds['air_pressure_levels'][:,:] = cumulative_delp[:,:].T + geoval_ds['air_pressure_levels'][:, 0:1].values
     geoval_ds['air_pressure_levels'][:,nlevsp1-1] = nr_ds['ps'][:]  # Unit: Pa
 
-#    geoval_ds['air_pressure'][:,:nlevs]  =  \
-#             (geoval_ds['air_pressure_levels'][:, :nlevs] + geoval_ds['air_pressure_levels'][:, 1:nlevs+1]) * 0.5
-
+    p1=geoval_ds['air_pressure_levels'][:,0:nlevsp1-1]
+    p2=geoval_ds['air_pressure_levels'][:,1:nlevsp1]
+    print(geoval_ds['air_pressure'].shape)
+    print(p1.shape)
+    print(p2.shape)
     for k in range(nlevs):
         geoval_ds['air_pressure'][:, k] = (geoval_ds['air_pressure_levels'][:, k] + geoval_ds['air_pressure_levels'][:, k + 1]) * 0.5  
+
+
 #Finally,
     # Save the new dataset to a new jedi geoval file
     print(f"Saving the new JEDI geoval file to {outfilename}") 
