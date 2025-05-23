@@ -69,11 +69,11 @@ def generate_radiance_geovals(sensor, year, month, day, analtime):
 
     # Read NCEP GFS surface file (info:2023-09-01 file)
     sfcfilename = '/discover/nobackup/projects/gmao/nwposse/mkim1/AIST-NR/jedi-ncep-sfc-files/GEOSadas-5.29.5/geos.crtmsrf.c12.nc4'
-    try:
-      dsfc = xr.open_dataset(sfcfilename)
-    except FileNotFoundError:
-      print(f"Error: The file {sfcfilename} does not exist.")
-      return
+    #try:
+    dsfc = xr.open_dataset(sfcfilename)
+    #except FileNotFoundError:
+    #  print(f"Error: The file {sfcfilename} does not exist.")
+    #  return
 
     # Extract the surface data variables
     sfclat = dsfc['lats'].values
@@ -83,10 +83,11 @@ def generate_radiance_geovals(sensor, year, month, day, analtime):
     vfrac = dsfc['vfrac'].values  # 0.0 - 1.0
   
     # Debugging output for checking the shapes of surface variables
-    print(f"Surface file variables extracted:")
-    print(f"sfclat shape: {sfclat.shape}, sfclon shape: {sfclon.shape}")
-    print(f"vtype shape: {vtype.shape}, stype shape: {stype.shape}")
-    print(f"vfrac shape: {vfrac.shape}")
+    if verbose:
+        print(f"Surface file variables extracted:")
+        print(f"sfclat shape: {sfclat.shape}, sfclon shape: {sfclon.shape}")
+        print(f"vtype shape: {vtype.shape}, stype shape: {stype.shape}")
+        print(f"vfrac shape: {vfrac.shape}")
 
     # Close the surface dataset after reading
     dsfc.close()
@@ -122,7 +123,9 @@ def generate_radiance_geovals(sensor, year, month, day, analtime):
     print(f"Shape of stype_point_array: {stype_point_array.shape}")
     print(f"Shape of vfrac_point_array: {vfrac_point_array.shape}")
 
-
+    ### Get SFC vars at Ob location
+    # use ds[v].interp method.
+  
 # 3. 
     # Create NR jedi-geovals of which each variables will be filled with values later.
     nlevs= nr_ds.sphu.shape[0]
@@ -240,6 +243,10 @@ def generate_radiance_geovals(sensor, year, month, day, analtime):
         if nr_ds['frseaice'][i] > 0.0 and geoval_ds['water_area_fraction'][i] > 0.0:
             geoval_ds['water_area_fraction'][i] -= nr_ds['frseaice'][i]  # Subtract the ice fraction from the water fraction
 
+    ### Alternative
+    I = (nr_ds['frseaice']>0.0)&(geoval_ds['water_area_fraction']>0.0)
+    geoval_ds['water_area_fraction'][I] -= nr_ds['frseaice'][I]
+            
     # Initialize surface snow area fraction
     geoval_ds['surface_snow_area_fraction'][:] = 0.0
 
@@ -266,6 +273,9 @@ def generate_radiance_geovals(sensor, year, month, day, analtime):
         if np.abs(tot_frac[i] - 1) > 1e-3:
             print(f"Warning: Total area fraction for location {i} is {tot_frac[i]} (expected 1).")
 
+    # Alternative
+    if np.any(np.abs(tot_frac - 1) > 1e-3): 
+            
     ### Surface tempeature 
     # ---------------------------
     geoval_ds['surface_temperature_where_sea'][:]  = nr_ds['ts'][:]

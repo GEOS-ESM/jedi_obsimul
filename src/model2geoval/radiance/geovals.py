@@ -11,7 +11,8 @@ from   datetime import datetime, timedelta
 # Default YAML file
 Geovals = """
 
-xxx = 1
+geos_template: 'tbd'
+ioda_template: 'tbd'
 
 """
 
@@ -19,10 +20,18 @@ xxx = 1
 
 class GEOVALS(object):
 
-    def __init__ (self, geos_filename, platform, config, ioda_template=None):
+    def __init__ (self, sensor, time, config=None,
+                        rootDir='./'):
         """
         Create GEOVAL object.
         """
+        self.sensor = sensor
+        self.time = time
+        self.rootDir = rootDir
+
+
+        
+        
     def populateIODA(self):
         """
         Generate all that is needed to compute radiances.
