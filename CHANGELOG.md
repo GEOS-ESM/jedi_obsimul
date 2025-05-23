@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Added `cmake` build for JEDI modules
+- Initial setup of sampling HISTORY.rc under etc/history
+- Generic notes about the PBL observing system under etc/pbl_obsys
+
 ### Changed
 
 ### Fixed
