@@ -1,0 +1,6 @@
+-HISTORY_OSSE.RC is the "master copy" to which changes are made
+-The individual crtm_*.vl files contain the necessary variables for the various
+instrment types (currently crtm_*.vl are all identical - need to verify that
+this is accurate)
+-To merge the files to generate a file to be used in GEOS, type:
+   m4 HISTORY_OSSE.RC > HISTORY_OSSE.rc 

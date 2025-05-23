@@ -1,0 +1,39 @@
+#
+# asmSampler_vars.vl: Met fields not in aer_Nv collection that are needed for
+#                     polarimeter/lidar simulators. Also including winds for
+#                     transport calculations (AOS science applications)
+#                     Cloud water included for allowing all sky simulations.
+#
+
+                                         'T'              , 'DYN'        ,
+                                         'U;V'            , 'DYN'        ,
+                                         'OMEGA'          , 'DYN'        ,
+                                         'Q'              , 'MOIST'      , 'QV'     ,
+                                         'RH2'            , 'MOIST'      , 'RH'     ,
+                                         'AIRDENS'        , 'CHEMENV'    ,
+                                         'DELP'           , 'DYN'        ,
+                                         'ZL'             , 'DYN'        , 'H'      ,
+                                         'PL'             , 'DYN'        , 'P'      ,
+                                         
+                                         'O3'             , 'CHEMISTRY'  ,
+
+                                         'PS'             , 'DYN'        ,
+                                         'SLP'            , 'DYN'        ,
+                                         'PHIS'           , 'AGCM'       ,
+                                         'FRLAND'         , 'SURFACE'    , 
+                                         'FRLANDICE'      , 'SURFACE'    , 
+                                         'FRLAKE'         , 'SURFACE'    , 
+                                         'FROCEAN'        , 'SURFACE'    , 
+                                         'FRACI'          , 'SURFACE'    ,
+
+                                         'U2M;V2M'        , 'SURFACE'    ,
+                                         'T2M'            , 'SURFACE'    ,
+                                         'Q2M'            , 'SURFACE'    ,
+                                         'U10N;V10N'      , 'SURFACE'    ,
+                                         'U10M;V10M'      , 'SURFACE'    ,
+                                         'T10M'           , 'SURFACE'    ,
+                                         'Q10M'           , 'SURFACE'    ,
+
+   
+
+

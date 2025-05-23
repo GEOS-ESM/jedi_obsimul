@@ -1,0 +1,8 @@
+#!/bin/csh -f
+#
+# Run cmake with reasonable defaults. Why make the user do all these steps?
+#
+
+source @env/g5_modules # to be sure
+
+cmake -B build -S . --install-prefix=`pwd`/install --fresh #-DCMAKE_BUILD_TYPE=Debug

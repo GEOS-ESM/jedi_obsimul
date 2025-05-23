@@ -1,17 +1,26 @@
 *~
-*.swp
-*.swo
+/@cmake/
+/@env/
+/@jedi-cmake/
+src/@crtm/
+src/@ioda-converters/
+src/@ioda/
+src/@oops/
+src/@ufo/
+src/@vader/
+/.mepo/
+/build/
+/install/
+__pycache__
+.ipynb_checkpoints
+parallel_build.o*
+log.*
+CMakeUserPresets.json
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
 .DS_Store
-*#
-.#*
-**/CVS/
 
-
-# Ignore possible symlinked build and install directories
-# Note: we can't use a / at the end because they might be
-# symlink to a directory
-build*
-install*
-
-# If you build with spack libraries, you can get spack log files
-spack*.log
+test-data-release/
+data/
+cmake*.log
+make*.log

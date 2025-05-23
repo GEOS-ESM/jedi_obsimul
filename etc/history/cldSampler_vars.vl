@@ -1,0 +1,25 @@
+#
+# cldSampler_vars.vl:     Cloud related variables that are needed for
+#                         polarimeter/lidar simulators. Also including winds for
+#                         transport calculations (AOS science applications)
+#                         Cloud water included for allowing all sky simulations.
+#
+
+                                         'QLTOT'          , 'AGCM'        , 'QL'     ,
+                                         'QITOT'          , 'AGCM'        , 'QI'     ,
+                                         'QRTOT'          , 'MOIST'       , 'QR'     ,
+                                         'QSTOT'          , 'MOIST'       , 'QS'     ,
+                                         'FCLD'           , 'MOIST'       , 'CLOUD'  ,
+
+                                         'TAUHI'          , 'SOLAR'       ,  'CODHGH'      ,
+                                         'TAULO'          , 'SOLAR'       ,  'CODLOW'      ,
+                                         'TAUMD'          , 'SOLAR'       ,  'CODMID'      ,
+                                         'TAUTT'          , 'SOLAR'       ,  'CODTOT'      ,
+
+                                         'CLDHI'          , 'SOLAR'       ,  'CLDHGH'      ,
+                                         'CLDLO'          , 'SOLAR'       ,  'CLDLOW'      ,
+                                         'CLDMD'          , 'SOLAR'       ,  'CLDMID'      ,
+                                         'CLDTT'          , 'SOLAR'       ,  'CLDTOT'      ,
+   
+
+

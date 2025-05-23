@@ -1,0 +1,8 @@
+#
+# budi_vars.vl: Total mass variables  
+#
+          'TQV'   , 'AGCM'  ,
+          'TQI'   , 'AGCM'  ,
+          'TQL'   , 'AGCM'  ,
+          'TOX'   , 'AGCM'  ,
+          'MASS'  , 'AGCM'  ,

@@ -1,0 +1,18 @@
+#
+# turb_vars.vl: Turbulence diagnostics
+#
+          'INTDIS'  , 'TURBULENCE'  ,
+          'TOPDIS'  , 'TURBULENCE'  ,
+          'SRFDIS'  , 'TURBULENCE'  ,
+          'DBUOY'   , 'TURBULENCE'  ,
+          'WERAD'   , 'TURBULENCE'  ,
+          'KH'      , 'TURBULENCE'  ,
+          'KM'      , 'TURBULENCE'  ,
+          'KHLS'    , 'TURBULENCE'  ,
+          'KMLS'    , 'TURBULENCE'  ,
+          'EKH'     , 'TURBULENCE'  ,
+          'EKM'     , 'TURBULENCE'  ,
+          'KHSFC'   , 'TURBULENCE'  ,
+          'KHRAD'   , 'TURBULENCE'  ,
+          'RI'      , 'TURBULENCE'  ,
+          'DU'      , 'TURBULENCE'  ,
