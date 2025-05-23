@@ -11,6 +11,8 @@ src/@vader/
 /.mepo/
 /build/
 /install/
+.#*
+._*
 __pycache__
 .ipynb_checkpoints
 parallel_build.o*
