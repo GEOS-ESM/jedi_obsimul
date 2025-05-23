@@ -4,11 +4,5 @@
 #
 
 source @env/g5_modules # to be sure
-rm -r    build
-mkdir -p build
-cd build
-##cmake .. -DBASEDIR=$BASEDIR/`uname -s` \
-cmake .. -DBASEDIR=$BASEDIR/`uname -s` \
-         -DCMAKE_Fortran_COMPILER=ifort \
-         -DCMAKE_INSTALL_PREFIX=../install # -DCMAKE_BUILD_TYPE=Debug
-      
+
+cmake -B build -S . --install-prefix=`pwd`/install --fresh #-DCMAKE_BUILD_TYPE=Debug
