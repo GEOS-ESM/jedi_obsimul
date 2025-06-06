@@ -3,19 +3,20 @@
 #
 
                        'U;V'            , 'DYN'        , 
-                       'TV'             , 'DYN'        , 
+                       'T'              , 'DYN'        , 
                        'DELP'           , 'DYN'        , 
-                       'Q'              , 'MOIST'      , 
+                       'Q'              , 'MOIST'      , 'QV'  ,
                        'ZLE'            , 'DYN'        , 'H'   ,
+                       'PLE'            , 'DYN'        , 
  
-                       'QITOT'          , 'AGCM'       , 
-                       'QLTOT'          , 'AGCM'       , 
-                       'QRTOT'          , 'MOIST'      , 
-                       'QSTOT'          , 'MOIST'      , 
+                       'QITOT'          , 'AGCM'       , 'QI'  ,
+                       'QLTOT'          , 'AGCM'       , 'QL'  ,
+                       'QRTOT'          , 'MOIST'      , 'QR'  ,
+                       'QSTOT'          , 'MOIST'      , 'QS'  ,
 
 #                      Trace gases
 #                      -----------
-                       'O3PPMV'         , 'CHEMISTRY'  ,
+                       'O3PPMV'         , 'CHEMISTRY'  , 'O3'
                        'GOCART::CO2'    , 'GOCART'     , 'CO2'  ,
  
                        'PS'             , 'DYN'        ,
