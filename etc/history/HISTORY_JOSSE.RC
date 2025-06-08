@@ -57,9 +57,9 @@ COLLECTIONS:
               'jedi'
               'ACtraj'
               'Aeronet'
-              'Aqua'
-              'Terra'
-#             'SNDR_ATMS'
+              'SNDR_ATMS'
+#              'Aqua'
+#              'Terra'
 #             'ABI_M6C14_Geostationary'  # slow
 #             'ABI_M6C01_Mask'           # slow
     
@@ -86,10 +86,16 @@ GRID_LABELS:
     
 #    Sampler Geometries
 #    ------------------
-     SwathGrid_MYD04
-     SwathGrid_MOD04
+     #SwathGrid_MYD04
+     #SwathGrid_MOD04
      SwathGrid_ATMS
-     abi_grid_GOES16_M6C14
+
+     #GeoDisk_ABI_East_2km
+     #GeoDisk_ABI_West_2km
+     GeoDisk_GXS_East
+     GeoDisk_GXS_West
+     GeoDisk_GHMS
+     GeoDisk_MTG_IRS
     
 ::
 
@@ -180,18 +186,80 @@ SwathGrid_MOD04.obs_file_end:       '2019-11-01T00:00:00'
 SwathGrid_MOD04.obs_file_interval:  '000000 000500'     # yymmdd  hhmmss
 SwathGrid_MOD04.Epoch:               060000                  # 
 
+GeoDisk_ABI_East_2km.GRID_TYPE:     XY
+GeoDisk_ABI_East_2km.GRIDNAME:      ABI_East_2km
+GeoDisk_ABI_East_2km.index_name_x:  x
+GeoDisk_ABI_East_2km.index_name_y:  y
+GeoDisk_ABI_East_2km.var_name_x:    x
+GeoDisk_ABI_East_2km.var_name_y:    y
+GeoDisk_ABI_East_2km.var_name_proj: goes_imager_projection
+GeoDisk_ABI_East_2km.att_name_proj: longitude_of_projection_origin
+GeoDisk_ABI_East_2km.thin_factor:   1
+GeoDisk_ABI_East_2km.LM:            137
+GeoDisk_ABI_East_2km.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/abi_east_2km_coords.nc4
 
-abi_grid_GOES16_M6C14.GRID_TYPE:     XY
-abi_grid_GOES16_M6C14.GRIDNAME:      ABI_Fixed_Grid
-abi_grid_GOES16_M6C14.index_name_x:  x
-abi_grid_GOES16_M6C14.index_name_y:  y
-abi_grid_GOES16_M6C14.var_name_x:    x
-abi_grid_GOES16_M6C14.var_name_y:    y
-abi_grid_GOES16_M6C14.var_name_proj: goes_imager_projection
-abi_grid_GOES16_M6C14.att_name_proj: longitude_of_projection_origin
-abi_grid_GOES16_M6C14.thin_factor:   10
-abi_grid_GOES16_M6C14.LM:            137
-abi_grid_GOES16_M6C14.GRID_FILENAME:   /discover/nobackup/projects/gmao/aist-nr/data/GOES-X/OR_ABI-L1b-RadF-M6C14_G16_s20192340800216_e20192340809524_c20192340810006.nc
+GeoDisk_ABI_West_2km.GRID_TYPE:     XY
+GeoDisk_ABI_West_2km.GRIDNAME:      ABI_West_2km
+GeoDisk_ABI_West_2km.index_name_x:  x
+GeoDisk_ABI_West_2km.index_name_y:  y
+GeoDisk_ABI_West_2km.var_name_x:    x
+GeoDisk_ABI_West_2km.var_name_y:    y
+GeoDisk_ABI_West_2km.var_name_proj: goes_imager_projection
+GeoDisk_ABI_West_2km.att_name_proj: longitude_of_projection_origin
+GeoDisk_ABI_West_2km.thin_factor:   1
+GeoDisk_ABI_West_2km.LM:            137
+GeoDisk_ABI_West_2km.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/abi_west_2km_coords.nc4
+
+GeoDisk_GXS_East.GRID_TYPE:     XY
+GeoDisk_GXS_East.GRIDNAME:      GXS_East
+GeoDisk_GXS_East.index_name_x:  x
+GeoDisk_GXS_East.index_name_y:  y
+GeoDisk_GXS_East.var_name_x:    x
+GeoDisk_GXS_East.var_name_y:    y
+GeoDisk_GXS_East.var_name_proj: goes_imager_projection
+GeoDisk_GXS_East.att_name_proj: longitude_of_projection_origin
+GeoDisk_GXS_East.thin_factor:   1
+GeoDisk_GXS_East.LM:            137
+GeoDisk_GXS_East.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/gxs_east_coords.nc4
+
+GeoDisk_GXS_West.GRID_TYPE:     XY
+GeoDisk_GXS_West.GRIDNAME:      GXS_West
+GeoDisk_GXS_West.index_name_x:  x
+GeoDisk_GXS_West.index_name_y:  y
+GeoDisk_GXS_West.var_name_x:    x
+GeoDisk_GXS_West.var_name_y:    y
+GeoDisk_GXS_West.var_name_proj: goes_imager_projection
+GeoDisk_GXS_West.att_name_proj: longitude_of_projection_origin
+GeoDisk_GXS_West.thin_factor:   1
+GeoDisk_GXS_West.LM:            137
+GeoDisk_GXS_West.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/gxs_west_coords.nc4
+
+GeoDisk_GHMS.GRID_TYPE:     XY
+GeoDisk_GHMS.GRIDNAME:      GHMS
+GeoDisk_GHMS.index_name_x:  x
+GeoDisk_GHMS.index_name_y:  y
+GeoDisk_GHMS.var_name_x:    x
+GeoDisk_GHMS.var_name_y:    y
+GeoDisk_GHMS.var_name_proj: goes_imager_projection
+GeoDisk_GHMS.att_name_proj: longitude_of_projection_origin
+GeoDisk_GHMS.thin_factor:   1
+GeoDisk_GHMS.LM:            137
+GeoDisk_GHMS.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/ghms_coords.nc4
+
+GeoDisk_MTG_IRS.GRID_TYPE:     XY
+GeoDisk_MTG_IRS.GRIDNAME:      MTG_IRS
+GeoDisk_MTG_IRS.index_name_x:  x
+GeoDisk_MTG_IRS.index_name_y:  y
+GeoDisk_MTG_IRS.var_name_x:    x
+GeoDisk_MTG_IRS.var_name_y:    y
+GeoDisk_MTG_IRS.var_name_proj: goes_imager_projection
+GeoDisk_MTG_IRS.att_name_proj: longitude_of_projection_origin
+GeoDisk_MTG_IRS.thin_factor:   1
+GeoDisk_MTG_IRS.LM:            137
+GeoDisk_MTG_IRS.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/mtg-irs_coords.nc4
+
+
+
 
 #                              ---------------------------------    
 #                              Definition of Gridded Collections
@@ -203,6 +271,7 @@ ana_prog.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
 ana_prog.archive:          '%c/Y%y4' ,
 ana_prog.format:           'CFIO' ,
 ana_prog.nbits:             12,
+ana_prog.chunks:            180 91 1 1,
 ana_prog.deflate:           1 ,
 ana_prog.grid_label:        PC1440x721-DC ,
 ana_prog.regrid_method:    'BILINEAR',
@@ -228,6 +297,7 @@ ana_surf.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
 ana_surf.archive:          '%c/Y%y4' ,
 ana_surf.format:           'CFIO' ,
 ana_surf.nbits:             12,
+ana_surf.chunks:            180 91 1 1,
 ana_surf.deflate:           1 ,
 ana_surf.grid_label:        PC1440x721-DC ,
 ana_surf.mode:             'time-averaged'
@@ -237,13 +307,14 @@ ana_surf.frequency:         010000 ,
 ana_surf.fields:            include(surf_vars.vl)
 ::
 
-# Met/Aerosol/Carbon Single Level Varriables -- Look at DYAMOND v2 (Browsing product)
+# Browsing product
+# Met/Aerosol/Carbon Single Level Variables
 # ------------------------------------------
 inst_01hr_2d_brs_Nx.format:      'CFIO' ,
 inst_01hr_2d_brs_Nx.descr:       '2d,1-Hourly,Instantaneous,Hi-Res Lat-Lon on Single-Level,Assimilation,Meteorological, Carbon and Aerosol Single-Level Diagnostics' ,
 inst_01hr_2d_brs_Nx.grid_label:  PC2880x1441-DC ,
 inst_01hr_2d_brs_Nx.nbits:       12,
-inst_01hr_2d_brs_Nx.chunksize:   360 181 1 1,
+inst_01hr_2d_brs_Nx.chunksize:   180 91 1 1,
 inst_01hr_2d_brs_Nx.deflate:     1,
 inst_01hr_2d_brs_Nx.template:    '%y4%m2%d2_%h2%n2z.nc4' ,
 inst_01hr_2d_brs_Nx.mode:        'instantaneous' ,
@@ -252,14 +323,14 @@ inst_01hr_2d_brs_Nx.duration:    010000 ,
 inst_01hr_2d_brs_Nx.fields:      include(brs_vars.vl)
 ::
 
-
-
     
 # Prognostic variables on pressure levels
 # ---------------------------------------    
 geosgcm_prog.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
 geosgcm_prog.archive:          '%c/Y%y4' ,
 geosgcm_prog.format:           'CFIO' ,
+geosgcm_prog.nbits:             12,
+geosgcm_prog.chunksize:         180 91 1 1,
 geosgcm_prog.deflate:           1 ,
 geosgcm_prog.grid_label:        PC720x361-DC ,
 geosgcm_prog.regrid_method:    'BILINEAR',
@@ -276,6 +347,8 @@ geosgcm_prog.fields:           include(prog_vars.vl)
 geosgcm_surf.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
 geosgcm_surf.archive:          '%c/Y%y4' ,
 geosgcm_surf.format:           'CFIO' ,
+geosgcm_surf.nbits:             12,
+geosgcm_surf.chunksize:         180 91 1 1,
 geosgcm_surf.deflate:           1 ,
 geosgcm_surf.grid_label:        PC720x361-DC ,
 geosgcm_surf.regrid_method:    'BILINEAR',
@@ -291,6 +364,8 @@ geosgcm_surf.fields:            include(surf_vars.vl)
 geosgcm_moist.template:        '%y4%m2%d2_%h2%n2z.nc4' ,
 geosgcm_moist.archive:         '%c/Y%y4' ,
 geosgcm_moist.format:          'CFIO' ,
+geosgcm_moist.nbits:             12,
+geosgcm_moist.chunksize:         180 91 1 1,
 geosgcm_moist.deflate:          1 ,
 geosgcm_moist.grid_label:       PC720x361-DC ,
 geosgcm_moist.regrid_method:   'BILINEAR',
@@ -310,6 +385,8 @@ geosgcm_moist.fields:          include(moist_vars.vl)
 geosgcm_turb.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
 geosgcm_turb.archive:          '%c/Y%y4' ,
 geosgcm_turb.format:           'CFIO' ,
+geosgcm_turb.nbits:             12,
+geosgcm_turb.chunksize:         180 91 1 1,
 geosgcm_turb.deflate:           1 ,
 geosgcm_turb.grid_label:        PC720x361-DC ,
 geosgcm_turb.regrid_method:    'BILINEAR',
@@ -329,6 +406,8 @@ geosgcm_turb.fields:            include(turb_vars.vl)
 geosgcm_gwd.template:          '%y4%m2%d2_%h2%n2z.nc4' ,
 geosgcm_gwd.archive:           '%c/Y%y4' ,
 geosgcm_gwd.format:            'CFIO' ,
+geosgcm_gwd.nbits:             12,
+geosgcm_gwd.chunksize:         180 91 1 1,
 geosgcm_gwd.deflate:            1 ,
 geosgcm_gwd.grid_label:         PC720x361-DC ,
 geosgcm_gwd.regrid_method:     'BILINEAR',
@@ -348,6 +427,8 @@ geosgcm_gwd.fields:            include(gwd_vars.vl)
 geosgcm_budi.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
 geosgcm_budi.archive:          '%c/Y%y4' ,
 geosgcm_budi.format:           'CFIO' ,
+geosgcm_budi.nbits:             12,
+geosgcm_budi.chunksize:         180 91 1 1,
 geosgcm_budi.deflate:           1 ,
 geosgcm_budi.grid_label:        PC720x361-DC ,
 geosgcm_budi.regrid_method:    'CONSERVE',
@@ -360,6 +441,8 @@ geosgcm_budi.fields:            include(budi_vars.vl)
 geosgcm_buda.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
 geosgcm_buda.archive:          '%c/Y%y4' ,
 geosgcm_buda.format:           'CFIO' ,
+geosgcm_buda.nbits:             12,
+geosgcm_buda.chunksize:         180 91 1 1,
 geosgcm_buda.deflate:           1 ,
 geosgcm_buda.grid_label:        PC720x361-DC ,
 geosgcm_buda.regrid_method:    'CONSERVE',
@@ -379,6 +462,8 @@ geosgcm_buda.fields:           include(buda_vars.vl)
 tavg2d_aer_x.template:       '%y4%m2%d2_%h2%n2z.nc4',
 tavg2d_aer_x.archive:        '%c/Y%y4',
 tavg2d_aer_x.format:         'CFIO',
+tavg2d_aer_x.nbits:           12,
+tavg2d_aer_x.chunksize:       180 91 1 1,
 tavg2d_aer_x.deflate:         1,
 tavg2d_aer_x.grid_label:      PC720x361-DC,
 tavg2d_aer_x.mode:           'instantaneous',
@@ -394,6 +479,8 @@ tavg2d_aer_x.fields:          included(aer2D_vars.vl)
 tavg3d_aer_p.template:       '%y4%m2%d2_%h2%n2z.nc4',
 tavg3d_aer_p.archive:        '%c/Y%y4',
 tavg3d_aer_p.format:         'CFIO',
+tavg3d_aer_p.nbits:             12,
+tavg3d_aer_p.chunksize:         180 91 1 1,
 tavg3d_aer_p.deflate:         1,
 tavg3d_aer_p.grid_label:      PC720x361-DC,
 tavg3d_aer_p.mode:           'instantaneous',
@@ -413,19 +500,6 @@ tavg3d_aer_p.fields:          include(aer3Dp_vars.vl)
 #                              ---------------------------------    
 #                              Definition of Sampled Collections
 #                              ---------------------------------    
-
-#ams  The station geometry is asymmetric. For consistency you should have 
-#     a geometry specific like the others. The supported sampling geometries
-#
-#     ____.geometry:  Station_AERONET    
-#     ____.geometry:  Swath_ATMS 
-#     ____.geometry:  Traj_FIREX-AQ      
-#     ____.geometry:  Traj_CAMP2EX      
-#     ____.geometry:  Patch_GOES16  
-#     ____.geometry:       
-#     ____.geometry:       
-#     ____.geometry:       
-#     ____.geometry:       
 
   Aeronet.sampler_spec:       'station'
   Aeronet.station_id_file:    /discover/nobackup/projects/gmao/aist-nr/data/Station/1_national.csv
@@ -473,11 +547,6 @@ tavg3d_aer_p.fields:          include(aer3Dp_vars.vl)
                            include(asmSampler_vars.vl)
 ::
 
-    #ams This design is not very consistent. We need to consistently separate
-    #    the geometry specification from te collection specification.
-    #    The airborne campaigns are ought to have their own geometry specification
-    #    as they are independent. 
-    
   ACtraj.sampler_spec:       trajectory
   ACtraj.ObsPlatforms:       CAMP2EX  FIREXAQ
   ACtraj.template:           '%y4%m2%d2_%h2%n2z.nc4',
@@ -508,26 +577,6 @@ tavg3d_aer_p.fields:          include(aer3Dp_vars.vl)
 #                              -------------------------    
 #                              JEDI Platform Definitions
 #                              -------------------------
-
-    #ams This does not make sense. This is in confounding geometry and collection
-    #    specifications.  For a given collection, one could elect to write more
-    #    than 1 collextion. It is all entagled. Needs refactoring.
-    #
-    #    IODA_SCHEMA is completely inadequate for CAMP2EX, FIREX-AQ; these have
-    #    absolutely to do with JEDI's IODA format.
-    
-    #    Now, for bina fide IODA trajecories, the IODA_SCHEMA parameters index_name_x, ..., var_name_time 
-    #    should be the default. Better yet, this is a IODA convention, no need to allow it to be redfined.
-    #
-    #    Really, when defining the geometries for trajectory one could define
-    #       SCHEMA: IODA or Generic
-    #    If SCHEMA is IODA, then this is implied (notice that I changed the label names):
-    #        index_dim_name:      Location
-    #        lon_var_name:        MetaData/longitude
-    #        lat_var_name:        MetaData/latitude
-    #        time_var_name:       MetaData/dateTime
-    #    If SCHEMA is Generic, then these attributes ought to be specified.
-    #
 
     
 DEFINE_OBS_PLATFORM::
