@@ -26,44 +26,76 @@ class GeovalError(Exception):
     
 class GEOVAL(xr.Dataset,abc.ABC):
 
-   def __init__ (self, time, latitude, longitude, pressure_edges, **kwargs):
+   def __init__ (self, nr, sfc=None, **kwargs):
        """
        Create GEOVAL object as a subclass of xr.Dataset.
        On input, `time`, ..., `pressure_edges` are xr.DataArray objects.
        ANy optional keyword arguments passed down when creating an empty
        `xr.DataSet`.
        """
-
+       
        # Init as an empty dataset from base class
        # ----------------------------------------
-       super.__init__(self,**kwargs)
+       super().__init__(**kwargs)
 
+       # Sanitize and save NR dataset
+       # ----------------------------
+       self.nr = nr.rename({'lev':'nlevs', 'levp1':'nlevsp1', 'Location':'nlocs'})
 
-       # Coordinates
-       # -----------
-       nlocs, nlevsp1 =  pressure_edges.shape
-       self.nlocs, self.nlevs = nlocs, nlevsp1-1
-       pressure_mid = (pressure_edges[:-1] + pressure_edges[1:]) / 2.
-       self.assign_coords ( time      = time,
-                            latitude  = latitude,
-                            longitude = longitude,
-                            air_pressure = pressure_mid,
-                            air_pressure_levels = pressure_edges )
+       # Calculate mid-layer pressure
+       # ----------------------------
+       PL = (nr.PLE.values[:,:-1] + nr.PLE.values[:,1:]) / 2.
+       pressure_mid = xr.DataArray(PL, dims=['nlocs','nlevs'],
+                                   attrs = {'long_name':'Pressure at Mid-layer', 'units':'pa' })
+
+       # Record coordinates
+       self.coords['time']                = self.nr.time
+       self.coords['latitude']            = self.nr.latitude
+       self.coords['longitude']           = self.nr.longitude 
+       self.coords['air_pressure']        = pressure_mid
+       self.coords['air_pressure_levels'] = self.nr.PLE     
+
+       # Make sure longitudes are in [-180,180]
+       self.longitude[self.longitude>180] -= 360.
        
+       # Get surface metadata on obs location
+       # ------------------------------------
+       if sfc is not None:
+           sfc_ = sfc.rename({'lon':'longitude', 'lat':'latitude'})
+           for v in ['stype', 'vtype', 'vfrac' ]:
+               self[v] = sfc_[v].interp(time=sfc_.time[0],
+                                        longitude=self.longitude,
+                                        latitude=self.latitude,
+                                        method='nearest').squeeze()
 
-   def zero_sfcVars ( self, Vars):
+    
+   def zero_sfcVars (self, Vars):
+       """
+       Add surface variables, initializing them to zero. 
+       """
+       
+       if isinstance(Vars,str):
+           Vars = [Vars,]
+
+       nlocs = self.sizes['nlocs']
+       for v in Vars:
+           self[v] = xr.DataArray(np.zeros(nlocs).astype('float32'), dims=['nlocs',],
+                                  attrs = {'long_name':v.replace('_',' ').capitalize() })
+
+   def zero_levVars ( self, Vars, dim='nlevs'):
        """
        Add surface variables, initializing them to zero. 
        """
        if isinstance(Vars,str):
            Vars = [Vars,]
+       nlocs, nz = self.sizes['nlocs'], self.sizes[dim]
        for v in Vars:
-           self[v] = xr.DataArray(np.zeros(self.nlocs).astype('float32'),
-                                  dims=['nlocs'],
+           self[v] = xr.DataArray(np.zeros((self.nlocs,nz)).astype('float32'),
+                                  dims=['nlocs',dim],
                                   attrs = {'long_name':v.replace('_',' ').capitalize() })
        
    @abc.abstractmethod
-   def populate (self, nr):
+   def populate (self):
        """
        Populate GEOVAL data with data from thr Nature RUn dataset `xr`.
      
@@ -85,9 +117,9 @@ class GEOVAL(xr.Dataset,abc.ABC):
        # Create encoding for each variable
        # ---------------------------------
        encode = {}
-       for v in ds.data_vars:
+       for v in self.variables:
 
-           chunksizes = [ chunks[d] for d in ds[v].dims ]
+           chunksizes = [ chunks[d] for d in self[v].dims ]
            encode[v] = {#'compression':'gzip', 'complevel':2,
                         "zlib": True, "complevel": 2,
                         'chunksizes':chunksizes}                            
@@ -96,9 +128,8 @@ class GEOVAL(xr.Dataset,abc.ABC):
        # ---------------------------- 
        if verbose:
            print('[] Writing',filename)
+           
        self.to_netcdf(filename,engine='netcdf4',format='NETCDF4',encoding=encode)     
-
-    def 
        
 #----
        
