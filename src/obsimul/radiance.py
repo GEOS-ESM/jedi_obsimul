@@ -12,9 +12,11 @@ from   datetime import datetime, timedelta
 from .geoval          import GEOVAL, GeovalError, wind_direction
 from pyobs.constants import *
 
-Sensors = [ 'airs_aqua','amsr2_gcom-w1','amsua_aqua','amsua_metop-b','amsua_n15','amsua_n18','amsua_n19','atms_n20','atms_npp',
-            'avhrr3_metop-b','avhrr3_n18','avhrr3_n19','cris-fsr_n20','cris_fsr_npp','gmi_gpm','gps','iasi_metop-b',
-            'mhs_metop-b','mhs_n19','ssmis_f17' ]
+Sensors = [ 'airs_aqua','amsr2_gcom-w1','amsua_aqua', 'amsua_metopb', 
+            'amsua_n15','amsua_n18', 'amsua_n19', 'atms_n20', 'atms_npp',
+            'avhrr3_metop-b', 'avhrr3_n18', 'avhrr3_n19',
+            'cris-fsr_n20', 'cris_fsr_npp', 'gmi_gpm', 'iasi_metop-b',
+            'mhs_metop-b', 'mhs_n19', 'ssmis_f17' ]
 
 class RADIANCE(GEOVAL):
 
@@ -99,7 +101,7 @@ class RADIANCE(GEOVAL):
 
         # Other land surface related variables directly GEOS NR
         self['soil_temperature'] = nr.TSOIL1
-        self['volume_fraction_of_condensed_water_in_soil'] = nr.GWETTOP[:]  # Check unit
+        self['volume_fraction_of_condensed_water_in_soil'] = nr.GWETTOP   # Check unit
         self['average_surface_temperature_within_field_of_view'] = nr.TS  # Temporary
         self['surface_snow_thickness'] = nr.SNOWDP  # Check unit
 
@@ -120,7 +122,7 @@ class RADIANCE(GEOVAL):
        
         # Temporary values for ozone and CO2 mole fractions (adjust as needed)
         self['mole_fraction_of_ozone_in_air']          = nr.O3  
-        self['mole_fraction_of_carbon_dioxide_in_air'] = nr.CO2  # Temporary value
+        self['mole_fraction_of_carbon_dioxide_in_air'] = nr.CO2  
 
         # QUESTION: what about the cloud condensate for all sky simulations
 
@@ -167,8 +169,7 @@ def CLI_radiances():
     (options, args) = parser.parse_args()
 
     if len(args) == 2 :
-        nrFile, sfcFiles, iso_t1, iso_t2 = args
-        t1, t2 = (isoparser(iso_t1), isoparser(iso_t2))
+        nrFile, sfcFiles = args
     else:
         parser.error("must have 2 or 4 arguments: stnFile inDataset [iso_t1 iso_t2]")
 
