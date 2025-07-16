@@ -8,6 +8,7 @@ src/@ioda/
 src/@oops/
 src/@ufo/
 src/@vader/
+src/
 /.mepo/
 /build/
 /install/

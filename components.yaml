@@ -19,20 +19,6 @@ ecbuild:
   remote: ../ecbuild.git
   tag: geos/v1.4.0
 
-GMAOpyobs:
-  local: ./src/Shared/@GMAOpyobs
-  remote: ../GMAOpyobs.git
-  tag: feature/adasilva/jedi_obsimul
-
-# Jedi repos follow - need releases to replace branches!
-
-# Per Doruk for iodaconv
-# required_repos:
-#  - jedicmake
-#  - oops
-#  - ioda
-#  - iodaconv
-#  - ioda-data
 
 jedi-cmake:
   local: ./@jedi-cmake
@@ -41,56 +27,98 @@ jedi-cmake:
   recurse_submodules: true
 
 oops:
-  local: ./src/@oops
-  remote: https://github.com/JCSDA/oops
-  branch: develop
+  local:     ./src/oops
+  remote:    https://github.com/JCSDA/oops
+  branch:    develop
 
-ioda-data:
-  local: ./data/ioda-data
-  remote: https://github.com/JCSDA-internal/ioda-data
-  branch: develop
-
-ioda:
-  local: ./src/@ioda
-  remote: https://github.com/JCSDA/ioda
-  branch: develop
-
-ioda-converters:
-  local: ./src/@ioda-converters
-  remote: https://github.com/mathomp4/ioda-converters
-  branch: feature/mepo-support
-
-# Per Doruk for ufo
-# optional_repos:
-#  - ropp-ufo
-#  - geos-aero
-#  - gsw
-#  - crtm
-
-# required_repos:
-#  - jedicmake
-#  - oops
-#  - ioda
-#  - ufo
-#  - ioda-data
-#  - ufo-data
+gsw:
+  local:     ./src/gsw
+  remote:    https://github.com/JCSDA-internal/GSW-Fortran
+  branch:    develop
 
 vader:
-  local: ./src/@vader
-  remote: https://github.com/JCSDA/vader
-  branch: develop
+  local:     ./src/vader
+  remote:    https://github.com/JCSDA/vader
+  branch:    develop
+
+saber:
+  local:     ./src/saber
+  remote:    https://github.com/JCSDA/saber
+  branch:    develop
+
+ioda-data:
+  local:     ./src/ioda-data
+  remote:    https://github.com/JCSDA-internal/ioda-data
+  branch:    develop
+
+ioda:
+  local:     ./src/ioda
+  remote:    https://github.com/JCSDA/ioda
+  branch:    develop
+
+iodaconv:
+  local:     ./src/iodaconv
+  remote:    https://github.com/JCSDA-internal/ioda-converters
+  branch:    develop
 
 crtm:
-  local: ./src/@crtm
-  remote: https://github.com/JCSDA/crtm
+  local:     ./src/crtm
+  remote:    https://github.com/JCSDA-internal/crtm
   tag: v2.4.1-jedi.1
 
-ufo:
-  local: ./src/@ufo
-  remote: https://github.com/mathomp4/ufo
-  branch: feature/mepo-support
-
 ufo-data:
-  local: ./data/ufo-data
-  remote: https://github.com/JCSDA-internal/ufo-data
-  branch: develop
+  local:     ./src/ufo-data
+  remote:    https://github.com/JCSDA-internal/ufo-data
+  branch:    develop
+
+ufo:
+  local:     ./src/ufo
+  remote:    https://github.com/JCSDA/ufo
+  branch:    develop
+
+soca:
+  local:     ./src/soca
+  remote:    https://github.com/JCSDA-internal/soca
+  branch:    develop
+
+fv3-jedi-lm:
+  local:     ./src/fv3-jedi-lm
+  remote:    https://github.com/JCSDA/fv3-jedi-linearmodel
+  branch:    develop
+
+femps:
+  local:     ./src/femps
+  remote:    https://github.com/JCSDA/femps
+  branch:    develop
+
+fv3-jedi-data:
+  local:     ./src/fv3-jedi-data
+  remote:    https://github.com/JCSDA-internal/fv3-jedi-data
+  branch:    develop
+
+fv3-jedi:
+  local:     ./src/fv3-jedi
+  remote:    https://github.com/JCSDA/fv3-jedi
+  branch:    develop
+
+#
+#gsibec:
+#  local:     ./src/gsibec
+#  remote:    https://github.com/GEOS-ESM/GSIbec
+#  tag:       1.2.1 
+#
+#fv3:
+#  local:     ./src/fv3
+#  remote:    https://github.com/JCSDA/GFDL_atmos_cubed_sphere
+#  branch:    develop
+#
+#da-utils:
+#  local:     ./src/da-utils
+#  remote:    https://github.com/NOAA-EMC/DA-utils
+#  branch:    develop
+#
+#geos-aero:
+#  local:     ./src/geos-aero
+#  remote:    https://github.com/JCSDA-internal/geos-aero
+#  branch:    develop
+#

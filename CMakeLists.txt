@@ -36,7 +36,7 @@ endforeach ()
 
 include (esma)
 
-list (APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/@jedi-cmake")
+list (APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/jedi-cmake")
 
 ecbuild_declare_project()
 
@@ -62,11 +62,11 @@ if(EXISTS ${CRTM_COEFFICIENTS_DIR})
     )
 
   # first create a directory called 'test-data-release' in the *source* tree
-  file(MAKE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/src/@ufo/test-data-release/crtm)
+  file(MAKE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/src/ufo/test-data-release/crtm)
   # then symlink the data files into that directory
   file(CREATE_LINK
     ${CRTM_COEFFICIENTS_DIR}
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/@ufo/test-data-release/crtm/2.4.1_skylab_4.0
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ufo/test-data-release/crtm/2.4.1_skylab_4.0
     SYMBOLIC
     )
 else()
