@@ -40,6 +40,8 @@ COLLECTIONS:
 #             'geosgcm_tracer'
               'tavg2d_aer_x'
               'tavg3d_aer_p'
+              'ana_prog'
+              'ana_surf'
 #             'const_2d_asm_Nx'
 
 #             Browsing products
@@ -280,17 +282,17 @@ ana_prog.frequency:         010000 ,
 ana_prog.fields:            include(ana_vars.vl)
 ::
     
-ana_slv.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
-ana_slv.archive:          '%c/Y%y4' ,
-ana_slv.format:           'CFIO' ,
-ana_slv.nbits:             12,
-ana_slv.chunks:            180 91 1 1,
-ana_slv.deflate:           1 ,
-ana_slv.grid_label:        PC1440x721-DC ,
-ana_slv.regrid_method:    'BILINEAR',
-ana_slv.ref_time:          210000 ,
-ana_slv.frequency:         010000 ,
-ana_slv.fields:            include(slv_vars.vl)  ##### add w at several levels
+#ana_slv.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
+#ana_slv.archive:          '%c/Y%y4' ,
+#ana_slv.format:           'CFIO' ,
+#ana_slv.nbits:             12,
+#ana_slv.chunks:            180 91 1 1,
+#ana_slv.deflate:           1 ,
+#ana_slv.grid_label:        PC1440x721-DC ,
+#ana_slv.regrid_method:    'BILINEAR',
+#ana_slv.ref_time:          210000 ,
+#ana_slv.frequency:         010000 ,
+#ana_slv.fields:            include(slv_vars.vl)  ##### add w at several levels
 ::
 
 ana_surf.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
@@ -875,6 +877,48 @@ PLATFORM.ssmis_f17::
     var_name_lat:        MetaData/latitude
     var_name_time:       MetaData/dateTime
     file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/ssmis_f17.%y4%m2%d2T%h2%n2%S2Z.nc4
+  ::
+  GEOVALS_SCHEMA::
+    geovals_fields::
+                         include(crtmSampler_vars.vl)
+  ::
+::
+
+PLATFORM.irs_mtg::
+  IODA_SCHEMA::
+    index_name_x:        Location
+    var_name_lon:        MetaData/longitude
+    var_name_lat:        MetaData/latitude
+    var_name_time:       MetaData/dateTime
+    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/irs_mtg.%y4%m2%d2T%h2%n2%S2Z.nc4
+  ::
+  GEOVALS_SCHEMA::
+    geovals_fields::
+                         include(crtmSampler_vars.vl)
+  ::
+::
+
+PLATFORM.gxs_geoxo::
+  IODA_SCHEMA::
+    index_name_x:        Location
+    var_name_lon:        MetaData/longitude
+    var_name_lat:        MetaData/latitude
+    var_name_time:       MetaData/dateTime
+    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/gxs_geoxo.%y4%m2%d2T%h2%n2%S2Z.nc4
+  ::
+  GEOVALS_SCHEMA::
+    geovals_fields::
+                         include(crtmSampler_vars.vl)
+  ::
+::
+
+PLATFORM.ghms_himawari::
+  IODA_SCHEMA::
+    index_name_x:        Location
+    var_name_lon:        MetaData/longitude
+    var_name_lat:        MetaData/latitude
+    var_name_time:       MetaData/dateTime
+    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/ghms_himawari.%y4%m2%d2T%h2%n2%S2Z.nc4
   ::
   GEOVALS_SCHEMA::
     geovals_fields::
