@@ -3,4 +3,6 @@
 instrment types (currently crtm_*.vl are all identical - need to verify that
 this is accurate)
 -To merge the files to generate a file to be used in GEOS, type:
-   m4 HISTORY_OSSE.RC > HISTORY_OSSE.rc 
+   m4 HISTORY_JOSSE.RC > HISTORY_JOSSE.rc
+- .vl : variable list
+- .gl : geometry list

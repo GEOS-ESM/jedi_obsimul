@@ -13,18 +13,50 @@ EXPSRC: GEOSgcm-v12
 #ServerSizeSplit: 81
 #CollectionWriteSplit: 7
 
-#                              -------------------------    
+#                              -------------------------
 #                               Selection of Collections
-#                              -------------------------    
+#                              -------------------------
 
-COLLECTIONS:  
+# non sampler part
+#
+COLLECTIONS:
 
 #             Gridded Output
-#             --------------  
- 
-  
+#             --------------
+              'geosgcm_prog'
+              'geosgcm_surf'
+              'inst_01hr_2d_brs_Nx'
+              'geosgcm_moist'
+              'geosgcm_turb'
+              'geosgcm_gwd'
+#             'geosgcm_tend'
+              'geosgcm_budi'
+              'geosgcm_buda'
+#             'geosgcm_landice'
+#             'geosgcm_meltwtr'
+#             'geosgcm_snowlayer'
+#             'geosgcm_tracer'
+              'tavg2d_aer_x'
+              'tavg3d_aer_p'
+              'ana_prog'
+              'ana_surf'
+#             'const_2d_asm_Nx'
+
+#             Browsing products
+#             -----------------
+             'hwt_30mn_slv_LCC'
+             'hwt_30mn_prs_LCC'
+             'hwt_01hr_slv_LCC'
+             'hwt_01hr_acc_LCC'
+             'inst1_2d_asm_Nx'
+             'tavg1_2d_flx_Nx'
+::
+
+
+qq_full_COLLECTIONS:
+
 #             Gridded Output
-#             --------------  
+#             --------------
               'geosgcm_prog'
               'geosgcm_surf'
               'inst_01hr_2d_brs_Nx'
@@ -53,57 +85,148 @@ COLLECTIONS:
              'inst1_2d_asm_Nx'
              'tavg1_2d_flx_Nx'
 
-    
 #             Sampelers at Obs locations
-#             --------------------------    
-              'jedi'
+#             --------------------------
               'ACtraj'
               'Aeronet'
               'SNDR_ATMS'
-#              'Aqua'
-#              'Terra'
+              'myd04'
+              'mod04'
 #             'ABI_M6C14_Geostationary'  # slow
 #             'ABI_M6C01_Mask'           # slow
-    
+
+
+#              'GeoDisk_ABI_East_2km'
+#              'GeoDisk_ABI_West_2km'
+              'GeoDisk_GXS_East'
+              'GeoDisk_GXS_West'
+              'GeoDisk_GHMS'
+              'GeoDisk_MTG_IRS'
+
+#             Trajectory: 2 Campaigns + JEDI 29 platforms (IODA format)
+#             ---------------------------------------------------------
+              'CAMP2EX'
+              'FIREXAQ'
+              'aircraft'
+              'airs_aqua'
+              'amsr2_gcom-w1'
+              'amsua_aqua'
+              'amsua_metop-b'
+              'amsua_n15'
+              'amsua_n18'
+              'amsua_n19'
+              'atms_n20'
+              'atms_npp'
+              'avhrr3_metop-b'
+              'avhrr3_n18'
+              'avhrr3_n19'
+              'cris-fsr_n20'
+              'cris-fsr_npp'
+              'gmi_gpm'
+              'gps'
+              'iasi_metop-b'
+              'mhs_metop-b'
+              'mhs_n19'
+              'mls55_aura'
+              'omi_aura'
+              'ompsnm_npp'
+              'satwind'
+              'scatwind'
+              'sfc'
+              'sfcship'
+              'sondes'
+              'ssmis_f17'
 ::
 
 
-#                              ----------------------    
+#                              ----------------------
 #                              Grid Definition Macros
-#                              ----------------------    
+#                              ----------------------
 
 # ---
 # N.B.: This set of labels must appear after the main list of COLLECTIONS.
 # ---
-    
-GRID_LABELS: 
+
+
+# non sampler part
+#
+GRID_LABELS:
+#    Global Grids
+#    ------------
+     PC720x361-DC        # 0.5    x 0.625   deg     (<==> c180)
+     PC1440x721-DC       # 0.25   x 0.3125  deg     (<--> c360)
+     PC2880x1441-DC      # 0.125  x 0.0625  deg     (<--> c720)
+#     not used in collections below
+#     PC5760x2881-DC      # 0.0625 x 0.03125 deg     (<--> c1140)
+#    generating c2880 is costly at high core count
+#    PC11520x5761-DC     # 112.5  x 56.25   arcsec  (<--> c2880)
+::
+
+
+
+qq_full_GRID_LABELS:
 
 #    Global Grids
 #    ------------
      PC720x361-DC        # 0.5    x 0.625   deg     (<==> c180)
      PC1440x721-DC       # 0.25   x 0.3125  deg     (<--> c360)
      PC2880x1441-DC      # 0.125  x 0.0625  deg     (<--> c720)
-     PC5760x2881-DC      # 0.0625 x 0.03125 deg     (<--> c1140)
-     PC11520x5761-DC     # 112.5  x 56.25   arcsec  (<--> c2880)
-    
+#     not used in collections below
+#     PC5760x2881-DC      # 0.0625 x 0.03125 deg     (<--> c1140)
+#    generating c2880 is costly at high core count
+#    PC11520x5761-DC     # 112.5  x 56.25   arcsec  (<--> c2880)
+
 #    Sampler Geometries
 #    ------------------
-     #SwathGrid_MYD04
-     #SwathGrid_MOD04
+#     SwathGrid_MYD04
+#     SwathGrid_MOD04
      SwathGrid_ATMS
 
-     #GeoDisk_ABI_East_2km
-     #GeoDisk_ABI_West_2km
-     GeoDisk_GXS_East
-     GeoDisk_GXS_West
-     GeoDisk_GHMS
-     GeoDisk_MTG_IRS
-    
+#     ABI_East_2km
+#     ABI_West_2km
+     GXS_East
+     GXS_West
+     GHMS
+     MTG_IRS
+
+#    Sampler: Trajectory Geometries
+#    ------------------------------
+     CAMP2EX_GEOM
+     FIREXAQ_GEOM
+     aircraft_GEOM
+     airs_aqua_GEOM
+     amsr2_gcom-w1_GEOM
+     amsua_aqua_GEOM
+     amsua_metop-b_GEOM
+     amsua_n15_GEOM
+     amsua_n18_GEOM
+     amsua_n19_GEOM
+     atms_n20_GEOM
+     atms_npp_GEOM
+     avhrr3_metop-b_GEOM
+     avhrr3_n18_GEOM
+     avhrr3_n19_GEOM
+     cris-fsr_n20_GEOM
+     cris-fsr_npp_GEOM
+     gmi_gpm_GEOM
+     gps_GEOM
+     iasi_metop-b_GEOM
+     mhs_metop-b_GEOM
+     mhs_n19_GEOM
+     mls55_aura_GEOM
+     omi_aura_GEOM
+     ompsnm_npp_GEOM
+     satwind_GEOM
+     scatwind_GEOM
+     sfc_GEOM
+     sfcship_GEOM
+     sondes_GEOM
+     ssmis_f17_GEOM
 ::
 
-#                              ------------------------    
+#                              ------------------------
 #                              Grid Geometry Definition
-#                              ------------------------    
+#                              ------------------------
 
 
 PC720x361-DC.GRID_TYPE: LatLon
@@ -140,6 +263,7 @@ PC11520x5761-DC.JM_WORLD:  5761
 PC11520x5761-DC.POLE: PC
 PC11520x5761-DC.DATELINE:  DC
 PC11520x5761-DC.LM: 137
+
 
 #                              ---------------------------
 #                              Sampler Geometry Definition
@@ -186,87 +310,86 @@ SwathGrid_MOD04.tunit:              'seconds since 1993-01-01 00:00:00'
 SwathGrid_MOD04.obs_file_begin:     '2019-07-31T00:00:00'
 SwathGrid_MOD04.obs_file_end:       '2019-11-01T00:00:00'
 SwathGrid_MOD04.obs_file_interval:  '000000 000500'     # yymmdd  hhmmss
-SwathGrid_MOD04.Epoch:               060000                  # 
+SwathGrid_MOD04.Epoch:               060000                  #
 
-GeoDisk_ABI_East_2km.GRID_TYPE:     XY
-GeoDisk_ABI_East_2km.GRIDNAME:      ABI_East_2km
-GeoDisk_ABI_East_2km.index_name_x:  x
-GeoDisk_ABI_East_2km.index_name_y:  y
-GeoDisk_ABI_East_2km.var_name_x:    x
-GeoDisk_ABI_East_2km.var_name_y:    y
-GeoDisk_ABI_East_2km.var_name_proj: goes_imager_projection
-GeoDisk_ABI_East_2km.att_name_proj: longitude_of_projection_origin
-GeoDisk_ABI_East_2km.thin_factor:   1
-GeoDisk_ABI_East_2km.LM:            137
-GeoDisk_ABI_East_2km.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/abi_east_2km_coords.nc4
+ABI_East_2km.GRID_TYPE:     XY
+ABI_East_2km.GRIDNAME:      ABI_East_2km
+ABI_East_2km.index_name_x:  x
+ABI_East_2km.index_name_y:  y
+ABI_East_2km.var_name_x:    x
+ABI_East_2km.var_name_y:    y
+ABI_East_2km.var_name_proj: goes_imager_projection
+ABI_East_2km.att_name_proj: longitude_of_projection_origin
+ABI_East_2km.thin_factor:   1
+ABI_East_2km.LM:            137
+ABI_East_2km.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/abi_east_2km_coords.nc4
 
-GeoDisk_ABI_West_2km.GRID_TYPE:     XY
-GeoDisk_ABI_West_2km.GRIDNAME:      ABI_West_2km
-GeoDisk_ABI_West_2km.index_name_x:  x
-GeoDisk_ABI_West_2km.index_name_y:  y
-GeoDisk_ABI_West_2km.var_name_x:    x
-GeoDisk_ABI_West_2km.var_name_y:    y
-GeoDisk_ABI_West_2km.var_name_proj: goes_imager_projection
-GeoDisk_ABI_West_2km.att_name_proj: longitude_of_projection_origin
-GeoDisk_ABI_West_2km.thin_factor:   1
-GeoDisk_ABI_West_2km.LM:            137
-GeoDisk_ABI_West_2km.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/abi_west_2km_coords.nc4
+ABI_West_2km.GRID_TYPE:     XY
+ABI_West_2km.GRIDNAME:      ABI_West_2km
+ABI_West_2km.index_name_x:  x
+ABI_West_2km.index_name_y:  y
+ABI_West_2km.var_name_x:    x
+ABI_West_2km.var_name_y:    y
+ABI_West_2km.var_name_proj: goes_imager_projection
+ABI_West_2km.att_name_proj: longitude_of_projection_origin
+ABI_West_2km.thin_factor:   1
+ABI_West_2km.LM:            137
+ABI_West_2km.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/abi_west_2km_coords.nc4
 
-GeoDisk_GXS_East.GRID_TYPE:     XY
-GeoDisk_GXS_East.GRIDNAME:      GXS_East
-GeoDisk_GXS_East.index_name_x:  x
-GeoDisk_GXS_East.index_name_y:  y
-GeoDisk_GXS_East.var_name_x:    x
-GeoDisk_GXS_East.var_name_y:    y
-GeoDisk_GXS_East.var_name_proj: goes_imager_projection
-GeoDisk_GXS_East.att_name_proj: longitude_of_projection_origin
-GeoDisk_GXS_East.thin_factor:   1
-GeoDisk_GXS_East.LM:            137
-GeoDisk_GXS_East.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/gxs_east_coords.nc4
+GXS_East.GRID_TYPE:     XY
+GXS_East.GRIDNAME:      GXS_East
+GXS_East.index_name_x:  x
+GXS_East.index_name_y:  y
+GXS_East.var_name_x:    x
+GXS_East.var_name_y:    y
+GXS_East.var_name_proj: goes_imager_projection
+GXS_East.att_name_proj: longitude_of_projection_origin
+GXS_East.thin_factor:   1
+GXS_East.LM:            137
+GXS_East.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/gxs_east_coords.nc4
 
-GeoDisk_GXS_West.GRID_TYPE:     XY
-GeoDisk_GXS_West.GRIDNAME:      GXS_West
-GeoDisk_GXS_West.index_name_x:  x
-GeoDisk_GXS_West.index_name_y:  y
-GeoDisk_GXS_West.var_name_x:    x
-GeoDisk_GXS_West.var_name_y:    y
-GeoDisk_GXS_West.var_name_proj: goes_imager_projection
-GeoDisk_GXS_West.att_name_proj: longitude_of_projection_origin
-GeoDisk_GXS_West.thin_factor:   1
-GeoDisk_GXS_West.LM:            137
-GeoDisk_GXS_West.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/gxs_west_coords.nc4
+GXS_West.GRID_TYPE:     XY
+GXS_West.GRIDNAME:      GXS_West
+GXS_West.index_name_x:  x
+GXS_West.index_name_y:  y
+GXS_West.var_name_x:    x
+GXS_West.var_name_y:    y
+GXS_West.var_name_proj: goes_imager_projection
+GXS_West.att_name_proj: longitude_of_projection_origin
+GXS_West.thin_factor:   1
+GXS_West.LM:            137
+GXS_West.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/gxs_west_coords.nc4
 
-GeoDisk_GHMS.GRID_TYPE:     XY
-GeoDisk_GHMS.GRIDNAME:      GHMS
-GeoDisk_GHMS.index_name_x:  x
-GeoDisk_GHMS.index_name_y:  y
-GeoDisk_GHMS.var_name_x:    x
-GeoDisk_GHMS.var_name_y:    y
-GeoDisk_GHMS.var_name_proj: goes_imager_projection
-GeoDisk_GHMS.att_name_proj: longitude_of_projection_origin
-GeoDisk_GHMS.thin_factor:   1
-GeoDisk_GHMS.LM:            137
-GeoDisk_GHMS.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/ghms_coords.nc4
+GHMS.GRID_TYPE:     XY
+GHMS.GRIDNAME:      GHMS
+GHMS.index_name_x:  x
+GHMS.index_name_y:  y
+GHMS.var_name_x:    x
+GHMS.var_name_y:    y
+GHMS.var_name_proj: goes_imager_projection
+GHMS.att_name_proj: longitude_of_projection_origin
+GHMS.thin_factor:   1
+GHMS.LM:            137
+GHMS.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/ghms_coords.nc4
 
-GeoDisk_MTG_IRS.GRID_TYPE:     XY
-GeoDisk_MTG_IRS.GRIDNAME:      MTG_IRS
-GeoDisk_MTG_IRS.index_name_x:  x
-GeoDisk_MTG_IRS.index_name_y:  y
-GeoDisk_MTG_IRS.var_name_x:    x
-GeoDisk_MTG_IRS.var_name_y:    y
-GeoDisk_MTG_IRS.var_name_proj: goes_imager_projection
-GeoDisk_MTG_IRS.att_name_proj: longitude_of_projection_origin
-GeoDisk_MTG_IRS.thin_factor:   1
-GeoDisk_MTG_IRS.LM:            137
-GeoDisk_MTG_IRS.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/mtg-irs_coords.nc4
+MTG_IRS.GRID_TYPE:     XY
+MTG_IRS.GRIDNAME:      MTG_IRS
+MTG_IRS.index_name_x:  x
+MTG_IRS.index_name_y:  y
+MTG_IRS.var_name_x:    x
+MTG_IRS.var_name_y:    y
+MTG_IRS.var_name_proj: goes_imager_projection
+MTG_IRS.att_name_proj: longitude_of_projection_origin
+MTG_IRS.thin_factor:   1
+MTG_IRS.LM:            137
+MTG_IRS.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/mtg-irs_coords.nc4
 
+include(traj_geom.gl)
 
-
-
-#                              ---------------------------------    
+#                              ---------------------------------
 #                              Definition of Gridded Collections
-#                              ---------------------------------    
-    
+#                              ---------------------------------
+
 # Prognostic variables for analysis verification
 # ----------------------------------------------
 ana_prog.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
@@ -281,7 +404,7 @@ ana_prog.ref_time:          210000 ,
 ana_prog.frequency:         010000 ,
 ana_prog.fields:            include(ana_vars.vl)
 ::
-    
+
 #ana_slv.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
 #ana_slv.archive:          '%c/Y%y4' ,
 #ana_slv.format:           'CFIO' ,
@@ -325,9 +448,9 @@ inst_01hr_2d_brs_Nx.duration:    010000 ,
 inst_01hr_2d_brs_Nx.fields:      include(brs_vars.vl)
 ::
 
-    
+
 # Prognostic variables on pressure levels
-# ---------------------------------------    
+# ---------------------------------------
 geosgcm_prog.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
 geosgcm_prog.archive:          '%c/Y%y4' ,
 geosgcm_prog.format:           'CFIO' ,
@@ -343,9 +466,9 @@ geosgcm_prog.vvars:            'log(PLE)' , 'DYN' ,
 geosgcm_prog.levels:           include(press_48levels.vl)
 geosgcm_prog.fields:           include(prog_vars.vl)
 ::
-  
+
 # Surface diagnostics
-# -------------------  
+# -------------------
 geosgcm_surf.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
 geosgcm_surf.archive:          '%c/Y%y4' ,
 geosgcm_surf.format:           'CFIO' ,
@@ -362,7 +485,7 @@ geosgcm_surf.fields:            include(surf_vars.vl)
 ::
 
 # Moist physics diagnostics
-# -------------------------    
+# -------------------------
 geosgcm_moist.template:        '%y4%m2%d2_%h2%n2z.nc4' ,
 geosgcm_moist.archive:         '%c/Y%y4' ,
 geosgcm_moist.format:          'CFIO' ,
@@ -383,7 +506,7 @@ geosgcm_moist.fields:          include(moist_vars.vl)
 ::
 
 # Turbulence diagnostics
-# ----------------------    
+# ----------------------
 geosgcm_turb.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
 geosgcm_turb.archive:          '%c/Y%y4' ,
 geosgcm_turb.format:           'CFIO' ,
@@ -420,7 +543,7 @@ geosgcm_gwd.frequency:          010000 ,
 geosgcm_gwd.vscale:             100.0 ,
 geosgcm_gwd.vunit:             'hPa' ,
 geosgcm_gwd.vvars:             'log(PLE)' , 'DYN' ,
-geosgcm_gwd.levels:            include(press_48levels.vl) 
+geosgcm_gwd.levels:            include(press_48levels.vl)
 geosgcm_gwd.fields:            include(gwd_vars.vl)
 ::
 
@@ -435,7 +558,7 @@ geosgcm_budi.deflate:           1 ,
 geosgcm_budi.grid_label:        PC720x361-DC ,
 geosgcm_budi.regrid_method:    'CONSERVE',
 geosgcm_budi.frequency:         010000 ,
-geosgcm_budi.fields:            include(budi_vars.vl)        
+geosgcm_budi.fields:            include(budi_vars.vl)
 ::
 
 # Analysis tendencies
@@ -499,571 +622,479 @@ tavg3d_aer_p.fields:          include(aer3Dp_vars.vl)
 ::
 
 
-#                              ---------------------------------    
+#                              ---------------------------------
 #                              Definition of Sampled Collections
-#                              ---------------------------------    
+#                              ---------------------------------
 
-  Aeronet.sampler_spec:       'station'
-  Aeronet.station_id_file:    /discover/nobackup/projects/gmao/aist-nr/data/Station/1_national.csv
-  Aeronet.station_skip_line:  1
-  Aeronet.template:           %y4%m2%d2_%h2%n2z.nc4
-  Aeronet.format:             'CFIO'
-  Aeronet.frequency:          010000,   # when to write
-  Aeronet.duration:           060000,   # time length to update file
-  Aeronet.splitField:         1,
-  Aeronet.regrid_method:      'BILINEAR' ,
-  Aeronet.fields:             include(aerSampler_vars.vl)
+Aeronet.sampler_type:         'station'
+Aeronet.station_id_file:      /discover/nobackup/projects/gmao/aist-nr/data/Station/1_national.csv
+Aeronet.station_skip_line:    1
+Aeronet.template:             %y4%m2%d2_%h2%n2z.nc4
+Aeronet.format:              'CFIO'
+Aeronet.frequency:            010000,
+Aeronet.duration:             060000,
+Aeronet.splitField:           1,
+Aeronet.regrid_method:       'BILINEAR' ,
+Aeronet.fields:               include(aerSampler_vars.vl)
                               include(cldSampler_vars.vl)
                               include(asmSampler_vars.vl)
 ::
 
-
-  SNDR_ATMS.observation_spec:  'Swath'
-  SNDR_ATMS.template:          '%y4%m2%d2_%h2%n2z.nc4',
-  SNDR_ATMS.format:            'CFIO',
-  SNDR_ATMS.frequency:         060000,
-  SNDR_ATMS.grid_label:        SwathGrid_ATMS,
-  SNDR_ATMS.regrid_method:     'BILINEAR' ,
-  SNDR_ATMS.fields:            include(crtmSampler_vars.vl)
+SNDR_ATMS.sampler_type:      'Swath'
+SNDR_ATMS.template:          '%y4%m2%d2_%h2%n2z.nc4',
+SNDR_ATMS.format:            'CFIO',
+SNDR_ATMS.frequency:         060000,
+SNDR_ATMS.grid_label:        SwathGrid_ATMS,
+SNDR_ATMS.regrid_method:     'BILINEAR' ,
+SNDR_ATMS.fields:            include(crtmSampler_vars.vl)
 ::
 
-  myd04.observation_spec:  'Swath'  
-  myd04.template:          '%y4%m2%d2_%h2%n2z.nc4',
-  myd04.format:            'CFIO',
-  myd04.frequency:         060000,               # should not be here
-  myd04.grid_label:        SwathGrid_MYD04,   
-  myd04.regrid_method:     'BILINEAR' ,   
-  myd04.fields:            include(aerSampler_vars.vl)
-                           include(cldSampler_vars.vl)
-                           include(asmSampler_vars.vl)
+myd04.sampler_type:      'Swath'
+myd04.template:          '%y4%m2%d2_%h2%n2z.nc4',
+myd04.format:            'CFIO',
+myd04.frequency:         060000,               # should not be here; (=Epoch)
+myd04.grid_label:        SwathGrid_MYD04,
+myd04.regrid_method:     'BILINEAR' ,
+myd04.fields:            include(aerSampler_vars.vl)
+                         include(cldSampler_vars.vl)
+                         include(asmSampler_vars.vl)
 ::
 
-  mod04.observation_spec:  'Swath'
-  mod04.template:          '%y4%m2%d2_%h2%n2z.nc4',
-  mod04.format:            'CFIO',
-  mod04.frequency:         060000,
-  mod04.grid_label:        SwathGrid_MOD04,
-  mod04.regrid_method:     'BILINEAR' ,
-  mod04.fields:            include(aerSampler_vars.vl)
-                           include(cldSampler_vars.vl)
-                           include(asmSampler_vars.vl)
+mod04.sampler_type:      'Swath'
+mod04.template:          '%y4%m2%d2_%h2%n2z.nc4',
+mod04.format:            'CFIO',
+mod04.frequency:         060000,              #  (=Epoch)
+mod04.grid_label:        SwathGrid_MOD04,
+mod04.regrid_method:     'BILINEAR' ,
+mod04.fields:            include(aerSampler_vars.vl)
+                         include(cldSampler_vars.vl)
+                         include(asmSampler_vars.vl)
 ::
 
-  ACtraj.sampler_spec:       trajectory
-  ACtraj.ObsPlatforms:       CAMP2EX  FIREXAQ
-  ACtraj.template:           '%y4%m2%d2_%h2%n2z.nc4',
-  ACtraj.format:             'CFIO',
-  ACtraj.obs_file_begin:     2019-07-31T00:00:00
-  ACtraj.obs_file_interval:  '000001 000000'        #  fixed string format:  yymmdd hhmmss
-  ACtraj.obs_file_end:       2019-11-01T00:00:00
-  ACtraj.Epoch:              240000                 #  fixed integer format:  hhmmss
-  ACtraj.regrid_method:      'BILINEAR' ,
-  ACtraj.splitField: 1
-::           
 
+#                              -----------------------------------------------------
+#                              Trajectory Collections (2 Campaign + 29 IODA platforms)
+#                              -----------------------------------------------------
 
-  jedi.sampler_spec:         trajectory
-  jedi.ObsPlatforms:         aircraft airs_aqua amsr2_gcom-w1 amsua_aqua amsua_metop-b amsua_n15 amsua_n18 amsua_n19 atms_n20 atms_npp avhrr3_metop-b avhrr3_n18 avhrr3_n19 cris-fsr_n20 cris-fsr_npp gmi_gpm gps iasi_metop-b mhs_metop-b mhs_n19 mls55_aura omi_aura ompsnm_npp satwind scatwind sfc sfcship sondes ssmis_f17
-  jedi.template:             '%y4%m2%d2_%h2%n2z.nc4',
-  jedi.format:               'CFIO',
-  jedi.obs_file_begin:       2019-07-31T21:00:00
-  jedi.obs_file_interval:    '000000 060000'    #  fixed string format:  yymmdd hhmmss
-  jedi.obs_file_end:         2019-11-01T00:00:00
-  jedi.Epoch:                060000             #  fixed integer format:  hhmmss
-  jedi.use_NWP_1_file:       .true.
-  jedi.restore_2_obs_vector: .true.
-  jedi.regrid_method:        'BILINEAR' ,
-  jedi.splitField:           1,
+schema.version:   1
+
+Trajectory_Schema::
+IODA.index:       Location                # name for index
+IODA.lon:         MetaData/longitude      #          lon
+IODA.lat:         MetaData/latitude       #          lat
+IODA.time:        MetaData/dateTime       #          time
+IODA.reftime:     2019-07-31T21:00:00     # reference synoptic time
+IODA.frequency:   '000000 060000'         # frequency of ioda files
+
+MACIE.index:      time
+MACIE.lon:        trjLon
+MACIE.lat:        trjLat
+MACIE.time:       time
+MACIE.reftime:    2019-07-31T00:00:00
+MACIE.frequency:  '000001 000000'
 ::
 
-#                              -------------------------    
-#                              JEDI Platform Definitions
-#                              -------------------------
 
-    
-DEFINE_OBS_PLATFORM::
-
-PLATFORM.CAMP2EX::
-  IODA_SCHEMA::
-    index_name_x:     time
-    var_name_lon:     trjLon
-    var_name_lat:     trjLat
-    var_name_time:    time
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/CAMP2EX/sampled/P3B/GEOS-FP/%y4-%m2-%d2/CAMP2Ex-GEOS-FP-adg-Nx-P3B_Model_%y4%m2%d2_R1.nc
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+CAMP2EX.sampler_type:       trajectory
+CAMP2EX.grid_label:         CAMP2EX_GEOM
+CAMP2EX.template:          '%y4%m2%d2_%h2%n2z.nc4',
+CAMP2EX.format:            'CFIO',
+CAMP2EX.Epoch:              480000
+CAMP2EX.regrid_method:     'BILINEAR' ,
+CAMP2EX.splitField:           1,
+CAMP2EX.fields:
                       include(aerSampler_vars.vl)
                       include(cldSampler_vars.vl)
                       include(asmSampler_vars.vl)
-    ::
-  ::
 ::
 
-PLATFORM.FIREXAQ::
-  IODA_SCHEMA::
-    index_name_x:       time
-    var_name_lon:       trjLon
-    var_name_lat:       trjLat
-    var_name_time:      time
-    file_name_template: /discover/nobackup/projects/gmao/aist-nr/data/FIREX-AQ/sampled/DC8/GEOS-FP/%y4-%m2-%d2/FIREXAQ-GEOS-FP-adg-Nx-DC8_Model_%y4%m2%d2_R1.nc
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
-                         include(aerSampler_vars.vl)
-                         include(cldSampler_vars.vl)
-                         include(asmSampler_vars.vl)
-    ::
-  ::
+FIREXAQ.sampler_type:       trajectory
+FIREXAQ.grid_label:         CAMP2EX_GEOM
+FIREXAQ.template:          '%y4%m2%d2_%h2%n2z.nc4',
+FIREXAQ.format:            'CFIO',
+FIREXAQ.Epoch:              480000
+FIREXAQ.regrid_method:     'BILINEAR' ,
+FIREXAQ.splitField:           1,
+FIREXAQ.fields:
+                      include(aerSampler_vars.vl)
+                      include(cldSampler_vars.vl)
+                      include(asmSampler_vars.vl)
 ::
 
-PLATFORM.airs_aqua::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/airs_aqua.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields:: 
+
+aircraft.sampler_type:         trajectory
+aircraft.grid_label:           aircraft_GEOM
+aircraft.template:            '%y4%m2%d2_%h2%n2z.nc4',
+aircraft.format:              'CFIO',
+aircraft.Epoch:                060000
+aircraft.use_NWP_1_file:       .true.
+aircraft.restore_2_obs_vector: .true.
+aircraft.regrid_method:        'BILINEAR' ,
+aircraft.splitField:            1,
+aircraft.fields:
                          include(crtmSampler_vars.vl)
-    ::
 ::
 
-PLATFORM.cris-fsr_n20::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/cris-fsr_n20.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+airs_aqua.sampler_type:         trajectory
+airs_aqua.grid_label:           airs_aqua_GEOM
+airs_aqua.template:            '%y4%m2%d2_%h2%n2z.nc4',
+airs_aqua.format:              'CFIO',
+airs_aqua.Epoch:                060000
+airs_aqua.use_NWP_1_file:       .true.
+airs_aqua.restore_2_obs_vector: .true.
+airs_aqua.regrid_method:        'BILINEAR' ,
+airs_aqua.splitField:            1,
+airs_aqua.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.cris-fsr_npp::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/cris-fsr_npp.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+amsr2_gcom-w1.sampler_type:         trajectory
+amsr2_gcom-w1.grid_label:           amsr2_gcom-w1_GEOM
+amsr2_gcom-w1.template:            '%y4%m2%d2_%h2%n2z.nc4',
+amsr2_gcom-w1.format:              'CFIO',
+amsr2_gcom-w1.Epoch:                060000
+amsr2_gcom-w1.use_NWP_1_file:       .true.
+amsr2_gcom-w1.restore_2_obs_vector: .true.
+amsr2_gcom-w1.regrid_method:        'BILINEAR' ,
+amsr2_gcom-w1.splitField:            1,
+amsr2_gcom-w1.fields:
                          include(crtmSampler_vars.vl)
-
-  ::
 ::
 
-PLATFORM.iasi_metop-b::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/iasi_metop-b.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+amsua_aqua.sampler_type:         trajectory
+amsua_aqua.grid_label:           amsua_aqua_GEOM
+amsua_aqua.template:            '%y4%m2%d2_%h2%n2z.nc4',
+amsua_aqua.format:              'CFIO',
+amsua_aqua.Epoch:                060000
+amsua_aqua.use_NWP_1_file:       .true.
+amsua_aqua.restore_2_obs_vector: .true.
+amsua_aqua.regrid_method:        'BILINEAR' ,
+amsua_aqua.splitField:            1,
+amsua_aqua.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.amsua_aqua::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/amsua_aqua.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+amsua_metop-b.sampler_type:         trajectory
+amsua_metop-b.grid_label:           amsua_metop-b_GEOM
+amsua_metop-b.template:            '%y4%m2%d2_%h2%n2z.nc4',
+amsua_metop-b.format:              'CFIO',
+amsua_metop-b.Epoch:                060000
+amsua_metop-b.use_NWP_1_file:       .true.
+amsua_metop-b.restore_2_obs_vector: .true.
+amsua_metop-b.regrid_method:        'BILINEAR' ,
+amsua_metop-b.splitField:            1,
+amsua_metop-b.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.amsua_metop-b::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/amsua_metop-b.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+amsua_n15.sampler_type:         trajectory
+amsua_n15.grid_label:           amsua_n15_GEOM
+amsua_n15.template:            '%y4%m2%d2_%h2%n2z.nc4',
+amsua_n15.format:              'CFIO',
+amsua_n15.Epoch:                060000
+amsua_n15.use_NWP_1_file:       .true.
+amsua_n15.restore_2_obs_vector: .true.
+amsua_n15.regrid_method:        'BILINEAR' ,
+amsua_n15.splitField:            1,
+amsua_n15.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.amsua_n15::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/amsua_n15.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+amsua_n18.sampler_type:         trajectory
+amsua_n18.grid_label:           amsua_n18_GEOM
+amsua_n18.template:            '%y4%m2%d2_%h2%n2z.nc4',
+amsua_n18.format:              'CFIO',
+amsua_n18.Epoch:                060000
+amsua_n18.use_NWP_1_file:       .true.
+amsua_n18.restore_2_obs_vector: .true.
+amsua_n18.regrid_method:        'BILINEAR' ,
+amsua_n18.splitField:            1,
+amsua_n18.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.amsua_n18::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/amsua_n18.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+amsua_n19.sampler_type:         trajectory
+amsua_n19.grid_label:           amsua_n19_GEOM
+amsua_n19.template:            '%y4%m2%d2_%h2%n2z.nc4',
+amsua_n19.format:              'CFIO',
+amsua_n19.Epoch:                060000
+amsua_n19.use_NWP_1_file:       .true.
+amsua_n19.restore_2_obs_vector: .true.
+amsua_n19.regrid_method:        'BILINEAR' ,
+amsua_n19.splitField:            1,
+amsua_n19.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.amsua_n19::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/amsua_n19.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+atms_n20.sampler_type:         trajectory
+atms_n20.grid_label:           atms_n20_GEOM
+atms_n20.template:            '%y4%m2%d2_%h2%n2z.nc4',
+atms_n20.format:              'CFIO',
+atms_n20.Epoch:                060000
+atms_n20.use_NWP_1_file:       .true.
+atms_n20.restore_2_obs_vector: .true.
+atms_n20.regrid_method:        'BILINEAR' ,
+atms_n20.splitField:            1,
+atms_n20.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.amsr2_gcom-w1::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/amsr2_gcom-w1.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+atms_npp.sampler_type:         trajectory
+atms_npp.grid_label:           atms_npp_GEOM
+atms_npp.template:            '%y4%m2%d2_%h2%n2z.nc4',
+atms_npp.format:              'CFIO',
+atms_npp.Epoch:                060000
+atms_npp.use_NWP_1_file:       .true.
+atms_npp.restore_2_obs_vector: .true.
+atms_npp.regrid_method:        'BILINEAR' ,
+atms_npp.splitField:            1,
+atms_npp.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.atms_n20::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/atms_n20.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+avhrr3_metop-b.sampler_type:         trajectory
+avhrr3_metop-b.grid_label:           avhrr3_metop-b_GEOM
+avhrr3_metop-b.template:            '%y4%m2%d2_%h2%n2z.nc4',
+avhrr3_metop-b.format:              'CFIO',
+avhrr3_metop-b.Epoch:                060000
+avhrr3_metop-b.use_NWP_1_file:       .true.
+avhrr3_metop-b.restore_2_obs_vector: .true.
+avhrr3_metop-b.regrid_method:        'BILINEAR' ,
+avhrr3_metop-b.splitField:            1,
+avhrr3_metop-b.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.atms_npp::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/atms_npp.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+avhrr3_n18.sampler_type:         trajectory
+avhrr3_n18.grid_label:           avhrr3_n18_GEOM
+avhrr3_n18.template:            '%y4%m2%d2_%h2%n2z.nc4',
+avhrr3_n18.format:              'CFIO',
+avhrr3_n18.Epoch:                060000
+avhrr3_n18.use_NWP_1_file:       .true.
+avhrr3_n18.restore_2_obs_vector: .true.
+avhrr3_n18.regrid_method:        'BILINEAR' ,
+avhrr3_n18.splitField:            1,
+avhrr3_n18.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.avhrr3_metop-b::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/avhrr3_metop-b.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+avhrr3_n19.sampler_type:         trajectory
+avhrr3_n19.grid_label:           avhrr3_n19_GEOM
+avhrr3_n19.template:            '%y4%m2%d2_%h2%n2z.nc4',
+avhrr3_n19.format:              'CFIO',
+avhrr3_n19.Epoch:                060000
+avhrr3_n19.use_NWP_1_file:       .true.
+avhrr3_n19.restore_2_obs_vector: .true.
+avhrr3_n19.regrid_method:        'BILINEAR' ,
+avhrr3_n19.splitField:            1,
+avhrr3_n19.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.avhrr3_n18::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/avhrr3_n18.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+cris-fsr_n20.sampler_type:         trajectory
+cris-fsr_n20.grid_label:           cris-fsr_n20_GEOM
+cris-fsr_n20.template:            '%y4%m2%d2_%h2%n2z.nc4',
+cris-fsr_n20.format:              'CFIO',
+cris-fsr_n20.Epoch:                060000
+cris-fsr_n20.use_NWP_1_file:       .true.
+cris-fsr_n20.restore_2_obs_vector: .true.
+cris-fsr_n20.regrid_method:        'BILINEAR' ,
+cris-fsr_n20.splitField:            1,
+cris-fsr_n20.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.avhrr3_n19::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/avhrr3_n19.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+cris-fsr_npp.sampler_type:         trajectory
+cris-fsr_npp.grid_label:           cris-fsr_npp_GEOM
+cris-fsr_npp.template:            '%y4%m2%d2_%h2%n2z.nc4',
+cris-fsr_npp.format:              'CFIO',
+cris-fsr_npp.Epoch:                060000
+cris-fsr_npp.use_NWP_1_file:       .true.
+cris-fsr_npp.restore_2_obs_vector: .true.
+cris-fsr_npp.regrid_method:        'BILINEAR' ,
+cris-fsr_npp.splitField:            1,
+cris-fsr_npp.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.gmi_gpm::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/gmi_gpm.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+gmi_gpm.sampler_type:         trajectory
+gmi_gpm.grid_label:           gmi_gpm_GEOM
+gmi_gpm.template:            '%y4%m2%d2_%h2%n2z.nc4',
+gmi_gpm.format:              'CFIO',
+gmi_gpm.Epoch:                060000
+gmi_gpm.use_NWP_1_file:       .true.
+gmi_gpm.restore_2_obs_vector: .true.
+gmi_gpm.regrid_method:        'BILINEAR' ,
+gmi_gpm.splitField:            1,
+gmi_gpm.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.mhs_metop-b::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/mhs_metop-b.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+gps.sampler_type:         trajectory
+gps.grid_label:           gps_GEOM
+gps.template:            '%y4%m2%d2_%h2%n2z.nc4',
+gps.format:              'CFIO',
+gps.Epoch:                060000
+gps.use_NWP_1_file:       .true.
+gps.restore_2_obs_vector: .true.
+gps.regrid_method:        'BILINEAR' ,
+gps.splitField:            1,
+gps.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.mhs_n19::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/mhs_n19.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+iasi_metop-b.sampler_type:         trajectory
+iasi_metop-b.grid_label:           iasi_metop-b_GEOM
+iasi_metop-b.template:            '%y4%m2%d2_%h2%n2z.nc4',
+iasi_metop-b.format:              'CFIO',
+iasi_metop-b.Epoch:                060000
+iasi_metop-b.use_NWP_1_file:       .true.
+iasi_metop-b.restore_2_obs_vector: .true.
+iasi_metop-b.regrid_method:        'BILINEAR' ,
+iasi_metop-b.splitField:            1,
+iasi_metop-b.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.ssmis_f17::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/ssmis_f17.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+mhs_metop-b.sampler_type:         trajectory
+mhs_metop-b.grid_label:           mhs_metop-b_GEOM
+mhs_metop-b.template:            '%y4%m2%d2_%h2%n2z.nc4',
+mhs_metop-b.format:              'CFIO',
+mhs_metop-b.Epoch:                060000
+mhs_metop-b.use_NWP_1_file:       .true.
+mhs_metop-b.restore_2_obs_vector: .true.
+mhs_metop-b.regrid_method:        'BILINEAR' ,
+mhs_metop-b.splitField:            1,
+mhs_metop-b.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.irs_mtg::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/irs_mtg.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+mhs_n19.sampler_type:         trajectory
+mhs_n19.grid_label:           mhs_n19_GEOM
+mhs_n19.template:            '%y4%m2%d2_%h2%n2z.nc4',
+mhs_n19.format:              'CFIO',
+mhs_n19.Epoch:                060000
+mhs_n19.use_NWP_1_file:       .true.
+mhs_n19.restore_2_obs_vector: .true.
+mhs_n19.regrid_method:        'BILINEAR' ,
+mhs_n19.splitField:            1,
+mhs_n19.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.gxs_geoxo::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/gxs_geoxo.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+mls55_aura.sampler_type:         trajectory
+mls55_aura.grid_label:           mls55_aura_GEOM
+mls55_aura.template:            '%y4%m2%d2_%h2%n2z.nc4',
+mls55_aura.format:              'CFIO',
+mls55_aura.Epoch:                060000
+mls55_aura.use_NWP_1_file:       .true.
+mls55_aura.restore_2_obs_vector: .true.
+mls55_aura.regrid_method:        'BILINEAR' ,
+mls55_aura.splitField:            1,
+mls55_aura.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.ghms_himawari::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/ghms_himawari.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+omi_aura.sampler_type:         trajectory
+omi_aura.grid_label:           omi_aura_GEOM
+omi_aura.template:            '%y4%m2%d2_%h2%n2z.nc4',
+omi_aura.format:              'CFIO',
+omi_aura.Epoch:                060000
+omi_aura.use_NWP_1_file:       .true.
+omi_aura.restore_2_obs_vector: .true.
+omi_aura.regrid_method:        'BILINEAR' ,
+omi_aura.splitField:            1,
+omi_aura.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.mls55_aura::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/mls55_aura.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+ompsnm_npp.sampler_type:         trajectory
+ompsnm_npp.grid_label:           ompsnm_npp_GEOM
+ompsnm_npp.template:            '%y4%m2%d2_%h2%n2z.nc4',
+ompsnm_npp.format:              'CFIO',
+ompsnm_npp.Epoch:                060000
+ompsnm_npp.use_NWP_1_file:       .true.
+ompsnm_npp.restore_2_obs_vector: .true.
+ompsnm_npp.regrid_method:        'BILINEAR' ,
+ompsnm_npp.splitField:            1,
+ompsnm_npp.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.aircraft::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/aircraft.%y4%m2%d2T%h2%n2%S2Z.nc4
-  :: 
-  GEOVALS_SCHEMA::
-    geovals_fields::
+satwind.sampler_type:         trajectory
+satwind.grid_label:           satwind_GEOM
+satwind.template:            '%y4%m2%d2_%h2%n2z.nc4',
+satwind.format:              'CFIO',
+satwind.Epoch:                060000
+satwind.use_NWP_1_file:       .true.
+satwind.restore_2_obs_vector: .true.
+satwind.regrid_method:        'BILINEAR' ,
+satwind.splitField:            1,
+satwind.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.gps::
-  IODA_SCHEMA::
-    index_name_x:        Location 
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/gps.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+scatwind.sampler_type:         trajectory
+scatwind.grid_label:           scatwind_GEOM
+scatwind.template:            '%y4%m2%d2_%h2%n2z.nc4',
+scatwind.format:              'CFIO',
+scatwind.Epoch:                060000
+scatwind.use_NWP_1_file:       .true.
+scatwind.restore_2_obs_vector: .true.
+scatwind.regrid_method:        'BILINEAR' ,
+scatwind.splitField:            1,
+scatwind.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.omi_aura::
-  IODA_SCHEMA::        
-    index_name_x:        Location     
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/omi_aura.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+sfc.sampler_type:         trajectory
+sfc.grid_label:           sfc_GEOM
+sfc.template:            '%y4%m2%d2_%h2%n2z.nc4',
+sfc.format:              'CFIO',
+sfc.Epoch:                060000
+sfc.use_NWP_1_file:       .true.
+sfc.restore_2_obs_vector: .true.
+sfc.regrid_method:        'BILINEAR' ,
+sfc.splitField:            1,
+sfc.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.ompsnm_npp::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/ompsnm_npp.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+sfcship.sampler_type:         trajectory
+sfcship.grid_label:           sfcship_GEOM
+sfcship.template:            '%y4%m2%d2_%h2%n2z.nc4',
+sfcship.format:              'CFIO',
+sfcship.Epoch:                060000
+sfcship.use_NWP_1_file:       .true.
+sfcship.restore_2_obs_vector: .true.
+sfcship.regrid_method:        'BILINEAR' ,
+sfcship.splitField:            1,
+sfcship.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.satwind::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/satwind.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+sondes.sampler_type:         trajectory
+sondes.grid_label:           sondes_GEOM
+sondes.template:            '%y4%m2%d2_%h2%n2z.nc4',
+sondes.format:              'CFIO',
+sondes.Epoch:                060000
+sondes.use_NWP_1_file:       .true.
+sondes.restore_2_obs_vector: .true.
+sondes.regrid_method:        'BILINEAR' ,
+sondes.splitField:            1,
+sondes.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.scatwind::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/scatwind.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+ssmis_f17.sampler_type:         trajectory
+ssmis_f17.grid_label:           ssmis_f17_GEOM
+ssmis_f17.template:            '%y4%m2%d2_%h2%n2z.nc4',
+ssmis_f17.format:              'CFIO',
+ssmis_f17.Epoch:                060000
+ssmis_f17.use_NWP_1_file:       .true.
+ssmis_f17.restore_2_obs_vector: .true.
+ssmis_f17.regrid_method:        'BILINEAR' ,
+ssmis_f17.splitField:            1,
+ssmis_f17.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
-
-PLATFORM.sfc::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/sfc.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
-                         include(crtmSampler_vars.vl)
-  ::
-::
-
-PLATFORM.sfcship::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/sfcship.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
-                         include(crtmSampler_vars.vl)
-  ::
-::
-
-PLATFORM.sondes::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/sondes.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
-                         include(crtmSampler_vars.vl)
-  ::
-::
-
-

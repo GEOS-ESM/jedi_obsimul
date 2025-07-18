@@ -1,0 +1,123 @@
+CAMP2EX_GEOM.GRID_TYPE:    trajectory
+CAMP2EX_GEOM.schema:       MACIE
+CAMP2EX_GEOM.file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/CAMP2EX/sampled/P3B/GEOS-FP/%y4-%m2-%d2/CAMP2Ex-GEOS-FP-adg-Nx-P3B_Model_%y4%m2%d2_R1.nc
+
+FIREXAQ_GEOM.GRID_TYPE:    trajectory
+FIREXAQ_GEOM.schema:       MACIE
+FIREXAQ_GEOM.file_name_template:   /discover/nobackup/projects/gmao/aist-nr/data/FIREX-AQ/sampled/DC8/GEOS-FP/%y4-%m2-%d2/FIREXAQ-GEOS-FP-adg-Nx-DC8_Model_%y4%m2%d2_R1.nc
+
+aircraft_GEOM.GRID_TYPE:   trajectory
+aircraft_GEOM.schema:      IODA
+aircraft_GEOM.file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/aircraft.%y4%m2%d2T%h2%n2%S2Z.nc4
+
+airs_aqua_GEOM.GRID_TYPE:   trajectory
+airs_aqua_GEOM.schema:      IODA
+airs_aqua_GEOM.file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/airs_aqua.%y4%m2%d2T%h2%n2%S2Z.nc4
+
+amsr2_gcom-w1_GEOM.GRID_TYPE:   trajectory
+amsr2_gcom-w1_GEOM.schema:      IODA
+amsr2_gcom-w1_GEOM.file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/amsr2_gcom-w1.%y4%m2%d2T%h2%n2%S2Z.nc4
+
+amsua_aqua_GEOM.GRID_TYPE:   trajectory
+amsua_aqua_GEOM.schema:      IODA
+amsua_aqua_GEOM.file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/amsua_aqua.%y4%m2%d2T%h2%n2%S2Z.nc4
+
+amsua_metop-b_GEOM.GRID_TYPE:   trajectory
+amsua_metop-b_GEOM.schema:      IODA
+amsua_metop-b_GEOM.file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/amsua_metop-b.%y4%m2%d2T%h2%n2%S2Z.nc4
+
+amsua_n15_GEOM.GRID_TYPE:   trajectory
+amsua_n15_GEOM.schema:      IODA
+amsua_n15_GEOM.file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/amsua_n15.%y4%m2%d2T%h2%n2%S2Z.nc4
+
+amsua_n18_GEOM.GRID_TYPE:   trajectory
+amsua_n18_GEOM.schema:      IODA
+amsua_n18_GEOM.file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/amsua_n18.%y4%m2%d2T%h2%n2%S2Z.nc4
+
+amsua_n19_GEOM.GRID_TYPE:   trajectory
+amsua_n19_GEOM.schema:      IODA
+amsua_n19_GEOM.file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/amsua_n19.%y4%m2%d2T%h2%n2%S2Z.nc4
+
+atms_n20_GEOM.GRID_TYPE:   trajectory
+atms_n20_GEOM.schema:      IODA
+atms_n20_GEOM.file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/atms_n20.%y4%m2%d2T%h2%n2%S2Z.nc4
+
+atms_npp_GEOM.GRID_TYPE:   trajectory
+atms_npp_GEOM.schema:      IODA
+atms_npp_GEOM.file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/atms_npp.%y4%m2%d2T%h2%n2%S2Z.nc4
+
+avhrr3_metop-b_GEOM.GRID_TYPE:   trajectory
+avhrr3_metop-b_GEOM.schema:      IODA
+avhrr3_metop-b_GEOM.file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/avhrr3_metop-b.%y4%m2%d2T%h2%n2%S2Z.nc4
+
+avhrr3_n18_GEOM.GRID_TYPE:   trajectory
+avhrr3_n18_GEOM.schema:      IODA
+avhrr3_n18_GEOM.file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/avhrr3_n18.%y4%m2%d2T%h2%n2%S2Z.nc4
+
+avhrr3_n19_GEOM.GRID_TYPE:   trajectory
+avhrr3_n19_GEOM.schema:      IODA
+avhrr3_n19_GEOM.file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/avhrr3_n19.%y4%m2%d2T%h2%n2%S2Z.nc4
+
+cris-fsr_n20_GEOM.GRID_TYPE:   trajectory
+cris-fsr_n20_GEOM.schema:      IODA
+cris-fsr_n20_GEOM.file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/cris-fsr_n20.%y4%m2%d2T%h2%n2%S2Z.nc4
+
+cris-fsr_npp_GEOM.GRID_TYPE:   trajectory
+cris-fsr_npp_GEOM.schema:      IODA
+cris-fsr_npp_GEOM.file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/cris-fsr_npp.%y4%m2%d2T%h2%n2%S2Z.nc4
+
+gmi_gpm_GEOM.GRID_TYPE:   trajectory
+gmi_gpm_GEOM.schema:      IODA
+gmi_gpm_GEOM.file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/gmi_gpm.%y4%m2%d2T%h2%n2%S2Z.nc4
+
+gps_GEOM.GRID_TYPE:   trajectory
+gps_GEOM.schema:      IODA
+gps_GEOM.file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/gps.%y4%m2%d2T%h2%n2%S2Z.nc4
+
+iasi_metop-b_GEOM.GRID_TYPE:   trajectory
+iasi_metop-b_GEOM.schema:      IODA
+iasi_metop-b_GEOM.file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/iasi_metop-b.%y4%m2%d2T%h2%n2%S2Z.nc4
+
+mhs_metop-b_GEOM.GRID_TYPE:   trajectory
+mhs_metop-b_GEOM.schema:      IODA
+mhs_metop-b_GEOM.file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/mhs_metop-b.%y4%m2%d2T%h2%n2%S2Z.nc4
+
+mhs_n19_GEOM.GRID_TYPE:   trajectory
+mhs_n19_GEOM.schema:      IODA
+mhs_n19_GEOM.file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/mhs_n19.%y4%m2%d2T%h2%n2%S2Z.nc4
+
+mls55_aura_GEOM.GRID_TYPE:   trajectory
+mls55_aura_GEOM.schema:      IODA
+mls55_aura_GEOM.file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/mls55_aura.%y4%m2%d2T%h2%n2%S2Z.nc4
+
+omi_aura_GEOM.GRID_TYPE:   trajectory
+omi_aura_GEOM.schema:      IODA
+omi_aura_GEOM.file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/omi_aura.%y4%m2%d2T%h2%n2%S2Z.nc4
+
+ompsnm_npp_GEOM.GRID_TYPE:   trajectory
+ompsnm_npp_GEOM.schema:      IODA
+ompsnm_npp_GEOM.file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/ompsnm_npp.%y4%m2%d2T%h2%n2%S2Z.nc4
+
+satwind_GEOM.GRID_TYPE:   trajectory
+satwind_GEOM.schema:      IODA
+satwind_GEOM.file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/satwind.%y4%m2%d2T%h2%n2%S2Z.nc4
+
+scatwind_GEOM.GRID_TYPE:   trajectory
+scatwind_GEOM.schema:      IODA
+scatwind_GEOM.file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/scatwind.%y4%m2%d2T%h2%n2%S2Z.nc4
+
+sfc_GEOM.GRID_TYPE:   trajectory
+sfc_GEOM.schema:      IODA
+sfc_GEOM.file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/sfc.%y4%m2%d2T%h2%n2%S2Z.nc4
+
+sfcship_GEOM.GRID_TYPE:   trajectory
+sfcship_GEOM.schema:      IODA
+sfcship_GEOM.file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/sfcship.%y4%m2%d2T%h2%n2%S2Z.nc4
+
+sondes_GEOM.GRID_TYPE:   trajectory
+sondes_GEOM.schema:      IODA
+sondes_GEOM.file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/sondes.%y4%m2%d2T%h2%n2%S2Z.nc4
+
+ssmis_f17_GEOM.GRID_TYPE:   trajectory
+ssmis_f17_GEOM.schema:      IODA
+ssmis_f17_GEOM.file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/ssmis_f17.%y4%m2%d2T%h2%n2%S2Z.nc4
