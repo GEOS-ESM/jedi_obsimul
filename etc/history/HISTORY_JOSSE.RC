@@ -98,10 +98,11 @@ qq_full_COLLECTIONS:
 
 #              'GeoDisk_ABI_East_2km'
 #              'GeoDisk_ABI_West_2km'
+#  very slow
               'GeoDisk_GXS_East'
-              'GeoDisk_GXS_West'
-              'GeoDisk_GHMS'
-              'GeoDisk_MTG_IRS'
+#              'GeoDisk_GXS_West'
+#              'GeoDisk_GHMS'
+#              'GeoDisk_MTG_IRS'
 
 #             Trajectory: 2 Campaigns + JEDI 29 platforms (IODA format)
 #             ---------------------------------------------------------
@@ -337,48 +338,48 @@ ABI_West_2km.LM:            137
 ABI_West_2km.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/abi_west_2km_coords.nc4
 
 GXS_East.GRID_TYPE:     XY
-GXS_East.GRIDNAME:      GXS_East
+GXS_East.GRIDNAME:      GXS_East_algo_ABI
 GXS_East.index_name_x:  x
 GXS_East.index_name_y:  y
 GXS_East.var_name_x:    x
 GXS_East.var_name_y:    y
-GXS_East.var_name_proj: goes_imager_projection
+GXS_East.var_name_proj: projection
 GXS_East.att_name_proj: longitude_of_projection_origin
 GXS_East.thin_factor:   1
 GXS_East.LM:            137
 GXS_East.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/gxs_east_coords.nc4
 
 GXS_West.GRID_TYPE:     XY
-GXS_West.GRIDNAME:      GXS_West
+GXS_West.GRIDNAME:      GXS_West_algo_ABI
 GXS_West.index_name_x:  x
 GXS_West.index_name_y:  y
 GXS_West.var_name_x:    x
 GXS_West.var_name_y:    y
-GXS_West.var_name_proj: goes_imager_projection
+GXS_West.var_name_proj: projection
 GXS_West.att_name_proj: longitude_of_projection_origin
 GXS_West.thin_factor:   1
 GXS_West.LM:            137
 GXS_West.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/gxs_west_coords.nc4
 
 GHMS.GRID_TYPE:     XY
-GHMS.GRIDNAME:      GHMS
+GHMS.GRIDNAME:      GHMS_algo_ABI
 GHMS.index_name_x:  x
 GHMS.index_name_y:  y
 GHMS.var_name_x:    x
 GHMS.var_name_y:    y
-GHMS.var_name_proj: goes_imager_projection
+GHMS.var_name_proj: projection
 GHMS.att_name_proj: longitude_of_projection_origin
 GHMS.thin_factor:   1
 GHMS.LM:            137
 GHMS.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/ghms_coords.nc4
 
 MTG_IRS.GRID_TYPE:     XY
-MTG_IRS.GRIDNAME:      MTG_IRS
+MTG_IRS.GRIDNAME:      MTG_IRS_algo_ABI
 MTG_IRS.index_name_x:  x
 MTG_IRS.index_name_y:  y
 MTG_IRS.var_name_x:    x
 MTG_IRS.var_name_y:    y
-MTG_IRS.var_name_proj: goes_imager_projection
+MTG_IRS.var_name_proj: projection
 MTG_IRS.att_name_proj: longitude_of_projection_origin
 MTG_IRS.thin_factor:   1
 MTG_IRS.LM:            137
@@ -670,6 +671,20 @@ mod04.fields:            include(aerSampler_vars.vl)
                          include(cldSampler_vars.vl)
                          include(asmSampler_vars.vl)
 ::
+
+
+
+#                              -----------------------------------------------------
+#                              Geostationary sampler
+#                              -----------------------------------------------------
+
+GeoDisk_GXS_East.template:    '%y4%m2%d2_%h2%n2z.nc4'
+GeoDisk_GXS_East.format:      'CFIO',
+GeoDisk_GXS_East.frequency:    010000
+GeoDisk_GXS_East.duration:     010000
+GeoDisk_GXS_East.grid_label:   GXS_East
+GeoDisk_GXS_East.splitField:   1,
+GeoDisk_GXS_East.fields:       include(gxs_vars.vl)
 
 
 #                              -----------------------------------------------------
