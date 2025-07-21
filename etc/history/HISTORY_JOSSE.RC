@@ -44,12 +44,12 @@ COLLECTIONS:
 
 #             Browsing products
 #             -----------------
-             'hwt_30mn_slv_LCC'
-             'hwt_30mn_prs_LCC'
-             'hwt_01hr_slv_LCC'
-             'hwt_01hr_acc_LCC'
-             'inst1_2d_asm_Nx'
-             'tavg1_2d_flx_Nx'
+#>             'hwt_30mn_slv_LCC'
+#>             'hwt_30mn_prs_LCC'
+#>             'hwt_01hr_slv_LCC'
+#>             'hwt_01hr_acc_LCC'
+#>             'inst1_2d_asm_Nx'
+#>             'tavg1_2d_flx_Nx'
 ::
 
 
@@ -78,14 +78,14 @@ qq_full_COLLECTIONS:
 
 #             Browsing products
 #             -----------------
-             'hwt_30mn_slv_LCC'
-             'hwt_30mn_prs_LCC'
-             'hwt_01hr_slv_LCC'
-             'hwt_01hr_acc_LCC'
-             'inst1_2d_asm_Nx'
-             'tavg1_2d_flx_Nx'
+#>>             'hwt_30mn_slv_LCC'
+#>>             'hwt_30mn_prs_LCC'
+#>>             'hwt_01hr_slv_LCC'
+#>>             'hwt_01hr_acc_LCC'
+#>>             'inst1_2d_asm_Nx'
+#>>             'tavg1_2d_flx_Nx'
 
-#             Sampelers at Obs locations
+#             Samplers at Obs locations
 #             --------------------------
               'ACtraj'
               'Aeronet'
@@ -597,7 +597,8 @@ tavg2d_aer_x.frequency:       010000,
 # tavg2d_aer_x.ref_time:        210000,
 tavg2d_aer_x.regrid_method:   'CONSERVE',
 tavg2d_aer_x.splitField:      1,
-tavg2d_aer_x.fields:          included(aer2D_vars.vl)
+tavg2d_aer_x.fields:          include(aer2D_vars.vl)
+::
 
 # 3D Aerosol Mixing Ratio
 # -----------------------

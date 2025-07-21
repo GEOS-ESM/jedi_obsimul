@@ -9,10 +9,10 @@
                        'ZLE'            , 'DYN'        , 'H'   ,
                        'PLE'            , 'DYN'        , 
  
-                       'QITOT'          , 'AGCM'       , 'QI'  ,
-                       'QLTOT'          , 'AGCM'       , 'QL'  ,
-                       'QRTOT'          , 'MOIST'      , 'QR'  ,
-                       'QSTOT'          , 'MOIST'      , 'QS'  ,
+                       'QITOT'          , 'AGCM'
+                       'QLTOT'          , 'AGCM'
+                       'QRTOT'          , 'MOIST'
+                       'QSTOT'          , 'MOIST'
 
 #                      Trace gases
 #                      -----------
