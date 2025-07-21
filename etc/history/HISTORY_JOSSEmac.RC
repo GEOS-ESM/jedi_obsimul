@@ -17,125 +17,92 @@ EXPSRC: GEOSgcm-v12
 #                               Selection of Collections
 #                              -------------------------
 
-# non sampler part
-#
+
+## qq_full_COLLECTIONS:
+
 COLLECTIONS:
-
-#             Gridded Output
-#             --------------
+###             Gridded Output
+###             --------------
               'geosgcm_prog'
-              'geosgcm_surf'
-              'inst_01hr_2d_brs_Nx'
-              'geosgcm_moist'
-              'geosgcm_turb'
-              'geosgcm_gwd'
-#             'geosgcm_tend'
-              'geosgcm_budi'
-              'geosgcm_buda'
-#             'geosgcm_landice'
-#             'geosgcm_meltwtr'
-#             'geosgcm_snowlayer'
-#             'geosgcm_tracer'
-              'tavg2d_aer_x'
-              'tavg3d_aer_p'
-              'ana_prog'
-              'ana_surf'
-#             'const_2d_asm_Nx'
-
-#             Browsing products
-#             -----------------
-             'hwt_30mn_slv_LCC'
-             'hwt_30mn_prs_LCC'
-             'hwt_01hr_slv_LCC'
-             'hwt_01hr_acc_LCC'
-             'inst1_2d_asm_Nx'
-             'tavg1_2d_flx_Nx'
-::
-
-
-qq_full_COLLECTIONS:
-
-#             Gridded Output
-#             --------------
-              'geosgcm_prog'
-              'geosgcm_surf'
-              'inst_01hr_2d_brs_Nx'
-              'geosgcm_moist'
-              'geosgcm_turb'
-              'geosgcm_gwd'
-#             'geosgcm_tend'
-              'geosgcm_budi'
-              'geosgcm_buda'
-#             'geosgcm_landice'
-#             'geosgcm_meltwtr'
-#             'geosgcm_snowlayer'
-#             'geosgcm_tracer'
-              'tavg2d_aer_x'
-              'tavg3d_aer_p'
-              'ana_prog'
-              'ana_surf'
-#             'const_2d_asm_Nx'
-
-#             Browsing products
-#             -----------------
-             'hwt_30mn_slv_LCC'
-             'hwt_30mn_prs_LCC'
-             'hwt_01hr_slv_LCC'
-             'hwt_01hr_acc_LCC'
-             'inst1_2d_asm_Nx'
-             'tavg1_2d_flx_Nx'
-
-#             Sampelers at Obs locations
-#             --------------------------
+##              'geosgcm_surf'
+##              'inst_01hr_2d_brs_Nx'
+##              'geosgcm_moist'
+##              'geosgcm_turb'
+##              'geosgcm_gwd'
+###             'geosgcm_tend'
+##              'geosgcm_budi'
+##              'geosgcm_buda'
+###             'geosgcm_landice'
+###             'geosgcm_meltwtr'
+###             'geosgcm_snowlayer'
+###             'geosgcm_tracer'
+##              'tavg2d_aer_x'
+##              'tavg3d_aer_p'
+##              'ana_prog'
+##              'ana_surf'
+###             'const_2d_asm_Nx'
+##
+###             Browsing products
+###             -----------------
+##             'hwt_30mn_slv_LCC'
+##             'hwt_30mn_prs_LCC'
+##             'hwt_01hr_slv_LCC'
+##             'hwt_01hr_acc_LCC'
+##             'inst1_2d_asm_Nx'
+##             'tavg1_2d_flx_Nx'
+##
+###             Sampelers at Obs locations
+###             --------------------------
+              'ACtraj'
               'Aeronet'
               'SNDR_ATMS'
-              'myd04'
-              'mod04'
-#             'ABI_M6C14_Geostationary'  # slow
-#             'ABI_M6C01_Mask'           # slow
-
-
-#              'GeoDisk_ABI_East_2km'
-#              'GeoDisk_ABI_West_2km'
-#  very slow
-              'GeoDisk_GXS_East'
-#              'GeoDisk_GXS_West'
-#              'GeoDisk_GHMS'
-#              'GeoDisk_MTG_IRS'
-
-#             Trajectory: 2 Campaigns + JEDI 29 platforms (IODA format)
-#             ---------------------------------------------------------
-              'CAMP2EX'
-              'FIREXAQ'
-              'aircraft'
-              'airs_aqua'
-              'amsr2_gcom-w1'
-              'amsua_aqua'
-              'amsua_metop-b'
-              'amsua_n15'
-              'amsua_n18'
-              'amsua_n19'
-              'atms_n20'
-              'atms_npp'
-              'avhrr3_metop-b'
-              'avhrr3_n18'
-              'avhrr3_n19'
-              'cris-fsr_n20'
-              'cris-fsr_npp'
-              'gmi_gpm'
-              'gps'
-              'iasi_metop-b'
-              'mhs_metop-b'
-              'mhs_n19'
-              'mls55_aura'
-              'omi_aura'
-              'ompsnm_npp'
-              'satwind'
-              'scatwind'
-              'sfc'
-              'sfcship'
-              'sondes'
-              'ssmis_f17'
+##              'myd04'
+##              'mod04'
+###             'ABI_M6C14_Geostationary'  # slow
+###             'ABI_M6C01_Mask'           # slow
+##
+##
+###              'GeoDisk_ABI_East_2km'
+###              'GeoDisk_ABI_West_2km'
+###  very slow
+##              'GeoDisk_GXS_East'
+###              'GeoDisk_GXS_West'
+###              'GeoDisk_GHMS'
+###              'GeoDisk_MTG_IRS'
+##
+###             Trajectory: 2 Campaigns + JEDI 29 platforms (IODA format)
+###             ---------------------------------------------------------
+##              'CAMP2EX'
+##              'FIREXAQ'
+##              'aircraft'
+##              'airs_aqua'
+##              'amsr2_gcom-w1'
+##              'amsua_aqua'
+##              'amsua_metop-b'
+##              'amsua_n15'
+##              'amsua_n18'
+##              'amsua_n19'
+##              'atms_n20'
+##              'atms_npp'
+##              'avhrr3_metop-b'
+##              'avhrr3_n18'
+##              'avhrr3_n19'
+##              'cris-fsr_n20'
+##              'cris-fsr_npp'
+##              'gmi_gpm'
+##              'gps'
+##              'iasi_metop-b'
+##              'mhs_metop-b'
+##              'mhs_n19'
+##              'mls55_aura'
+##              'omi_aura'
+##              'ompsnm_npp'
+##              'satwind'
+##              'scatwind'
+##              'sfc'
+##              'sfcship'
+##              'sondes'
+##              'ssmis_f17'
 ::
 
 
@@ -278,8 +245,9 @@ SwathGrid_ATMS.var_name_lon:        lon
 SwathGrid_ATMS.var_name_lat:        lat
 SwathGrid_ATMS.var_name_time:       obs_time_tai93
 SwathGrid_ATMS.tunit:               'seconds since 1993-01-01 00:00:00'
-SwathGrid_ATMS.obs_reftime:      '2019-07-31T00:00:00'
-SwathGrid_ATMS.obs_frequency:   '000000 000600'         # yymmdd  hhmmss
+SwathGrid_ATMS.obs_file_begin:      '2019-07-31T00:00:00'
+SwathGrid_ATMS.obs_file_end:        '2019-11-01T23:00:00'
+SwathGrid_ATMS.obs_file_interval:   '000000 000600'         # yymmdd  hhmmss
 SwathGrid_ATMS.Epoch:                060000                 # hhmmss
 
 SwathGrid_MYD04.GRID_TYPE: Swath
@@ -291,8 +259,9 @@ SwathGrid_MYD04.var_name_lon:        'Longitude'
 SwathGrid_MYD04.var_name_lat:        'Latitude'
 SwathGrid_MYD04.var_name_time:       'Scan_Start_Time'
 SwathGrid_MYD04.tunit:               'seconds since 1993-01-01 00:00:00'
-SwathGrid_MYD04.obs_reftime:      '2019-07-31T00:00:00'
-SwathGrid_MYD04.obs_frequency:   '000000 000500'     # yymmdd  hhmmss
+SwathGrid_MYD04.obs_file_begin:      '2019-07-31T00:00:00'
+SwathGrid_MYD04.obs_file_end:        '2019-11-01T00:00:00'
+SwathGrid_MYD04.obs_file_interval:   '000000 000500'     # yymmdd  hhmmss
 SwathGrid_MYD04.Epoch:               060000              #
 
 
@@ -305,8 +274,9 @@ SwathGrid_MOD04.var_name_lon:       'Longitude'
 SwathGrid_MOD04.var_name_lat:       'Latitude'
 SwathGrid_MOD04.var_name_time:      'Scan_Start_Time'
 SwathGrid_MOD04.tunit:              'seconds since 1993-01-01 00:00:00'
-SwathGrid_MOD04.obs_reftime:     '2019-07-31T00:00:00'
-SwathGrid_MOD04.obs_frequency:  '000000 000500'     # yymmdd  hhmmss
+SwathGrid_MOD04.obs_file_begin:     '2019-07-31T00:00:00'
+SwathGrid_MOD04.obs_file_end:       '2019-11-01T00:00:00'
+SwathGrid_MOD04.obs_file_interval:  '000000 000500'     # yymmdd  hhmmss
 SwathGrid_MOD04.Epoch:               060000                  #
 
 ABI_East_2km.GRID_TYPE:     XY
@@ -399,7 +369,7 @@ ana_prog.grid_label:        PC1440x721-DC ,
 ana_prog.regrid_method:    'BILINEAR',
 ana_prog.ref_time:          210000 ,
 ana_prog.frequency:         010000 ,
-ana_prog.fields:            include(ana_vars.vl)
+ana_prog.fields:   var3 ,  "Root" ,
 ::
 
 #ana_slv.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
@@ -426,7 +396,8 @@ ana_surf.mode:             'time-averaged'
 ana_surf.regrid_method:    'CONSERVE',
 ana_surf.ref_time:          210000 ,
 ana_surf.frequency:         010000 ,
-ana_surf.fields:            include(surf_vars.vl)
+ana_surf.fields:
+       var3 ,  "Root" ,
 ::
 
 # Browsing product
@@ -442,7 +413,8 @@ inst_01hr_2d_brs_Nx.template:    '%y4%m2%d2_%h2%n2z.nc4' ,
 inst_01hr_2d_brs_Nx.mode:        'instantaneous' ,
 inst_01hr_2d_brs_Nx.frequency:   010000 ,
 inst_01hr_2d_brs_Nx.duration:    010000 ,
-inst_01hr_2d_brs_Nx.fields:      include(brs_vars.vl)
+inst_01hr_2d_brs_Nx.fields:
+       var3 ,  "Root" ,
 ::
 
 
@@ -461,7 +433,8 @@ geosgcm_prog.vscale:            100.0 ,
 geosgcm_prog.vunit:            'hPa' ,
 geosgcm_prog.vvars:            'log(PLE)' , 'DYN' ,
 geosgcm_prog.levels:           include(press_48levels.vl)
-geosgcm_prog.fields:           include(prog_vars.vl)
+geosgcm_prog.fields:
+       var3 ,  "Root" ,
 ::
 
 # Surface diagnostics
@@ -478,7 +451,8 @@ geosgcm_surf.mode:             'instantaneous' ,
 # geosgcm_surf.monthly:           1 ,
 geosgcm_surf.frequency:         010000 ,
 geosgcm_surf.ref_time:          210000 ,
-geosgcm_surf.fields:            include(surf_vars.vl)
+geosgcm_surf.fields:
+       var3 ,  "Root" ,
 ::
 
 # Moist physics diagnostics
@@ -499,7 +473,8 @@ geosgcm_moist.vscale:           100.0 ,
 geosgcm_moist.vunit:           'hPa' ,
 geosgcm_moist.vvars:           'log(PLE)', 'DYN' ,
 geosgcm_moist.levels:          include(press_48levels.vl)
-geosgcm_moist.fields:          include(moist_vars.vl)
+geosgcm_moist.fields:
+       var3 ,  "Root" ,
 ::
 
 # Turbulence diagnostics
@@ -520,7 +495,8 @@ geosgcm_turb.vscale:            100.0 ,
 geosgcm_turb.vunit:            'hPa' ,
 geosgcm_turb.vvars:            'log(PLE)' , 'DYN' ,
 geosgcm_turb.levels:            include(press_48levels.vl)
-geosgcm_turb.fields:            include(turb_vars.vl)
+geosgcm_turb.fields:
+        var3 ,  "Root" ,
 ::
 
 # Gravity wave drag
@@ -541,7 +517,8 @@ geosgcm_gwd.vscale:             100.0 ,
 geosgcm_gwd.vunit:             'hPa' ,
 geosgcm_gwd.vvars:             'log(PLE)' , 'DYN' ,
 geosgcm_gwd.levels:            include(press_48levels.vl)
-geosgcm_gwd.fields:            include(gwd_vars.vl)
+geosgcm_gwd.fields:
+    var3 ,  "Root" ,
 ::
 
 # Column mass
@@ -555,7 +532,8 @@ geosgcm_budi.deflate:           1 ,
 geosgcm_budi.grid_label:        PC720x361-DC ,
 geosgcm_budi.regrid_method:    'CONSERVE',
 geosgcm_budi.frequency:         010000 ,
-geosgcm_budi.fields:            include(budi_vars.vl)
+geosgcm_budi.fields:
+   var3 ,  "Root" ,
 ::
 
 # Analysis tendencies
@@ -571,7 +549,8 @@ geosgcm_buda.regrid_method:    'CONSERVE',
 geosgcm_buda.mode:             'instantaneous' ,
 #  geosgcm_buda.monthly:           1 ,
 geosgcm_buda.frequency:        010000 ,
-geosgcm_buda.fields:           include(buda_vars.vl)
+geosgcm_buda.fields:
+       var3 ,  "Root" ,
 ::
 
 #                     ---------------------
@@ -594,7 +573,11 @@ tavg2d_aer_x.frequency:       010000,
 # tavg2d_aer_x.ref_time:        210000,
 tavg2d_aer_x.regrid_method:   'CONSERVE',
 tavg2d_aer_x.splitField:      1,
-tavg2d_aer_x.fields:          included(aer2D_vars.vl)
+tavg2d_aer_x.fields:
+  var3 ,  "Root" ,
+  ::
+
+
 
 # 3D Aerosol Mixing Ratio
 # -----------------------
@@ -615,7 +598,8 @@ tavg3d_aer_p.vscale:          100.0,
 tavg3d_aer_p.vunit:          'hPa',
 tavg3d_aer_p.vvars:          'log(PLE)'    , 'DYN'        ,
 tavg3d_aer_p.levels:          include(press_26levels.vl)
-tavg3d_aer_p.fields:          include(aer3Dp_vars.vl)
+tavg3d_aer_p.fields:
+  var3 ,  "Root" ,
 ::
 
 
@@ -632,9 +616,8 @@ Aeronet.frequency:            010000,
 Aeronet.duration:             060000,
 Aeronet.splitField:           1,
 Aeronet.regrid_method:       'BILINEAR' ,
-Aeronet.fields:               include(aerSampler_vars.vl)
-                              include(cldSampler_vars.vl)
-                              include(asmSampler_vars.vl)
+Aeronet.fields:
+   var3 ,  "Root" ,
 ::
 
 SNDR_ATMS.sampler_type:      'Swath'
@@ -643,7 +626,8 @@ SNDR_ATMS.format:            'CFIO',
 SNDR_ATMS.frequency:         060000,
 SNDR_ATMS.grid_label:        SwathGrid_ATMS,
 SNDR_ATMS.regrid_method:     'BILINEAR' ,
-SNDR_ATMS.fields:            include(crtmSampler_vars.vl)
+SNDR_ATMS.fields:
+    var3 ,  "Root" ,
 ::
 
 myd04.sampler_type:      'Swath'
@@ -652,9 +636,8 @@ myd04.format:            'CFIO',
 myd04.frequency:         060000,               # should not be here; (=Epoch)
 myd04.grid_label:        SwathGrid_MYD04,
 myd04.regrid_method:     'BILINEAR' ,
-myd04.fields:            include(aerSampler_vars.vl)
-                         include(cldSampler_vars.vl)
-                         include(asmSampler_vars.vl)
+myd04.fields:
+      var3 ,  "Root" ,
 ::
 
 mod04.sampler_type:      'Swath'
@@ -663,9 +646,8 @@ mod04.format:            'CFIO',
 mod04.frequency:         060000,              #  (=Epoch)
 mod04.grid_label:        SwathGrid_MOD04,
 mod04.regrid_method:     'BILINEAR' ,
-mod04.fields:            include(aerSampler_vars.vl)
-                         include(cldSampler_vars.vl)
-                         include(asmSampler_vars.vl)
+mod04.fields:
+     var3 ,  "Root" ,
 ::
 
 
@@ -680,7 +662,9 @@ GeoDisk_GXS_East.frequency:    010000
 GeoDisk_GXS_East.duration:     010000
 GeoDisk_GXS_East.grid_label:   GXS_East
 GeoDisk_GXS_East.splitField:   1,
-GeoDisk_GXS_East.fields:       include(gxs_vars.vl)
+GeoDisk_GXS_East.fields:
+   var3 ,  "Root" ,
+   ::
 
 
 #                              -----------------------------------------------------
@@ -694,15 +678,15 @@ IODA.index:       Location                # name for index
 IODA.lon:         MetaData/longitude      #          lon
 IODA.lat:         MetaData/latitude       #          lat
 IODA.time:        MetaData/dateTime       #          time
-IODA.obs_reftime:     2019-07-31T21:00:00     # reference synoptic time
-IODA.obs_frequency:   '000000 060000'         # frequency of ioda files
+IODA.reftime:     2019-07-31T21:00:00     # reference synoptic time
+IODA.frequency:   '000000 060000'         # frequency of ioda files
 
 MACIE.index:      time
 MACIE.lon:        trjLon
 MACIE.lat:        trjLat
 MACIE.time:       time
-MACIE.obs_reftime:    2019-07-31T00:00:00
-MACIE.obs_frequency:  '000001 000000'
+MACIE.reftime:    2019-07-31T00:00:00
+MACIE.frequency:  '000001 000000'
 ::
 
 
@@ -714,9 +698,7 @@ CAMP2EX.Epoch:              480000
 CAMP2EX.regrid_method:     'BILINEAR' ,
 CAMP2EX.splitField:           1,
 CAMP2EX.fields:
-                      include(aerSampler_vars.vl)
-                      include(cldSampler_vars.vl)
-                      include(asmSampler_vars.vl)
+   var3 ,  "Root" ,
 ::
 
 FIREXAQ.sampler_type:       trajectory
@@ -727,9 +709,7 @@ FIREXAQ.Epoch:              480000
 FIREXAQ.regrid_method:     'BILINEAR' ,
 FIREXAQ.splitField:           1,
 FIREXAQ.fields:
-                      include(aerSampler_vars.vl)
-                      include(cldSampler_vars.vl)
-                      include(asmSampler_vars.vl)
+    var3 ,  "Root" ,
 ::
 
 
@@ -743,7 +723,7 @@ aircraft.restore_2_obs_vector: .true.
 aircraft.regrid_method:        'BILINEAR' ,
 aircraft.splitField:            1,
 aircraft.fields:
-                         include(crtmSampler_vars.vl)
+  var3 ,  "Root" ,
 ::
 
 airs_aqua.sampler_type:         trajectory
