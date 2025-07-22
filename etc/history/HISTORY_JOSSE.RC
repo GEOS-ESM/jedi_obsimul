@@ -315,7 +315,7 @@ ABI_East_2km.var_name_x:    x
 ABI_East_2km.var_name_y:    y
 ABI_East_2km.var_name_proj: projection
 ABI_East_2km.att_name_proj: longitude_of_projection_origin
-ABI_East_2km.thin_factor:   1
+ABI_East_2km.thin_factor:   14
 ABI_East_2km.LM:            137
 ABI_East_2km.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/abi_east_2km_coords.nc4
 
@@ -327,7 +327,7 @@ ABI_West_2km.var_name_x:    x
 ABI_West_2km.var_name_y:    y
 ABI_West_2km.var_name_proj: projection
 ABI_West_2km.att_name_proj: longitude_of_projection_origin
-ABI_West_2km.thin_factor:   1
+ABI_West_2km.thin_factor:   14
 ABI_West_2km.LM:            137
 ABI_West_2km.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/abi_west_2km_coords.nc4
 
@@ -339,7 +339,7 @@ GXS_East.var_name_x:    x
 GXS_East.var_name_y:    y
 GXS_East.var_name_proj: projection
 GXS_East.att_name_proj: longitude_of_projection_origin
-GXS_East.thin_factor:   1
+GXS_East.thin_factor:   7
 GXS_East.LM:            137
 GXS_East.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/gxs_east_coords.nc4
 
@@ -351,7 +351,7 @@ GXS_West.var_name_x:    x
 GXS_West.var_name_y:    y
 GXS_West.var_name_proj: projection
 GXS_West.att_name_proj: longitude_of_projection_origin
-GXS_West.thin_factor:   1
+GXS_West.thin_factor:   7
 GXS_West.LM:            137
 GXS_West.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/gxs_west_coords.nc4
 
@@ -363,7 +363,7 @@ GHMS.var_name_x:    x
 GHMS.var_name_y:    y
 GHMS.var_name_proj: projection
 GHMS.att_name_proj: longitude_of_projection_origin
-GHMS.thin_factor:   1
+GHMS.thin_factor:   7
 GHMS.LM:            137
 GHMS.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/ghms_coords.nc4
 
@@ -375,7 +375,7 @@ MTG_IRS.var_name_x:    x
 MTG_IRS.var_name_y:    y
 MTG_IRS.var_name_proj: projection
 MTG_IRS.att_name_proj: longitude_of_projection_origin
-MTG_IRS.thin_factor:   1
+MTG_IRS.thin_factor:   7
 MTG_IRS.LM:            137
 MTG_IRS.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/mtg-irs_coords.nc4
 
@@ -642,6 +642,7 @@ SNDR_ATMS.format:            'CFIO',
 SNDR_ATMS.frequency:         060000,
 SNDR_ATMS.grid_label:        SwathGrid_ATMS,
 SNDR_ATMS.regrid_method:     'BILINEAR' ,
+SNDR_ATMS.splitField:        1,
 SNDR_ATMS.fields:            include(crtmSampler_vars.vl)
 ::
 
@@ -651,6 +652,7 @@ myd04.format:            'CFIO',
 myd04.frequency:         060000,               # code defect (must equals Epoch)
 myd04.grid_label:        SwathGrid_MYD04,
 myd04.regrid_method:     'BILINEAR' ,
+myd04.splitField:        1,
 myd04.fields:            include(aerSampler_vars.vl)
                          include(cldSampler_vars.vl)
                          include(asmSampler_vars.vl)
@@ -662,6 +664,7 @@ mod04.format:            'CFIO',
 mod04.frequency:         060000,              #  (=Epoch)
 mod04.grid_label:        SwathGrid_MOD04,
 mod04.regrid_method:     'BILINEAR' ,
+mod04.splitField:        1,
 mod04.fields:            include(aerSampler_vars.vl)
                          include(cldSampler_vars.vl)
                          include(asmSampler_vars.vl)
@@ -678,7 +681,7 @@ GeoDisk_GXS_East.frequency:    010000
 GeoDisk_GXS_East.duration:     010000
 GeoDisk_GXS_East.grid_label:   GXS_East
 GeoDisk_GXS_East.splitField:   1,
-GeoDisk_GXS_East.fields:       include(gxs_vars.vl)
+GeoDisk_GXS_East.fields:       include(crtmSampler_vars.vl)
 ::
 
 GeoDisk_GXS_West.template:    '%y4%m2%d2_%h2%n2z.nc4'
@@ -687,7 +690,7 @@ GeoDisk_GXS_West.frequency:    010000
 GeoDisk_GXS_West.duration:     010000
 GeoDisk_GXS_West.grid_label:   GXS_West
 GeoDisk_GXS_West.splitField:   1,
-GeoDisk_GXS_West.fields:       include(gxs_vars.vl)
+GeoDisk_GXS_West.fields:       include(crtmSampler_vars.vl)
 ::
 
 GeoDisk_GHMS.template:    '%y4%m2%d2_%h2%n2z.nc4'
@@ -696,7 +699,7 @@ GeoDisk_GHMS.frequency:    010000
 GeoDisk_GHMS.duration:     010000
 GeoDisk_GHMS.grid_label:   GHMS
 GeoDisk_GHMS.splitField:   1,
-GeoDisk_GHMS.fields:       include(gxs_vars.vl)
+GeoDisk_GHMS.fields:       include(crtmSampler_vars.vl)
 ::
 
 GeoDisk_MTG_IRS.template:    '%y4%m2%d2_%h2%n2z.nc4'
@@ -705,7 +708,7 @@ GeoDisk_MTG_IRS.frequency:    010000
 GeoDisk_MTG_IRS.duration:     010000
 GeoDisk_MTG_IRS.grid_label:   MTG_IRS
 GeoDisk_MTG_IRS.splitField:   1,
-GeoDisk_MTG_IRS.fields:       include(gxs_vars.vl)
+GeoDisk_MTG_IRS.fields:       include(crtmSampler_vars.vl)
 ::
 
 
@@ -713,7 +716,7 @@ GeoDisk_MTG_IRS.fields:       include(gxs_vars.vl)
 #                              Mask sampler
 #                              -----------------------------------------------------
 
-ABI_M6C01_Mask.sampler_type:        'mask'           # 'mask_geosat'
+ABI_M6C01_Mask.sampler_type:        'mask'           # 'mask_geosat'   1-km res
 ABI_M6C01_Mask.obs_file_begin:      '2019-07-31T00:00:00'
 ABI_M6C01_Mask.obs_file_end:        '2019-11-01T00:00:00'
 ABI_M6C01_Mask.obs_file_interval:   '000000 001000'     # yymmdd  hhmmss
@@ -724,13 +727,14 @@ ABI_M6C01_Mask.var_name_x:           x
 ABI_M6C01_Mask.var_name_y:           y
 ABI_M6C01_Mask.var_name_proj:        goes_imager_projection
 ABI_M6C01_Mask.att_name_proj:        longitude_of_projection_origin
-ABI_M6C01_Mask.thin_factor:          10
+ABI_M6C01_Mask.thin_factor:          30
 ABI_M6C01_Mask.template:             '%y4%m2%d2_%h2%n2z.nc4',
 ABI_M6C01_Mask.format:               'CFIO',
 ABI_M6C01_Mask.frequency:            010000,
 ABI_M6C01_Mask.duration:             010000,
 ABI_M6C01_Mask.regrid_method:        'BILINEAR' ,
-ABI_M6C01_Mask.fields:               include (aerNv_vars.vl)
+ABI_M6C01_Mask.splitField:           1,
+ABI_M6C01_Mask.fields:               include(crtmSampler_vars.vl)
 ::
 
 
@@ -779,7 +783,7 @@ FIREXAQ.regrid_method:     'BILINEAR' ,
 FIREXAQ.splitField:           1,
 FIREXAQ.fields:
                       include(aerSampler_vars.vl)
-                      include(cldSampler_vars.vl)
+                      Include(cldSampler_Vars.vl)
                       include(asmSampler_vars.vl)
 ::
 
