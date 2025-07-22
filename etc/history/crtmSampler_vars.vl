@@ -2,13 +2,15 @@
 # crtm_ir.vl:  Generic geophysical variables for CRTM IR sensors.
 #
 
-                       'U;V'            , 'DYN'        , 
-                       'T'              , 'DYN'        , 
-                       'DELP'           , 'DYN'        , 
+#                       'U;V'            , 'DYN'        ,
+                       'U'            , 'DYN'        ,
+                       'V'            , 'DYN'        ,
+                       'T'              , 'DYN'        ,
+                       'DELP'           , 'DYN'        ,
                        'Q'              , 'MOIST'      , 'QV'  ,
                        'ZLE'            , 'DYN'        , 'H'   ,
-                       'PLE'            , 'DYN'        , 
- 
+                       'PLE'            , 'DYN'        ,
+
                        'QITOT'          , 'AGCM'
                        'QLTOT'          , 'AGCM'
                        'QRTOT'          , 'MOIST'
@@ -18,40 +20,44 @@
 #                      -----------
                        'O3PPMV'         , 'CHEMISTRY'  , 'O3'
                        'GOCART::CO2'    , 'GOCART'     , 'CO2'  ,
- 
+
                        'PS'             , 'DYN'        ,
-                       'PHIS'           , 'AGCM'       , 
-                       'SGH'            , 'AGCM'       , 
-                       'FRLAND'         , 'SURFACE'    , 
-                       'FRLANDICE'      , 'SURFACE'    , 
-                       'FRLAKE'         , 'SURFACE'    , 
-                       'FROCEAN'        , 'SURFACE'    , 
-                       'FRACI'          , 'SURFACE'    , 
-                       
+                       'PHIS'           , 'AGCM'       ,
+                       'SGH'            , 'AGCM'       ,
+                       'FRLAND'         , 'SURFACE'    ,
+                       'FRLANDICE'      , 'SURFACE'    ,
+                       'FRLAKE'         , 'SURFACE'    ,
+                       'FROCEAN'        , 'SURFACE'    ,
+                       'FRACI'          , 'SURFACE'    ,
+
                        'TROPP_EPV'      , 'AGCM'       , 'TROPPV'    ,
                        'TROPP_THERMAL'  , 'AGCM'       , 'TROPPT'    ,
                        'TROPP_BLENDED'  , 'AGCM'       , 'TROPPB'    ,
                        'TROPT'          , 'AGCM'       ,
                        'TROPQ'          , 'AGCM'       ,
-                       
+
                        'US'             , 'DYN'        , 'UA'     ,
                        'VS'             , 'DYN'        , 'VA'     ,
-                       'TS'             , 'SURFACE'    , 
+                       'TS'             , 'SURFACE'    ,
                        'QS'             , 'SURFACE'    ,
                        'TA'             , 'DYN'        ,
                        'QA'             , 'DYN'        ,
 
                        'U2M'            , 'SURFACE'    ,
-                       'V2M'            , 'SURFACE'    ,                       
+                       'V2M'            , 'SURFACE'    ,
                        'T2M'            , 'SURFACE'    ,
                        'Q2M'            , 'SURFACE'    ,
-                       'U10N;V10N'      , 'SURFACE'    , 
-                       'U10M;V10M'      , 'SURFACE'    , 
+#                       'U10N;V10N'      , 'SURFACE'    ,
+#                       'U10M;V10M'      , 'SURFACE'    ,
+                       'U10N'      , 'SURFACE'    ,
+                       'V10N'      , 'SURFACE'    ,
+                       'U10M'      , 'SURFACE'    ,
+                       'V10M'      , 'SURFACE'    ,
                        'T10M'           , 'SURFACE'    ,
                        'Q10M'           , 'SURFACE'    ,
                        'U50M'           , 'DYN'        ,
                        'V50M'           , 'DYN'        ,
-                       
+
                        'SH'             , 'SURFACE'    , 'HFLUX'     ,
                        'LHFX'           , 'SURFACE'    , 'EFLUX'     ,
                        'TAUX'           , 'SURFACE'    , 'UFLUX' ,
@@ -62,7 +68,7 @@
                        'LAI'            , 'SURFACE'    ,
 
                        'COSZ'           , 'SOLAR'      ,
-                       
+
                        'QHAT'           , 'SURFACE'    ,
                        'THAT'           , 'SURFACE'    ,
                        'VENT'           , 'SURFACE'    ,
@@ -71,7 +77,7 @@
                        'CQ'             , 'SURFACE'    ,
                        'CT'             , 'SURFACE'    ,
                        'D0'             , 'SURFACE'    , 'DISPH'     ,
-                       
+
                        'Z0'             , 'SURFACE'    , 'Z0M'       ,
                        'DCOOL'          , 'SURFACE'    ,
                        'DWARM'          , 'SURFACE'    ,

@@ -19,7 +19,7 @@ EXPSRC: GEOSgcm-v12
 
 # non sampler part
 #
-COLLECTIONS:
+qq_non_sampler_COLLECTIONS:
 
 #             Gridded Output
 #             --------------
@@ -53,8 +53,10 @@ COLLECTIONS:
 ::
 
 
-qq_full_COLLECTIONS:
 
+#  Full version
+#
+COLLECTIONS:
 #             Gridded Output
 #             --------------
               'geosgcm_prog'
@@ -91,17 +93,13 @@ qq_full_COLLECTIONS:
               'SNDR_ATMS'
               'myd04'
               'mod04'
-#             'ABI_M6C14_Geostationary'  # slow
-#             'ABI_M6C01_Mask'           # slow
-
-
 #              'GeoDisk_ABI_East_2km'
 #              'GeoDisk_ABI_West_2km'
-#  very slow
               'GeoDisk_GXS_East'
-#              'GeoDisk_GXS_West'
-#              'GeoDisk_GHMS'
-#              'GeoDisk_MTG_IRS'
+              'GeoDisk_GXS_West'
+              'GeoDisk_GHMS'
+              'GeoDisk_MTG_IRS'
+              'ABI_M6C01_Mask'      # capability illustration
 
 #             Trajectory: 2 Campaigns + JEDI 29 platforms (IODA format)
 #             ---------------------------------------------------------
@@ -150,7 +148,7 @@ qq_full_COLLECTIONS:
 
 # non sampler part
 #
-GRID_LABELS:
+qq_partial_GRID_LABELS:
 #    Global Grids
 #    ------------
      PC720x361-DC        # 0.5    x 0.625   deg     (<==> c180)
@@ -164,7 +162,7 @@ GRID_LABELS:
 
 
 
-qq_full_GRID_LABELS:
+GRID_LABELS:
 
 #    Global Grids
 #    ------------
@@ -178,8 +176,8 @@ qq_full_GRID_LABELS:
 
 #    Sampler Geometries
 #    ------------------
-#     SwathGrid_MYD04
-#     SwathGrid_MOD04
+     SwathGrid_MYD04
+     SwathGrid_MOD04
      SwathGrid_ATMS
 
 #     ABI_East_2km
@@ -310,24 +308,24 @@ SwathGrid_MOD04.obs_frequency:  '000000 000500'     # yymmdd  hhmmss
 SwathGrid_MOD04.Epoch:               060000                  #
 
 ABI_East_2km.GRID_TYPE:     XY
-ABI_East_2km.GRIDNAME:      ABI_East_2km
+ABI_East_2km.GRIDNAME:      ABI_East_2km_algo_ABI
 ABI_East_2km.index_name_x:  x
 ABI_East_2km.index_name_y:  y
 ABI_East_2km.var_name_x:    x
 ABI_East_2km.var_name_y:    y
-ABI_East_2km.var_name_proj: goes_imager_projection
+ABI_East_2km.var_name_proj: projection
 ABI_East_2km.att_name_proj: longitude_of_projection_origin
 ABI_East_2km.thin_factor:   1
 ABI_East_2km.LM:            137
 ABI_East_2km.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/abi_east_2km_coords.nc4
 
 ABI_West_2km.GRID_TYPE:     XY
-ABI_West_2km.GRIDNAME:      ABI_West_2km
+ABI_West_2km.GRIDNAME:      ABI_West_2km_algo_ABI
 ABI_West_2km.index_name_x:  x
 ABI_West_2km.index_name_y:  y
 ABI_West_2km.var_name_x:    x
 ABI_West_2km.var_name_y:    y
-ABI_West_2km.var_name_proj: goes_imager_projection
+ABI_West_2km.var_name_proj: projection
 ABI_West_2km.att_name_proj: longitude_of_projection_origin
 ABI_West_2km.thin_factor:   1
 ABI_West_2km.LM:            137
@@ -620,9 +618,9 @@ tavg3d_aer_p.fields:          include(aer3Dp_vars.vl)
 ::
 
 
-#                              ---------------------------------
-#                              Definition of Sampled Collections
-#                              ---------------------------------
+#                              -----------------------------------------------------------------
+#                              Sampled Collections (station,swath,geostationary,mask,trajectory)
+#                              -----------------------------------------------------------------
 
 Aeronet.sampler_type:         'station'
 Aeronet.station_id_file:      /discover/nobackup/projects/gmao/aist-nr/data/Station/1_national.csv
@@ -650,7 +648,7 @@ SNDR_ATMS.fields:            include(crtmSampler_vars.vl)
 myd04.sampler_type:      'Swath'
 myd04.template:          '%y4%m2%d2_%h2%n2z.nc4',
 myd04.format:            'CFIO',
-myd04.frequency:         060000,               # should not be here; (=Epoch)
+myd04.frequency:         060000,               # code defect (must equals Epoch)
 myd04.grid_label:        SwathGrid_MYD04,
 myd04.regrid_method:     'BILINEAR' ,
 myd04.fields:            include(aerSampler_vars.vl)
@@ -670,7 +668,6 @@ mod04.fields:            include(aerSampler_vars.vl)
 ::
 
 
-
 #                              -----------------------------------------------------
 #                              Geostationary sampler
 #                              -----------------------------------------------------
@@ -682,11 +679,64 @@ GeoDisk_GXS_East.duration:     010000
 GeoDisk_GXS_East.grid_label:   GXS_East
 GeoDisk_GXS_East.splitField:   1,
 GeoDisk_GXS_East.fields:       include(gxs_vars.vl)
+::
+
+GeoDisk_GXS_West.template:    '%y4%m2%d2_%h2%n2z.nc4'
+GeoDisk_GXS_West.format:      'CFIO',
+GeoDisk_GXS_West.frequency:    010000
+GeoDisk_GXS_West.duration:     010000
+GeoDisk_GXS_West.grid_label:   GXS_West
+GeoDisk_GXS_West.splitField:   1,
+GeoDisk_GXS_West.fields:       include(gxs_vars.vl)
+::
+
+GeoDisk_GHMS.template:    '%y4%m2%d2_%h2%n2z.nc4'
+GeoDisk_GHMS.format:      'CFIO',
+GeoDisk_GHMS.frequency:    010000
+GeoDisk_GHMS.duration:     010000
+GeoDisk_GHMS.grid_label:   GHMS
+GeoDisk_GHMS.splitField:   1,
+GeoDisk_GHMS.fields:       include(gxs_vars.vl)
+::
+
+GeoDisk_MTG_IRS.template:    '%y4%m2%d2_%h2%n2z.nc4'
+GeoDisk_MTG_IRS.format:      'CFIO',
+GeoDisk_MTG_IRS.frequency:    010000
+GeoDisk_MTG_IRS.duration:     010000
+GeoDisk_MTG_IRS.grid_label:   MTG_IRS
+GeoDisk_MTG_IRS.splitField:   1,
+GeoDisk_MTG_IRS.fields:       include(gxs_vars.vl)
+::
 
 
 #                              -----------------------------------------------------
+#                              Mask sampler
+#                              -----------------------------------------------------
+
+ABI_M6C01_Mask.sampler_type:        'mask'           # 'mask_geosat'
+ABI_M6C01_Mask.obs_file_begin:      '2019-07-31T00:00:00'
+ABI_M6C01_Mask.obs_file_end:        '2019-11-01T00:00:00'
+ABI_M6C01_Mask.obs_file_interval:   '000000 001000'     # yymmdd  hhmmss
+ABI_M6C01_Mask.obs_files:            /discover/nobackup/projects/gmao/aist-nr/data/GOES-X/OR_ABI-L1b-RadF-M6C01_G16_s20192340840216_e20192340849524_c20192340849582.nc
+ABI_M6C01_Mask.index_name_x:         x
+ABI_M6C01_Mask.index_name_y:         y
+ABI_M6C01_Mask.var_name_x:           x
+ABI_M6C01_Mask.var_name_y:           y
+ABI_M6C01_Mask.var_name_proj:        goes_imager_projection
+ABI_M6C01_Mask.att_name_proj:        longitude_of_projection_origin
+ABI_M6C01_Mask.thin_factor:          10
+ABI_M6C01_Mask.template:             '%y4%m2%d2_%h2%n2z.nc4',
+ABI_M6C01_Mask.format:               'CFIO',
+ABI_M6C01_Mask.frequency:            010000,
+ABI_M6C01_Mask.duration:             010000,
+ABI_M6C01_Mask.regrid_method:        'BILINEAR' ,
+ABI_M6C01_Mask.fields:               include (aerNv_vars.vl)
+::
+
+
+#                              -------------------------------------------------------
 #                              Trajectory Collections (2 Campaign + 29 IODA platforms)
-#                              -----------------------------------------------------
+#                              -------------------------------------------------------
 
 schema.version:   1
 
