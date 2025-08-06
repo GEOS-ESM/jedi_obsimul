@@ -50,40 +50,6 @@ COLLECTIONS:
              'hwt_01hr_acc_LCC'
              'inst1_2d_asm_Nx'
              'tavg1_2d_flx_Nx'
-::
-
-
-qq_full_COLLECTIONS:
-
-#             Gridded Output
-#             --------------
-              'geosgcm_prog'
-              'geosgcm_surf'
-              'inst_01hr_2d_brs_Nx'
-              'geosgcm_moist'
-              'geosgcm_turb'
-              'geosgcm_gwd'
-#             'geosgcm_tend'
-              'geosgcm_budi'
-              'geosgcm_buda'
-#             'geosgcm_landice'
-#             'geosgcm_meltwtr'
-#             'geosgcm_snowlayer'
-#             'geosgcm_tracer'
-              'tavg2d_aer_x'
-              'tavg3d_aer_p'
-              'ana_prog'
-              'ana_surf'
-#             'const_2d_asm_Nx'
-
-#             Browsing products
-#             -----------------
-#>>             'hwt_30mn_slv_LCC'
-#>>             'hwt_30mn_prs_LCC'
-#>>             'hwt_01hr_slv_LCC'
-#>>             'hwt_01hr_acc_LCC'
-#>>             'inst1_2d_asm_Nx'
-#>>             'tavg1_2d_flx_Nx'
 
 #             Samplers at Obs locations
 #             --------------------------
@@ -161,21 +127,6 @@ GRID_LABELS:
 #    generating c2880 is costly at high core count
 #    PC11520x5761-DC     # 112.5  x 56.25   arcsec  (<--> c2880)
      lambert
-::
-
-
-
-qq_full_GRID_LABELS:
-
-#    Global Grids
-#    ------------
-     PC720x361-DC        # 0.5    x 0.625   deg     (<==> c180)
-     PC1440x721-DC       # 0.25   x 0.3125  deg     (<--> c360)
-     PC2880x1441-DC      # 0.125  x 0.0625  deg     (<--> c720)
-#     not used in collections below
-#     PC5760x2881-DC      # 0.0625 x 0.03125 deg     (<--> c1140)
-#    generating c2880 is costly at high core count
-#    PC11520x5761-DC     # 112.5  x 56.25   arcsec  (<--> c2880)
 
 #    Sampler Geometries
 #    ------------------
@@ -265,10 +216,10 @@ PC11520x5761-DC.POLE: PC
 PC11520x5761-DC.DATELINE:  DC
 PC11520x5761-DC.LM: 137
 
-lambert.GRID_TYPE: XY       
+lambert.GRID_TYPE: XY
 lambert.GRIDNAME: lambert_conformal
 lambert.GRIDSPEC: lambert_grid.nc4
-lambert.IM_WORLD: 1799       
+lambert.IM_WORLD: 1799
 lambert.JM_WORLD: 1059
 lambert.LM: 137
 
@@ -424,8 +375,8 @@ ana_prog.fields:            include(ana_vars.vl)
 #ana_slv.ref_time:          210000 ,
 #ana_slv.frequency:         010000 ,
 #ana_slv.fields:            include(slv_vars.vl)  ##### add w at several levels
-ana_slv.fields:            Include(ana_vars.vl)  ##### add w at several levels
-::
+#ana_slv.fields:            include(ana_vars.vl)  ##### add w at several levels
+#::
 
 ana_surf.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
 ana_surf.archive:          '%c/Y%y4' ,
@@ -1178,9 +1129,9 @@ ssmis_f17.fields:
                            'ISRB08RG'  , 'SOLAR'      ,
                            'ISRB09RG'  , 'SOLAR'      ,
                            'ISRB10RG'  , 'SOLAR'      ,
-                           'OSRB08RG'  , 'SOLAR'      , 
-                           'OSRB09RG'  , 'SOLAR'      , 
-                           'OSRB10RG'  , 'SOLAR'      , 
+                           'OSRB08RG'  , 'SOLAR'      ,
+                           'OSRB09RG'  , 'SOLAR'      ,
+                           'OSRB10RG'  , 'SOLAR'      ,
                            'TBRB05RG'  , 'IRRAD'      ,
                            'TBRB06RG'  , 'IRRAD'      ,
                            'TBRB07RG'  , 'IRRAD'      ,
@@ -1216,11 +1167,11 @@ ssmis_f17.fields:
                                 'LS_PRCP'   , 'MOIST'    , 'PRECLSC' ,
                                 'U850;V850' , 'DYN'      ,
                                 'U250;V250' , 'DYN'      ,
-                                'VORT200'   , 'DYN'      , 
+                                'VORT200'   , 'DYN'      ,
                                 'VORT500'   , 'DYN'      ,
                                 'VORT700'   , 'DYN'      ,
                                 'VORT850'   , 'DYN'      ,
-                                'DIVG200'   , 'DYN'      , 
+                                'DIVG200'   , 'DYN'      ,
                                 'DIVG500'   , 'DYN'      ,
                                 'DIVG700'   , 'DYN'      ,
                                 'DIVG850'   , 'DYN'      ,
@@ -1237,7 +1188,7 @@ ssmis_f17.fields:
                                 'CA.ocEXTTAU'    , 'CA.oc'     , 'OCEXTTAU'    ,
                                 'SUEXTTAU'       , 'SU'  ,
                                 'NIEXTTAU'       , 'NI'  ,
-                                'FRACI'     , 'SURFACE'  , 'frseaice'   ,               
+                                'FRACI'     , 'SURFACE'  , 'frseaice'   ,
                                 'SNOMAS'    , 'SURFACE'  ,
                                 ::
 
@@ -1358,7 +1309,7 @@ ssmis_f17.fields:
                            'SRH03'     , 'DYN'        , 'HLCY_0-3KM'        ,
                            'SRH01'     , 'DYN'        , 'HLCY_0-1KM'        ,
                            'CAPE'      , 'MOIST'      ,
-                           'INHB'      , 'MOIST'      , 'CIN'               , 
+                           'INHB'      , 'MOIST'      , 'CIN'               ,
                            'SBCAPE'    , 'MOIST'      , 'CAPE_SFC'          ,
                            'SBCIN'     , 'MOIST'      , 'CIN_SFC'           ,
                            'MLCAPE'    , 'MOIST'      , 'CAPE_90MB'         ,
@@ -1366,12 +1317,12 @@ ssmis_f17.fields:
                            'MUCAPE'    , 'MOIST'      , 'CAPE_255MB'        ,
                            'MUCIN'     , 'MOIST'      , 'CIN_255MB'         ,
                              'SLRTP'   , 'SOLAR'    , 'SWTDN'        ,
-                           'ISRB08RG'  , 'SOLAR'      , 
-                           'ISRB09RG'  , 'SOLAR'      , 
-                           'ISRB10RG'  , 'SOLAR'      , 
-                           'OSRB08RG'  , 'SOLAR'      ,                           
+                           'ISRB08RG'  , 'SOLAR'      ,
+                           'ISRB09RG'  , 'SOLAR'      ,
+                           'ISRB10RG'  , 'SOLAR'      ,
+                           'OSRB08RG'  , 'SOLAR'      ,
                            'OSRB09RG'  , 'SOLAR'      ,
-                           'OSRB10RG'  , 'SOLAR'      , 
+                           'OSRB10RG'  , 'SOLAR'      ,
                            'TBRB05RG'  , 'IRRAD'      ,
                            'TBRB06RG'  , 'IRRAD'      ,
                            'TBRB07RG'  , 'IRRAD'      ,
@@ -1398,4 +1349,3 @@ ssmis_f17.fields:
                                 'NIEXTTAU'       , 'NI'  ,
                                      'AREA'      , 'DYN'      ,
                          ::
-
