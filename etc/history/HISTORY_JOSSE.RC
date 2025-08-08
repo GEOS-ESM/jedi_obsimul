@@ -1,7 +1,8 @@
 #
 #  To generarate a valid GEOS history file, process this file with m4:
 #
-#  % m4 < HISTORY_JOSSE.RC > HISTORY_JOSSE.rc
+#  % m4 < HISTORY_JOSSE.RC > HISTORY_JOSSE.rc    [discover]
+#  % m4 < HISTORY_JOSSE.RC > HISTORY.rc          [mac]
 #
 
 include(warning.vl)
@@ -17,39 +18,38 @@ EXPSRC: GEOSgcm-v12
 #                               Selection of Collections
 #                              -------------------------
 
-# non sampler part
-#
 COLLECTIONS:
-
-#             Gridded Output
-#             --------------
-              'geosgcm_prog'
-              'geosgcm_surf'
-              'inst_01hr_2d_brs_Nx'
-              'geosgcm_moist'
-              'geosgcm_turb'
-              'geosgcm_gwd'
-#             'geosgcm_tend'
-              'geosgcm_budi'
-              'geosgcm_buda'
-#             'geosgcm_landice'
-#             'geosgcm_meltwtr'
-#             'geosgcm_snowlayer'
-#             'geosgcm_tracer'
-              'tavg2d_aer_x'
-              'tavg3d_aer_p'
-              'ana_prog'
-              'ana_surf'
-#             'const_2d_asm_Nx'
-
-#             Browsing products
-#             -----------------
-             'hwt_30mn_slv_LCC'
-             'hwt_30mn_prs_LCC'
-             'hwt_01hr_slv_LCC'
-             'hwt_01hr_acc_LCC'
-             'inst1_2d_asm_Nx'
-             'tavg1_2d_flx_Nx'
+#
+##             Gridded Output
+##             --------------
+#              'geosgcm_prog'
+#              'geosgcm_surf'
+#              'inst_01hr_2d_brs_Nx'
+#              'geosgcm_moist'
+#              'geosgcm_turb'
+#              'geosgcm_gwd'
+##             'geosgcm_tend'
+#              'geosgcm_budi'
+#              'geosgcm_buda'
+##             'geosgcm_landice'
+##             'geosgcm_meltwtr'
+##             'geosgcm_snowlayer'
+##             'geosgcm_tracer'
+#              'tavg2d_aer_x'
+#              'tavg3d_aer_p'
+#              'ana_prog'
+#              'ana_surf'
+##             'const_2d_asm_Nx'
+#
+##             Browsing products
+##             -----------------
+#             'hwt_30mn_slv_LCC'
+#             'hwt_30mn_prs_LCC'
+#             'hwt_01hr_slv_LCC'
+#             'hwt_01hr_acc_LCC'
+#             'inst1_2d_asm_Nx'
+#             'tavg1_2d_flx_Nx'
+#
 
 #             Samplers at Obs locations
 #             --------------------------
@@ -114,8 +114,6 @@ COLLECTIONS:
 # ---
 
 
-# non sampler part
-#
 GRID_LABELS:
 #    Global Grids
 #    ------------
@@ -130,8 +128,8 @@ GRID_LABELS:
 
 #    Sampler Geometries
 #    ------------------
-#     SwathGrid_MYD04
-#     SwathGrid_MOD04
+     SwathGrid_MYD04
+     SwathGrid_MOD04
      SwathGrid_ATMS
 
 #     ABI_East_2km
@@ -237,10 +235,10 @@ SwathGrid_ATMS.var_name_lon:        lon
 SwathGrid_ATMS.var_name_lat:        lat
 SwathGrid_ATMS.var_name_time:       obs_time_tai93
 SwathGrid_ATMS.tunit:               'seconds since 1993-01-01 00:00:00'
-SwathGrid_ATMS.obs_file_begin:      '2019-07-31T00:00:00'
-SwathGrid_ATMS.obs_file_end:        '2019-11-01T23:00:00'
-SwathGrid_ATMS.obs_file_interval:   '000000 000600'         # yymmdd  hhmmss
+SwathGrid_ATMS.ref_time:         '2019-07-31T00:00:00'
+SwathGrid_ATMS.frequency:       '000000 000600'         # yymmdd  hhmmss
 SwathGrid_ATMS.Epoch:                060000                 # hhmmss
+
 
 SwathGrid_MYD04.GRID_TYPE: Swath
 SwathGrid_MYD04.GRID_FILE: /discover/nobackup/projects/gmao/aist-nr/data/Aqua/%y4/%D3/MYD04_L2.A%y4%D3.%h2%n2*.hdf
@@ -251,10 +249,9 @@ SwathGrid_MYD04.var_name_lon:        'Longitude'
 SwathGrid_MYD04.var_name_lat:        'Latitude'
 SwathGrid_MYD04.var_name_time:       'Scan_Start_Time'
 SwathGrid_MYD04.tunit:               'seconds since 1993-01-01 00:00:00'
-SwathGrid_MYD04.obs_file_begin:      '2019-07-31T00:00:00'
-SwathGrid_MYD04.obs_file_end:        '2019-11-01T00:00:00'
-SwathGrid_MYD04.obs_file_interval:   '000000 000500'     # yymmdd  hhmmss
-SwathGrid_MYD04.Epoch:               060000              #
+SwathGrid_MYD04.ref_time:         '2019-07-31T00:00:00'
+SwathGrid_MYD04.frequency:       '000000 000500'       # yymmdd  hhmmss
+SwathGrid_MYD04.Epoch:                060000               #
 
 
 SwathGrid_MOD04.GRID_TYPE: Swath
@@ -266,10 +263,10 @@ SwathGrid_MOD04.var_name_lon:       'Longitude'
 SwathGrid_MOD04.var_name_lat:       'Latitude'
 SwathGrid_MOD04.var_name_time:      'Scan_Start_Time'
 SwathGrid_MOD04.tunit:              'seconds since 1993-01-01 00:00:00'
-SwathGrid_MOD04.obs_file_begin:     '2019-07-31T00:00:00'
-SwathGrid_MOD04.obs_file_end:       '2019-11-01T00:00:00'
-SwathGrid_MOD04.obs_file_interval:  '000000 000500'     # yymmdd  hhmmss
-SwathGrid_MOD04.Epoch:               060000                  #
+SwathGrid_MOD04.ref_time:        '2019-07-31T00:00:00'
+SwathGrid_MOD04.frequency:      '000000 000500'     # yymmdd  hhmmss
+SwathGrid_MOD04.Epoch:               060000             #
+
 
 ABI_East_2km.GRID_TYPE:     XY
 ABI_East_2km.GRIDNAME:      ABI_East_2km
@@ -644,14 +641,14 @@ IODA.index:       Location                # name for index
 IODA.lon:         MetaData/longitude      #          lon
 IODA.lat:         MetaData/latitude       #          lat
 IODA.time:        MetaData/dateTime       #          time
-IODA.reftime:     2019-07-31T21:00:00     # reference synoptic time
+IODA.ref_time:    2019-07-31T21:00:00     # reference synoptic time
 IODA.frequency:   '000000 060000'         # frequency of ioda files
 
 MACIE.index:      time
 MACIE.lon:        trjLon
 MACIE.lat:        trjLat
 MACIE.time:       time
-MACIE.reftime:    2019-07-31T00:00:00
+MACIE.ref_time:   2019-07-31T00:00:00
 MACIE.frequency:  '000001 000000'
 ::
 
