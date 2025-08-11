@@ -53,7 +53,6 @@ COLLECTIONS:
 
 #             Samplers at Obs locations
 #             --------------------------
-              'ACtraj'
               'Aeronet'
               'SNDR_ATMS'
               'myd04'
@@ -216,9 +215,9 @@ PC11520x5761-DC.LM: 137
 
 lambert.GRID_TYPE: XY
 lambert.GRIDNAME: lambert_conformal
-lambert.GRIDSPEC: lambert_grid.nc4
-lambert.IM_WORLD: 1799
-lambert.JM_WORLD: 1059
+lambert.GRID_FILENAME: ./lambert_grid.nc4
+lambert.index_name_x:  Xdim
+lambert.index_name_y:  Ydim
 lambert.LM: 137
 
 
@@ -293,7 +292,7 @@ ABI_West_2km.LM:            137
 ABI_West_2km.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/abi_west_2km_coords.nc4
 
 GXS_East.GRID_TYPE:     XY
-GXS_East.GRIDNAME:      GXS_East
+GXS_East.GRIDNAME:      ABI_GXS_East
 GXS_East.index_name_x:  x
 GXS_East.index_name_y:  y
 GXS_East.var_name_x:    x
@@ -305,7 +304,7 @@ GXS_East.LM:            137
 GXS_East.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/gxs_east_coords.nc4
 
 GXS_West.GRID_TYPE:     XY
-GXS_West.GRIDNAME:      GXS_West
+GXS_West.GRIDNAME:      ABI_GXS_West
 GXS_West.index_name_x:  x
 GXS_West.index_name_y:  y
 GXS_West.var_name_x:    x
@@ -317,7 +316,7 @@ GXS_West.LM:            137
 GXS_West.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/gxs_west_coords.nc4
 
 GHMS.GRID_TYPE:     XY
-GHMS.GRIDNAME:      GHMS
+GHMS.GRIDNAME:      ABI_GHMS
 GHMS.index_name_x:  x
 GHMS.index_name_y:  y
 GHMS.var_name_x:    x
@@ -329,7 +328,7 @@ GHMS.LM:            137
 GHMS.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/ghms_coords.nc4
 
 MTG_IRS.GRID_TYPE:     XY
-MTG_IRS.GRIDNAME:      MTG_IRS
+MTG_IRS.GRIDNAME:      ABI_MTG_IRS
 MTG_IRS.index_name_x:  x
 MTG_IRS.index_name_y:  y
 MTG_IRS.var_name_x:    x
@@ -581,7 +580,7 @@ tavg3d_aer_p.fields:          include(aer3Dp_vars.vl)
 
 
 #                              ---------------------------------
-#                              Definition of Sampled Collections
+#                              Begin Sampled Collections
 #                              ---------------------------------
 
 Aeronet.sampler_type:         'station'
@@ -666,8 +665,9 @@ CAMP2EX.fields:
                       include(asmSampler_vars.vl)
 ::
 
+
 FIREXAQ.sampler_type:       trajectory
-FIREXAQ.grid_label:         CAMP2EX_GEOM
+FIREXAQ.grid_label:         FIREXAQ_GEOM
 FIREXAQ.template:          '%y4%m2%d2_%h2%n2z.nc4',
 FIREXAQ.format:            'CFIO',
 FIREXAQ.Epoch:              480000
@@ -1056,6 +1056,12 @@ ssmis_f17.splitField:            1,
 ssmis_f17.fields:
                          include(crtmSampler_vars.vl)
 ::
+
+
+#                              ---------------------------------
+#                              End Sampled Collections
+#                              ---------------------------------
+
 
   tavg1_2d_flx_Nx.format:      'CFIO' ,
   tavg1_2d_flx_Nx.grid_label:   PC5760x2881-DC,
