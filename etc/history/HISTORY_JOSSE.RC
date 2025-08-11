@@ -579,9 +579,11 @@ tavg3d_aer_p.fields:          include(aer3Dp_vars.vl)
 ::
 
 
-#                              ---------------------------------
-#                              Begin Sampled Collections
-#                              ---------------------------------
+
+#                              -----------------------------------------------------------------
+#                              Sampled Collections (station,swath,geostationary,mask,trajectory)
+#                              -----------------------------------------------------------------
+
 
 Aeronet.sampler_type:         'station'
 Aeronet.station_id_file:      /discover/nobackup/projects/gmao/aist-nr/data/Station/1_national.csv
@@ -603,6 +605,7 @@ SNDR_ATMS.format:            'CFIO',
 SNDR_ATMS.frequency:         060000,
 SNDR_ATMS.grid_label:        SwathGrid_ATMS,
 SNDR_ATMS.regrid_method:     'BILINEAR' ,
+SNDR_ATMS.splitField:        1,
 SNDR_ATMS.fields:            include(crtmSampler_vars.vl)
 ::
 
@@ -612,6 +615,7 @@ myd04.format:            'CFIO',
 myd04.frequency:         060000,               # should not be here; (=Epoch)
 myd04.grid_label:        SwathGrid_MYD04,
 myd04.regrid_method:     'BILINEAR' ,
+myd04.splitField:        1,
 myd04.fields:            include(aerSampler_vars.vl)
                          include(cldSampler_vars.vl)
                          include(asmSampler_vars.vl)
@@ -623,9 +627,77 @@ mod04.format:            'CFIO',
 mod04.frequency:         060000,              #  (=Epoch)
 mod04.grid_label:        SwathGrid_MOD04,
 mod04.regrid_method:     'BILINEAR' ,
+mod04.splitField:        1,
 mod04.fields:            include(aerSampler_vars.vl)
                          include(cldSampler_vars.vl)
                          include(asmSampler_vars.vl)
+::
+
+
+#                              -----------------------------------------------------
+#                              Geostationary sampler
+#                              -----------------------------------------------------
+
+GeoDisk_GXS_East.template:    '%y4%m2%d2_%h2%n2z.nc4'
+GeoDisk_GXS_East.format:      'CFIO',
+GeoDisk_GXS_East.frequency:    010000
+GeoDisk_GXS_East.duration:     010000
+GeoDisk_GXS_East.grid_label:   GXS_East
+GeoDisk_GXS_East.splitField:   1,
+GeoDisk_GXS_East.fields:       include(crtmSampler_vars.vl)
+::
+
+GeoDisk_GXS_West.template:    '%y4%m2%d2_%h2%n2z.nc4'
+GeoDisk_GXS_West.format:      'CFIO',
+GeoDisk_GXS_West.frequency:    010000
+GeoDisk_GXS_West.duration:     010000
+GeoDisk_GXS_West.grid_label:   GXS_West
+GeoDisk_GXS_West.splitField:   1,
+GeoDisk_GXS_West.fields:       include(crtmSampler_vars.vl)
+::
+
+GeoDisk_GHMS.template:    '%y4%m2%d2_%h2%n2z.nc4'
+GeoDisk_GHMS.format:      'CFIO',
+GeoDisk_GHMS.frequency:    010000
+GeoDisk_GHMS.duration:     010000
+GeoDisk_GHMS.grid_label:   GHMS
+GeoDisk_GHMS.splitField:   1,
+GeoDisk_GHMS.fields:       include(crtmSampler_vars.vl)
+::
+
+GeoDisk_MTG_IRS.template:    '%y4%m2%d2_%h2%n2z.nc4'
+GeoDisk_MTG_IRS.format:      'CFIO',
+GeoDisk_MTG_IRS.frequency:    010000
+GeoDisk_MTG_IRS.duration:     010000
+GeoDisk_MTG_IRS.grid_label:   MTG_IRS
+GeoDisk_MTG_IRS.splitField:   1,
+GeoDisk_MTG_IRS.fields:       include(crtmSampler_vars.vl)
+::
+
+
+#                              -----------------------------------------------------
+#                              Mask sampler
+#                              -----------------------------------------------------
+
+ABI_M6C01_Mask.sampler_type:        'mask'           # 'mask_geosat'   1-km res
+ABI_M6C01_Mask.obs_file_begin:      '2019-07-31T00:00:00'
+ABI_M6C01_Mask.obs_file_end:        '2019-11-01T00:00:00'
+ABI_M6C01_Mask.obs_file_interval:   '000000 001000'     # yymmdd  hhmmss
+ABI_M6C01_Mask.obs_files:            /discover/nobackup/projects/gmao/aist-nr/data/GOES-X/OR_ABI-L1b-RadF-M6C01_G16_s20192340840216_e20192340849524_c20192340849582.nc
+ABI_M6C01_Mask.index_name_x:         x
+ABI_M6C01_Mask.index_name_y:         y
+ABI_M6C01_Mask.var_name_x:           x
+ABI_M6C01_Mask.var_name_y:           y
+ABI_M6C01_Mask.var_name_proj:        goes_imager_projection
+ABI_M6C01_Mask.att_name_proj:        longitude_of_projection_origin
+ABI_M6C01_Mask.thin_factor:          30
+ABI_M6C01_Mask.template:             '%y4%m2%d2_%h2%n2z.nc4',
+ABI_M6C01_Mask.format:               'CFIO',
+ABI_M6C01_Mask.frequency:            010000,
+ABI_M6C01_Mask.duration:             010000,
+ABI_M6C01_Mask.regrid_method:        'BILINEAR' ,
+ABI_M6C01_Mask.splitField:           1,
+ABI_M6C01_Mask.fields:               include(crtmSampler_vars.vl)
 ::
 
 
