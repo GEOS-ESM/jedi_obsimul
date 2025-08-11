@@ -1,11 +1,3 @@
-#
-#  To generarate a valid GEOS history file, process this file with m4:
-#
-#  % m4 < HISTORY_JOSSE.RC > HISTORY_JOSSE.rc    [discover]
-#  % m4 < HISTORY_JOSSE.RC > HISTORY.rc          [mac]
-#
-
-include(warning.vl)
 
 VERSION: 1
 EXPID:  AIST_c180_L137
@@ -18,7 +10,23 @@ EXPSRC: GEOSgcm-v12
 #                               Selection of Collections
 #                              -------------------------
 
+
+
+uuCOLLECTIONS:
+              'SNDR_ATMS'
+              'aircraft'              
+              'GeoDisk_GXS_East'
+::              
+
+uuGRID_LABELS:
+  SwathGrid_ATMS
+  aircraft_GEOM 
+ GXS_East
+::
+
+
 COLLECTIONS:
+
 #             Gridded Output
 #             --------------
               'geosgcm_prog'
@@ -40,14 +48,14 @@ COLLECTIONS:
               'ana_surf'
 #             'const_2d_asm_Nx'
 
-#             Browsing products
-#             -----------------
-             'hwt_30mn_slv_LCC'
-             'hwt_30mn_prs_LCC'
-             'hwt_01hr_slv_LCC'
-             'hwt_01hr_acc_LCC'
-             'inst1_2d_asm_Nx'
-             'tavg1_2d_flx_Nx'
+##             Browsing products
+##             -----------------
+#             'hwt_30mn_slv_LCC'
+#             'hwt_30mn_prs_LCC'
+#             'hwt_01hr_slv_LCC'
+#             'hwt_01hr_acc_LCC'
+#             'inst1_2d_asm_Nx'
+#             'tavg1_2d_flx_Nx'
 
 
 #             Samplers at Obs locations
@@ -111,7 +119,6 @@ COLLECTIONS:
 # N.B.: This set of labels must appear after the main list of COLLECTIONS.
 # ---
 
-
 GRID_LABELS:
 #    Global Grids
 #    ------------
@@ -122,7 +129,7 @@ GRID_LABELS:
 #     PC5760x2881-DC      # 0.0625 x 0.03125 deg     (<--> c1140)
 #    generating c2880 is costly at high core count
 #    PC11520x5761-DC     # 112.5  x 56.25   arcsec  (<--> c2880)
-     lambert
+##     lambert
 
 #    Sampler Geometries
 #    ------------------
@@ -274,7 +281,7 @@ ABI_East_2km.var_name_x:    x
 ABI_East_2km.var_name_y:    y
 ABI_East_2km.var_name_proj: projection
 ABI_East_2km.att_name_proj: longitude_of_projection_origin
-ABI_East_2km.thin_factor:   10
+ABI_East_2km.thin_factor:   500
 ABI_East_2km.LM:            137
 ABI_East_2km.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/abi_east_2km_coords.nc4
 
@@ -286,7 +293,7 @@ ABI_West_2km.var_name_x:    x
 ABI_West_2km.var_name_y:    y
 ABI_West_2km.var_name_proj: projection
 ABI_West_2km.att_name_proj: longitude_of_projection_origin
-ABI_West_2km.thin_factor:   10
+ABI_West_2km.thin_factor:   500
 ABI_West_2km.LM:            137
 ABI_West_2km.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/abi_west_2km_coords.nc4
 
@@ -298,7 +305,7 @@ GXS_East.var_name_x:    x
 GXS_East.var_name_y:    y
 GXS_East.var_name_proj: projection
 GXS_East.att_name_proj: longitude_of_projection_origin
-GXS_East.thin_factor:   10
+GXS_East.thin_factor:   500
 GXS_East.LM:            137
 GXS_East.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/gxs_east_coords.nc4
 
@@ -310,7 +317,7 @@ GXS_West.var_name_x:    x
 GXS_West.var_name_y:    y
 GXS_West.var_name_proj: projection
 GXS_West.att_name_proj: longitude_of_projection_origin
-GXS_West.thin_factor:   10
+GXS_West.thin_factor:   500
 GXS_West.LM:            137
 GXS_West.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/gxs_west_coords.nc4
 
@@ -322,7 +329,7 @@ GHMS.var_name_x:    x
 GHMS.var_name_y:    y
 GHMS.var_name_proj: projection
 GHMS.att_name_proj: longitude_of_projection_origin
-GHMS.thin_factor:   10
+GHMS.thin_factor:   500
 GHMS.LM:            137
 GHMS.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/ghms_coords.nc4
 
@@ -334,11 +341,11 @@ MTG_IRS.var_name_x:    x
 MTG_IRS.var_name_y:    y
 MTG_IRS.var_name_proj: projection
 MTG_IRS.att_name_proj: longitude_of_projection_origin
-MTG_IRS.thin_factor:   10
+MTG_IRS.thin_factor:   500
 MTG_IRS.LM:            137
 MTG_IRS.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/mtg-irs_coords.nc4
 
-include(traj_geom.gl)
+includex(traj_geom.gl)
 
 #                              ---------------------------------
 #                              Definition of Gridded Collections
@@ -418,7 +425,7 @@ geosgcm_prog.frequency:         010000 ,
 geosgcm_prog.vscale:            100.0 ,
 geosgcm_prog.vunit:            'hPa' ,
 geosgcm_prog.vvars:            'log(PLE)' , 'DYN' ,
-geosgcm_prog.levels:           include(press_48levels.vl)
+geosgcm_prog.levels:           includey(press_48levels.vl)
 geosgcm_prog.fields:           include(prog_vars.vl)
 ::
 
@@ -456,7 +463,7 @@ geosgcm_moist.frequency:        010000 ,
 geosgcm_moist.vscale:           100.0 ,
 geosgcm_moist.vunit:           'hPa' ,
 geosgcm_moist.vvars:           'log(PLE)', 'DYN' ,
-geosgcm_moist.levels:          include(press_48levels.vl)
+geosgcm_moist.levels:          includey(press_48levels.vl)
 geosgcm_moist.fields:          include(moist_vars.vl)
 ::
 
@@ -477,7 +484,7 @@ geosgcm_turb.frequency:         010000 ,
 geosgcm_turb.vscale:            100.0 ,
 geosgcm_turb.vunit:            'hPa' ,
 geosgcm_turb.vvars:            'log(PLE)' , 'DYN' ,
-geosgcm_turb.levels:            include(press_48levels.vl)
+geosgcm_turb.levels:            includey(press_48levels.vl)
 geosgcm_turb.fields:            include(turb_vars.vl)
 ::
 
@@ -498,7 +505,7 @@ geosgcm_gwd.frequency:          010000 ,
 geosgcm_gwd.vscale:             100.0 ,
 geosgcm_gwd.vunit:             'hPa' ,
 geosgcm_gwd.vvars:             'log(PLE)' , 'DYN' ,
-geosgcm_gwd.levels:            include(press_48levels.vl)
+geosgcm_gwd.levels:            includey(press_48levels.vl)
 geosgcm_gwd.fields:            include(gwd_vars.vl)
 ::
 
@@ -573,7 +580,7 @@ tavg3d_aer_p.splitField:      1,
 tavg3d_aer_p.vscale:          100.0,
 tavg3d_aer_p.vunit:          'hPa',
 tavg3d_aer_p.vvars:          'log(PLE)'    , 'DYN'        ,
-tavg3d_aer_p.levels:          include(press_26levels.vl)
+tavg3d_aer_p.levels:          includey(press_26levels.vl)
 tavg3d_aer_p.fields:          include(aer3Dp_vars.vl)
 ::
 
@@ -594,8 +601,6 @@ Aeronet.duration:             060000,
 Aeronet.splitField:           1,
 Aeronet.regrid_method:       'BILINEAR' ,
 Aeronet.fields:               include(aerSampler_vars.vl)
-                              include(cldSampler_vars.vl)
-                              include(asmSampler_vars.vl)
 ::
 
 SNDR_ATMS.sampler_type:      'Swath'
@@ -616,8 +621,6 @@ myd04.grid_label:        SwathGrid_MYD04,
 myd04.regrid_method:     'BILINEAR' ,
 myd04.splitField:        1,
 myd04.fields:            include(aerSampler_vars.vl)
-                         include(cldSampler_vars.vl)
-                         include(asmSampler_vars.vl)
 ::
 
 mod04.sampler_type:      'Swath'
@@ -628,8 +631,6 @@ mod04.grid_label:        SwathGrid_MOD04,
 mod04.regrid_method:     'BILINEAR' ,
 mod04.splitField:        1,
 mod04.fields:            include(aerSampler_vars.vl)
-                         include(cldSampler_vars.vl)
-                         include(asmSampler_vars.vl)
 ::
 
 
@@ -732,8 +733,6 @@ CAMP2EX.regrid_method:     'BILINEAR' ,
 CAMP2EX.splitField:           1,
 CAMP2EX.fields:
                       include(aerSampler_vars.vl)
-                      include(cldSampler_vars.vl)
-                      include(asmSampler_vars.vl)
 ::
 
 
@@ -746,8 +745,6 @@ FIREXAQ.regrid_method:     'BILINEAR' ,
 FIREXAQ.splitField:           1,
 FIREXAQ.fields:
                       include(aerSampler_vars.vl)
-                      include(cldSampler_vars.vl)
-                      include(asmSampler_vars.vl)
 ::
 
 
@@ -1133,293 +1130,3 @@ ssmis_f17.fields:
 #                              End Sampled Collections
 #                              ---------------------------------
 
-
-  tavg1_2d_flx_Nx.format:      'CFIO' ,
-  tavg1_2d_flx_Nx.grid_label:   PC5760x2881-DC,
-  tavg1_2d_flx_Nx.template:    '%y4%m2%d2_%h2%n2z.nc4' ,
-  tavg1_2d_flx_Nx.mode:        'time-averaged' ,
-  tavg1_2d_flx_Nx.frequency:    010000 ,
-  tavg1_2d_flx_Nx.duration:     010000 ,
-  tavg1_2d_flx_Nx.deflate:      1,
-  tavg1_2d_flx_Nx.regrid_method:    'BILINEAR',
-  tavg1_2d_flx_Nx.fields:       'AN_PRCP'      , 'MOIST'    , 'PRECANV' ,
-                                'CN_PRCP'      , 'MOIST'    , 'PRECCON' ,
-                                'LS_PRCP'      , 'MOIST'    , 'PRECLSC' ,
-                                'TPREC'        , 'MOIST'    , 'PRECTOT' ,
-                                'KUCHERA_RATIO' , 'MOIST' ,
-                                'SNOWTOTAL' , 'MOIST'  , 'SNOWACCUM', 'ACCUMULATE'
-                                'PRECTOTAL' , 'MOIST'  , 'PRECACCUM', 'ACCUMULATE'
-                                'SNO'       , 'MOIST'  , 'SNOW' ,
-                                'ICE'       , 'MOIST'  , 'ICE' ,
-                                'FRZR'      , 'MOIST'  , 'FRZR' ,
-                                'RAIN'      , 'MOIST'  , 'RAIN' ,
-                                'SLP'       , 'DYN'    ,
-                          'DBZ_MAX'  , 'MOIST'    ,  'DBZMAX' , 'MAX' ,
-                          'DBZ_TOP'  , 'MOIST'    ,  'DBZTOP' , 'MAX' ,
-                          'DBZ_1KM'  , 'MOIST'    ,  'DBZ1KM' , 'MAX' ,
-                          'DBZ_M10C' , 'MOIST'    , 'DBZM10C' , 'MAX' ,
-                          'UH25'     , 'DYN'      ,  'UH25MX' , 'MAX' ,
-                          'UH03'     , 'DYN'      ,  'UH03MX' , 'MAX' ,
-                          'SRH25'    , 'DYN'      , 'SRH25MX' , 'MAX' ,
-                          'SRH03'    , 'DYN'      , 'SRH03MX' , 'MAX' ,
-                          'SRH01'    , 'DYN'      , 'SRH01MX' , 'MAX' ,
-                                'SPEED'     , 'DYN'    , 'SPEEDMX' , 'MAX' ,
-                                'SFCEM'   , 'IRRAD'    , 'LWGEM'        ,
-                                'LWS'     , 'IRRAD'    , 'LWGAB'        ,
-                                'LCS'     , 'IRRAD'    , 'LWGABCLR'     ,
-                                'LAS'     , 'IRRAD'    , 'LWGABCLRCLN'  ,
-                                'FLNS'    , 'IRRAD'    , 'LWGNT'        ,
-                                'FLNSC'   , 'IRRAD'    , 'LWGNTCLR'     ,
-                                'FLNSA'   , 'IRRAD'    , 'LWGNTCLRCLN'  ,
-                                'OLR'     , 'IRRAD'    , 'LWTUP'        ,
-                                'OLC'     , 'IRRAD'    , 'LWTUPCLR'     ,
-                                'OLA'     , 'IRRAD'    , 'LWTUPCLRCLN'  ,
-                                'SLRTP'   , 'SOLAR'    , 'SWTDN'        ,
-                                'SLRSF'   , 'SOLAR'    , 'SWGDN'        ,
-                                'SLRSFC'  , 'SOLAR'    , 'SWGDNCLR'     ,
-                                'RSRS'    , 'SOLAR'    , 'SWGNT'        ,
-                                'RSCS'    , 'SOLAR'    , 'SWGNTCLR'     ,
-                                'RSRSNA'  , 'SOLAR'    , 'SWGNTCLN'     ,
-                                'RSCSNA'  , 'SOLAR'    , 'SWGNTCLRCLN'  ,
-                                'RSR'     , 'SOLAR'    , 'SWTNT'        ,
-                                'RSC'     , 'SOLAR'    , 'SWTNTCLR'     ,
-                                'RSRNA'   , 'SOLAR'    , 'SWTNTCLN'     ,
-                                'RSCNA'   , 'SOLAR'    , 'SWTNTCLRCLN'  ,
-                                'CLDTMP'  , 'SOLAR'    , 'SWCLDTMP'     ,
-                                'CLDPRS'  , 'SOLAR'    , 'SWCLDPRS'     ,
-                                'PHIS'    , 'AGCM'     ,
-                              ::
-
-  inst1_2d_asm_Nx.format:      'CFIO' ,
-  inst1_2d_asm_Nx.grid_label:   PC5760x2881-DC,
-  inst1_2d_asm_Nx.template:    '%y4%m2%d2_%h2%n2z.nc4' ,
-  inst1_2d_asm_Nx.mode:        'instantaneous' ,
-  inst1_2d_asm_Nx.frequency:    003000 ,
-  inst1_2d_asm_Nx.duration:     003000 ,
-  inst1_2d_asm_Nx.deflate:      1,
-  inst1_2d_asm_Nx.regrid_method:    'BILINEAR',
-  inst1_2d_asm_Nx.fields:       'SLP'       , 'DYN'      ,
-                             'SLRTP'   , 'SOLAR'    , 'SWTDN'        ,
-                           'ISRB08RG'  , 'SOLAR'      ,
-                           'ISRB09RG'  , 'SOLAR'      ,
-                           'ISRB10RG'  , 'SOLAR'      ,
-                           'OSRB08RG'  , 'SOLAR'      ,
-                           'OSRB09RG'  , 'SOLAR'      ,
-                           'OSRB10RG'  , 'SOLAR'      ,
-                           'TBRB05RG'  , 'IRRAD'      ,
-                           'TBRB06RG'  , 'IRRAD'      ,
-                           'TBRB07RG'  , 'IRRAD'      ,
-                           'TBRB09RG'  , 'IRRAD'      ,
-                           'TBRB10RG'  , 'IRRAD'      ,
-                           'TBRB11RG'  , 'IRRAD'      ,
-                           'TBRB15RG'  , 'IRRAD'      ,
-                                'TBISCCP'   , 'SATSIM'   ,
-                                'CAPE'      , 'MOIST'    ,
-                          'DBZ_MAX'  , 'MOIST'    ,
-                          'DBZ_TOP'  , 'MOIST'    ,
-                          'DBZ_1KM'  , 'MOIST'    ,
-                          'DBZ_M10C' , 'MOIST'    ,
-                          'UH25'     , 'DYN'      ,
-                          'UH03'     , 'DYN'      ,
-                          'SRH25'    , 'DYN'      ,
-                          'SRH03'    , 'DYN'      ,
-                          'SRH01'    , 'DYN'      ,
-                                'SPEED'     , 'DYN'      ,
-                                'U10M;V10M' , 'SURFACE'  ,
-                                'T2M'       , 'SURFACE'  ,
-                                'T2MDEW'    , 'SURFACE'  ,
-                                'H1000'     , 'DYN'      ,
-                                'H500'      , 'DYN'      ,
-                                'TQV'       , 'AGCM'     ,
-                                'SNO'       , 'MOIST'    , 'SNOW' ,
-                                'ICE'       , 'MOIST'    , 'ICE' ,
-                                'FRZR'      , 'MOIST'    , 'FRZR' ,
-                                'RAIN'      , 'MOIST'    , 'RAIN' ,
-                                'PTYPE'     , 'MOIST'    ,
-                                'AN_PRCP'   , 'MOIST'    , 'PRECANV' ,
-                                'CN_PRCP'   , 'MOIST'    , 'PRECCON' ,
-                                'LS_PRCP'   , 'MOIST'    , 'PRECLSC' ,
-                                'U850;V850' , 'DYN'      ,
-                                'U250;V250' , 'DYN'      ,
-                                'VORT200'   , 'DYN'      ,
-                                'VORT500'   , 'DYN'      ,
-                                'VORT700'   , 'DYN'      ,
-                                'VORT850'   , 'DYN'      ,
-                                'DIVG200'   , 'DYN'      ,
-                                'DIVG500'   , 'DYN'      ,
-                                'DIVG700'   , 'DYN'      ,
-                                'DIVG850'   , 'DYN'      ,
-                                'RSR'       , 'SOLAR'    , 'SWTNT'    ,
-                                'OSR'       , 'SOLAR'    , 'SWTUP'    ,
-                                'OLR'       , 'IRRAD'    , 'LWTUP'    ,
-                                'CWP'       , 'MOIST'    ,
-                                'LWP'       , 'MOIST'    ,
-                                'IWP'       , 'MOIST'    ,
-                                'DUEXTTAU'       , 'DU'  ,
-                                'SSEXTTAU'       , 'SS'  ,
-                                'CA.brEXTTAU'    , 'CA.br'     , 'BREXTTAU'    ,
-                                'CA.bcEXTTAU'    , 'CA.bc'     , 'BCEXTTAU'    ,
-                                'CA.ocEXTTAU'    , 'CA.oc'     , 'OCEXTTAU'    ,
-                                'SUEXTTAU'       , 'SU'  ,
-                                'NIEXTTAU'       , 'NI'  ,
-                                'FRACI'     , 'SURFACE'  , 'frseaice'   ,
-                                'SNOMAS'    , 'SURFACE'  ,
-                                ::
-
-  hwt_01hr_acc_LCC.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
-  hwt_01hr_acc_LCC.archive:          '%c/Y%y4' ,
-  hwt_01hr_acc_LCC.format:           'CFIO' ,
-  hwt_01hr_acc_LCC.deflate:           1 ,
-  hwt_01hr_acc_LCC.grid_label:        lambert ,
-  hwt_01hr_acc_LCC.regrid_method:    'BILINEAR_MONOTONIC' ,
-  hwt_01hr_acc_LCC.mode:             'time-averaged' ,
-  hwt_01hr_acc_LCC.frequency:         010000 ,
-  hwt_01hr_acc_LCC.duration:          010000 ,
-  hwt_01hr_acc_LCC.acc_ref_time:      000000 ,
-  hwt_01hr_acc_LCC.acc_interval:      1200000 ,
-  hwt_01hr_acc_LCC.timestampEnd:      .true. ,
-  hwt_01hr_acc_LCC.mode:             'time-averaged' ,
-  hwt_01hr_acc_LCC.fields:           'PRECTOTAL' , 'MOIST' ,  'APCP' , 'ACCUMULATE' ,
-                                     'CN_PRCP'   , 'MOIST' , 'ACPCP' , 'ACCUMULATE' ,
-                                     'LS_PRCP'   , 'MOIST' , 'NCPCP' , 'ACCUMULATE' ,
-                                     'SNOWTOTAL' , 'MOIST'  , 'SNOWACCUM', 'ACCUMULATE'
-                                     'KUCHERA_RATIO' , 'MOIST' ,
-                                     'AREA'      , 'DYN'      ,
-                             ::
-
-  hwt_01hr_slv_LCC.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
-  hwt_01hr_slv_LCC.archive:          '%c/Y%y4' ,
-  hwt_01hr_slv_LCC.format:           'CFIO' ,
-  hwt_01hr_slv_LCC.deflate:           1 ,
-  hwt_01hr_slv_LCC.grid_label:        lambert ,
-  hwt_01hr_slv_LCC.regrid_method:    'BILINEAR_MONOTONIC' ,
-  hwt_01hr_slv_LCC.mode:             'time-averaged' ,
-  hwt_01hr_slv_LCC.frequency:         010000 ,
-  hwt_01hr_slv_LCC.duration:          010000 ,
-  hwt_01hr_slv_LCC.timestampEnd:      .true. ,
-  hwt_01hr_slv_LCC.fields:           'GUST'      , 'SURFACE'  , 'GUSTMX'             , 'MAX' ,
-                                     'DBZ_1KM'   , 'MOIST'    , 'MXREFD_1KM'         , 'MAX' ,
-                                     'DBZ_M10C'  , 'MOIST'    , 'MXREFD_263K'        , 'MAX' ,
-                                     'UH25'      , 'DYN'      , 'MXUPHL_2-5KM'       , 'MAX' ,
-                                     'UH25'      , 'DYN'      , 'MNUPHL_2-5KM'       , 'MIN' ,
-                                     'UH03'      , 'DYN'      , 'MXUPHL_0-3KM'       , 'MAX' ,
-                                     'UH03'      , 'DYN'      , 'MNUPHL_0-3KM'       , 'MIN' ,
-                                     'WSPD_10M'  , 'DYN'      , 'MXWSPD_10M'         , 'MAX' ,
-                              'VVEL_UP_100_1000' , 'DYN'      , 'VVELUP_100-1000hPa' , 'MAX' ,
-                              'VVEL_DN_100_1000' , 'DYN'      , 'VVELDN_100-1000hPa' , 'MIN' ,
-                                     'PRECTOTAL' , 'MOIST'    ,  'APCP_1H'           , 'ACCUMULATE' ,
-                                     'CN_PRCP'   , 'MOIST'    , 'ACPCP_1H'           , 'ACCUMULATE' ,
-                                     'LS_PRCP'   , 'MOIST'    , 'NCPCP_1H'           , 'ACCUMULATE' ,
-                                     'AREA'      , 'DYN'      ,
-                             ::
-
-  hwt_30mn_prs_LCC.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
-  hwt_30mn_prs_LCC.archive:          '%c/Y%y4' ,
-  hwt_30mn_prs_LCC.format:           'CFIO' ,
-  hwt_30mn_prs_LCC.deflate:          1,
-  hwt_30mn_prs_LCC.grid_label:       lambert,
-  hwt_30mn_prs_LCC.regrid_method:    'BILINEAR_MONOTONIC' ,
-  hwt_30mn_prs_LCC.mode:             'instantaneous' ,
-  hwt_30mn_prs_LCC.frequency:        003000 ,
-  hwt_30mn_prs_LCC.duration:         003000 ,
-  hwt_30mn_prs_LCC.vscale:           100.0 ,
-  hwt_30mn_prs_LCC.vunit:            'hPa' ,
-  hwt_30mn_prs_LCC.vvars:            'log(PLE)' , 'DYN' ,
-  hwt_30mn_prs_LCC.levels:           1000 925 850 700 500 400 300 250 200 150 100 ,
-  hwt_30mn_prs_LCC.fields:           'U;V'    , 'DYN'        , 'UGRD;VGRD' ,
-                                     'T'      , 'DYN'        , 'TMP'       ,
-                                     'ZLE'    , 'DYN'        , 'HGT'       ,
-                                     'Q'      , 'MOIST'      , 'SPFH'      ,
-                                     'RH2'    , 'MOIST'      , 'RH'        ,
-                                     'QITOT'  , 'AGCM'       , 'QI'  ,
-                                     'QLTOT'  , 'AGCM'       , 'QL'  ,
-                                     'QRTOT'  , 'AGCM'       , 'QR'  ,
-                                     'QSTOT'  , 'AGCM'       , 'QS'  ,
-                                     'QGTOT'  , 'AGCM'       , 'QG'  ,
-                                     'VORT'   , 'DYN'        ,
-                                     'DIVG'   , 'DYN'        ,
-                                     'KH'     , 'TURBULENCE' ,
-                                     'KM'     , 'TURBULENCE' ,
-                                     'CNV_MF0', 'MOIST'      , 'CNVMF0'  ,
-                                     'CNV_MFD', 'MOIST'      , 'CNVMFD'  ,
-                                     'CNV_MFC', 'MOIST'      , 'CNVMFC'  ,
-                                     'UMF_SC' , 'MOIST'      ,
-                                     'AREA'   , 'DYN'        ,
-                             ::
-
-  hwt_30mn_slv_LCC.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
-  hwt_30mn_slv_LCC.archive:          '%c/Y%y4' ,
-  hwt_30mn_slv_LCC.format:           'CFIO' ,
-  hwt_30mn_slv_LCC.deflate:          1,
-  hwt_30mn_slv_LCC.grid_label:       lambert,
-  hwt_30mn_slv_LCC.regrid_method:    'BILINEAR_MONOTONIC' ,
-  hwt_30mn_slv_LCC.mode:             'instantaneous' ,
-  hwt_30mn_slv_LCC.frequency:        003000 ,
-  hwt_30mn_slv_LCC.duration:         003000 ,
-  hwt_30mn_slv_LCC.fields: 'PHIS'      , 'AGCM'       , 'HGT_SFC'           ,
-                           'PS'        , 'DYN'        , 'PRES_SFC'          ,
-                           'SLP'       , 'DYN'        , 'PRMSL'             ,
-                           'T2M'       , 'SURFACE'    , 'TMP_2M'            ,
-                           'T2MDEW'    , 'SURFACE'    , 'DPT_2M'            ,
-                           'Q2M'       , 'SURFACE'    , 'SPFH_2M'           ,
-                           'RH2M'      , 'SURFACE'    , 'RH_2M'             ,
-                           'U10M;V10M' , 'SURFACE'    , 'UGRD_10M;VGRD_10M' ,
-                           'TAUTT'     , 'SOLAR'      , 'TCOT'              ,
-                           'TAULO'     , 'SOLAR'      , 'LCOT'              ,
-                           'TAUMD'     , 'SOLAR'      , 'MCOT'              ,
-                           'TAUHI'     , 'SOLAR'      , 'HCOT'              ,
-                           'CLDTT'     , 'SOLAR'      , 'TCDC'              ,
-                           'CLDLO'     , 'SOLAR'      , 'LCDC'              ,
-                           'CLDMD'     , 'SOLAR'      , 'MCDC'              ,
-                           'CLDHI'     , 'SOLAR'      , 'HCDC'              ,
-                           'ZPBL'      , 'TURBULENCE' , 'HPBL'              ,
-                           'DBZ_MAX'   , 'MOIST'      , 'REFC'              ,
-                           'DBZ_TOP'   , 'MOIST'      , 'RETOP'             ,
-                           'DBZ_1KM'   , 'MOIST'      , 'REFD_1KM'          ,
-                           'DBZ_M10C'  , 'MOIST'      , 'REFD_263K'         ,
-                           'UH25'      , 'DYN'        , 'UPHL_2-5KM'        ,
-                           'UH03'      , 'DYN'        , 'UPHL_0-3KM'        ,
-                           'SRH25'     , 'DYN'        , 'HLCY_2-5KM'        ,
-                           'SRH03'     , 'DYN'        , 'HLCY_0-3KM'        ,
-                           'SRH01'     , 'DYN'        , 'HLCY_0-1KM'        ,
-                           'CAPE'      , 'MOIST'      ,
-                           'INHB'      , 'MOIST'      , 'CIN'               ,
-                           'SBCAPE'    , 'MOIST'      , 'CAPE_SFC'          ,
-                           'SBCIN'     , 'MOIST'      , 'CIN_SFC'           ,
-                           'MLCAPE'    , 'MOIST'      , 'CAPE_90MB'         ,
-                           'MLCIN'     , 'MOIST'      , 'CIN_90MB'          ,
-                           'MUCAPE'    , 'MOIST'      , 'CAPE_255MB'        ,
-                           'MUCIN'     , 'MOIST'      , 'CIN_255MB'         ,
-                             'SLRTP'   , 'SOLAR'    , 'SWTDN'        ,
-                           'ISRB08RG'  , 'SOLAR'      ,
-                           'ISRB09RG'  , 'SOLAR'      ,
-                           'ISRB10RG'  , 'SOLAR'      ,
-                           'OSRB08RG'  , 'SOLAR'      ,
-                           'OSRB09RG'  , 'SOLAR'      ,
-                           'OSRB10RG'  , 'SOLAR'      ,
-                           'TBRB05RG'  , 'IRRAD'      ,
-                           'TBRB06RG'  , 'IRRAD'      ,
-                           'TBRB07RG'  , 'IRRAD'      ,
-                           'TBRB09RG'  , 'IRRAD'      ,
-                           'TBRB10RG'  , 'IRRAD'      ,
-                           'TBRB11RG'  , 'IRRAD'      ,
-                           'TBRB15RG'  , 'IRRAD'      ,
-                           'TBISCCP'   , 'SATSIM'     ,
-                           'SPEED'     , 'DYN'        ,
-                           'GUST'      , 'SURFACE'    ,
-                           'SNO'       , 'MOIST'      , 'SNOW',
-                           'ICE'       , 'MOIST'      , 'ICE',
-                           'FRZR'      , 'MOIST'      , 'FRZR' ,
-                           'RAIN'      , 'MOIST'      , 'RAIN' ,
-                           'TPREC'     , 'MOIST'      , 'PRECTOT' ,
-                           'CN_PRCP'   , 'MOIST'      , 'PRECCON' ,
-                           'LS_PRCP'   , 'MOIST'      , 'PRECLSC' ,
-                                'DUEXTTAU'       , 'DU'  ,
-                                'SSEXTTAU'       , 'SS'  ,
-                                'CA.brEXTTAU'    , 'CA.br'     , 'BREXTTAU'    ,
-                                'CA.bcEXTTAU'    , 'CA.bc'     , 'BCEXTTAU'    ,
-                                'CA.ocEXTTAU'    , 'CA.oc'     , 'OCEXTTAU'    ,
-                                'SUEXTTAU'       , 'SU'  ,
-                                'NIEXTTAU'       , 'NI'  ,
-                                     'AREA'      , 'DYN'      ,
-                         ::
