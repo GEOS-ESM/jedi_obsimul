@@ -8,7 +8,7 @@
 #          'TAUOROX;TAUOROY'    , 'GWD'  ,
 #          'TAUBKGX;TAUBKGY'    , 'GWD'  ,
           'DUDT_ORO'  , 'GWD'  , 'DUDTORO' ,
-          'DVDT_ORO'  , 'GWD'  , 'DVDTORO' ,          
+          'DVDT_ORO'  , 'GWD'  , 'DVDTORO' ,
           'DUDT_BKG'  , 'GWD'  , 'DUDTBKG' ,
           'DVDT_BKG'  , 'GWD'  , 'DVDTBKG' ,
           'DUDT_RAY'  , 'GWD'  , 'DUDTRAY' ,
@@ -16,7 +16,7 @@
           'TAUOROX'    , 'GWD'  ,
           'TAUOROY'    , 'GWD'  ,
           'TAUBKGX'    , 'GWD'  ,
-          'TAUBKGY'    , 'GWD'  ,          
+          'TAUBKGY'    , 'GWD'  ,
 
           'DTDT_ORO'           , 'GWD'  , 'DTDTORO'  ,
           'DTDT_BKG'           , 'GWD'  , 'DTDTBKG'  ,

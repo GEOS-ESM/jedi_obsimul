@@ -26,3 +26,6 @@ test-data-release/
 data/
 cmake*.log
 make*.log
+
+HISTORY.rc
+HISTORY1.rc

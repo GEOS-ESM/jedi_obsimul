@@ -1,5 +1,8 @@
 #!/bin/bash -l
 
+
+#---------- for use HISTORY_JOSSE.RC  ---------
+
 f=HISTORY_JOSSE.RC
 f2=HISTORY.rc
 
