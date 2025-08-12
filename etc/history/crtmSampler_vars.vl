@@ -2,7 +2,8 @@
 # crtm_ir.vl:  Generic geophysical variables for CRTM IR sensors.
 #
 
-                       'U;V'            , 'DYN'        , 
+                       'U'            , 'DYN'        ,
+                       'V'            , 'DYN'        ,                        
                        'T'              , 'DYN'        , 
                        'DELP'           , 'DYN'        , 
                        'Q'              , 'MOIST'      , 'QV'  ,
@@ -17,8 +18,11 @@
 #                      Trace gases
 #                      -----------
                        'O3PPMV'         , 'CHEMISTRY'  , 'O3'
-                       'GOCART::CO2'    , 'GOCART'     , 'CO2'  ,
- 
+# ygyu: 'GOCART::CO2' not found
+#                       'GOCART::CO2'    , 'GOCART'     , 'CO2'  ,
+# ygyu: 'SpeciesConc_CO2' is wrong
+#                       'SpeciesConc_CO2', 'GCHPchem'   , 'CO2'  ,
+
                        'PS'             , 'DYN'        ,
                        'PHIS'           , 'AGCM'       , 
                        'SGH'            , 'AGCM'       , 
@@ -45,8 +49,10 @@
                        'V2M'            , 'SURFACE'    ,                       
                        'T2M'            , 'SURFACE'    ,
                        'Q2M'            , 'SURFACE'    ,
-                       'U10N;V10N'      , 'SURFACE'    , 
-                       'U10M;V10M'      , 'SURFACE'    , 
+                       'U10N'      , 'SURFACE'    , 
+                       'V10N'      , 'SURFACE'    , 
+                       'U10M'      , 'SURFACE'    ,
+                       'V10M'      , 'SURFACE'    ,                        
                        'T10M'           , 'SURFACE'    ,
                        'Q10M'           , 'SURFACE'    ,
                        'U50M'           , 'DYN'        ,

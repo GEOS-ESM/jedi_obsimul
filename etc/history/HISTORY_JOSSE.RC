@@ -53,9 +53,10 @@ COLLECTIONS:
 #             Samplers at Obs locations
 #             --------------------------
               'Aeronet'
-              'SNDR_ATMS'
-              'myd04'
-              'mod04'
+#ygyu1
+#              'SNDR_ATMS'
+#              'myd04'
+#              'mod04'
 #             'ABI_M6C14_Geostationary'  # slow
 #             'ABI_M6C01_Mask'           # slow
 
@@ -118,17 +119,18 @@ GRID_LABELS:
      PC720x361-DC        # 0.5    x 0.625   deg     (<==> c180)
      PC1440x721-DC       # 0.25   x 0.3125  deg     (<--> c360)
      PC2880x1441-DC      # 0.125  x 0.0625  deg     (<--> c720)
-#     not used in collections below
-#     PC5760x2881-DC      # 0.0625 x 0.03125 deg     (<--> c1140)
+     PC5760x2881-DC      # 0.0625 x 0.03125 deg     (<--> c1140)
 #    generating c2880 is costly at high core count
 #    PC11520x5761-DC     # 112.5  x 56.25   arcsec  (<--> c2880)
      lambert
 
 #    Sampler Geometries
 #    ------------------
-     SwathGrid_MYD04
-     SwathGrid_MOD04
-     SwathGrid_ATMS
+
+#ygyu2
+#     SwathGrid_MYD04
+#     SwathGrid_MOD04
+#     SwathGrid_ATMS
 
 #     ABI_East_2km
 #     ABI_West_2km

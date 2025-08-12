@@ -7,7 +7,9 @@
           'DELP'   , 'DYN'        ,
           'PS'     , 'DYN'        ,
 
-          'U;V'    , 'DYN'        ,
+#          'U;V'    , 'DYN'        ,
+           'U'    , 'DYN'        ,
+           'V'    , 'DYN'        ,           
           'W'      , 'DYN'        ,
           'OMEGA'  , 'DYN'        ,
           'T'      , 'DYN'        ,
