@@ -2,10 +2,13 @@
 #---------- for use HISTORY_JOSSE.RC  ---------
 f=HISTORY_JOSSE.RC
 f2=HISTORY.rc
+d=/discover/nobackup/projects/gmao/aist-nr/yyu11/run_geos_su17/c24_Aug6_v12-rc17/scratch/.
 
 m4 $f > $f2
-echo "mv /discover/nobackup/yyu11/trash/$f2  ."
-scp $f2 yyu11@discover:/discover/nobackup/yyu11/trash/.
+cmd="scp $f2 yyu11@discover:$d"
+echo $cmd
+bash -c "$cmd"
+
 exit
 
 ##cp /discover/nobackup/bmauer/tmp/lambert/lambert_grid.nc4 /discover/nobackup/projects/gmao/aist-nr/yyu11/run_geos_su17/c24_Aug6_v12-rc17/scratch/

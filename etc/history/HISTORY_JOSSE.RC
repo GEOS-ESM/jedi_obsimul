@@ -18,7 +18,69 @@ EXPSRC: GEOSgcm-v12
 #                               Selection of Collections
 #                              -------------------------
 
+# grp-2:  sampler
 COLLECTIONS:
+   geosgcm_prog
+# 'GeoDisk_GXS_East'   pass
+::              
+
+
+qxxCOLLECTIONS:
+# ygyu1:  remove swath
+#             Samplers at Obs locations
+#             --------------------------
+              'Aeronet'
+#              'SNDR_ATMS'
+#              'myd04'
+#              'mod04'
+#             'ABI_M6C14_Geostationary'  # slow
+#             'ABI_M6C01_Mask'           # slow
+
+
+#              'GeoDisk_ABI_East_2km'
+#              'GeoDisk_ABI_West_2km'
+              'GeoDisk_GXS_East'
+              'GeoDisk_GXS_West'
+              'GeoDisk_GHMS'
+              'GeoDisk_MTG_IRS'
+
+#             Trajectory: 2 Campaigns + JEDI 29 platforms (IODA format)
+#             ---------------------------------------------------------
+              'CAMP2EX'
+              'FIREXAQ'
+              'aircraft'
+              'airs_aqua'
+              'amsr2_gcom-w1'
+              'amsua_aqua'
+              'amsua_metop-b'
+              'amsua_n15'
+              'amsua_n18'
+              'amsua_n19'
+              'atms_n20'
+              'atms_npp'
+              'avhrr3_metop-b'
+              'avhrr3_n18'
+              'avhrr3_n19'
+              'cris-fsr_n20'
+              'cris-fsr_npp'
+              'gmi_gpm'
+              'gps'
+              'iasi_metop-b'
+              'mhs_metop-b'
+              'mhs_n19'
+              'mls55_aura'
+              'omi_aura'
+              'ompsnm_npp'
+              'satwind'
+              'scatwind'
+              'sfc'
+              'sfcship'
+              'sondes'
+              'ssmis_f17'
+::
+
+
+qqCOLLECTIONS:
 #             Gridded Output
 #             --------------
               'geosgcm_prog'
@@ -40,22 +102,24 @@ COLLECTIONS:
               'ana_surf'
 #             'const_2d_asm_Nx'
 
+#ygyu3: browsing is the last to test
+
 #             Browsing products
 #             -----------------
-             'hwt_30mn_slv_LCC'
-             'hwt_30mn_prs_LCC'
-             'hwt_01hr_slv_LCC'
-             'hwt_01hr_acc_LCC'
-             'inst1_2d_asm_Nx'
-             'tavg1_2d_flx_Nx'
+#             'hwt_30mn_slv_LCC'
+#             'hwt_30mn_prs_LCC'
+#             'hwt_01hr_slv_LCC'
+#             'hwt_01hr_acc_LCC'
+#             'inst1_2d_asm_Nx'
+#             'tavg1_2d_flx_Nx'
 
-
+# ygyu1:  remove swath
 #             Samplers at Obs locations
 #             --------------------------
               'Aeronet'
-              'SNDR_ATMS'
-              'myd04'
-              'mod04'
+#              'SNDR_ATMS'
+#              'myd04'
+#              'mod04'
 #             'ABI_M6C14_Geostationary'  # slow
 #             'ABI_M6C01_Mask'           # slow
 
@@ -124,11 +188,13 @@ GRID_LABELS:
 #    PC11520x5761-DC     # 112.5  x 56.25   arcsec  (<--> c2880)
      lambert
 
+#ygyu2
+
 #    Sampler Geometries
 #    ------------------
-     SwathGrid_MYD04
-     SwathGrid_MOD04
-     SwathGrid_ATMS
+#     SwathGrid_MYD04
+#     SwathGrid_MOD04
+#     SwathGrid_ATMS
 
 #     ABI_East_2km
 #     ABI_West_2km
@@ -604,7 +670,6 @@ SNDR_ATMS.format:            'CFIO',
 SNDR_ATMS.frequency:         060000,
 SNDR_ATMS.grid_label:        SwathGrid_ATMS,
 SNDR_ATMS.regrid_method:     'BILINEAR' ,
-SNDR_ATMS.splitField:        1,
 SNDR_ATMS.fields:            include(crtmSampler_vars.vl)
 ::
 
@@ -642,7 +707,6 @@ GeoDisk_GXS_East.format:      'CFIO',
 GeoDisk_GXS_East.frequency:    010000
 GeoDisk_GXS_East.duration:     010000
 GeoDisk_GXS_East.grid_label:   GXS_East
-GeoDisk_GXS_East.splitField:   1,
 GeoDisk_GXS_East.fields:       include(crtmSampler_vars.vl)
 ::
 
@@ -651,7 +715,6 @@ GeoDisk_GXS_West.format:      'CFIO',
 GeoDisk_GXS_West.frequency:    010000
 GeoDisk_GXS_West.duration:     010000
 GeoDisk_GXS_West.grid_label:   GXS_West
-GeoDisk_GXS_West.splitField:   1,
 GeoDisk_GXS_West.fields:       include(crtmSampler_vars.vl)
 ::
 
@@ -660,7 +723,6 @@ GeoDisk_GHMS.format:      'CFIO',
 GeoDisk_GHMS.frequency:    010000
 GeoDisk_GHMS.duration:     010000
 GeoDisk_GHMS.grid_label:   GHMS
-GeoDisk_GHMS.splitField:   1,
 GeoDisk_GHMS.fields:       include(crtmSampler_vars.vl)
 ::
 
@@ -669,7 +731,6 @@ GeoDisk_MTG_IRS.format:      'CFIO',
 GeoDisk_MTG_IRS.frequency:    010000
 GeoDisk_MTG_IRS.duration:     010000
 GeoDisk_MTG_IRS.grid_label:   MTG_IRS
-GeoDisk_MTG_IRS.splitField:   1,
 GeoDisk_MTG_IRS.fields:       include(crtmSampler_vars.vl)
 ::
 
@@ -695,7 +756,6 @@ ABI_M6C01_Mask.format:               'CFIO',
 ABI_M6C01_Mask.frequency:            010000,
 ABI_M6C01_Mask.duration:             010000,
 ABI_M6C01_Mask.regrid_method:        'BILINEAR' ,
-ABI_M6C01_Mask.splitField:           1,
 ABI_M6C01_Mask.fields:               include(crtmSampler_vars.vl)
 ::
 
@@ -759,7 +819,7 @@ aircraft.Epoch:                060000
 aircraft.use_NWP_1_file:       .true.
 aircraft.restore_2_obs_vector: .true.
 aircraft.regrid_method:        'BILINEAR' ,
-aircraft.splitField:            1,
+#aircraft.splitField:            1,
 aircraft.fields:
                          include(crtmSampler_vars.vl)
 ::
@@ -772,7 +832,7 @@ airs_aqua.Epoch:                060000
 airs_aqua.use_NWP_1_file:       .true.
 airs_aqua.restore_2_obs_vector: .true.
 airs_aqua.regrid_method:        'BILINEAR' ,
-airs_aqua.splitField:            1,
+#airs_aqua.splitField:            1,
 airs_aqua.fields:
                          include(crtmSampler_vars.vl)
 ::
@@ -785,7 +845,7 @@ amsr2_gcom-w1.Epoch:                060000
 amsr2_gcom-w1.use_NWP_1_file:       .true.
 amsr2_gcom-w1.restore_2_obs_vector: .true.
 amsr2_gcom-w1.regrid_method:        'BILINEAR' ,
-amsr2_gcom-w1.splitField:            1,
+#amsr2_gcom-w1.splitField:            1,
 amsr2_gcom-w1.fields:
                          include(crtmSampler_vars.vl)
 ::
@@ -798,7 +858,7 @@ amsua_aqua.Epoch:                060000
 amsua_aqua.use_NWP_1_file:       .true.
 amsua_aqua.restore_2_obs_vector: .true.
 amsua_aqua.regrid_method:        'BILINEAR' ,
-amsua_aqua.splitField:            1,
+#amsua_aqua.splitField:            1,
 amsua_aqua.fields:
                          include(crtmSampler_vars.vl)
 ::
@@ -811,7 +871,7 @@ amsua_metop-b.Epoch:                060000
 amsua_metop-b.use_NWP_1_file:       .true.
 amsua_metop-b.restore_2_obs_vector: .true.
 amsua_metop-b.regrid_method:        'BILINEAR' ,
-amsua_metop-b.splitField:            1,
+#amsua_metop-b.splitField:            1,
 amsua_metop-b.fields:
                          include(crtmSampler_vars.vl)
 ::
@@ -824,7 +884,7 @@ amsua_n15.Epoch:                060000
 amsua_n15.use_NWP_1_file:       .true.
 amsua_n15.restore_2_obs_vector: .true.
 amsua_n15.regrid_method:        'BILINEAR' ,
-amsua_n15.splitField:            1,
+#amsua_n15.splitField:            1,
 amsua_n15.fields:
                          include(crtmSampler_vars.vl)
 ::
@@ -837,7 +897,7 @@ amsua_n18.Epoch:                060000
 amsua_n18.use_NWP_1_file:       .true.
 amsua_n18.restore_2_obs_vector: .true.
 amsua_n18.regrid_method:        'BILINEAR' ,
-amsua_n18.splitField:            1,
+#amsua_n18.splitField:            1,
 amsua_n18.fields:
                          include(crtmSampler_vars.vl)
 ::
@@ -850,7 +910,7 @@ amsua_n19.Epoch:                060000
 amsua_n19.use_NWP_1_file:       .true.
 amsua_n19.restore_2_obs_vector: .true.
 amsua_n19.regrid_method:        'BILINEAR' ,
-amsua_n19.splitField:            1,
+#amsua_n19.splitField:            1,
 amsua_n19.fields:
                          include(crtmSampler_vars.vl)
 ::
@@ -863,7 +923,7 @@ atms_n20.Epoch:                060000
 atms_n20.use_NWP_1_file:       .true.
 atms_n20.restore_2_obs_vector: .true.
 atms_n20.regrid_method:        'BILINEAR' ,
-atms_n20.splitField:            1,
+#atms_n20.splitField:            1,
 atms_n20.fields:
                          include(crtmSampler_vars.vl)
 ::
@@ -876,7 +936,7 @@ atms_npp.Epoch:                060000
 atms_npp.use_NWP_1_file:       .true.
 atms_npp.restore_2_obs_vector: .true.
 atms_npp.regrid_method:        'BILINEAR' ,
-atms_npp.splitField:            1,
+#atms_npp.splitField:            1,
 atms_npp.fields:
                          include(crtmSampler_vars.vl)
 ::
@@ -889,7 +949,7 @@ avhrr3_metop-b.Epoch:                060000
 avhrr3_metop-b.use_NWP_1_file:       .true.
 avhrr3_metop-b.restore_2_obs_vector: .true.
 avhrr3_metop-b.regrid_method:        'BILINEAR' ,
-avhrr3_metop-b.splitField:            1,
+#avhrr3_metop-b.splitField:            1,
 avhrr3_metop-b.fields:
                          include(crtmSampler_vars.vl)
 ::
@@ -902,7 +962,7 @@ avhrr3_n18.Epoch:                060000
 avhrr3_n18.use_NWP_1_file:       .true.
 avhrr3_n18.restore_2_obs_vector: .true.
 avhrr3_n18.regrid_method:        'BILINEAR' ,
-avhrr3_n18.splitField:            1,
+#avhrr3_n18.splitField:            1,
 avhrr3_n18.fields:
                          include(crtmSampler_vars.vl)
 ::
@@ -915,7 +975,7 @@ avhrr3_n19.Epoch:                060000
 avhrr3_n19.use_NWP_1_file:       .true.
 avhrr3_n19.restore_2_obs_vector: .true.
 avhrr3_n19.regrid_method:        'BILINEAR' ,
-avhrr3_n19.splitField:            1,
+#avhrr3_n19.splitField:            1,
 avhrr3_n19.fields:
                          include(crtmSampler_vars.vl)
 ::
@@ -928,7 +988,7 @@ cris-fsr_n20.Epoch:                060000
 cris-fsr_n20.use_NWP_1_file:       .true.
 cris-fsr_n20.restore_2_obs_vector: .true.
 cris-fsr_n20.regrid_method:        'BILINEAR' ,
-cris-fsr_n20.splitField:            1,
+#cris-fsr_n20.splitField:            1,
 cris-fsr_n20.fields:
                          include(crtmSampler_vars.vl)
 ::
@@ -941,7 +1001,7 @@ cris-fsr_npp.Epoch:                060000
 cris-fsr_npp.use_NWP_1_file:       .true.
 cris-fsr_npp.restore_2_obs_vector: .true.
 cris-fsr_npp.regrid_method:        'BILINEAR' ,
-cris-fsr_npp.splitField:            1,
+#cris-fsr_npp.splitField:            1,
 cris-fsr_npp.fields:
                          include(crtmSampler_vars.vl)
 ::
@@ -954,7 +1014,7 @@ gmi_gpm.Epoch:                060000
 gmi_gpm.use_NWP_1_file:       .true.
 gmi_gpm.restore_2_obs_vector: .true.
 gmi_gpm.regrid_method:        'BILINEAR' ,
-gmi_gpm.splitField:            1,
+#gmi_gpm.splitField:            1,
 gmi_gpm.fields:
                          include(crtmSampler_vars.vl)
 ::
@@ -967,7 +1027,7 @@ gps.Epoch:                060000
 gps.use_NWP_1_file:       .true.
 gps.restore_2_obs_vector: .true.
 gps.regrid_method:        'BILINEAR' ,
-gps.splitField:            1,
+#gps.splitField:            1,
 gps.fields:
                          include(crtmSampler_vars.vl)
 ::
@@ -980,7 +1040,7 @@ iasi_metop-b.Epoch:                060000
 iasi_metop-b.use_NWP_1_file:       .true.
 iasi_metop-b.restore_2_obs_vector: .true.
 iasi_metop-b.regrid_method:        'BILINEAR' ,
-iasi_metop-b.splitField:            1,
+#iasi_metop-b.splitField:            1,
 iasi_metop-b.fields:
                          include(crtmSampler_vars.vl)
 ::
@@ -993,7 +1053,7 @@ mhs_metop-b.Epoch:                060000
 mhs_metop-b.use_NWP_1_file:       .true.
 mhs_metop-b.restore_2_obs_vector: .true.
 mhs_metop-b.regrid_method:        'BILINEAR' ,
-mhs_metop-b.splitField:            1,
+#mhs_metop-b.splitField:            1,
 mhs_metop-b.fields:
                          include(crtmSampler_vars.vl)
 ::
@@ -1006,7 +1066,7 @@ mhs_n19.Epoch:                060000
 mhs_n19.use_NWP_1_file:       .true.
 mhs_n19.restore_2_obs_vector: .true.
 mhs_n19.regrid_method:        'BILINEAR' ,
-mhs_n19.splitField:            1,
+#mhs_n19.splitField:            1,
 mhs_n19.fields:
                          include(crtmSampler_vars.vl)
 ::
@@ -1019,7 +1079,7 @@ mls55_aura.Epoch:                060000
 mls55_aura.use_NWP_1_file:       .true.
 mls55_aura.restore_2_obs_vector: .true.
 mls55_aura.regrid_method:        'BILINEAR' ,
-mls55_aura.splitField:            1,
+#mls55_aura.splitField:            1,
 mls55_aura.fields:
                          include(crtmSampler_vars.vl)
 ::
@@ -1032,7 +1092,7 @@ omi_aura.Epoch:                060000
 omi_aura.use_NWP_1_file:       .true.
 omi_aura.restore_2_obs_vector: .true.
 omi_aura.regrid_method:        'BILINEAR' ,
-omi_aura.splitField:            1,
+#omi_aura.splitField:            1,
 omi_aura.fields:
                          include(crtmSampler_vars.vl)
 ::
@@ -1045,7 +1105,7 @@ ompsnm_npp.Epoch:                060000
 ompsnm_npp.use_NWP_1_file:       .true.
 ompsnm_npp.restore_2_obs_vector: .true.
 ompsnm_npp.regrid_method:        'BILINEAR' ,
-ompsnm_npp.splitField:            1,
+#ompsnm_npp.splitField:            1,
 ompsnm_npp.fields:
                          include(crtmSampler_vars.vl)
 ::
@@ -1058,7 +1118,7 @@ satwind.Epoch:                060000
 satwind.use_NWP_1_file:       .true.
 satwind.restore_2_obs_vector: .true.
 satwind.regrid_method:        'BILINEAR' ,
-satwind.splitField:            1,
+#satwind.splitField:            1,
 satwind.fields:
                          include(crtmSampler_vars.vl)
 ::
@@ -1071,7 +1131,7 @@ scatwind.Epoch:                060000
 scatwind.use_NWP_1_file:       .true.
 scatwind.restore_2_obs_vector: .true.
 scatwind.regrid_method:        'BILINEAR' ,
-scatwind.splitField:            1,
+#scatwind.splitField:            1,
 scatwind.fields:
                          include(crtmSampler_vars.vl)
 ::
@@ -1084,7 +1144,7 @@ sfc.Epoch:                060000
 sfc.use_NWP_1_file:       .true.
 sfc.restore_2_obs_vector: .true.
 sfc.regrid_method:        'BILINEAR' ,
-sfc.splitField:            1,
+#sfc.splitField:            1,
 sfc.fields:
                          include(crtmSampler_vars.vl)
 ::
@@ -1097,7 +1157,7 @@ sfcship.Epoch:                060000
 sfcship.use_NWP_1_file:       .true.
 sfcship.restore_2_obs_vector: .true.
 sfcship.regrid_method:        'BILINEAR' ,
-sfcship.splitField:            1,
+#sfcship.splitField:            1,
 sfcship.fields:
                          include(crtmSampler_vars.vl)
 ::
@@ -1110,7 +1170,7 @@ sondes.Epoch:                060000
 sondes.use_NWP_1_file:       .true.
 sondes.restore_2_obs_vector: .true.
 sondes.regrid_method:        'BILINEAR' ,
-sondes.splitField:            1,
+#sondes.splitField:            1,
 sondes.fields:
                          include(crtmSampler_vars.vl)
 ::
@@ -1123,7 +1183,7 @@ ssmis_f17.Epoch:                060000
 ssmis_f17.use_NWP_1_file:       .true.
 ssmis_f17.restore_2_obs_vector: .true.
 ssmis_f17.regrid_method:        'BILINEAR' ,
-ssmis_f17.splitField:            1,
+#ssmis_f17.splitField:            1,
 ssmis_f17.fields:
                          include(crtmSampler_vars.vl)
 ::
