@@ -12,11 +12,43 @@ EXPSRC: GEOSgcm-v12
 
 
 
-uuCOLLECTIONS:
-              'SNDR_ATMS'
-              'aircraft'              
-              'GeoDisk_GXS_East'
-::              
+COLLECTIONS:
+#             Trajectory: 2 Campaigns + JEDI 29 platforms (IODA format)
+#             ---------------------------------------------------------
+              'CAMP2EX'
+              'FIREXAQ'
+              'aircraft'
+              'airs_aqua'
+              'amsr2_gcom-w1'
+              'amsua_aqua'
+              'amsua_metop-b'
+              'amsua_n15'
+              'amsua_n18'
+              'amsua_n19'
+              'atms_n20'
+              'atms_npp'
+              'avhrr3_metop-b'
+              'avhrr3_n18'
+              'avhrr3_n19'
+              'cris-fsr_n20'
+              'cris-fsr_npp'
+              'gmi_gpm'
+              'gps'
+              'iasi_metop-b'
+              'mhs_metop-b'
+              'mhs_n19'
+              'mls55_aura'
+              'omi_aura'
+              'ompsnm_npp'
+              'satwind'
+              'scatwind'
+              'sfc'
+              'sfcship'
+              'sondes'
+              'ssmis_f17'
+::
+
+
 
 uuGRID_LABELS:
   SwathGrid_ATMS
@@ -25,7 +57,7 @@ uuGRID_LABELS:
 ::
 
 
-COLLECTIONS:
+zzCOLLECTIONS:
 
 #             Gridded Output
 #             --------------
@@ -61,9 +93,9 @@ COLLECTIONS:
 #             Samplers at Obs locations
 #             --------------------------
               'Aeronet'
-              'SNDR_ATMS'
-              'myd04'
-              'mod04'
+#              'SNDR_ATMS'
+#              'myd04'
+#              'mod04'
 #             'ABI_M6C14_Geostationary'  # slow
 #             'ABI_M6C01_Mask'           # slow
 
@@ -131,18 +163,21 @@ GRID_LABELS:
 #    PC11520x5761-DC     # 112.5  x 56.25   arcsec  (<--> c2880)
 ##     lambert
 
-#    Sampler Geometries
-#    ------------------
-     SwathGrid_MYD04
-     SwathGrid_MOD04
-     SwathGrid_ATMS
 
-#     ABI_East_2km
-#     ABI_West_2km
-     GXS_East
-     GXS_West
-     GHMS
-     MTG_IRS
+##    Sampler Geometries
+##    ------------------
+#     SwathGrid_MYD04
+#     SwathGrid_MOD04
+#     SwathGrid_ATMS
+
+#
+##     ABI_East_2km
+##     ABI_West_2km
+#     GXS_East
+#     GXS_West
+#     GHMS
+#     MTG_IRS
+#
 
 #    Sampler: Trajectory Geometries
 #    ------------------------------

@@ -23,6 +23,7 @@ f=HISTORY_var2.RC
 fo=zb
 fo2=zc
 f2=HISTORY1.rc
+d=/discover/nobackup/projects/gmao/aist-nr/yyu11/run_geos_su17/mapl_test_c12_traj_use_grid/.
 
 sed -e  's#include(.*#include(var2.vl)#g'  $f > $fo
 diff $f $fo
@@ -33,6 +34,12 @@ sed -e 's/includex/include/g' \
     -e 's/includey/include/g' $fo > $fo2
 diff $fo  $fo2
 m4 $fo2 > $f2
+cp $f2  /Users/yyu11/bkup_run/run/test_c12_illustrate/.
+
+cmd="scp $f2 yyu11@discover:$d"
+echo $cmd
+bash -c "$cmd"
+
 less $f2
 
 fi

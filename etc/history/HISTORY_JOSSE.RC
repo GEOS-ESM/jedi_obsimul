@@ -19,95 +19,29 @@ EXPSRC: GEOSgcm-v12
 #                              -------------------------
 
 
-## grp-2:  sampler
-#qxCOLLECTIONS:
-##   geosgcm_prog    pass
-## 'GeoDisk_GXS_East' 
-##              'CAMP2EX'
-#::              
-
-
 COLLECTIONS:
-# ygyu1:  remove swath
-#             Samplers at Obs locations
-#             --------------------------
 
-#p1
-#              'Aeronet'
-##              'SNDR_ATMS'
-##              'myd04'
-##              'mod04'
-##             'ABI_M6C14_Geostationary'  # slow
-##             'ABI_M6C01_Mask'           # slow
-#
-##              'GeoDisk_ABI_East_2km'
-##              'GeoDisk_ABI_West_2km'
-#              'GeoDisk_GXS_East'
-#              'GeoDisk_GXS_West'
-#              'GeoDisk_GHMS'
-#              'GeoDisk_MTG_IRS'
+##             Gridded Output
+##             --------------
+#              'geosgcm_prog'
+#              'geosgcm_surf'
+#              'inst_01hr_2d_brs_Nx'
+#              'geosgcm_moist'
+#              'geosgcm_turb'
+#              'geosgcm_gwd'
+##             'geosgcm_tend'
+#              'geosgcm_budi'
+#              'geosgcm_buda'
+##             'geosgcm_landice'
+##             'geosgcm_meltwtr'
+##             'geosgcm_snowlayer'
+##             'geosgcm_tracer'
+#              'tavg2d_aer_x'
+#              'tavg3d_aer_p'
+#              'ana_prog'
+#              'ana_surf'
+##             'const_2d_asm_Nx'
 
-
-#p2.
-#             Trajectory: 2 Campaigns + JEDI 29 platforms (IODA format)
-#             ---------------------------------------------------------
-#              'CAMP2EX'
-#              'FIREXAQ'
-
-#p3.
-              'aircraft'
-              'airs_aqua'
-              'amsr2_gcom-w1'
-              'amsua_aqua'
-              'amsua_metop-b'
-              'amsua_n15'
-              'amsua_n18'
-              'amsua_n19'
-              'atms_n20'
-              'atms_npp'
-              'avhrr3_metop-b'
-              'avhrr3_n18'
-              'avhrr3_n19'
-              'cris-fsr_n20'
-              'cris-fsr_npp'
-              'gmi_gpm'
-              'gps'
-              'iasi_metop-b'
-              'mhs_metop-b'
-              'mhs_n19'
-              'mls55_aura'
-              'omi_aura'
-              'ompsnm_npp'
-              'satwind'
-              'scatwind'
-              'sfc'
-              'sfcship'
-              'sondes'
-              'ssmis_f17'
-::
-
-
-qqCOLLECTIONS:
-#             Gridded Output
-#             --------------
-              'geosgcm_prog'
-              'geosgcm_surf'
-              'inst_01hr_2d_brs_Nx'
-              'geosgcm_moist'
-              'geosgcm_turb'
-              'geosgcm_gwd'
-#             'geosgcm_tend'
-              'geosgcm_budi'
-              'geosgcm_buda'
-#             'geosgcm_landice'
-#             'geosgcm_meltwtr'
-#             'geosgcm_snowlayer'
-#             'geosgcm_tracer'
-              'tavg2d_aer_x'
-              'tavg3d_aer_p'
-              'ana_prog'
-              'ana_surf'
-#             'const_2d_asm_Nx'
 
 #ygyu3: browsing is the last to test
 
@@ -124,9 +58,9 @@ qqCOLLECTIONS:
 #             Samplers at Obs locations
 #             --------------------------
               'Aeronet'
-#              'SNDR_ATMS'
-#              'myd04'
-#              'mod04'
+              'SNDR_ATMS'
+              'myd04'
+              'mod04'
 #             'ABI_M6C14_Geostationary'  # slow
 #             'ABI_M6C01_Mask'           # slow
 
@@ -199,9 +133,9 @@ GRID_LABELS:
 
 #    Sampler Geometries
 #    ------------------
-#     SwathGrid_MYD04
-#     SwathGrid_MOD04
-#     SwathGrid_ATMS
+     SwathGrid_MYD04
+     SwathGrid_MOD04
+     SwathGrid_ATMS
 
 #     ABI_East_2km
 #     ABI_West_2km
