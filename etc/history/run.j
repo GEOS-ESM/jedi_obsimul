@@ -1,4 +1,7 @@
 #!/bin/bash -l
+
+if [[ $# -eq 0 || ( $# -eq 1 && $1 == 1 ) ]]; then 
+
 #---------- for use HISTORY_JOSSE.RC  ---------
 f=HISTORY_JOSSE.RC
 f2=HISTORY.rc
@@ -12,6 +15,8 @@ bash -c "$cmd"
 exit
 
 ##cp /discover/nobackup/bmauer/tmp/lambert/lambert_grid.nc4 /discover/nobackup/projects/gmao/aist-nr/yyu11/run_geos_su17/c24_Aug6_v12-rc17/scratch/
+
+elif [[ ( $# -eq 1 && $1 == 2 ) ]]; then
 
 #---------- for use HISTORY_var2.RC  ---------
 f=HISTORY_var2.RC
@@ -29,3 +34,5 @@ sed -e 's/includex/include/g' \
 diff $fo  $fo2
 m4 $fo2 > $f2
 less $f2
+
+fi

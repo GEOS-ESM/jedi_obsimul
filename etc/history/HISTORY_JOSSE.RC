@@ -18,36 +18,43 @@ EXPSRC: GEOSgcm-v12
 #                               Selection of Collections
 #                              -------------------------
 
-# grp-2:  sampler
+
+## grp-2:  sampler
+#qxCOLLECTIONS:
+##   geosgcm_prog    pass
+## 'GeoDisk_GXS_East' 
+##              'CAMP2EX'
+#::              
+
+
 COLLECTIONS:
-   geosgcm_prog
-# 'GeoDisk_GXS_East'   pass
-::              
-
-
-qxxCOLLECTIONS:
 # ygyu1:  remove swath
 #             Samplers at Obs locations
 #             --------------------------
-              'Aeronet'
-#              'SNDR_ATMS'
-#              'myd04'
-#              'mod04'
-#             'ABI_M6C14_Geostationary'  # slow
-#             'ABI_M6C01_Mask'           # slow
+
+#p1
+#              'Aeronet'
+##              'SNDR_ATMS'
+##              'myd04'
+##              'mod04'
+##             'ABI_M6C14_Geostationary'  # slow
+##             'ABI_M6C01_Mask'           # slow
+#
+##              'GeoDisk_ABI_East_2km'
+##              'GeoDisk_ABI_West_2km'
+#              'GeoDisk_GXS_East'
+#              'GeoDisk_GXS_West'
+#              'GeoDisk_GHMS'
+#              'GeoDisk_MTG_IRS'
 
 
-#              'GeoDisk_ABI_East_2km'
-#              'GeoDisk_ABI_West_2km'
-              'GeoDisk_GXS_East'
-              'GeoDisk_GXS_West'
-              'GeoDisk_GHMS'
-              'GeoDisk_MTG_IRS'
-
+#p2.
 #             Trajectory: 2 Campaigns + JEDI 29 platforms (IODA format)
 #             ---------------------------------------------------------
-              'CAMP2EX'
-              'FIREXAQ'
+#              'CAMP2EX'
+#              'FIREXAQ'
+
+#p3.
               'aircraft'
               'airs_aqua'
               'amsr2_gcom-w1'

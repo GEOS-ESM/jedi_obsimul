@@ -22,8 +22,7 @@
 #                      Trace gases
 #                      -----------
                        'O3PPMV'         , 'CHEMISTRY'  , 'O3'
-# ygyu4: 'GOCART::CO2' causes history crash
-#                       'GOCART::CO2'    , 'GOCART'     , 'CO2'  ,
+                       'GOCART::CO2'    , 'GOCART'     , 'CO2'  ,
  
                        'PS'             , 'DYN'        ,
                        'PHIS'           , 'AGCM'       , 
