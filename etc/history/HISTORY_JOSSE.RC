@@ -18,53 +18,46 @@ EXPSRC: GEOSgcm-v12
 #                               Selection of Collections
 #                              -------------------------
 
-
 COLLECTIONS:
 
-##             Gridded Output
-##             --------------
-#              'geosgcm_prog'
-#              'geosgcm_surf'
-#              'inst_01hr_2d_brs_Nx'
-#              'geosgcm_moist'
-#              'geosgcm_turb'
-#              'geosgcm_gwd'
-##             'geosgcm_tend'
-#              'geosgcm_budi'
-#              'geosgcm_buda'
-##             'geosgcm_landice'
-##             'geosgcm_meltwtr'
-##             'geosgcm_snowlayer'
-##             'geosgcm_tracer'
-#              'tavg2d_aer_x'
-#              'tavg3d_aer_p'
-#              'ana_prog'
-#              'ana_surf'
-##             'const_2d_asm_Nx'
-
-
-#ygyu3: browsing is the last to test
+#             Gridded Output
+#             --------------
+              'geosgcm_prog'
+              'geosgcm_surf'
+              'inst_01hr_2d_brs_Nx'
+              'geosgcm_moist'
+              'geosgcm_turb'
+              'geosgcm_gwd'
+#             'geosgcm_tend'
+              'geosgcm_budi'
+              'geosgcm_buda'
+#             'geosgcm_landice'
+#             'geosgcm_meltwtr'
+#             'geosgcm_snowlayer'
+#             'geosgcm_tracer'
+              'tavg2d_aer_x'
+              'tavg3d_aer_p'
+              'ana_prog'
+              'ana_surf'
+#             'const_2d_asm_Nx'
 
 #             Browsing products
 #             -----------------
-#             'hwt_30mn_slv_LCC'
-#             'hwt_30mn_prs_LCC'
-#             'hwt_01hr_slv_LCC'
-#             'hwt_01hr_acc_LCC'
-#             'inst1_2d_asm_Nx'
-#             'tavg1_2d_flx_Nx'
+             'hwt_30mn_slv_LCC'
+             'hwt_30mn_prs_LCC'
+             'hwt_01hr_slv_LCC'
+             'hwt_01hr_acc_LCC'
+             'inst1_2d_asm_Nx'
+             'tavg1_2d_flx_Nx'
 
-# ygyu1:  remove swath
 #             Samplers at Obs locations
 #             --------------------------
               'Aeronet'
               'SNDR_ATMS'
               'myd04'
               'mod04'
-#             'ABI_M6C14_Geostationary'  # slow
-#             'ABI_M6C01_Mask'           # slow
-
-
+#             'ABI_M6C14_Geostationary'  # slow; demonstration
+#             'ABI_M6C01_Mask'           # slow; demonstration
 #              'GeoDisk_ABI_East_2km'
 #              'GeoDisk_ABI_West_2km'
               'GeoDisk_GXS_East'
@@ -123,13 +116,9 @@ GRID_LABELS:
      PC720x361-DC        # 0.5    x 0.625   deg     (<==> c180)
      PC1440x721-DC       # 0.25   x 0.3125  deg     (<--> c360)
      PC2880x1441-DC      # 0.125  x 0.0625  deg     (<--> c720)
-#     not used in collections below
-#     PC5760x2881-DC      # 0.0625 x 0.03125 deg     (<--> c1140)
-#    generating c2880 is costly at high core count
+     PC5760x2881-DC      # 0.0625 x 0.03125 deg     (<--> c1140)
 #    PC11520x5761-DC     # 112.5  x 56.25   arcsec  (<--> c2880)
      lambert
-
-#ygyu2
 
 #    Sampler Geometries
 #    ------------------
@@ -605,7 +594,7 @@ Aeronet.fields:               include(aerSampler_vars.vl)
                               include(asmSampler_vars.vl)
 ::
 
-SNDR_ATMS.sampler_type:      'Swath'
+SNDR_ATMS.sampler_type:      'swath'
 SNDR_ATMS.template:          '%y4%m2%d2_%h2%n2z.nc4',
 SNDR_ATMS.format:            'CFIO',
 SNDR_ATMS.frequency:         060000,
@@ -614,7 +603,7 @@ SNDR_ATMS.regrid_method:     'BILINEAR' ,
 SNDR_ATMS.fields:            include(crtmSampler_vars.vl)
 ::
 
-myd04.sampler_type:      'Swath'
+myd04.sampler_type:      'swath'
 myd04.template:          '%y4%m2%d2_%h2%n2z.nc4',
 myd04.format:            'CFIO',
 myd04.frequency:         060000,               # should not be here; (=Epoch)
@@ -626,7 +615,7 @@ myd04.fields:            include(aerSampler_vars.vl)
                          include(asmSampler_vars.vl)
 ::
 
-mod04.sampler_type:      'Swath'
+mod04.sampler_type:      'swath'
 mod04.template:          '%y4%m2%d2_%h2%n2z.nc4',
 mod04.format:            'CFIO',
 mod04.frequency:         060000,              #  (=Epoch)
@@ -680,7 +669,7 @@ GeoDisk_MTG_IRS.fields:       include(crtmSampler_vars.vl)
 #                              Mask sampler
 #                              -----------------------------------------------------
 
-ABI_M6C01_Mask.sampler_type:        'mask'           # 'mask_geosat'   1-km res
+ABI_M6C01_Mask.sampler_type:        'mask'
 ABI_M6C01_Mask.obs_file_begin:      '2019-07-31T00:00:00'
 ABI_M6C01_Mask.obs_file_end:        '2019-11-01T00:00:00'
 ABI_M6C01_Mask.obs_file_interval:   '000000 001000'     # yymmdd  hhmmss
