@@ -1,7 +1,8 @@
 #
 #  To generarate a valid GEOS history file, process this file with m4:
 #
-#  % m4 < HISTORY_JOSSE.RC > HISTORY_JOSSE.rc
+#  % m4 < HISTORY_JOSSE.RC > HISTORY_JOSSE.rc    [discover]
+#  % m4 < HISTORY_JOSSE.RC > HISTORY.rc          [mac]
 #
 
 include(warning.vl)
@@ -13,18 +14,14 @@ EXPSRC: GEOSgcm-v12
 #ServerSizeSplit: 81
 #CollectionWriteSplit: 7
 
-#                              -------------------------    
+#                              -------------------------
 #                               Selection of Collections
-#                              -------------------------    
+#                              -------------------------
 
-COLLECTIONS:  
+COLLECTIONS:
 
 #             Gridded Output
-#             --------------  
- 
-  
-#             Gridded Output
-#             --------------  
+#             --------------
               'geosgcm_prog'
               'geosgcm_surf'
               'inst_01hr_2d_brs_Nx'
@@ -40,6 +37,8 @@ COLLECTIONS:
 #             'geosgcm_tracer'
               'tavg2d_aer_x'
               'tavg3d_aer_p'
+              'ana_prog'
+              'ana_surf'
 #             'const_2d_asm_Nx'
 
 #             Browsing products
@@ -51,51 +50,127 @@ COLLECTIONS:
              'inst1_2d_asm_Nx'
              'tavg1_2d_flx_Nx'
 
-    
-#             Sampelers at Obs locations
-#             --------------------------    
-              'jedi'
-              'ACtraj'
+#             Samplers at Obs locations
+#             --------------------------
               'Aeronet'
-              'Aqua'
-              'Terra'
-#             'SNDR_ATMS'
-#             'ABI_M6C14_Geostationary'  # slow
-#             'ABI_M6C01_Mask'           # slow
-    
+              'SNDR_ATMS'
+              'myd04'
+              'mod04'
+#             'ABI_M6C14_Geostationary'  # slow; demonstration
+#             'ABI_M6C01_Mask'           # slow; demonstration
+#              'GeoDisk_ABI_East_2km'
+#              'GeoDisk_ABI_West_2km'
+              'GeoDisk_GXS_East'
+              'GeoDisk_GXS_West'
+              'GeoDisk_GHMS'
+              'GeoDisk_MTG_IRS'
+
+#             Trajectory: 2 Campaigns + JEDI 29 platforms (IODA format)
+#             ---------------------------------------------------------
+              'CAMP2EX'
+              'FIREXAQ'
+              'aircraft'
+              'airs_aqua'
+              'amsr2_gcom-w1'
+              'amsua_aqua'
+              'amsua_metop-b'
+              'amsua_n15'
+              'amsua_n18'
+              'amsua_n19'
+              'atms_n20'
+              'atms_npp'
+              'avhrr3_metop-b'
+              'avhrr3_n18'
+              'avhrr3_n19'
+              'cris-fsr_n20'
+              'cris-fsr_npp'
+              'gmi_gpm'
+              'gps'
+              'iasi_metop-b'
+              'mhs_metop-b'
+              'mhs_n19'
+              'mls55_aura'
+              'omi_aura'
+              'ompsnm_npp'
+              'satwind'
+              'scatwind'
+              'sfc'
+              'sfcship'
+              'sondes'
+              'ssmis_f17'
 ::
 
 
-#                              ----------------------    
+#                              ----------------------
 #                              Grid Definition Macros
-#                              ----------------------    
+#                              ----------------------
 
 # ---
 # N.B.: This set of labels must appear after the main list of COLLECTIONS.
 # ---
-    
-GRID_LABELS: 
 
+
+GRID_LABELS:
 #    Global Grids
 #    ------------
      PC720x361-DC        # 0.5    x 0.625   deg     (<==> c180)
      PC1440x721-DC       # 0.25   x 0.3125  deg     (<--> c360)
      PC2880x1441-DC      # 0.125  x 0.0625  deg     (<--> c720)
      PC5760x2881-DC      # 0.0625 x 0.03125 deg     (<--> c1140)
-     PC11520x5761-DC     # 112.5  x 56.25   arcsec  (<--> c2880)
-    
+#    PC11520x5761-DC     # 112.5  x 56.25   arcsec  (<--> c2880)
+     lambert
+
 #    Sampler Geometries
 #    ------------------
      SwathGrid_MYD04
      SwathGrid_MOD04
      SwathGrid_ATMS
-     abi_grid_GOES16_M6C14
-    
+
+#     ABI_East_2km
+#     ABI_West_2km
+     GXS_East
+     GXS_West
+     GHMS
+     MTG_IRS
+
+#    Sampler: Trajectory Geometries
+#    ------------------------------
+     CAMP2EX_GEOM
+     FIREXAQ_GEOM
+     aircraft_GEOM
+     airs_aqua_GEOM
+     amsr2_gcom-w1_GEOM
+     amsua_aqua_GEOM
+     amsua_metop-b_GEOM
+     amsua_n15_GEOM
+     amsua_n18_GEOM
+     amsua_n19_GEOM
+     atms_n20_GEOM
+     atms_npp_GEOM
+     avhrr3_metop-b_GEOM
+     avhrr3_n18_GEOM
+     avhrr3_n19_GEOM
+     cris-fsr_n20_GEOM
+     cris-fsr_npp_GEOM
+     gmi_gpm_GEOM
+     gps_GEOM
+     iasi_metop-b_GEOM
+     mhs_metop-b_GEOM
+     mhs_n19_GEOM
+     mls55_aura_GEOM
+     omi_aura_GEOM
+     ompsnm_npp_GEOM
+     satwind_GEOM
+     scatwind_GEOM
+     sfc_GEOM
+     sfcship_GEOM
+     sondes_GEOM
+     ssmis_f17_GEOM
 ::
 
-#                              ------------------------    
+#                              ------------------------
 #                              Grid Geometry Definition
-#                              ------------------------    
+#                              ------------------------
 
 
 PC720x361-DC.GRID_TYPE: LatLon
@@ -133,6 +208,14 @@ PC11520x5761-DC.POLE: PC
 PC11520x5761-DC.DATELINE:  DC
 PC11520x5761-DC.LM: 137
 
+lambert.GRID_TYPE: XY
+lambert.GRIDNAME: lambert_conformal
+lambert.GRID_FILENAME: ./lambert_grid.nc4
+lambert.index_name_x:  Xdim
+lambert.index_name_y:  Ydim
+lambert.LM: 137
+
+
 #                              ---------------------------
 #                              Sampler Geometry Definition
 #                              ---------------------------
@@ -146,10 +229,10 @@ SwathGrid_ATMS.var_name_lon:        lon
 SwathGrid_ATMS.var_name_lat:        lat
 SwathGrid_ATMS.var_name_time:       obs_time_tai93
 SwathGrid_ATMS.tunit:               'seconds since 1993-01-01 00:00:00'
-SwathGrid_ATMS.obs_file_begin:      '2019-07-31T00:00:00'
-SwathGrid_ATMS.obs_file_end:        '2019-11-01T23:00:00'
-SwathGrid_ATMS.obs_file_interval:   '000000 000600'         # yymmdd  hhmmss
+SwathGrid_ATMS.ref_time:         '2019-07-31T00:00:00'
+SwathGrid_ATMS.frequency:       '000000 000600'         # yymmdd  hhmmss
 SwathGrid_ATMS.Epoch:                060000                 # hhmmss
+
 
 SwathGrid_MYD04.GRID_TYPE: Swath
 SwathGrid_MYD04.GRID_FILE: /discover/nobackup/projects/gmao/aist-nr/data/Aqua/%y4/%D3/MYD04_L2.A%y4%D3.%h2%n2*.hdf
@@ -160,10 +243,9 @@ SwathGrid_MYD04.var_name_lon:        'Longitude'
 SwathGrid_MYD04.var_name_lat:        'Latitude'
 SwathGrid_MYD04.var_name_time:       'Scan_Start_Time'
 SwathGrid_MYD04.tunit:               'seconds since 1993-01-01 00:00:00'
-SwathGrid_MYD04.obs_file_begin:      '2019-07-31T00:00:00'
-SwathGrid_MYD04.obs_file_end:        '2019-11-01T00:00:00'
-SwathGrid_MYD04.obs_file_interval:   '000000 000500'     # yymmdd  hhmmss
-SwathGrid_MYD04.Epoch:               060000              #
+SwathGrid_MYD04.ref_time:         '2019-07-31T00:00:00'
+SwathGrid_MYD04.frequency:       '000000 000500'       # yymmdd  hhmmss
+SwathGrid_MYD04.Epoch:                060000               #
 
 
 SwathGrid_MOD04.GRID_TYPE: Swath
@@ -175,34 +257,96 @@ SwathGrid_MOD04.var_name_lon:       'Longitude'
 SwathGrid_MOD04.var_name_lat:       'Latitude'
 SwathGrid_MOD04.var_name_time:      'Scan_Start_Time'
 SwathGrid_MOD04.tunit:              'seconds since 1993-01-01 00:00:00'
-SwathGrid_MOD04.obs_file_begin:     '2019-07-31T00:00:00'
-SwathGrid_MOD04.obs_file_end:       '2019-11-01T00:00:00'
-SwathGrid_MOD04.obs_file_interval:  '000000 000500'     # yymmdd  hhmmss
-SwathGrid_MOD04.Epoch:               060000                  # 
+SwathGrid_MOD04.ref_time:        '2019-07-31T00:00:00'
+SwathGrid_MOD04.frequency:      '000000 000500'     # yymmdd  hhmmss
+SwathGrid_MOD04.Epoch:               060000             #
 
 
-abi_grid_GOES16_M6C14.GRID_TYPE:     XY
-abi_grid_GOES16_M6C14.GRIDNAME:      ABI_Fixed_Grid
-abi_grid_GOES16_M6C14.index_name_x:  x
-abi_grid_GOES16_M6C14.index_name_y:  y
-abi_grid_GOES16_M6C14.var_name_x:    x
-abi_grid_GOES16_M6C14.var_name_y:    y
-abi_grid_GOES16_M6C14.var_name_proj: goes_imager_projection
-abi_grid_GOES16_M6C14.att_name_proj: longitude_of_projection_origin
-abi_grid_GOES16_M6C14.thin_factor:   10
-abi_grid_GOES16_M6C14.LM:            137
-abi_grid_GOES16_M6C14.GRID_FILENAME:   /discover/nobackup/projects/gmao/aist-nr/data/GOES-X/OR_ABI-L1b-RadF-M6C14_G16_s20192340800216_e20192340809524_c20192340810006.nc
+ABI_East_2km.GRID_TYPE:     XY
+ABI_East_2km.GRIDNAME:      ABI_East_2km
+ABI_East_2km.index_name_x:  x
+ABI_East_2km.index_name_y:  y
+ABI_East_2km.var_name_x:    x
+ABI_East_2km.var_name_y:    y
+ABI_East_2km.var_name_proj: projection
+ABI_East_2km.att_name_proj: longitude_of_projection_origin
+ABI_East_2km.thin_factor:   10
+ABI_East_2km.LM:            137
+ABI_East_2km.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/abi_east_2km_coords.nc4
 
-#                              ---------------------------------    
+ABI_West_2km.GRID_TYPE:     XY
+ABI_West_2km.GRIDNAME:      ABI_West_2km
+ABI_West_2km.index_name_x:  x
+ABI_West_2km.index_name_y:  y
+ABI_West_2km.var_name_x:    x
+ABI_West_2km.var_name_y:    y
+ABI_West_2km.var_name_proj: projection
+ABI_West_2km.att_name_proj: longitude_of_projection_origin
+ABI_West_2km.thin_factor:   10
+ABI_West_2km.LM:            137
+ABI_West_2km.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/abi_west_2km_coords.nc4
+
+GXS_East.GRID_TYPE:     XY
+GXS_East.GRIDNAME:      ABI_GXS_East
+GXS_East.index_name_x:  x
+GXS_East.index_name_y:  y
+GXS_East.var_name_x:    x
+GXS_East.var_name_y:    y
+GXS_East.var_name_proj: projection
+GXS_East.att_name_proj: longitude_of_projection_origin
+GXS_East.thin_factor:   10
+GXS_East.LM:            137
+GXS_East.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/gxs_east_coords.nc4
+
+GXS_West.GRID_TYPE:     XY
+GXS_West.GRIDNAME:      ABI_GXS_West
+GXS_West.index_name_x:  x
+GXS_West.index_name_y:  y
+GXS_West.var_name_x:    x
+GXS_West.var_name_y:    y
+GXS_West.var_name_proj: projection
+GXS_West.att_name_proj: longitude_of_projection_origin
+GXS_West.thin_factor:   10
+GXS_West.LM:            137
+GXS_West.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/gxs_west_coords.nc4
+
+GHMS.GRID_TYPE:     XY
+GHMS.GRIDNAME:      ABI_GHMS
+GHMS.index_name_x:  x
+GHMS.index_name_y:  y
+GHMS.var_name_x:    x
+GHMS.var_name_y:    y
+GHMS.var_name_proj: projection
+GHMS.att_name_proj: longitude_of_projection_origin
+GHMS.thin_factor:   10
+GHMS.LM:            137
+GHMS.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/ghms_coords.nc4
+
+MTG_IRS.GRID_TYPE:     XY
+MTG_IRS.GRIDNAME:      ABI_MTG_IRS
+MTG_IRS.index_name_x:  x
+MTG_IRS.index_name_y:  y
+MTG_IRS.var_name_x:    x
+MTG_IRS.var_name_y:    y
+MTG_IRS.var_name_proj: projection
+MTG_IRS.att_name_proj: longitude_of_projection_origin
+MTG_IRS.thin_factor:   10
+MTG_IRS.LM:            137
+MTG_IRS.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/mtg-irs_coords.nc4
+
+include(traj_geom.gl)
+
+#                              ---------------------------------
 #                              Definition of Gridded Collections
-#                              ---------------------------------    
-    
+#                              ---------------------------------
+
 # Prognostic variables for analysis verification
 # ----------------------------------------------
 ana_prog.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
 ana_prog.archive:          '%c/Y%y4' ,
 ana_prog.format:           'CFIO' ,
 ana_prog.nbits:             12,
+ana_prog.chunks:            180 91 1 1,
 ana_prog.deflate:           1 ,
 ana_prog.grid_label:        PC1440x721-DC ,
 ana_prog.regrid_method:    'BILINEAR',
@@ -210,24 +354,26 @@ ana_prog.ref_time:          210000 ,
 ana_prog.frequency:         010000 ,
 ana_prog.fields:            include(ana_vars.vl)
 ::
-    
-ana_slv.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
-ana_slv.archive:          '%c/Y%y4' ,
-ana_slv.format:           'CFIO' ,
-ana_slv.nbits:             12,
-ana_slv.chunks:            180 91 1 1,
-ana_slv.deflate:           1 ,
-ana_slv.grid_label:        PC1440x721-DC ,
-ana_slv.regrid_method:    'BILINEAR',
-ana_slv.ref_time:          210000 ,
-ana_slv.frequency:         010000 ,
-ana_slv.fields:            include(slv_vars.vl)  ##### add w at several levels
-::
+
+#ana_slv.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
+#ana_slv.archive:          '%c/Y%y4' ,
+#ana_slv.format:           'CFIO' ,
+#ana_slv.nbits:             12,
+#ana_slv.chunks:            180 91 1 1,
+#ana_slv.deflate:           1 ,
+#ana_slv.grid_label:        PC1440x721-DC ,
+#ana_slv.regrid_method:    'BILINEAR',
+#ana_slv.ref_time:          210000 ,
+#ana_slv.frequency:         010000 ,
+#ana_slv.fields:            include(slv_vars.vl)  ##### add w at several levels
+#ana_slv.fields:            include(ana_vars.vl)  ##### add w at several levels
+#::
 
 ana_surf.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
 ana_surf.archive:          '%c/Y%y4' ,
 ana_surf.format:           'CFIO' ,
 ana_surf.nbits:             12,
+ana_surf.chunks:            180 91 1 1,
 ana_surf.deflate:           1 ,
 ana_surf.grid_label:        PC1440x721-DC ,
 ana_surf.mode:             'time-averaged'
@@ -237,13 +383,14 @@ ana_surf.frequency:         010000 ,
 ana_surf.fields:            include(surf_vars.vl)
 ::
 
-# Met/Aerosol/Carbon Single Level Varriables -- Look at DYAMOND v2 (Browsing product)
+# Browsing product
+# Met/Aerosol/Carbon Single Level Variables
 # ------------------------------------------
 inst_01hr_2d_brs_Nx.format:      'CFIO' ,
 inst_01hr_2d_brs_Nx.descr:       '2d,1-Hourly,Instantaneous,Hi-Res Lat-Lon on Single-Level,Assimilation,Meteorological, Carbon and Aerosol Single-Level Diagnostics' ,
 inst_01hr_2d_brs_Nx.grid_label:  PC2880x1441-DC ,
 inst_01hr_2d_brs_Nx.nbits:       12,
-inst_01hr_2d_brs_Nx.chunksize:   360 181 1 1,
+inst_01hr_2d_brs_Nx.chunksize:   180 91 1 1,
 inst_01hr_2d_brs_Nx.deflate:     1,
 inst_01hr_2d_brs_Nx.template:    '%y4%m2%d2_%h2%n2z.nc4' ,
 inst_01hr_2d_brs_Nx.mode:        'instantaneous' ,
@@ -253,13 +400,13 @@ inst_01hr_2d_brs_Nx.fields:      include(brs_vars.vl)
 ::
 
 
-
-    
 # Prognostic variables on pressure levels
-# ---------------------------------------    
+# ---------------------------------------
 geosgcm_prog.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
 geosgcm_prog.archive:          '%c/Y%y4' ,
 geosgcm_prog.format:           'CFIO' ,
+geosgcm_prog.nbits:             12,
+geosgcm_prog.chunksize:         180 91 1 1,
 geosgcm_prog.deflate:           1 ,
 geosgcm_prog.grid_label:        PC720x361-DC ,
 geosgcm_prog.regrid_method:    'BILINEAR',
@@ -270,12 +417,14 @@ geosgcm_prog.vvars:            'log(PLE)' , 'DYN' ,
 geosgcm_prog.levels:           include(press_48levels.vl)
 geosgcm_prog.fields:           include(prog_vars.vl)
 ::
-  
+
 # Surface diagnostics
-# -------------------  
+# -------------------
 geosgcm_surf.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
 geosgcm_surf.archive:          '%c/Y%y4' ,
 geosgcm_surf.format:           'CFIO' ,
+geosgcm_surf.nbits:             12,
+geosgcm_surf.chunksize:         180 91 1 1,
 geosgcm_surf.deflate:           1 ,
 geosgcm_surf.grid_label:        PC720x361-DC ,
 geosgcm_surf.regrid_method:    'BILINEAR',
@@ -287,10 +436,12 @@ geosgcm_surf.fields:            include(surf_vars.vl)
 ::
 
 # Moist physics diagnostics
-# -------------------------    
+# -------------------------
 geosgcm_moist.template:        '%y4%m2%d2_%h2%n2z.nc4' ,
 geosgcm_moist.archive:         '%c/Y%y4' ,
 geosgcm_moist.format:          'CFIO' ,
+geosgcm_moist.nbits:             12,
+geosgcm_moist.chunksize:         180 91 1 1,
 geosgcm_moist.deflate:          1 ,
 geosgcm_moist.grid_label:       PC720x361-DC ,
 geosgcm_moist.regrid_method:   'BILINEAR',
@@ -306,10 +457,12 @@ geosgcm_moist.fields:          include(moist_vars.vl)
 ::
 
 # Turbulence diagnostics
-# ----------------------    
+# ----------------------
 geosgcm_turb.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
 geosgcm_turb.archive:          '%c/Y%y4' ,
 geosgcm_turb.format:           'CFIO' ,
+geosgcm_turb.nbits:             12,
+geosgcm_turb.chunksize:         180 91 1 1,
 geosgcm_turb.deflate:           1 ,
 geosgcm_turb.grid_label:        PC720x361-DC ,
 geosgcm_turb.regrid_method:    'BILINEAR',
@@ -329,6 +482,8 @@ geosgcm_turb.fields:            include(turb_vars.vl)
 geosgcm_gwd.template:          '%y4%m2%d2_%h2%n2z.nc4' ,
 geosgcm_gwd.archive:           '%c/Y%y4' ,
 geosgcm_gwd.format:            'CFIO' ,
+geosgcm_gwd.nbits:             12,
+geosgcm_gwd.chunksize:         180 91 1 1,
 geosgcm_gwd.deflate:            1 ,
 geosgcm_gwd.grid_label:         PC720x361-DC ,
 geosgcm_gwd.regrid_method:     'BILINEAR',
@@ -339,7 +494,7 @@ geosgcm_gwd.frequency:          010000 ,
 geosgcm_gwd.vscale:             100.0 ,
 geosgcm_gwd.vunit:             'hPa' ,
 geosgcm_gwd.vvars:             'log(PLE)' , 'DYN' ,
-geosgcm_gwd.levels:            include(press_48levels.vl) 
+geosgcm_gwd.levels:            include(press_48levels.vl)
 geosgcm_gwd.fields:            include(gwd_vars.vl)
 ::
 
@@ -348,11 +503,13 @@ geosgcm_gwd.fields:            include(gwd_vars.vl)
 geosgcm_budi.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
 geosgcm_budi.archive:          '%c/Y%y4' ,
 geosgcm_budi.format:           'CFIO' ,
+geosgcm_budi.nbits:             12,
+geosgcm_budi.chunksize:         180 91 1 1,
 geosgcm_budi.deflate:           1 ,
 geosgcm_budi.grid_label:        PC720x361-DC ,
 geosgcm_budi.regrid_method:    'CONSERVE',
 geosgcm_budi.frequency:         010000 ,
-geosgcm_budi.fields:            include(budi_vars.vl)        
+geosgcm_budi.fields:            include(budi_vars.vl)
 ::
 
 # Analysis tendencies
@@ -360,6 +517,8 @@ geosgcm_budi.fields:            include(budi_vars.vl)
 geosgcm_buda.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
 geosgcm_buda.archive:          '%c/Y%y4' ,
 geosgcm_buda.format:           'CFIO' ,
+geosgcm_buda.nbits:             12,
+geosgcm_buda.chunksize:         180 91 1 1,
 geosgcm_buda.deflate:           1 ,
 geosgcm_buda.grid_label:        PC720x361-DC ,
 geosgcm_buda.regrid_method:    'CONSERVE',
@@ -379,6 +538,8 @@ geosgcm_buda.fields:           include(buda_vars.vl)
 tavg2d_aer_x.template:       '%y4%m2%d2_%h2%n2z.nc4',
 tavg2d_aer_x.archive:        '%c/Y%y4',
 tavg2d_aer_x.format:         'CFIO',
+tavg2d_aer_x.nbits:           12,
+tavg2d_aer_x.chunksize:       180 91 1 1,
 tavg2d_aer_x.deflate:         1,
 tavg2d_aer_x.grid_label:      PC720x361-DC,
 tavg2d_aer_x.mode:           'instantaneous',
@@ -387,13 +548,16 @@ tavg2d_aer_x.frequency:       010000,
 # tavg2d_aer_x.ref_time:        210000,
 tavg2d_aer_x.regrid_method:   'CONSERVE',
 tavg2d_aer_x.splitField:      1,
-tavg2d_aer_x.fields:          included(aer2D_vars.vl)
+tavg2d_aer_x.fields:          include(aer2D_vars.vl)
+::
 
 # 3D Aerosol Mixing Ratio
 # -----------------------
 tavg3d_aer_p.template:       '%y4%m2%d2_%h2%n2z.nc4',
 tavg3d_aer_p.archive:        '%c/Y%y4',
 tavg3d_aer_p.format:         'CFIO',
+tavg3d_aer_p.nbits:             12,
+tavg3d_aer_p.chunksize:         180 91 1 1,
 tavg3d_aer_p.deflate:         1,
 tavg3d_aer_p.grid_label:      PC720x361-DC,
 tavg3d_aer_p.mode:           'instantaneous',
@@ -410,567 +574,842 @@ tavg3d_aer_p.fields:          include(aer3Dp_vars.vl)
 ::
 
 
-#                              ---------------------------------    
-#                              Definition of Sampled Collections
-#                              ---------------------------------    
 
-#ams  The station geometry is asymmetric. For consistency you should have 
-#     a geometry specific like the others. The supported sampling geometries
-#
-#     ____.geometry:  Station_AERONET    
-#     ____.geometry:  Swath_ATMS 
-#     ____.geometry:  Traj_FIREX-AQ      
-#     ____.geometry:  Traj_CAMP2EX      
-#     ____.geometry:  Patch_GOES16  
-#     ____.geometry:       
-#     ____.geometry:       
-#     ____.geometry:       
-#     ____.geometry:       
+#                              -----------------------------------------------------------------
+#                              Sampled Collections (station,swath,geostationary,mask,trajectory)
+#                              -----------------------------------------------------------------
 
-  Aeronet.sampler_spec:       'station'
-  Aeronet.station_id_file:    /discover/nobackup/projects/gmao/aist-nr/data/Station/1_national.csv
-  Aeronet.station_skip_line:  1
-  Aeronet.template:           %y4%m2%d2_%h2%n2z.nc4
-  Aeronet.format:             'CFIO'
-  Aeronet.frequency:          010000,   # when to write
-  Aeronet.duration:           060000,   # time length to update file
-  Aeronet.splitField:         1,
-  Aeronet.regrid_method:      'BILINEAR' ,
-  Aeronet.fields:             include(aerSampler_vars.vl)
+
+Aeronet.sampler_type:         'station'
+Aeronet.station_id_file:      /discover/nobackup/projects/gmao/aist-nr/data/Station/1_national.csv
+Aeronet.station_skip_line:    1
+Aeronet.template:             %y4%m2%d2_%h2%n2z.nc4
+Aeronet.format:              'CFIO'
+Aeronet.frequency:            010000,
+Aeronet.duration:             060000,
+Aeronet.splitField:           1,
+Aeronet.regrid_method:       'BILINEAR' ,
+Aeronet.fields:               include(aerSampler_vars.vl)
                               include(cldSampler_vars.vl)
                               include(asmSampler_vars.vl)
 ::
 
-
-  SNDR_ATMS.observation_spec:  'Swath'
-  SNDR_ATMS.template:          '%y4%m2%d2_%h2%n2z.nc4',
-  SNDR_ATMS.format:            'CFIO',
-  SNDR_ATMS.frequency:         060000,
-  SNDR_ATMS.grid_label:        SwathGrid_ATMS,
-  SNDR_ATMS.regrid_method:     'BILINEAR' ,
-  SNDR_ATMS.fields:            include(crtmSampler_vars.vl)
+SNDR_ATMS.sampler_type:      'swath'
+SNDR_ATMS.template:          '%y4%m2%d2_%h2%n2z.nc4',
+SNDR_ATMS.format:            'CFIO',
+SNDR_ATMS.frequency:         060000,
+SNDR_ATMS.grid_label:        SwathGrid_ATMS,
+SNDR_ATMS.regrid_method:     'BILINEAR' ,
+SNDR_ATMS.fields:            include(crtmSampler_vars.vl)
 ::
 
-  myd04.observation_spec:  'Swath'  
-  myd04.template:          '%y4%m2%d2_%h2%n2z.nc4',
-  myd04.format:            'CFIO',
-  myd04.frequency:         060000,               # should not be here
-  myd04.grid_label:        SwathGrid_MYD04,   
-  myd04.regrid_method:     'BILINEAR' ,   
-  myd04.fields:            include(aerSampler_vars.vl)
-                           include(cldSampler_vars.vl)
-                           include(asmSampler_vars.vl)
+myd04.sampler_type:      'swath'
+myd04.template:          '%y4%m2%d2_%h2%n2z.nc4',
+myd04.format:            'CFIO',
+myd04.frequency:         060000,               # should not be here; (=Epoch)
+myd04.grid_label:        SwathGrid_MYD04,
+myd04.regrid_method:     'BILINEAR' ,
+myd04.splitField:        1,
+myd04.fields:            include(aerSampler_vars.vl)
+                         include(cldSampler_vars.vl)
+                         include(asmSampler_vars.vl)
 ::
 
-  mod04.observation_spec:  'Swath'
-  mod04.template:          '%y4%m2%d2_%h2%n2z.nc4',
-  mod04.format:            'CFIO',
-  mod04.frequency:         060000,
-  mod04.grid_label:        SwathGrid_MOD04,
-  mod04.regrid_method:     'BILINEAR' ,
-  mod04.fields:            include(aerSampler_vars.vl)
-                           include(cldSampler_vars.vl)
-                           include(asmSampler_vars.vl)
+mod04.sampler_type:      'swath'
+mod04.template:          '%y4%m2%d2_%h2%n2z.nc4',
+mod04.format:            'CFIO',
+mod04.frequency:         060000,              #  (=Epoch)
+mod04.grid_label:        SwathGrid_MOD04,
+mod04.regrid_method:     'BILINEAR' ,
+mod04.splitField:        1,
+mod04.fields:            include(aerSampler_vars.vl)
+                         include(cldSampler_vars.vl)
+                         include(asmSampler_vars.vl)
 ::
 
-    #ams This design is not very consistent. We need to consistently separate
-    #    the geometry specification from te collection specification.
-    #    The airborne campaigns are ought to have their own geometry specification
-    #    as they are independent. 
-    
-  ACtraj.sampler_spec:       trajectory
-  ACtraj.ObsPlatforms:       CAMP2EX  FIREXAQ
-  ACtraj.template:           '%y4%m2%d2_%h2%n2z.nc4',
-  ACtraj.format:             'CFIO',
-  ACtraj.obs_file_begin:     2019-07-31T00:00:00
-  ACtraj.obs_file_interval:  '000001 000000'        #  fixed string format:  yymmdd hhmmss
-  ACtraj.obs_file_end:       2019-11-01T00:00:00
-  ACtraj.Epoch:              240000                 #  fixed integer format:  hhmmss
-  ACtraj.regrid_method:      'BILINEAR' ,
-  ACtraj.splitField: 1
-::           
 
+#                              -----------------------------------------------------
+#                              Geostationary sampler
+#                              -----------------------------------------------------
 
-  jedi.sampler_spec:         trajectory
-  jedi.ObsPlatforms:         aircraft airs_aqua amsr2_gcom-w1 amsua_aqua amsua_metop-b amsua_n15 amsua_n18 amsua_n19 atms_n20 atms_npp avhrr3_metop-b avhrr3_n18 avhrr3_n19 cris-fsr_n20 cris-fsr_npp gmi_gpm gps iasi_metop-b mhs_metop-b mhs_n19 mls55_aura omi_aura ompsnm_npp satwind scatwind sfc sfcship sondes ssmis_f17
-  jedi.template:             '%y4%m2%d2_%h2%n2z.nc4',
-  jedi.format:               'CFIO',
-  jedi.obs_file_begin:       2019-07-31T21:00:00
-  jedi.obs_file_interval:    '000000 060000'    #  fixed string format:  yymmdd hhmmss
-  jedi.obs_file_end:         2019-11-01T00:00:00
-  jedi.Epoch:                060000             #  fixed integer format:  hhmmss
-  jedi.use_NWP_1_file:       .true.
-  jedi.restore_2_obs_vector: .true.
-  jedi.regrid_method:        'BILINEAR' ,
-  jedi.splitField:           1,
+GeoDisk_GXS_East.template:    '%y4%m2%d2_%h2%n2z.nc4'
+GeoDisk_GXS_East.format:      'CFIO',
+GeoDisk_GXS_East.frequency:    010000
+GeoDisk_GXS_East.duration:     010000
+GeoDisk_GXS_East.grid_label:   GXS_East
+GeoDisk_GXS_East.fields:       include(crtmSampler_vars.vl)
 ::
 
-#                              -------------------------    
-#                              JEDI Platform Definitions
-#                              -------------------------
+GeoDisk_GXS_West.template:    '%y4%m2%d2_%h2%n2z.nc4'
+GeoDisk_GXS_West.format:      'CFIO',
+GeoDisk_GXS_West.frequency:    010000
+GeoDisk_GXS_West.duration:     010000
+GeoDisk_GXS_West.grid_label:   GXS_West
+GeoDisk_GXS_West.fields:       include(crtmSampler_vars.vl)
+::
 
-    #ams This does not make sense. This is in confounding geometry and collection
-    #    specifications.  For a given collection, one could elect to write more
-    #    than 1 collextion. It is all entagled. Needs refactoring.
-    #
-    #    IODA_SCHEMA is completely inadequate for CAMP2EX, FIREX-AQ; these have
-    #    absolutely to do with JEDI's IODA format.
-    
-    #    Now, for bina fide IODA trajecories, the IODA_SCHEMA parameters index_name_x, ..., var_name_time 
-    #    should be the default. Better yet, this is a IODA convention, no need to allow it to be redfined.
-    #
-    #    Really, when defining the geometries for trajectory one could define
-    #       SCHEMA: IODA or Generic
-    #    If SCHEMA is IODA, then this is implied (notice that I changed the label names):
-    #        index_dim_name:      Location
-    #        lon_var_name:        MetaData/longitude
-    #        lat_var_name:        MetaData/latitude
-    #        time_var_name:       MetaData/dateTime
-    #    If SCHEMA is Generic, then these attributes ought to be specified.
-    #
+GeoDisk_GHMS.template:    '%y4%m2%d2_%h2%n2z.nc4'
+GeoDisk_GHMS.format:      'CFIO',
+GeoDisk_GHMS.frequency:    010000
+GeoDisk_GHMS.duration:     010000
+GeoDisk_GHMS.grid_label:   GHMS
+GeoDisk_GHMS.fields:       include(crtmSampler_vars.vl)
+::
 
-    
-DEFINE_OBS_PLATFORM::
+GeoDisk_MTG_IRS.template:    '%y4%m2%d2_%h2%n2z.nc4'
+GeoDisk_MTG_IRS.format:      'CFIO',
+GeoDisk_MTG_IRS.frequency:    010000
+GeoDisk_MTG_IRS.duration:     010000
+GeoDisk_MTG_IRS.grid_label:   MTG_IRS
+GeoDisk_MTG_IRS.fields:       include(crtmSampler_vars.vl)
+::
 
-PLATFORM.CAMP2EX::
-  IODA_SCHEMA::
-    index_name_x:     time
-    var_name_lon:     trjLon
-    var_name_lat:     trjLat
-    var_name_time:    time
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/CAMP2EX/sampled/P3B/GEOS-FP/%y4-%m2-%d2/CAMP2Ex-GEOS-FP-adg-Nx-P3B_Model_%y4%m2%d2_R1.nc
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+
+#                              -----------------------------------------------------
+#                              Mask sampler
+#                              -----------------------------------------------------
+
+ABI_M6C01_Mask.sampler_type:        'mask'
+ABI_M6C01_Mask.obs_file_begin:      '2019-07-31T00:00:00'
+ABI_M6C01_Mask.obs_file_end:        '2019-11-01T00:00:00'
+ABI_M6C01_Mask.obs_file_interval:   '000000 001000'     # yymmdd  hhmmss
+ABI_M6C01_Mask.obs_files:            /discover/nobackup/projects/gmao/aist-nr/data/GOES-X/OR_ABI-L1b-RadF-M6C01_G16_s20192340840216_e20192340849524_c20192340849582.nc
+ABI_M6C01_Mask.index_name_x:         x
+ABI_M6C01_Mask.index_name_y:         y
+ABI_M6C01_Mask.var_name_x:           x
+ABI_M6C01_Mask.var_name_y:           y
+ABI_M6C01_Mask.var_name_proj:        goes_imager_projection
+ABI_M6C01_Mask.att_name_proj:        longitude_of_projection_origin
+ABI_M6C01_Mask.thin_factor:          30
+ABI_M6C01_Mask.template:             '%y4%m2%d2_%h2%n2z.nc4',
+ABI_M6C01_Mask.format:               'CFIO',
+ABI_M6C01_Mask.frequency:            010000,
+ABI_M6C01_Mask.duration:             010000,
+ABI_M6C01_Mask.regrid_method:        'BILINEAR' ,
+ABI_M6C01_Mask.fields:               include(crtmSampler_vars.vl)
+::
+
+
+#                              -----------------------------------------------------
+#                              Trajectory Collections (2 Campaign + 29 IODA platforms)
+#                              -----------------------------------------------------
+
+schema.version:   1
+
+Trajectory_Schema::
+IODA.index:       Location                # name for index
+IODA.lon:         MetaData/longitude      #          lon
+IODA.lat:         MetaData/latitude       #          lat
+IODA.time:        MetaData/dateTime       #          time
+IODA.ref_time:    2019-07-31T21:00:00     # reference synoptic time
+IODA.frequency:   '000000 060000'         # frequency of ioda files
+
+MACIE.index:      time
+MACIE.lon:        trjLon
+MACIE.lat:        trjLat
+MACIE.time:       time
+MACIE.ref_time:   2019-07-31T00:00:00
+MACIE.frequency:  '000001 000000'
+::
+
+
+CAMP2EX.sampler_type:       trajectory
+CAMP2EX.grid_label:         CAMP2EX_GEOM
+CAMP2EX.template:          '%y4%m2%d2_%h2%n2z.nc4',
+CAMP2EX.format:            'CFIO',
+CAMP2EX.Epoch:              480000
+CAMP2EX.regrid_method:     'BILINEAR' ,
+CAMP2EX.splitField:           1,
+CAMP2EX.fields:
                       include(aerSampler_vars.vl)
                       include(cldSampler_vars.vl)
                       include(asmSampler_vars.vl)
-    ::
-  ::
 ::
 
-PLATFORM.FIREXAQ::
-  IODA_SCHEMA::
-    index_name_x:       time
-    var_name_lon:       trjLon
-    var_name_lat:       trjLat
-    var_name_time:      time
-    file_name_template: /discover/nobackup/projects/gmao/aist-nr/data/FIREX-AQ/sampled/DC8/GEOS-FP/%y4-%m2-%d2/FIREXAQ-GEOS-FP-adg-Nx-DC8_Model_%y4%m2%d2_R1.nc
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
-                         include(aerSampler_vars.vl)
-                         include(cldSampler_vars.vl)
-                         include(asmSampler_vars.vl)
-    ::
-  ::
+
+FIREXAQ.sampler_type:       trajectory
+FIREXAQ.grid_label:         FIREXAQ_GEOM
+FIREXAQ.template:          '%y4%m2%d2_%h2%n2z.nc4',
+FIREXAQ.format:            'CFIO',
+FIREXAQ.Epoch:              480000
+FIREXAQ.regrid_method:     'BILINEAR' ,
+FIREXAQ.splitField:           1,
+FIREXAQ.fields:
+                      include(aerSampler_vars.vl)
+                      include(cldSampler_vars.vl)
+                      include(asmSampler_vars.vl)
 ::
 
-PLATFORM.airs_aqua::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/airs_aqua.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields:: 
+
+aircraft.sampler_type:         trajectory
+aircraft.grid_label:           aircraft_GEOM
+aircraft.template:            '%y4%m2%d2_%h2%n2z.nc4',
+aircraft.format:              'CFIO',
+aircraft.Epoch:                060000
+aircraft.use_NWP_1_file:       .true.
+aircraft.restore_2_obs_vector: .true.
+aircraft.regrid_method:        'BILINEAR' ,
+#aircraft.splitField:            1,
+aircraft.fields:
                          include(crtmSampler_vars.vl)
-    ::
 ::
 
-PLATFORM.cris-fsr_n20::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/cris-fsr_n20.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+airs_aqua.sampler_type:         trajectory
+airs_aqua.grid_label:           airs_aqua_GEOM
+airs_aqua.template:            '%y4%m2%d2_%h2%n2z.nc4',
+airs_aqua.format:              'CFIO',
+airs_aqua.Epoch:                060000
+airs_aqua.use_NWP_1_file:       .true.
+airs_aqua.restore_2_obs_vector: .true.
+airs_aqua.regrid_method:        'BILINEAR' ,
+#airs_aqua.splitField:            1,
+airs_aqua.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.cris-fsr_npp::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/cris-fsr_npp.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+amsr2_gcom-w1.sampler_type:         trajectory
+amsr2_gcom-w1.grid_label:           amsr2_gcom-w1_GEOM
+amsr2_gcom-w1.template:            '%y4%m2%d2_%h2%n2z.nc4',
+amsr2_gcom-w1.format:              'CFIO',
+amsr2_gcom-w1.Epoch:                060000
+amsr2_gcom-w1.use_NWP_1_file:       .true.
+amsr2_gcom-w1.restore_2_obs_vector: .true.
+amsr2_gcom-w1.regrid_method:        'BILINEAR' ,
+#amsr2_gcom-w1.splitField:            1,
+amsr2_gcom-w1.fields:
                          include(crtmSampler_vars.vl)
-
-  ::
 ::
 
-PLATFORM.iasi_metop-b::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/iasi_metop-b.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+amsua_aqua.sampler_type:         trajectory
+amsua_aqua.grid_label:           amsua_aqua_GEOM
+amsua_aqua.template:            '%y4%m2%d2_%h2%n2z.nc4',
+amsua_aqua.format:              'CFIO',
+amsua_aqua.Epoch:                060000
+amsua_aqua.use_NWP_1_file:       .true.
+amsua_aqua.restore_2_obs_vector: .true.
+amsua_aqua.regrid_method:        'BILINEAR' ,
+#amsua_aqua.splitField:            1,
+amsua_aqua.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.amsua_aqua::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/amsua_aqua.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+amsua_metop-b.sampler_type:         trajectory
+amsua_metop-b.grid_label:           amsua_metop-b_GEOM
+amsua_metop-b.template:            '%y4%m2%d2_%h2%n2z.nc4',
+amsua_metop-b.format:              'CFIO',
+amsua_metop-b.Epoch:                060000
+amsua_metop-b.use_NWP_1_file:       .true.
+amsua_metop-b.restore_2_obs_vector: .true.
+amsua_metop-b.regrid_method:        'BILINEAR' ,
+#amsua_metop-b.splitField:            1,
+amsua_metop-b.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.amsua_metop-b::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/amsua_metop-b.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+amsua_n15.sampler_type:         trajectory
+amsua_n15.grid_label:           amsua_n15_GEOM
+amsua_n15.template:            '%y4%m2%d2_%h2%n2z.nc4',
+amsua_n15.format:              'CFIO',
+amsua_n15.Epoch:                060000
+amsua_n15.use_NWP_1_file:       .true.
+amsua_n15.restore_2_obs_vector: .true.
+amsua_n15.regrid_method:        'BILINEAR' ,
+#amsua_n15.splitField:            1,
+amsua_n15.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.amsua_n15::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/amsua_n15.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+amsua_n18.sampler_type:         trajectory
+amsua_n18.grid_label:           amsua_n18_GEOM
+amsua_n18.template:            '%y4%m2%d2_%h2%n2z.nc4',
+amsua_n18.format:              'CFIO',
+amsua_n18.Epoch:                060000
+amsua_n18.use_NWP_1_file:       .true.
+amsua_n18.restore_2_obs_vector: .true.
+amsua_n18.regrid_method:        'BILINEAR' ,
+#amsua_n18.splitField:            1,
+amsua_n18.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.amsua_n18::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/amsua_n18.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+amsua_n19.sampler_type:         trajectory
+amsua_n19.grid_label:           amsua_n19_GEOM
+amsua_n19.template:            '%y4%m2%d2_%h2%n2z.nc4',
+amsua_n19.format:              'CFIO',
+amsua_n19.Epoch:                060000
+amsua_n19.use_NWP_1_file:       .true.
+amsua_n19.restore_2_obs_vector: .true.
+amsua_n19.regrid_method:        'BILINEAR' ,
+#amsua_n19.splitField:            1,
+amsua_n19.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.amsua_n19::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/amsua_n19.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+atms_n20.sampler_type:         trajectory
+atms_n20.grid_label:           atms_n20_GEOM
+atms_n20.template:            '%y4%m2%d2_%h2%n2z.nc4',
+atms_n20.format:              'CFIO',
+atms_n20.Epoch:                060000
+atms_n20.use_NWP_1_file:       .true.
+atms_n20.restore_2_obs_vector: .true.
+atms_n20.regrid_method:        'BILINEAR' ,
+#atms_n20.splitField:            1,
+atms_n20.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.amsr2_gcom-w1::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/amsr2_gcom-w1.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+atms_npp.sampler_type:         trajectory
+atms_npp.grid_label:           atms_npp_GEOM
+atms_npp.template:            '%y4%m2%d2_%h2%n2z.nc4',
+atms_npp.format:              'CFIO',
+atms_npp.Epoch:                060000
+atms_npp.use_NWP_1_file:       .true.
+atms_npp.restore_2_obs_vector: .true.
+atms_npp.regrid_method:        'BILINEAR' ,
+#atms_npp.splitField:            1,
+atms_npp.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.atms_n20::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/atms_n20.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+avhrr3_metop-b.sampler_type:         trajectory
+avhrr3_metop-b.grid_label:           avhrr3_metop-b_GEOM
+avhrr3_metop-b.template:            '%y4%m2%d2_%h2%n2z.nc4',
+avhrr3_metop-b.format:              'CFIO',
+avhrr3_metop-b.Epoch:                060000
+avhrr3_metop-b.use_NWP_1_file:       .true.
+avhrr3_metop-b.restore_2_obs_vector: .true.
+avhrr3_metop-b.regrid_method:        'BILINEAR' ,
+#avhrr3_metop-b.splitField:            1,
+avhrr3_metop-b.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.atms_npp::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/atms_npp.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+avhrr3_n18.sampler_type:         trajectory
+avhrr3_n18.grid_label:           avhrr3_n18_GEOM
+avhrr3_n18.template:            '%y4%m2%d2_%h2%n2z.nc4',
+avhrr3_n18.format:              'CFIO',
+avhrr3_n18.Epoch:                060000
+avhrr3_n18.use_NWP_1_file:       .true.
+avhrr3_n18.restore_2_obs_vector: .true.
+avhrr3_n18.regrid_method:        'BILINEAR' ,
+#avhrr3_n18.splitField:            1,
+avhrr3_n18.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.avhrr3_metop-b::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/avhrr3_metop-b.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+avhrr3_n19.sampler_type:         trajectory
+avhrr3_n19.grid_label:           avhrr3_n19_GEOM
+avhrr3_n19.template:            '%y4%m2%d2_%h2%n2z.nc4',
+avhrr3_n19.format:              'CFIO',
+avhrr3_n19.Epoch:                060000
+avhrr3_n19.use_NWP_1_file:       .true.
+avhrr3_n19.restore_2_obs_vector: .true.
+avhrr3_n19.regrid_method:        'BILINEAR' ,
+#avhrr3_n19.splitField:            1,
+avhrr3_n19.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.avhrr3_n18::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/avhrr3_n18.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+cris-fsr_n20.sampler_type:         trajectory
+cris-fsr_n20.grid_label:           cris-fsr_n20_GEOM
+cris-fsr_n20.template:            '%y4%m2%d2_%h2%n2z.nc4',
+cris-fsr_n20.format:              'CFIO',
+cris-fsr_n20.Epoch:                060000
+cris-fsr_n20.use_NWP_1_file:       .true.
+cris-fsr_n20.restore_2_obs_vector: .true.
+cris-fsr_n20.regrid_method:        'BILINEAR' ,
+#cris-fsr_n20.splitField:            1,
+cris-fsr_n20.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.avhrr3_n19::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/avhrr3_n19.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+cris-fsr_npp.sampler_type:         trajectory
+cris-fsr_npp.grid_label:           cris-fsr_npp_GEOM
+cris-fsr_npp.template:            '%y4%m2%d2_%h2%n2z.nc4',
+cris-fsr_npp.format:              'CFIO',
+cris-fsr_npp.Epoch:                060000
+cris-fsr_npp.use_NWP_1_file:       .true.
+cris-fsr_npp.restore_2_obs_vector: .true.
+cris-fsr_npp.regrid_method:        'BILINEAR' ,
+#cris-fsr_npp.splitField:            1,
+cris-fsr_npp.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.gmi_gpm::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/gmi_gpm.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+gmi_gpm.sampler_type:         trajectory
+gmi_gpm.grid_label:           gmi_gpm_GEOM
+gmi_gpm.template:            '%y4%m2%d2_%h2%n2z.nc4',
+gmi_gpm.format:              'CFIO',
+gmi_gpm.Epoch:                060000
+gmi_gpm.use_NWP_1_file:       .true.
+gmi_gpm.restore_2_obs_vector: .true.
+gmi_gpm.regrid_method:        'BILINEAR' ,
+#gmi_gpm.splitField:            1,
+gmi_gpm.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.mhs_metop-b::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/mhs_metop-b.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+gps.sampler_type:         trajectory
+gps.grid_label:           gps_GEOM
+gps.template:            '%y4%m2%d2_%h2%n2z.nc4',
+gps.format:              'CFIO',
+gps.Epoch:                060000
+gps.use_NWP_1_file:       .true.
+gps.restore_2_obs_vector: .true.
+gps.regrid_method:        'BILINEAR' ,
+#gps.splitField:            1,
+gps.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.mhs_n19::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/mhs_n19.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+iasi_metop-b.sampler_type:         trajectory
+iasi_metop-b.grid_label:           iasi_metop-b_GEOM
+iasi_metop-b.template:            '%y4%m2%d2_%h2%n2z.nc4',
+iasi_metop-b.format:              'CFIO',
+iasi_metop-b.Epoch:                060000
+iasi_metop-b.use_NWP_1_file:       .true.
+iasi_metop-b.restore_2_obs_vector: .true.
+iasi_metop-b.regrid_method:        'BILINEAR' ,
+#iasi_metop-b.splitField:            1,
+iasi_metop-b.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.ssmis_f17::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/ssmis_f17.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+mhs_metop-b.sampler_type:         trajectory
+mhs_metop-b.grid_label:           mhs_metop-b_GEOM
+mhs_metop-b.template:            '%y4%m2%d2_%h2%n2z.nc4',
+mhs_metop-b.format:              'CFIO',
+mhs_metop-b.Epoch:                060000
+mhs_metop-b.use_NWP_1_file:       .true.
+mhs_metop-b.restore_2_obs_vector: .true.
+mhs_metop-b.regrid_method:        'BILINEAR' ,
+#mhs_metop-b.splitField:            1,
+mhs_metop-b.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.mls55_aura::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/mls55_aura.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+mhs_n19.sampler_type:         trajectory
+mhs_n19.grid_label:           mhs_n19_GEOM
+mhs_n19.template:            '%y4%m2%d2_%h2%n2z.nc4',
+mhs_n19.format:              'CFIO',
+mhs_n19.Epoch:                060000
+mhs_n19.use_NWP_1_file:       .true.
+mhs_n19.restore_2_obs_vector: .true.
+mhs_n19.regrid_method:        'BILINEAR' ,
+#mhs_n19.splitField:            1,
+mhs_n19.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.aircraft::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/aircraft.%y4%m2%d2T%h2%n2%S2Z.nc4
-  :: 
-  GEOVALS_SCHEMA::
-    geovals_fields::
+mls55_aura.sampler_type:         trajectory
+mls55_aura.grid_label:           mls55_aura_GEOM
+mls55_aura.template:            '%y4%m2%d2_%h2%n2z.nc4',
+mls55_aura.format:              'CFIO',
+mls55_aura.Epoch:                060000
+mls55_aura.use_NWP_1_file:       .true.
+mls55_aura.restore_2_obs_vector: .true.
+mls55_aura.regrid_method:        'BILINEAR' ,
+#mls55_aura.splitField:            1,
+mls55_aura.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.gps::
-  IODA_SCHEMA::
-    index_name_x:        Location 
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/gps.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+omi_aura.sampler_type:         trajectory
+omi_aura.grid_label:           omi_aura_GEOM
+omi_aura.template:            '%y4%m2%d2_%h2%n2z.nc4',
+omi_aura.format:              'CFIO',
+omi_aura.Epoch:                060000
+omi_aura.use_NWP_1_file:       .true.
+omi_aura.restore_2_obs_vector: .true.
+omi_aura.regrid_method:        'BILINEAR' ,
+#omi_aura.splitField:            1,
+omi_aura.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.omi_aura::
-  IODA_SCHEMA::        
-    index_name_x:        Location     
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/omi_aura.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+ompsnm_npp.sampler_type:         trajectory
+ompsnm_npp.grid_label:           ompsnm_npp_GEOM
+ompsnm_npp.template:            '%y4%m2%d2_%h2%n2z.nc4',
+ompsnm_npp.format:              'CFIO',
+ompsnm_npp.Epoch:                060000
+ompsnm_npp.use_NWP_1_file:       .true.
+ompsnm_npp.restore_2_obs_vector: .true.
+ompsnm_npp.regrid_method:        'BILINEAR' ,
+#ompsnm_npp.splitField:            1,
+ompsnm_npp.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.ompsnm_npp::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/ompsnm_npp.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+satwind.sampler_type:         trajectory
+satwind.grid_label:           satwind_GEOM
+satwind.template:            '%y4%m2%d2_%h2%n2z.nc4',
+satwind.format:              'CFIO',
+satwind.Epoch:                060000
+satwind.use_NWP_1_file:       .true.
+satwind.restore_2_obs_vector: .true.
+satwind.regrid_method:        'BILINEAR' ,
+#satwind.splitField:            1,
+satwind.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.satwind::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/satwind.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+scatwind.sampler_type:         trajectory
+scatwind.grid_label:           scatwind_GEOM
+scatwind.template:            '%y4%m2%d2_%h2%n2z.nc4',
+scatwind.format:              'CFIO',
+scatwind.Epoch:                060000
+scatwind.use_NWP_1_file:       .true.
+scatwind.restore_2_obs_vector: .true.
+scatwind.regrid_method:        'BILINEAR' ,
+#scatwind.splitField:            1,
+scatwind.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.scatwind::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/scatwind.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+sfc.sampler_type:         trajectory
+sfc.grid_label:           sfc_GEOM
+sfc.template:            '%y4%m2%d2_%h2%n2z.nc4',
+sfc.format:              'CFIO',
+sfc.Epoch:                060000
+sfc.use_NWP_1_file:       .true.
+sfc.restore_2_obs_vector: .true.
+sfc.regrid_method:        'BILINEAR' ,
+#sfc.splitField:            1,
+sfc.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.sfc::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/sfc.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+sfcship.sampler_type:         trajectory
+sfcship.grid_label:           sfcship_GEOM
+sfcship.template:            '%y4%m2%d2_%h2%n2z.nc4',
+sfcship.format:              'CFIO',
+sfcship.Epoch:                060000
+sfcship.use_NWP_1_file:       .true.
+sfcship.restore_2_obs_vector: .true.
+sfcship.regrid_method:        'BILINEAR' ,
+#sfcship.splitField:            1,
+sfcship.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.sfcship::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/sfcship.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+sondes.sampler_type:         trajectory
+sondes.grid_label:           sondes_GEOM
+sondes.template:            '%y4%m2%d2_%h2%n2z.nc4',
+sondes.format:              'CFIO',
+sondes.Epoch:                060000
+sondes.use_NWP_1_file:       .true.
+sondes.restore_2_obs_vector: .true.
+sondes.regrid_method:        'BILINEAR' ,
+#sondes.splitField:            1,
+sondes.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
-PLATFORM.sondes::
-  IODA_SCHEMA::
-    index_name_x:        Location
-    var_name_lon:        MetaData/longitude
-    var_name_lat:        MetaData/latitude
-    var_name_time:       MetaData/dateTime
-    file_name_template:  /discover/nobackup/projects/gmao/aist-nr/data/ioda_reshuffle/%y4%m2%d2/geos_atmosphere/sondes.%y4%m2%d2T%h2%n2%S2Z.nc4
-  ::
-  GEOVALS_SCHEMA::
-    geovals_fields::
+ssmis_f17.sampler_type:         trajectory
+ssmis_f17.grid_label:           ssmis_f17_GEOM
+ssmis_f17.template:            '%y4%m2%d2_%h2%n2z.nc4',
+ssmis_f17.format:              'CFIO',
+ssmis_f17.Epoch:                060000
+ssmis_f17.use_NWP_1_file:       .true.
+ssmis_f17.restore_2_obs_vector: .true.
+ssmis_f17.regrid_method:        'BILINEAR' ,
+#ssmis_f17.splitField:            1,
+ssmis_f17.fields:
                          include(crtmSampler_vars.vl)
-  ::
 ::
 
 
+#                              ---------------------------------
+#                              End Sampled Collections
+#                              ---------------------------------
+
+
+  tavg1_2d_flx_Nx.format:      'CFIO' ,
+  tavg1_2d_flx_Nx.grid_label:   PC5760x2881-DC,
+  tavg1_2d_flx_Nx.template:    '%y4%m2%d2_%h2%n2z.nc4' ,
+  tavg1_2d_flx_Nx.mode:        'time-averaged' ,
+  tavg1_2d_flx_Nx.frequency:    010000 ,
+  tavg1_2d_flx_Nx.duration:     010000 ,
+  tavg1_2d_flx_Nx.deflate:      1,
+  tavg1_2d_flx_Nx.regrid_method:    'BILINEAR',
+  tavg1_2d_flx_Nx.fields:       'AN_PRCP'      , 'MOIST'    , 'PRECANV' ,
+                                'CN_PRCP'      , 'MOIST'    , 'PRECCON' ,
+                                'LS_PRCP'      , 'MOIST'    , 'PRECLSC' ,
+                                'TPREC'        , 'MOIST'    , 'PRECTOT' ,
+                                'KUCHERA_RATIO' , 'MOIST' ,
+                                'SNOWTOTAL' , 'MOIST'  , 'SNOWACCUM', 'ACCUMULATE'
+                                'PRECTOTAL' , 'MOIST'  , 'PRECACCUM', 'ACCUMULATE'
+                                'SNO'       , 'MOIST'  , 'SNOW' ,
+                                'ICE'       , 'MOIST'  , 'ICE' ,
+                                'FRZR'      , 'MOIST'  , 'FRZR' ,
+                                'RAIN'      , 'MOIST'  , 'RAIN' ,
+                                'SLP'       , 'DYN'    ,
+                          'DBZ_MAX'  , 'MOIST'    ,  'DBZMAX' , 'MAX' ,
+                          'DBZ_TOP'  , 'MOIST'    ,  'DBZTOP' , 'MAX' ,
+                          'DBZ_1KM'  , 'MOIST'    ,  'DBZ1KM' , 'MAX' ,
+                          'DBZ_M10C' , 'MOIST'    , 'DBZM10C' , 'MAX' ,
+                          'UH25'     , 'DYN'      ,  'UH25MX' , 'MAX' ,
+                          'UH03'     , 'DYN'      ,  'UH03MX' , 'MAX' ,
+                          'SRH25'    , 'DYN'      , 'SRH25MX' , 'MAX' ,
+                          'SRH03'    , 'DYN'      , 'SRH03MX' , 'MAX' ,
+                          'SRH01'    , 'DYN'      , 'SRH01MX' , 'MAX' ,
+                                'SPEED'     , 'DYN'    , 'SPEEDMX' , 'MAX' ,
+                                'SFCEM'   , 'IRRAD'    , 'LWGEM'        ,
+                                'LWS'     , 'IRRAD'    , 'LWGAB'        ,
+                                'LCS'     , 'IRRAD'    , 'LWGABCLR'     ,
+                                'LAS'     , 'IRRAD'    , 'LWGABCLRCLN'  ,
+                                'FLNS'    , 'IRRAD'    , 'LWGNT'        ,
+                                'FLNSC'   , 'IRRAD'    , 'LWGNTCLR'     ,
+                                'FLNSA'   , 'IRRAD'    , 'LWGNTCLRCLN'  ,
+                                'OLR'     , 'IRRAD'    , 'LWTUP'        ,
+                                'OLC'     , 'IRRAD'    , 'LWTUPCLR'     ,
+                                'OLA'     , 'IRRAD'    , 'LWTUPCLRCLN'  ,
+                                'SLRTP'   , 'SOLAR'    , 'SWTDN'        ,
+                                'SLRSF'   , 'SOLAR'    , 'SWGDN'        ,
+                                'SLRSFC'  , 'SOLAR'    , 'SWGDNCLR'     ,
+                                'RSRS'    , 'SOLAR'    , 'SWGNT'        ,
+                                'RSCS'    , 'SOLAR'    , 'SWGNTCLR'     ,
+                                'RSRSNA'  , 'SOLAR'    , 'SWGNTCLN'     ,
+                                'RSCSNA'  , 'SOLAR'    , 'SWGNTCLRCLN'  ,
+                                'RSR'     , 'SOLAR'    , 'SWTNT'        ,
+                                'RSC'     , 'SOLAR'    , 'SWTNTCLR'     ,
+                                'RSRNA'   , 'SOLAR'    , 'SWTNTCLN'     ,
+                                'RSCNA'   , 'SOLAR'    , 'SWTNTCLRCLN'  ,
+                                'CLDTMP'  , 'SOLAR'    , 'SWCLDTMP'     ,
+                                'CLDPRS'  , 'SOLAR'    , 'SWCLDPRS'     ,
+                                'PHIS'    , 'AGCM'     ,
+                              ::
+
+  inst1_2d_asm_Nx.format:      'CFIO' ,
+  inst1_2d_asm_Nx.grid_label:   PC5760x2881-DC,
+  inst1_2d_asm_Nx.template:    '%y4%m2%d2_%h2%n2z.nc4' ,
+  inst1_2d_asm_Nx.mode:        'instantaneous' ,
+  inst1_2d_asm_Nx.frequency:    003000 ,
+  inst1_2d_asm_Nx.duration:     003000 ,
+  inst1_2d_asm_Nx.deflate:      1,
+  inst1_2d_asm_Nx.regrid_method:    'BILINEAR',
+  inst1_2d_asm_Nx.fields:       'SLP'       , 'DYN'      ,
+                             'SLRTP'   , 'SOLAR'    , 'SWTDN'        ,
+                           'ISRB08RG'  , 'SOLAR'      ,
+                           'ISRB09RG'  , 'SOLAR'      ,
+                           'ISRB10RG'  , 'SOLAR'      ,
+                           'OSRB08RG'  , 'SOLAR'      ,
+                           'OSRB09RG'  , 'SOLAR'      ,
+                           'OSRB10RG'  , 'SOLAR'      ,
+                           'TBRB05RG'  , 'IRRAD'      ,
+                           'TBRB06RG'  , 'IRRAD'      ,
+                           'TBRB07RG'  , 'IRRAD'      ,
+                           'TBRB09RG'  , 'IRRAD'      ,
+                           'TBRB10RG'  , 'IRRAD'      ,
+                           'TBRB11RG'  , 'IRRAD'      ,
+                           'TBRB15RG'  , 'IRRAD'      ,
+                                'TBISCCP'   , 'SATSIM'   ,
+                                'CAPE'      , 'MOIST'    ,
+                          'DBZ_MAX'  , 'MOIST'    ,
+                          'DBZ_TOP'  , 'MOIST'    ,
+                          'DBZ_1KM'  , 'MOIST'    ,
+                          'DBZ_M10C' , 'MOIST'    ,
+                          'UH25'     , 'DYN'      ,
+                          'UH03'     , 'DYN'      ,
+                          'SRH25'    , 'DYN'      ,
+                          'SRH03'    , 'DYN'      ,
+                          'SRH01'    , 'DYN'      ,
+                                'SPEED'     , 'DYN'      ,
+                                'U10M;V10M' , 'SURFACE'  ,
+                                'T2M'       , 'SURFACE'  ,
+                                'T2MDEW'    , 'SURFACE'  ,
+                                'H1000'     , 'DYN'      ,
+                                'H500'      , 'DYN'      ,
+                                'TQV'       , 'AGCM'     ,
+                                'SNO'       , 'MOIST'    , 'SNOW' ,
+                                'ICE'       , 'MOIST'    , 'ICE' ,
+                                'FRZR'      , 'MOIST'    , 'FRZR' ,
+                                'RAIN'      , 'MOIST'    , 'RAIN' ,
+                                'PTYPE'     , 'MOIST'    ,
+                                'AN_PRCP'   , 'MOIST'    , 'PRECANV' ,
+                                'CN_PRCP'   , 'MOIST'    , 'PRECCON' ,
+                                'LS_PRCP'   , 'MOIST'    , 'PRECLSC' ,
+                                'U850;V850' , 'DYN'      ,
+                                'U250;V250' , 'DYN'      ,
+                                'VORT200'   , 'DYN'      ,
+                                'VORT500'   , 'DYN'      ,
+                                'VORT700'   , 'DYN'      ,
+                                'VORT850'   , 'DYN'      ,
+                                'DIVG200'   , 'DYN'      ,
+                                'DIVG500'   , 'DYN'      ,
+                                'DIVG700'   , 'DYN'      ,
+                                'DIVG850'   , 'DYN'      ,
+                                'RSR'       , 'SOLAR'    , 'SWTNT'    ,
+                                'OSR'       , 'SOLAR'    , 'SWTUP'    ,
+                                'OLR'       , 'IRRAD'    , 'LWTUP'    ,
+                                'CWP'       , 'MOIST'    ,
+                                'LWP'       , 'MOIST'    ,
+                                'IWP'       , 'MOIST'    ,
+                                'DUEXTTAU'       , 'DU'  ,
+                                'SSEXTTAU'       , 'SS'  ,
+                                'CA.brEXTTAU'    , 'CA.br'     , 'BREXTTAU'    ,
+                                'CA.bcEXTTAU'    , 'CA.bc'     , 'BCEXTTAU'    ,
+                                'CA.ocEXTTAU'    , 'CA.oc'     , 'OCEXTTAU'    ,
+                                'SUEXTTAU'       , 'SU'  ,
+                                'NIEXTTAU'       , 'NI'  ,
+                                'FRACI'     , 'SURFACE'  , 'frseaice'   ,
+                                'SNOMAS'    , 'SURFACE'  ,
+                                ::
+
+  hwt_01hr_acc_LCC.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
+  hwt_01hr_acc_LCC.archive:          '%c/Y%y4' ,
+  hwt_01hr_acc_LCC.format:           'CFIO' ,
+  hwt_01hr_acc_LCC.deflate:           1 ,
+  hwt_01hr_acc_LCC.grid_label:        lambert ,
+  hwt_01hr_acc_LCC.regrid_method:    'BILINEAR_MONOTONIC' ,
+  hwt_01hr_acc_LCC.mode:             'time-averaged' ,
+  hwt_01hr_acc_LCC.frequency:         010000 ,
+  hwt_01hr_acc_LCC.duration:          010000 ,
+  hwt_01hr_acc_LCC.acc_ref_time:      000000 ,
+  hwt_01hr_acc_LCC.acc_interval:      1200000 ,
+  hwt_01hr_acc_LCC.timestampEnd:      .true. ,
+  hwt_01hr_acc_LCC.mode:             'time-averaged' ,
+  hwt_01hr_acc_LCC.fields:           'PRECTOTAL' , 'MOIST' ,  'APCP' , 'ACCUMULATE' ,
+                                     'CN_PRCP'   , 'MOIST' , 'ACPCP' , 'ACCUMULATE' ,
+                                     'LS_PRCP'   , 'MOIST' , 'NCPCP' , 'ACCUMULATE' ,
+                                     'SNOWTOTAL' , 'MOIST'  , 'SNOWACCUM', 'ACCUMULATE'
+                                     'KUCHERA_RATIO' , 'MOIST' ,
+                                     'AREA'      , 'DYN'      ,
+                             ::
+
+  hwt_01hr_slv_LCC.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
+  hwt_01hr_slv_LCC.archive:          '%c/Y%y4' ,
+  hwt_01hr_slv_LCC.format:           'CFIO' ,
+  hwt_01hr_slv_LCC.deflate:           1 ,
+  hwt_01hr_slv_LCC.grid_label:        lambert ,
+  hwt_01hr_slv_LCC.regrid_method:    'BILINEAR_MONOTONIC' ,
+  hwt_01hr_slv_LCC.mode:             'time-averaged' ,
+  hwt_01hr_slv_LCC.frequency:         010000 ,
+  hwt_01hr_slv_LCC.duration:          010000 ,
+  hwt_01hr_slv_LCC.timestampEnd:      .true. ,
+  hwt_01hr_slv_LCC.fields:           'GUST'      , 'SURFACE'  , 'GUSTMX'             , 'MAX' ,
+                                     'DBZ_1KM'   , 'MOIST'    , 'MXREFD_1KM'         , 'MAX' ,
+                                     'DBZ_M10C'  , 'MOIST'    , 'MXREFD_263K'        , 'MAX' ,
+                                     'UH25'      , 'DYN'      , 'MXUPHL_2-5KM'       , 'MAX' ,
+                                     'UH25'      , 'DYN'      , 'MNUPHL_2-5KM'       , 'MIN' ,
+                                     'UH03'      , 'DYN'      , 'MXUPHL_0-3KM'       , 'MAX' ,
+                                     'UH03'      , 'DYN'      , 'MNUPHL_0-3KM'       , 'MIN' ,
+                                     'WSPD_10M'  , 'DYN'      , 'MXWSPD_10M'         , 'MAX' ,
+                              'VVEL_UP_100_1000' , 'DYN'      , 'VVELUP_100-1000hPa' , 'MAX' ,
+                              'VVEL_DN_100_1000' , 'DYN'      , 'VVELDN_100-1000hPa' , 'MIN' ,
+                                     'PRECTOTAL' , 'MOIST'    ,  'APCP_1H'           , 'ACCUMULATE' ,
+                                     'CN_PRCP'   , 'MOIST'    , 'ACPCP_1H'           , 'ACCUMULATE' ,
+                                     'LS_PRCP'   , 'MOIST'    , 'NCPCP_1H'           , 'ACCUMULATE' ,
+                                     'AREA'      , 'DYN'      ,
+                             ::
+
+  hwt_30mn_prs_LCC.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
+  hwt_30mn_prs_LCC.archive:          '%c/Y%y4' ,
+  hwt_30mn_prs_LCC.format:           'CFIO' ,
+  hwt_30mn_prs_LCC.deflate:          1,
+  hwt_30mn_prs_LCC.grid_label:       lambert,
+  hwt_30mn_prs_LCC.regrid_method:    'BILINEAR_MONOTONIC' ,
+  hwt_30mn_prs_LCC.mode:             'instantaneous' ,
+  hwt_30mn_prs_LCC.frequency:        003000 ,
+  hwt_30mn_prs_LCC.duration:         003000 ,
+  hwt_30mn_prs_LCC.vscale:           100.0 ,
+  hwt_30mn_prs_LCC.vunit:            'hPa' ,
+  hwt_30mn_prs_LCC.vvars:            'log(PLE)' , 'DYN' ,
+  hwt_30mn_prs_LCC.levels:           1000 925 850 700 500 400 300 250 200 150 100 ,
+  hwt_30mn_prs_LCC.fields:           'U;V'    , 'DYN'        , 'UGRD;VGRD' ,
+                                     'T'      , 'DYN'        , 'TMP'       ,
+                                     'ZLE'    , 'DYN'        , 'HGT'       ,
+                                     'Q'      , 'MOIST'      , 'SPFH'      ,
+                                     'RH2'    , 'MOIST'      , 'RH'        ,
+                                     'QITOT'  , 'AGCM'       , 'QI'  ,
+                                     'QLTOT'  , 'AGCM'       , 'QL'  ,
+                                     'QRTOT'  , 'AGCM'       , 'QR'  ,
+                                     'QSTOT'  , 'AGCM'       , 'QS'  ,
+                                     'QGTOT'  , 'AGCM'       , 'QG'  ,
+                                     'VORT'   , 'DYN'        ,
+                                     'DIVG'   , 'DYN'        ,
+                                     'KH'     , 'TURBULENCE' ,
+                                     'KM'     , 'TURBULENCE' ,
+                                     'CNV_MF0', 'MOIST'      , 'CNVMF0'  ,
+                                     'CNV_MFD', 'MOIST'      , 'CNVMFD'  ,
+                                     'CNV_MFC', 'MOIST'      , 'CNVMFC'  ,
+                                     'UMF_SC' , 'MOIST'      ,
+                                     'AREA'   , 'DYN'        ,
+                             ::
+
+  hwt_30mn_slv_LCC.template:         '%y4%m2%d2_%h2%n2z.nc4' ,
+  hwt_30mn_slv_LCC.archive:          '%c/Y%y4' ,
+  hwt_30mn_slv_LCC.format:           'CFIO' ,
+  hwt_30mn_slv_LCC.deflate:          1,
+  hwt_30mn_slv_LCC.grid_label:       lambert,
+  hwt_30mn_slv_LCC.regrid_method:    'BILINEAR_MONOTONIC' ,
+  hwt_30mn_slv_LCC.mode:             'instantaneous' ,
+  hwt_30mn_slv_LCC.frequency:        003000 ,
+  hwt_30mn_slv_LCC.duration:         003000 ,
+  hwt_30mn_slv_LCC.fields: 'PHIS'      , 'AGCM'       , 'HGT_SFC'           ,
+                           'PS'        , 'DYN'        , 'PRES_SFC'          ,
+                           'SLP'       , 'DYN'        , 'PRMSL'             ,
+                           'T2M'       , 'SURFACE'    , 'TMP_2M'            ,
+                           'T2MDEW'    , 'SURFACE'    , 'DPT_2M'            ,
+                           'Q2M'       , 'SURFACE'    , 'SPFH_2M'           ,
+                           'RH2M'      , 'SURFACE'    , 'RH_2M'             ,
+                           'U10M;V10M' , 'SURFACE'    , 'UGRD_10M;VGRD_10M' ,
+                           'TAUTT'     , 'SOLAR'      , 'TCOT'              ,
+                           'TAULO'     , 'SOLAR'      , 'LCOT'              ,
+                           'TAUMD'     , 'SOLAR'      , 'MCOT'              ,
+                           'TAUHI'     , 'SOLAR'      , 'HCOT'              ,
+                           'CLDTT'     , 'SOLAR'      , 'TCDC'              ,
+                           'CLDLO'     , 'SOLAR'      , 'LCDC'              ,
+                           'CLDMD'     , 'SOLAR'      , 'MCDC'              ,
+                           'CLDHI'     , 'SOLAR'      , 'HCDC'              ,
+                           'ZPBL'      , 'TURBULENCE' , 'HPBL'              ,
+                           'DBZ_MAX'   , 'MOIST'      , 'REFC'              ,
+                           'DBZ_TOP'   , 'MOIST'      , 'RETOP'             ,
+                           'DBZ_1KM'   , 'MOIST'      , 'REFD_1KM'          ,
+                           'DBZ_M10C'  , 'MOIST'      , 'REFD_263K'         ,
+                           'UH25'      , 'DYN'        , 'UPHL_2-5KM'        ,
+                           'UH03'      , 'DYN'        , 'UPHL_0-3KM'        ,
+                           'SRH25'     , 'DYN'        , 'HLCY_2-5KM'        ,
+                           'SRH03'     , 'DYN'        , 'HLCY_0-3KM'        ,
+                           'SRH01'     , 'DYN'        , 'HLCY_0-1KM'        ,
+                           'CAPE'      , 'MOIST'      ,
+                           'INHB'      , 'MOIST'      , 'CIN'               ,
+                           'SBCAPE'    , 'MOIST'      , 'CAPE_SFC'          ,
+                           'SBCIN'     , 'MOIST'      , 'CIN_SFC'           ,
+                           'MLCAPE'    , 'MOIST'      , 'CAPE_90MB'         ,
+                           'MLCIN'     , 'MOIST'      , 'CIN_90MB'          ,
+                           'MUCAPE'    , 'MOIST'      , 'CAPE_255MB'        ,
+                           'MUCIN'     , 'MOIST'      , 'CIN_255MB'         ,
+                             'SLRTP'   , 'SOLAR'    , 'SWTDN'        ,
+                           'ISRB08RG'  , 'SOLAR'      ,
+                           'ISRB09RG'  , 'SOLAR'      ,
+                           'ISRB10RG'  , 'SOLAR'      ,
+                           'OSRB08RG'  , 'SOLAR'      ,
+                           'OSRB09RG'  , 'SOLAR'      ,
+                           'OSRB10RG'  , 'SOLAR'      ,
+                           'TBRB05RG'  , 'IRRAD'      ,
+                           'TBRB06RG'  , 'IRRAD'      ,
+                           'TBRB07RG'  , 'IRRAD'      ,
+                           'TBRB09RG'  , 'IRRAD'      ,
+                           'TBRB10RG'  , 'IRRAD'      ,
+                           'TBRB11RG'  , 'IRRAD'      ,
+                           'TBRB15RG'  , 'IRRAD'      ,
+                           'TBISCCP'   , 'SATSIM'     ,
+                           'SPEED'     , 'DYN'        ,
+                           'GUST'      , 'SURFACE'    ,
+                           'SNO'       , 'MOIST'      , 'SNOW',
+                           'ICE'       , 'MOIST'      , 'ICE',
+                           'FRZR'      , 'MOIST'      , 'FRZR' ,
+                           'RAIN'      , 'MOIST'      , 'RAIN' ,
+                           'TPREC'     , 'MOIST'      , 'PRECTOT' ,
+                           'CN_PRCP'   , 'MOIST'      , 'PRECCON' ,
+                           'LS_PRCP'   , 'MOIST'      , 'PRECLSC' ,
+                                'DUEXTTAU'       , 'DU'  ,
+                                'SSEXTTAU'       , 'SS'  ,
+                                'CA.brEXTTAU'    , 'CA.br'     , 'BREXTTAU'    ,
+                                'CA.bcEXTTAU'    , 'CA.bc'     , 'BCEXTTAU'    ,
+                                'CA.ocEXTTAU'    , 'CA.oc'     , 'OCEXTTAU'    ,
+                                'SUEXTTAU'       , 'SU'  ,
+                                'NIEXTTAU'       , 'NI'  ,
+                                     'AREA'      , 'DYN'      ,
+                         ::
