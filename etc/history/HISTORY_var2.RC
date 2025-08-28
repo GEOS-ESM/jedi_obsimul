@@ -380,7 +380,7 @@ MTG_IRS.thin_factor:   500
 MTG_IRS.LM:            137
 MTG_IRS.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/mtg-irs_coords.nc4
 
-includex(traj_geom.gl)
+includex(traj_geom_Y2025.gl)
 
 #                              ---------------------------------
 #                              Definition of Gridded Collections
