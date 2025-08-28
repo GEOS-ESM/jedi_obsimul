@@ -53,17 +53,20 @@ COLLECTIONS:
 #             Samplers at Obs locations
 #             --------------------------
               'Aeronet'
-              'SNDR_ATMS'
-              'myd04'
-              'mod04'
-#             'ABI_M6C14_Geostationary'  # slow; demonstration
-#             'ABI_M6C01_Mask'           # slow; demonstration
-#              'GeoDisk_ABI_East_2km'
-#              'GeoDisk_ABI_West_2km'
-              'GeoDisk_GXS_East'
-              'GeoDisk_GXS_West'
-              'GeoDisk_GHMS'
-              'GeoDisk_MTG_IRS'
+#               obs data not found for 2025
+#              'SNDR_ATMS'
+#               memory issue myd04/mod04
+#              'myd04'
+#              'mod04'
+#              GXS not ready
+##             'ABI_M6C14_Geostationary'  # slow; demonstration
+##             'ABI_M6C01_Mask'           # slow; demonstration
+##              'GeoDisk_ABI_East_2km'
+##              'GeoDisk_ABI_West_2km'
+#              'GeoDisk_GXS_East'
+#              'GeoDisk_GXS_West'
+#              'GeoDisk_GHMS'
+#              'GeoDisk_MTG_IRS'
 
 #             Trajectory: 2 Campaigns + JEDI 29 platforms (IODA format)
 #             ---------------------------------------------------------
@@ -122,16 +125,20 @@ GRID_LABELS:
 
 #    Sampler Geometries
 #    ------------------
-     SwathGrid_MYD04
-     SwathGrid_MOD04
-     SwathGrid_ATMS
+#     memory related issue for geos v12
+#     SwathGrid_MYD04
+#     SwathGrid_MOD04
+#  data not found
+#     SwathGrid_ATMS
 
-#     ABI_East_2km
-#     ABI_West_2km
-     GXS_East
-     GXS_West
-     GHMS
-     MTG_IRS
+#      To do: add Fortran interface related to GXS
+#
+##     ABI_East_2km
+##     ABI_West_2km
+#     GXS_East
+#     GXS_West
+#     GHMS
+#     MTG_IRS
 
 #    Sampler: Trajectory Geometries
 #    ------------------------------
@@ -334,7 +341,8 @@ MTG_IRS.thin_factor:   10
 MTG_IRS.LM:            137
 MTG_IRS.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/mtg-irs_coords.nc4
 
-include(traj_geom.gl)
+include(traj_geom_Y2025.gl)
+## include(traj_geom_Y2019.gl)
 
 #                              ---------------------------------
 #                              Definition of Gridded Collections
