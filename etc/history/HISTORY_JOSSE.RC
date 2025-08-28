@@ -53,17 +53,22 @@ COLLECTIONS:
 #             Samplers at Obs locations
 #             --------------------------
               'Aeronet'
-              'SNDR_ATMS'
-              'myd04'
-              'mod04'
-#             'ABI_M6C14_Geostationary'  # slow; demonstration
-#             'ABI_M6C01_Mask'           # slow; demonstration
-#              'GeoDisk_ABI_East_2km'
-#              'GeoDisk_ABI_West_2km'
-              'GeoDisk_GXS_East'
-              'GeoDisk_GXS_West'
-              'GeoDisk_GHMS'
-              'GeoDisk_MTG_IRS'
+#               obs data not found for 2025
+#              'SNDR_ATMS'
+#               ?? memory issue myd/mod 
+#              'myd04'    # obs data for 2019
+#              'mod04'    # obs data for 2019
+#              'myd14'    # obs data for 2025
+#              'mod14'    # obs data for 2025
+#              GXS not ready
+##             'ABI_M6C14_Geostationary'  # slow; demonstration
+##             'ABI_M6C01_Mask'           # slow; demonstration
+##              'GeoDisk_ABI_East_2km'
+##              'GeoDisk_ABI_West_2km'
+#              'GeoDisk_GXS_East'
+#              'GeoDisk_GXS_West'
+#              'GeoDisk_GHMS'
+#              'GeoDisk_MTG_IRS'
 
 #             Trajectory: 2 Campaigns + JEDI 29 platforms (IODA format)
 #             ---------------------------------------------------------
@@ -122,16 +127,22 @@ GRID_LABELS:
 
 #    Sampler Geometries
 #    ------------------
-     SwathGrid_MYD04
-     SwathGrid_MOD04
-     SwathGrid_ATMS
+#     memory related issue for geos v12
+#     SwathGrid_MYD04
+#     SwathGrid_MOD04
+#     SwathGrid_MYD14
+#     SwathGrid_MOD14
+#  ?? data not found
+#     SwathGrid_ATMS
 
-#     ABI_East_2km
-#     ABI_West_2km
-     GXS_East
-     GXS_West
-     GHMS
-     MTG_IRS
+#      To do: add Fortran interface related to GXS
+#
+##     ABI_East_2km
+##     ABI_West_2km
+#     GXS_East
+#     GXS_West
+#     GHMS
+#     MTG_IRS
 
 #    Sampler: Trajectory Geometries
 #    ------------------------------
@@ -261,6 +272,41 @@ SwathGrid_MOD04.ref_time:        '2019-07-31T00:00:00'
 SwathGrid_MOD04.frequency:      '000000 000500'     # yymmdd  hhmmss
 SwathGrid_MOD04.Epoch:               060000             #
 
+#Algorithm for 2025 changes, how to calculate lon/lat ?
+#netcdf MYD14.A2025121.2015.061.2025122120333 {
+#dimensions:
+#        number_of_scan_lines = 2040 ;
+#        pixels_per_scan_line = 1354 ;
+#
+SwathGrid_MYD14.GRID_TYPE: Swath
+SwathGrid_MYD14.GRID_FILE: /discover/nobackup/projects/gmao/aist-nr/data/Aqua/%y4/%D3/MYD14_L2.A%y4%D3.%h2%n2*.hdf
+SwathGrid_MYD14.LM:  137
+SwathGrid_MYD14.index_name_lon:      'Cell_Across_Swath:mod04'
+SwathGrid_MYD14.index_name_lat:      'Cell_Along_Swath:mod04'
+SwathGrid_MYD14.var_name_lon:        'Longitude' 
+SwathGrid_MYD14.var_name_lat:        'Latitude'
+SwathGrid_MYD14.var_name_time:       'Scan_Start_Time'
+SwathGrid_MYD14.tunit:               'seconds since 1993-01-01 00:00:00'
+SwathGrid_MYD14.ref_time:         '2019-07-31T00:00:00'
+SwathGrid_MYD14.frequency:       '000000 000500'       # yymmdd  hhmmss
+SwathGrid_MYD14.Epoch:                060000               #
+
+# Algorithm for 2025 changes, how to calculate lon/lat ?
+#
+#
+SwathGrid_MOD14.GRID_TYPE: Swath
+SwathGrid_MOD14.GRID_FILE: /discover/nobackup/projects/gmao/aist-nr/data/Terra/%y4/%D3/MOD14_L2.A%y4%D3.%h2%n2*.hdf
+SwathGrid_MOD14.LM:   137
+SwathGrid_MOD14.index_name_lon:     'Cell_Across_Swath:mod04'
+SwathGrid_MOD14.index_name_lat:     'Cell_Along_Swath:mod04'
+SwathGrid_MOD14.var_name_lon:       'Longitude'
+SwathGrid_MOD14.var_name_lat:       'Latitude'
+SwathGrid_MOD14.var_name_time:      'Scan_Start_Time'
+SwathGrid_MOD14.tunit:              'seconds since 1993-01-01 00:00:00'
+SwathGrid_MOD14.ref_time:        '2019-07-31T00:00:00'
+SwathGrid_MOD14.frequency:      '000000 000500'     # yymmdd  hhmmss
+SwathGrid_MOD14.Epoch:               060000             #
+
 
 ABI_East_2km.GRID_TYPE:     XY
 ABI_East_2km.GRIDNAME:      ABI_East_2km
@@ -334,7 +380,8 @@ MTG_IRS.thin_factor:   10
 MTG_IRS.LM:            137
 MTG_IRS.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/mtg-irs_coords.nc4
 
-include(traj_geom.gl)
+include(traj_geom_Y2025.gl)
+## include(traj_geom_Y2019.gl)
 
 #                              ---------------------------------
 #                              Definition of Gridded Collections
@@ -623,6 +670,31 @@ mod04.grid_label:        SwathGrid_MOD04,
 mod04.regrid_method:     'BILINEAR' ,
 mod04.splitField:        1,
 mod04.fields:            include(aerSampler_vars.vl)
+                         include(cldSampler_vars.vl)
+                         include(asmSampler_vars.vl)
+::
+
+
+myd14.sampler_type:      'swath'
+myd14.template:          '%y4%m2%d2_%h2%n2z.nc4',
+myd14.format:            'CFIO',
+myd14.frequency:         060000,               # should not be here; (=Epoch)
+myd14.grid_label:        SwathGrid_MYD14,
+myd14.regrid_method:     'BILINEAR' ,
+myd14.splitField:        1,
+myd14.fields:            include(aerSampler_vars.vl)
+                         include(cldSampler_vars.vl)
+                         include(asmSampler_vars.vl)
+::
+
+mod14.sampler_type:      'swath'
+mod14.template:          '%y4%m2%d2_%h2%n2z.nc4',
+mod14.format:            'CFIO',
+mod14.frequency:         060000,              #  (=Epoch)
+mod14.grid_label:        SwathGrid_MOD14,
+mod14.regrid_method:     'BILINEAR' ,
+mod14.splitField:        1,
+mod14.fields:            include(aerSampler_vars.vl)
                          include(cldSampler_vars.vl)
                          include(asmSampler_vars.vl)
 ::
