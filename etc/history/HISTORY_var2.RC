@@ -10,9 +10,45 @@ EXPSRC: GEOSgcm-v12
 #                               Selection of Collections
 #                              -------------------------
 
-
-
 COLLECTIONS:
+'ABI_M6C01_G16_Mask'
+::
+
+GRID_LABELS:
+   PC720x361-DC        # 0.5    x 0.625   deg     (<==> c180)
+::
+
+qqCOLLECTIONS:
+'SNDR_ATMS'
+'mod04'    # obs data avail for 2019, 2025
+'myd04'    # obs data avail for 2019, 2025
+::
+
+qqGRID_LABELS:
+SwathGrid_MYD04
+SwathGrid_MOD04
+SwathGrid_ATMS
+::
+
+qqCOLLECTIONS:
+             'GeoDisk_GXS_East'
+             'GeoDisk_GXS_West'
+             'GeoDisk_GHMS'
+             'GeoDisk_MTG_IRS'
+::
+
+
+
+# gxs
+qqGRID_LABELS:
+     GXS_East
+     GXS_West
+     GHMS
+     MTG_IRS
+::
+
+
+qqCOLLECTIONS:
 #             Trajectory: 2 Campaigns + JEDI 29 platforms (IODA format)
 #             ---------------------------------------------------------
               'CAMP2EX'
@@ -48,99 +84,6 @@ COLLECTIONS:
               'ssmis_f17'
 ::
 
-
-
-uuGRID_LABELS:
-  SwathGrid_ATMS
-  aircraft_GEOM 
- GXS_East
-::
-
-
-zzCOLLECTIONS:
-
-#             Gridded Output
-#             --------------
-              'geosgcm_prog'
-              'geosgcm_surf'
-              'inst_01hr_2d_brs_Nx'
-              'geosgcm_moist'
-              'geosgcm_turb'
-              'geosgcm_gwd'
-#             'geosgcm_tend'
-              'geosgcm_budi'
-              'geosgcm_buda'
-#             'geosgcm_landice'
-#             'geosgcm_meltwtr'
-#             'geosgcm_snowlayer'
-#             'geosgcm_tracer'
-              'tavg2d_aer_x'
-              'tavg3d_aer_p'
-              'ana_prog'
-              'ana_surf'
-#             'const_2d_asm_Nx'
-
-##             Browsing products
-##             -----------------
-#             'hwt_30mn_slv_LCC'
-#             'hwt_30mn_prs_LCC'
-#             'hwt_01hr_slv_LCC'
-#             'hwt_01hr_acc_LCC'
-#             'inst1_2d_asm_Nx'
-#             'tavg1_2d_flx_Nx'
-
-
-#             Samplers at Obs locations
-#             --------------------------
-              'Aeronet'
-#              'SNDR_ATMS'
-#              'myd04'
-#              'mod04'
-#             'ABI_M6C14_Geostationary'  # slow
-#             'ABI_M6C01_Mask'           # slow
-
-
-#              'GeoDisk_ABI_East_2km'
-#              'GeoDisk_ABI_West_2km'
-              'GeoDisk_GXS_East'
-              'GeoDisk_GXS_West'
-              'GeoDisk_GHMS'
-              'GeoDisk_MTG_IRS'
-
-#             Trajectory: 2 Campaigns + JEDI 29 platforms (IODA format)
-#             ---------------------------------------------------------
-              'CAMP2EX'
-              'FIREXAQ'
-              'aircraft'
-              'airs_aqua'
-              'amsr2_gcom-w1'
-              'amsua_aqua'
-              'amsua_metop-b'
-              'amsua_n15'
-              'amsua_n18'
-              'amsua_n19'
-              'atms_n20'
-              'atms_npp'
-              'avhrr3_metop-b'
-              'avhrr3_n18'
-              'avhrr3_n19'
-              'cris-fsr_n20'
-              'cris-fsr_npp'
-              'gmi_gpm'
-              'gps'
-              'iasi_metop-b'
-              'mhs_metop-b'
-              'mhs_n19'
-              'mls55_aura'
-              'omi_aura'
-              'ompsnm_npp'
-              'satwind'
-              'scatwind'
-              'sfc'
-              'sfcship'
-              'sondes'
-              'ssmis_f17'
-::
 
 
 #                              ----------------------
@@ -151,7 +94,7 @@ zzCOLLECTIONS:
 # N.B.: This set of labels must appear after the main list of COLLECTIONS.
 # ---
 
-GRID_LABELS:
+qqGRID_LABELS:
 #    Global Grids
 #    ------------
      PC720x361-DC        # 0.5    x 0.625   deg     (<==> c180)
@@ -254,12 +197,12 @@ PC11520x5761-DC.POLE: PC
 PC11520x5761-DC.DATELINE:  DC
 PC11520x5761-DC.LM: 137
 
-lambert.GRID_TYPE: XY
-lambert.GRIDNAME: lambert_conformal
-lambert.GRID_FILENAME: ./lambert_grid.nc4
-lambert.index_name_x:  Xdim
-lambert.index_name_y:  Ydim
-lambert.LM: 137
+lambert.GRID_TYPE:       XY
+lambert.GRIDNAME:        lambert_conformal
+lambert.GRID_FILENAME:   /discover/nobackup/projects/gmao/osse2/stage/BCS_FILES/lambert_grid.nc4
+lambert.index_name_x:    Xdim
+lambert.index_name_y:    Ydim
+lambert.LM:              137
 
 
 #                              ---------------------------
@@ -316,7 +259,7 @@ ABI_East_2km.var_name_x:    x
 ABI_East_2km.var_name_y:    y
 ABI_East_2km.var_name_proj: projection
 ABI_East_2km.att_name_proj: longitude_of_projection_origin
-ABI_East_2km.thin_factor:   500
+ABI_East_2km.thin_factor:   1
 ABI_East_2km.LM:            137
 ABI_East_2km.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/abi_east_2km_coords.nc4
 
@@ -328,7 +271,7 @@ ABI_West_2km.var_name_x:    x
 ABI_West_2km.var_name_y:    y
 ABI_West_2km.var_name_proj: projection
 ABI_West_2km.att_name_proj: longitude_of_projection_origin
-ABI_West_2km.thin_factor:   500
+ABI_West_2km.thin_factor:   1
 ABI_West_2km.LM:            137
 ABI_West_2km.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/abi_west_2km_coords.nc4
 
@@ -340,9 +283,9 @@ GXS_East.var_name_x:    x
 GXS_East.var_name_y:    y
 GXS_East.var_name_proj: projection
 GXS_East.att_name_proj: longitude_of_projection_origin
-GXS_East.thin_factor:   500
+GXS_East.thin_factor:   1
 GXS_East.LM:            137
-GXS_East.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/gxs_east_coords.nc4
+GXS_East.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation_30km/NWP/gxs_east_coords.nc4
 
 GXS_West.GRID_TYPE:     XY
 GXS_West.GRIDNAME:      ABI_GXS_West
@@ -352,9 +295,9 @@ GXS_West.var_name_x:    x
 GXS_West.var_name_y:    y
 GXS_West.var_name_proj: projection
 GXS_West.att_name_proj: longitude_of_projection_origin
-GXS_West.thin_factor:   500
+GXS_West.thin_factor:   1
 GXS_West.LM:            137
-GXS_West.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/gxs_west_coords.nc4
+GXS_West.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation_30km/NWP/gxs_west_coords.nc4
 
 GHMS.GRID_TYPE:     XY
 GHMS.GRIDNAME:      ABI_GHMS
@@ -364,9 +307,9 @@ GHMS.var_name_x:    x
 GHMS.var_name_y:    y
 GHMS.var_name_proj: projection
 GHMS.att_name_proj: longitude_of_projection_origin
-GHMS.thin_factor:   500
+GHMS.thin_factor:   1
 GHMS.LM:            137
-GHMS.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/ghms_coords.nc4
+GHMS.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation_30km/NWP/ghms_coords.nc4
 
 MTG_IRS.GRID_TYPE:     XY
 MTG_IRS.GRIDNAME:      ABI_MTG_IRS
@@ -376,9 +319,9 @@ MTG_IRS.var_name_x:    x
 MTG_IRS.var_name_y:    y
 MTG_IRS.var_name_proj: projection
 MTG_IRS.att_name_proj: longitude_of_projection_origin
-MTG_IRS.thin_factor:   500
+MTG_IRS.thin_factor:   1
 MTG_IRS.LM:            137
-MTG_IRS.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/mtg-irs_coords.nc4
+MTG_IRS.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation_30km/NWP/mtg-irs_coords.nc4
 
 includex(traj_geom_Y2025.gl)
 
@@ -714,25 +657,25 @@ GeoDisk_MTG_IRS.fields:       include(crtmSampler_vars.vl)
 #                              Mask sampler
 #                              -----------------------------------------------------
 
-ABI_M6C01_Mask.sampler_type:        'mask'           # 'mask_geosat'   1-km res
-ABI_M6C01_Mask.obs_file_begin:      '2019-07-31T00:00:00'
-ABI_M6C01_Mask.obs_file_end:        '2019-11-01T00:00:00'
-ABI_M6C01_Mask.obs_file_interval:   '000000 001000'     # yymmdd  hhmmss
-ABI_M6C01_Mask.obs_files:            /discover/nobackup/projects/gmao/aist-nr/data/GOES-X/OR_ABI-L1b-RadF-M6C01_G16_s20192340840216_e20192340849524_c20192340849582.nc
-ABI_M6C01_Mask.index_name_x:         x
-ABI_M6C01_Mask.index_name_y:         y
-ABI_M6C01_Mask.var_name_x:           x
-ABI_M6C01_Mask.var_name_y:           y
-ABI_M6C01_Mask.var_name_proj:        goes_imager_projection
-ABI_M6C01_Mask.att_name_proj:        longitude_of_projection_origin
-ABI_M6C01_Mask.thin_factor:          30
-ABI_M6C01_Mask.template:             '%y4%m2%d2_%h2%n2z.nc4',
-ABI_M6C01_Mask.format:               'CFIO',
-ABI_M6C01_Mask.frequency:            010000,
-ABI_M6C01_Mask.duration:             010000,
-ABI_M6C01_Mask.regrid_method:        'BILINEAR' ,
-ABI_M6C01_Mask.splitField:           1,
-ABI_M6C01_Mask.fields:               include(crtmSampler_vars.vl)
+ABI_M6C01_G16_Mask.sampler_type:        'mask'           # 'mask_geosat'   1-km res
+ABI_M6C01_G16_Mask.obs_file_begin:      '2019-07-31T00:00:00'
+ABI_M6C01_G16_Mask.obs_file_end:        '2019-11-01T00:00:00'
+ABI_M6C01_G16_Mask.obs_file_interval:   '000000 001000'     # yymmdd  hhmmss
+ABI_M6C01_G16_Mask.obs_files:            /discover/nobackup/projects/gmao/aist-nr/data/GOES-X/OR_ABI-L1b-RadF-M6C01_G16_s20192340840216_e20192340849524_c20192340849582.nc
+ABI_M6C01_G16_Mask.index_name_x:         x
+ABI_M6C01_G16_Mask.index_name_y:         y
+ABI_M6C01_G16_Mask.var_name_x:           x
+ABI_M6C01_G16_Mask.var_name_y:           y
+ABI_M6C01_G16_Mask.var_name_proj:        goes_imager_projection
+ABI_M6C01_G16_Mask.att_name_proj:        longitude_of_projection_origin
+ABI_M6C01_G16_Mask.thin_factor:          30
+ABI_M6C01_G16_Mask.template:             '%y4%m2%d2_%h2%n2z.nc4',
+ABI_M6C01_G16_Mask.format:               'CFIO',
+ABI_M6C01_G16_Mask.frequency:            010000,
+ABI_M6C01_G16_Mask.duration:             010000,
+ABI_M6C01_G16_Mask.regrid_method:        'BILINEAR' ,
+ABI_M6C01_G16_Mask.splitField:           1,
+ABI_M6C01_G16_Mask.fields:               include(crtmSampler_vars.vl)
 ::
 
 

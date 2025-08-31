@@ -1,5 +1,9 @@
 #!/bin/bash -l
 
+# usage:
+#   sh run_hist_to_discover.j  1    # sync to GCM run
+#                              2    # sync to MAPL run
+
 if [[ $# -eq 0 || ( $# -eq 1 && $1 == 1 ) ]]; then 
 
 #---------- for use HISTORY_JOSSE.RC  ---------
@@ -34,12 +38,18 @@ sed -e 's/includex/include/g' \
     -e 's/includey/include/g' $fo > $fo2
 diff $fo  $fo2
 m4 $fo2 > $f2
-cp $f2  /Users/yyu11/bkup_run/run/test_c12_illustrate/.
 
+# on discover
 cmd="scp $f2 yyu11@discover:$d"
 echo $cmd
 bash -c "$cmd"
-
 less $f2
+exit
+
+
+# on Mac
+sed -e 's#/discover/#/Volumes/T9/yonggang/discover/#g' $f2 > za
+cp za  /Users/yyu11/bkup_run/run/test_c12_illustrate/$f2
+exit
 
 fi
