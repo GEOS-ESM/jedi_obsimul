@@ -695,7 +695,7 @@ ABI_M6C01_G16_Mask.var_name_x:           x
 ABI_M6C01_G16_Mask.var_name_y:           y
 ABI_M6C01_G16_Mask.var_name_proj:        goes_imager_projection
 ABI_M6C01_G16_Mask.att_name_proj:        longitude_of_projection_origin
-ABI_M6C01_G16_Mask.thin_factor:          30
+ABI_M6C01_G16_Mask.thin_factor:          20
 ABI_M6C01_G16_Mask.template:             '%y4%m2%d2_%h2%n2z.nc4',
 ABI_M6C01_G16_Mask.format:               'CFIO',
 ABI_M6C01_G16_Mask.frequency:            010000,
