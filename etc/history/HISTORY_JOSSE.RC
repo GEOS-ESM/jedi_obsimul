@@ -53,20 +53,18 @@ COLLECTIONS:
 #             Samplers at Obs locations
 #             --------------------------
               'Aeronet'
-#               obs data not found for 2025
-#              'SNDR_ATMS'
-#               memory issue myd04/mod04
-#              'myd04'
-#              'mod04'
-#              GXS not ready
-##             'ABI_M6C14_Geostationary'  # slow; demonstration
-##             'ABI_M6C01_Mask'           # slow; demonstration
+              'SNDR_ATMS'
+              'mod04'
+              'myd04'
+              'GeoDisk_GXS_East'
+              'GeoDisk_GXS_West'
+              'GeoDisk_GHMS'
+              'GeoDisk_MTG_IRS'
+              'ABI_M6C01_G16_Mask'
 ##              'GeoDisk_ABI_East_2km'
 ##              'GeoDisk_ABI_West_2km'
-#              'GeoDisk_GXS_East'
-#              'GeoDisk_GXS_West'
-#              'GeoDisk_GHMS'
-#              'GeoDisk_MTG_IRS'
+
+
 
 #             Trajectory: 2 Campaigns + JEDI 29 platforms (IODA format)
 #             ---------------------------------------------------------
@@ -125,20 +123,17 @@ GRID_LABELS:
 
 #    Sampler Geometries
 #    ------------------
-#     memory related issue for geos v12
-#     SwathGrid_MYD04
-#     SwathGrid_MOD04
-#  data not found
-#     SwathGrid_ATMS
 
-#      To do: add Fortran interface related to GXS
-#
-##     ABI_East_2km
-##     ABI_West_2km
-#     GXS_East
-#     GXS_West
-#     GHMS
-#     MTG_IRS
+     SwathGrid_MYD04
+     SwathGrid_MOD04
+     SwathGrid_ATMS
+
+#     ABI_East_2km
+#     ABI_West_2km
+     GXS_East
+     GXS_West
+     GHMS
+     MTG_IRS
 
 #    Sampler: Trajectory Geometries
 #    ------------------------------
@@ -215,57 +210,57 @@ PC11520x5761-DC.POLE: PC
 PC11520x5761-DC.DATELINE:  DC
 PC11520x5761-DC.LM: 137
 
-lambert.GRID_TYPE: XY
-lambert.GRIDNAME: lambert_conformal
-lambert.GRID_FILENAME: ./lambert_grid.nc4
-lambert.index_name_x:  Xdim
-lambert.index_name_y:  Ydim
-lambert.LM: 137
+lambert.GRID_TYPE:       XY
+lambert.GRIDNAME:        lambert_conformal
+lambert.GRID_FILENAME:   /discover/nobackup/projects/gmao/osse2/stage/BCS_FILES/lambert_grid.nc4
+lambert.index_name_x:    Xdim
+lambert.index_name_y:    Ydim
+lambert.LM:              137
 
 
 #                              ---------------------------
 #                              Sampler Geometry Definition
 #                              ---------------------------
 
-SwathGrid_ATMS.GRID_TYPE: Swath
-SwathGrid_ATMS.GRID_FILE: /discover/nobackup/projects/gmao/aist-nr/data/SNDR.J1.ATMS.L1B.v02/Y%y4/%D3/SNDR.J1.ATMS.%y4%m2%d2T%h2%n2*.nc
-SwathGrid_ATMS.LM:  137
+SwathGrid_ATMS.GRID_TYPE:           Swath
+SwathGrid_ATMS.GRID_FILE:           /discover/nobackup/projects/gmao/aist-nr/data/SNDR.J1.ATMS.L1B.v02/Y%y4/%D3/SNDR.J1.ATMS.%y4%m2%d2T%h2%n2*.nc
+SwathGrid_ATMS.LM:                  137
 SwathGrid_ATMS.index_name_lon:      xtrack
 SwathGrid_ATMS.index_name_lat:      atrack
 SwathGrid_ATMS.var_name_lon:        lon
 SwathGrid_ATMS.var_name_lat:        lat
 SwathGrid_ATMS.var_name_time:       obs_time_tai93
 SwathGrid_ATMS.tunit:               'seconds since 1993-01-01 00:00:00'
-SwathGrid_ATMS.ref_time:         '2019-07-31T00:00:00'
-SwathGrid_ATMS.frequency:       '000000 000600'         # yymmdd  hhmmss
+SwathGrid_ATMS.ref_time:            '2019-07-31T00:00:00'
+SwathGrid_ATMS.frequency:           '000000 000600'         # yymmdd  hhmmss
 SwathGrid_ATMS.Epoch:                060000                 # hhmmss
 
 
-SwathGrid_MYD04.GRID_TYPE: Swath
-SwathGrid_MYD04.GRID_FILE: /discover/nobackup/projects/gmao/aist-nr/data/Aqua/%y4/%D3/MYD04_L2.A%y4%D3.%h2%n2*.hdf
-SwathGrid_MYD04.LM:  137
+SwathGrid_MYD04.GRID_TYPE:           Swath
+SwathGrid_MYD04.GRID_FILE:           /discover/nobackup/projects/gmao/aist-nr/data/Aqua/%y4/%D3/MYD04_L2.A%y4%D3.%h2%n2*.hdf
+SwathGrid_MYD04.LM:                  137
 SwathGrid_MYD04.index_name_lon:      'Cell_Across_Swath:mod04'
 SwathGrid_MYD04.index_name_lat:      'Cell_Along_Swath:mod04'
 SwathGrid_MYD04.var_name_lon:        'Longitude'
 SwathGrid_MYD04.var_name_lat:        'Latitude'
 SwathGrid_MYD04.var_name_time:       'Scan_Start_Time'
 SwathGrid_MYD04.tunit:               'seconds since 1993-01-01 00:00:00'
-SwathGrid_MYD04.ref_time:         '2019-07-31T00:00:00'
-SwathGrid_MYD04.frequency:       '000000 000500'       # yymmdd  hhmmss
+SwathGrid_MYD04.ref_time:            '2019-07-31T00:00:00'
+SwathGrid_MYD04.frequency:           '000000 000500'       # yymmdd  hhmmss
 SwathGrid_MYD04.Epoch:                060000               #
 
 
-SwathGrid_MOD04.GRID_TYPE: Swath
-SwathGrid_MOD04.GRID_FILE: /discover/nobackup/projects/gmao/aist-nr/data/Terra/%y4/%D3/MOD04_L2.A%y4%D3.%h2%n2*.hdf
-SwathGrid_MOD04.LM:   137
+SwathGrid_MOD04.GRID_TYPE:           Swath
+SwathGrid_MOD04.GRID_FILE:           /discover/nobackup/projects/gmao/aist-nr/data/Terra/%y4/%D3/MOD04_L2.A%y4%D3.%h2%n2*.hdf
+SwathGrid_MOD04.LM:                 137
 SwathGrid_MOD04.index_name_lon:     'Cell_Across_Swath:mod04'
 SwathGrid_MOD04.index_name_lat:     'Cell_Along_Swath:mod04'
 SwathGrid_MOD04.var_name_lon:       'Longitude'
 SwathGrid_MOD04.var_name_lat:       'Latitude'
 SwathGrid_MOD04.var_name_time:      'Scan_Start_Time'
 SwathGrid_MOD04.tunit:              'seconds since 1993-01-01 00:00:00'
-SwathGrid_MOD04.ref_time:        '2019-07-31T00:00:00'
-SwathGrid_MOD04.frequency:      '000000 000500'     # yymmdd  hhmmss
+SwathGrid_MOD04.ref_time:           '2019-07-31T00:00:00'
+SwathGrid_MOD04.frequency:          '000000 000500'     # yymmdd  hhmmss
 SwathGrid_MOD04.Epoch:               060000             #
 
 
@@ -277,9 +272,10 @@ ABI_East_2km.var_name_x:    x
 ABI_East_2km.var_name_y:    y
 ABI_East_2km.var_name_proj: projection
 ABI_East_2km.att_name_proj: longitude_of_projection_origin
-ABI_East_2km.thin_factor:   10
+ABI_East_2km.thin_factor:   1
 ABI_East_2km.LM:            137
 ABI_East_2km.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/abi_east_2km_coords.nc4
+
 
 ABI_West_2km.GRID_TYPE:     XY
 ABI_West_2km.GRIDNAME:      ABI_West_2km
@@ -289,9 +285,10 @@ ABI_West_2km.var_name_x:    x
 ABI_West_2km.var_name_y:    y
 ABI_West_2km.var_name_proj: projection
 ABI_West_2km.att_name_proj: longitude_of_projection_origin
-ABI_West_2km.thin_factor:   10
+ABI_West_2km.thin_factor:   1
 ABI_West_2km.LM:            137
 ABI_West_2km.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/abi_west_2km_coords.nc4
+
 
 GXS_East.GRID_TYPE:     XY
 GXS_East.GRIDNAME:      ABI_GXS_East
@@ -301,9 +298,11 @@ GXS_East.var_name_x:    x
 GXS_East.var_name_y:    y
 GXS_East.var_name_proj: projection
 GXS_East.att_name_proj: longitude_of_projection_origin
-GXS_East.thin_factor:   10
+GXS_East.thin_factor:   1
 GXS_East.LM:            137
-GXS_East.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/gxs_east_coords.nc4
+#GXS_East.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/gxs_east_coords.nc4
+GXS_East.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation_30km/NWP/gxs_east_coords.nc4
+
 
 GXS_West.GRID_TYPE:     XY
 GXS_West.GRIDNAME:      ABI_GXS_West
@@ -313,21 +312,25 @@ GXS_West.var_name_x:    x
 GXS_West.var_name_y:    y
 GXS_West.var_name_proj: projection
 GXS_West.att_name_proj: longitude_of_projection_origin
-GXS_West.thin_factor:   10
+GXS_West.thin_factor:   1
 GXS_West.LM:            137
-GXS_West.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/gxs_west_coords.nc4
+#GXS_West.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/gxs_west_coords.nc4
+GXS_West.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation_30km/NWP/gxs_west_coords.nc4
 
-GHMS.GRID_TYPE:     XY
-GHMS.GRIDNAME:      ABI_GHMS
-GHMS.index_name_x:  x
-GHMS.index_name_y:  y
-GHMS.var_name_x:    x
-GHMS.var_name_y:    y
-GHMS.var_name_proj: projection
-GHMS.att_name_proj: longitude_of_projection_origin
-GHMS.thin_factor:   10
-GHMS.LM:            137
-GHMS.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/ghms_coords.nc4
+
+GHMS.GRID_TYPE:        XY
+GHMS.GRIDNAME:         ABI_GHMS
+GHMS.index_name_x:     x
+GHMS.index_name_y:     y
+GHMS.var_name_x:       x
+GHMS.var_name_y:       y
+GHMS.var_name_proj:    projection
+GHMS.att_name_proj:    longitude_of_projection_origin
+GHMS.thin_factor:      1
+GHMS.LM:               137
+#GHMS.GRID_FILENAME:    /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/ghms_coords.nc4
+GHMS.GRID_FILENAME:    /discover/nobackup/projects/gmao/aist-nr/data/geolocation_30km/NWP/ghms_coords.nc4
+
 
 MTG_IRS.GRID_TYPE:     XY
 MTG_IRS.GRIDNAME:      ABI_MTG_IRS
@@ -337,9 +340,11 @@ MTG_IRS.var_name_x:    x
 MTG_IRS.var_name_y:    y
 MTG_IRS.var_name_proj: projection
 MTG_IRS.att_name_proj: longitude_of_projection_origin
-MTG_IRS.thin_factor:   10
+MTG_IRS.thin_factor:   1
 MTG_IRS.LM:            137
-MTG_IRS.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/mtg-irs_coords.nc4
+#MTG_IRS.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation/NWP/mtg-irs_coords.nc4
+MTG_IRS.GRID_FILENAME: /discover/nobackup/projects/gmao/aist-nr/data/geolocation_30km/NWP/mtg-irs_coords.nc4
+
 
 include(traj_geom_Y2025.gl)
 ## include(traj_geom_Y2019.gl)
@@ -614,7 +619,7 @@ SNDR_ATMS.fields:            include(crtmSampler_vars.vl)
 myd04.sampler_type:      'swath'
 myd04.template:          '%y4%m2%d2_%h2%n2z.nc4',
 myd04.format:            'CFIO',
-myd04.frequency:         060000,               # should not be here; (=Epoch)
+myd04.frequency:         060000,               # should not be here, but now (must=Epoch)
 myd04.grid_label:        SwathGrid_MYD04,
 myd04.regrid_method:     'BILINEAR' ,
 myd04.splitField:        1,
@@ -622,6 +627,7 @@ myd04.fields:            include(aerSampler_vars.vl)
                          include(cldSampler_vars.vl)
                          include(asmSampler_vars.vl)
 ::
+
 
 mod04.sampler_type:      'swath'
 mod04.template:          '%y4%m2%d2_%h2%n2z.nc4',
@@ -634,6 +640,7 @@ mod04.fields:            include(aerSampler_vars.vl)
                          include(cldSampler_vars.vl)
                          include(asmSampler_vars.vl)
 ::
+
 
 
 #                              -----------------------------------------------------
@@ -677,24 +684,24 @@ GeoDisk_MTG_IRS.fields:       include(crtmSampler_vars.vl)
 #                              Mask sampler
 #                              -----------------------------------------------------
 
-ABI_M6C01_Mask.sampler_type:        'mask'
-ABI_M6C01_Mask.obs_file_begin:      '2019-07-31T00:00:00'
-ABI_M6C01_Mask.obs_file_end:        '2019-11-01T00:00:00'
-ABI_M6C01_Mask.obs_file_interval:   '000000 001000'     # yymmdd  hhmmss
-ABI_M6C01_Mask.obs_files:            /discover/nobackup/projects/gmao/aist-nr/data/GOES-X/OR_ABI-L1b-RadF-M6C01_G16_s20192340840216_e20192340849524_c20192340849582.nc
-ABI_M6C01_Mask.index_name_x:         x
-ABI_M6C01_Mask.index_name_y:         y
-ABI_M6C01_Mask.var_name_x:           x
-ABI_M6C01_Mask.var_name_y:           y
-ABI_M6C01_Mask.var_name_proj:        goes_imager_projection
-ABI_M6C01_Mask.att_name_proj:        longitude_of_projection_origin
-ABI_M6C01_Mask.thin_factor:          30
-ABI_M6C01_Mask.template:             '%y4%m2%d2_%h2%n2z.nc4',
-ABI_M6C01_Mask.format:               'CFIO',
-ABI_M6C01_Mask.frequency:            010000,
-ABI_M6C01_Mask.duration:             010000,
-ABI_M6C01_Mask.regrid_method:        'BILINEAR' ,
-ABI_M6C01_Mask.fields:               include(crtmSampler_vars.vl)
+ABI_M6C01_G16_Mask.sampler_type:        'mask'
+ABI_M6C01_G16_Mask.obs_file_begin:      '2019-07-31T00:00:00'       #  can be deleted? 
+ABI_M6C01_G16_Mask.obs_file_end:        '2019-11-01T00:00:00'       #  can be deleted? 
+ABI_M6C01_G16_Mask.obs_file_interval:   '000000 001000'     # yymmdd  hhmmss
+ABI_M6C01_G16_Mask.obs_files:            /discover/nobackup/projects/gmao/aist-nr/data/GOES-X/OR_ABI-L1b-RadF-M6C01_G16_s20192340840216_e20192340849524_c20192340849582.nc
+ABI_M6C01_G16_Mask.index_name_x:         x
+ABI_M6C01_G16_Mask.index_name_y:         y
+ABI_M6C01_G16_Mask.var_name_x:           x
+ABI_M6C01_G16_Mask.var_name_y:           y
+ABI_M6C01_G16_Mask.var_name_proj:        goes_imager_projection
+ABI_M6C01_G16_Mask.att_name_proj:        longitude_of_projection_origin
+ABI_M6C01_G16_Mask.thin_factor:          20
+ABI_M6C01_G16_Mask.template:             '%y4%m2%d2_%h2%n2z.nc4',
+ABI_M6C01_G16_Mask.format:               'CFIO',
+ABI_M6C01_G16_Mask.frequency:            010000,
+ABI_M6C01_G16_Mask.duration:             010000,
+ABI_M6C01_G16_Mask.regrid_method:        'BILINEAR' ,
+ABI_M6C01_G16_Mask.fields:               include(crtmSampler_vars.vl)
 ::
 
 
