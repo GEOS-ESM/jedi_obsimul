@@ -10,42 +10,81 @@ EXPSRC: GEOSgcm-v12
 #                               Selection of Collections
 #                              -------------------------
 
+ 
 COLLECTIONS:
-'ABI_M6C01_G16_Mask'
-::
+              'aircraft'
+              'airs_aqua'
+              'amsr2_gcom-w1'
+              'amsua_aqua'
+              'amsua_metop-b'
+              'amsua_n15'
+              'amsua_n18'
+              'amsua_n19'
+              'atms_n20'
+              'atms_npp'
+              'avhrr3_metop-b'
+              'avhrr3_n18'
+              'avhrr3_n19'
+::              
 
 GRID_LABELS:
-   PC720x361-DC        # 0.5    x 0.625   deg     (<==> c180)
+##    Sampler: Trajectory Geometries
+##    ------------------------------
+#     CAMP2EX_GEOM
+#     FIREXAQ_GEOM
+     aircraft_GEOM
+     airs_aqua_GEOM
+     amsr2_gcom-w1_GEOM
+     amsua_aqua_GEOM
+     amsua_metop-b_GEOM
+     amsua_n15_GEOM
+     amsua_n18_GEOM
+     amsua_n19_GEOM
+     atms_n20_GEOM
+     atms_npp_GEOM
+     avhrr3_metop-b_GEOM
+     avhrr3_n18_GEOM
+     avhrr3_n19_GEOM
+#     cris-fsr_n20_GEOM
+#     cris-fsr_npp_GEOM
+#     gmi_gpm_GEOM
+#     gps_GEOM
+#     iasi_metop-b_GEOM
+#     mhs_metop-b_GEOM
+#     mhs_n19_GEOM
+#     mls55_aura_GEOM
+#     omi_aura_GEOM
+#     ompsnm_npp_GEOM
+#     satwind_GEOM
+#     scatwind_GEOM
+#     sfc_GEOM
+#     sfcship_GEOM
+#     sondes_GEOM
+#     ssmis_f17_GEOM
 ::
 
-qqCOLLECTIONS:
-'SNDR_ATMS'
-'mod04'    # obs data avail for 2019, 2025
-'myd04'    # obs data avail for 2019, 2025
+
+xxCOLLECTIONS:
+Aeronet
 ::
 
-qqGRID_LABELS:
-SwathGrid_MYD04
-SwathGrid_MOD04
-SwathGrid_ATMS
-::
-
-qqCOLLECTIONS:
-             'GeoDisk_GXS_East'
-             'GeoDisk_GXS_West'
-             'GeoDisk_GHMS'
-             'GeoDisk_MTG_IRS'
+xxGRID_LABELS:
+  PC720x361-DC
 ::
 
 
+vvCOLLECTIONS:
+#   'geosgcm_prog'   # fail
+  ana_prog
+::              
 
-# gxs
-qqGRID_LABELS:
-     GXS_East
-     GXS_West
-     GHMS
-     MTG_IRS
+
+vvGRID_LABELS:
+  PC720x361-DC
+#  PC1440x721-DC 
 ::
+
+
 
 
 qqCOLLECTIONS:
@@ -86,6 +125,46 @@ qqCOLLECTIONS:
 
 
 
+qqCOLLECTIONS:
+'ABI_M6C01_G16_Mask'
+::
+
+qqGRID_LABELS:
+   PC720x361-DC        # 0.5    x 0.625   deg     (<==> c180)
+::
+
+qqCOLLECTIONS:
+'SNDR_ATMS'
+'mod04'    # obs data avail for 2019, 2025
+'myd04'    # obs data avail for 2019, 2025
+::
+
+qqGRID_LABELS:
+SwathGrid_MYD04
+SwathGrid_MOD04
+SwathGrid_ATMS
+::
+
+qqCOLLECTIONS:
+             'GeoDisk_GXS_East'
+             'GeoDisk_GXS_West'
+             'GeoDisk_GHMS'
+             'GeoDisk_MTG_IRS'
+::
+
+
+
+# gxs
+qqGRID_LABELS:
+     GXS_East
+     GXS_West
+     GHMS
+     MTG_IRS
+::
+
+
+
+
 #                              ----------------------
 #                              Grid Definition Macros
 #                              ----------------------
@@ -95,32 +174,34 @@ qqCOLLECTIONS:
 # ---
 
 qqGRID_LABELS:
-#    Global Grids
-#    ------------
-     PC720x361-DC        # 0.5    x 0.625   deg     (<==> c180)
-     PC1440x721-DC       # 0.25   x 0.3125  deg     (<--> c360)
-     PC2880x1441-DC      # 0.125  x 0.0625  deg     (<--> c720)
-#     not used in collections below
-#     PC5760x2881-DC      # 0.0625 x 0.03125 deg     (<--> c1140)
-#    generating c2880 is costly at high core count
-#    PC11520x5761-DC     # 112.5  x 56.25   arcsec  (<--> c2880)
-##     lambert
-
-
-##    Sampler Geometries
-##    ------------------
-#     SwathGrid_MYD04
-#     SwathGrid_MOD04
-#     SwathGrid_ATMS
-
+##    Global Grids
+##    ------------
+#     PC720x361-DC        # 0.5    x 0.625   deg     (<==> c180)
+#     PC1440x721-DC       # 0.25   x 0.3125  deg     (<--> c360)
+#     PC2880x1441-DC      # 0.125  x 0.0625  deg     (<--> c720)
+##     not used in collections below
+##     PC5760x2881-DC      # 0.0625 x 0.03125 deg     (<--> c1140)
+##    generating c2880 is costly at high core count
+##    PC11520x5761-DC     # 112.5  x 56.25   arcsec  (<--> c2880)
+###     lambert
 #
-##     ABI_East_2km
-##     ABI_West_2km
-#     GXS_East
-#     GXS_West
-#     GHMS
-#     MTG_IRS
 #
+###    Sampler Geometries
+###    ------------------
+##     SwathGrid_MYD04
+##     SwathGrid_MOD04
+##     SwathGrid_ATMS
+#
+##
+###     ABI_East_2km
+###     ABI_West_2km
+##     GXS_East
+##     GXS_West
+##     GHMS
+##     MTG_IRS
+##
+#
+
 
 #    Sampler: Trajectory Geometries
 #    ------------------------------
@@ -336,8 +417,9 @@ ana_prog.archive:          '%c/Y%y4' ,
 ana_prog.format:           'CFIO' ,
 ana_prog.nbits:             12,
 ana_prog.chunks:            180 91 1 1,
-ana_prog.deflate:           1 ,
-ana_prog.grid_label:        PC1440x721-DC ,
+ana_prog.deflate:           1 ,#
+#ana_prog.grid_label:        PC1440x721-DC ,
+ana_prog.grid_label:        PC720x361-DC ,
 ana_prog.regrid_method:    'BILINEAR',
 ana_prog.ref_time:          210000 ,
 ana_prog.frequency:         010000 ,
