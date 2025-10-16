@@ -3,4 +3,21 @@
 instrment types (currently crtm_*.vl are all identical - need to verify that
 this is accurate)
 -To merge the files to generate a file to be used in GEOS, type:
-   m4 HISTORY_OSSE.RC > HISTORY_OSSE.rc 
+   m4 HISTORY_JOSSE.RC > HISTORY_JOSSE.rc
+- .vl : variable list
+- .gl : geometry list
+
+
+
+
+
+Sampler problems encountered:
+
+1. ZLE, PLE
+#                       'ZLE'            , 'DYN'        , 'H'   ,
+#                       'PLE'            , 'DYN'        ,
+pe=00057 FAIL at line=00752    MAPL_VerticalMethods.F90                 <have mixed level/edge>
+pe=00057 FAIL at line=00188    GriddedIO.F90                            <status=1>
+pe=00057 FAIL at line=02622    MAPL_HistoryGridComp.F90                 <status=1>
+
+2. ERROR: cannot find output GOCART::CO2 in GOCART

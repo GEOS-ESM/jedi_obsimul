@@ -2,20 +2,26 @@
 # crtm_ir.vl:  Generic geophysical variables for CRTM IR sensors.
 #
 
-                       'U;V'            , 'DYN'        , 
-                       'TV'             , 'DYN'        , 
+#                       'U;V'            , 'DYN'        ,
+                       'U'            , 'DYN'        , 
+                       'V'            , 'DYN'        , 
+                       'T'              , 'DYN'        , 
                        'DELP'           , 'DYN'        , 
-                       'Q'              , 'MOIST'      , 
-                       'ZLE'            , 'DYN'        , 'H'   ,
- 
-                       'QITOT'          , 'AGCM'       , 
-                       'QLTOT'          , 'AGCM'       , 
-                       'QRTOT'          , 'MOIST'      , 
-                       'QSTOT'          , 'MOIST'      , 
+                       'Q'              , 'MOIST'      , 'QV'  ,
+# error using ZLE/PLE:
+# FAIL at line=00752    MAPL_VerticalMethods.F90                 <have mixed level/edge>
+# FAIL at line=00188    GriddedIO.F90                            <status=1>
+#
+#                       'ZLE'            , 'DYN'        , 'H'   ,
+#                       'PLE'            , 'DYN'        , 
+                       'QITOT'          , 'AGCM'
+                       'QLTOT'          , 'AGCM'
+                       'QRTOT'          , 'MOIST'
+                       'QSTOT'          , 'MOIST'
 
 #                      Trace gases
 #                      -----------
-                       'O3PPMV'         , 'CHEMISTRY'  ,
+                       'O3PPMV'         , 'CHEMISTRY'  , 'O3'
                        'GOCART::CO2'    , 'GOCART'     , 'CO2'  ,
  
                        'PS'             , 'DYN'        ,
@@ -44,8 +50,8 @@
                        'V2M'            , 'SURFACE'    ,                       
                        'T2M'            , 'SURFACE'    ,
                        'Q2M'            , 'SURFACE'    ,
-                       'U10N;V10N'      , 'SURFACE'    , 
-                       'U10M;V10M'      , 'SURFACE'    , 
+#                       'U10N;V10N'      , 'SURFACE'    , 
+#                       'U10M;V10M'      , 'SURFACE'    , 
                        'T10M'           , 'SURFACE'    ,
                        'Q10M'           , 'SURFACE'    ,
                        'U50M'           , 'DYN'        ,
